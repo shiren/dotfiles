@@ -22,7 +22,6 @@ set clipboard=unnamed
 set cursorline
 set foldmethod=syntax
 set foldlevelstart=0
-imap ;; <ESC>
 
 syntax on     " 문법 하이라이트 킴"
 filetype off                  " required
@@ -40,7 +39,6 @@ call vundle#begin()
     Plugin 'The-NERD-tree'
     Plugin 'EasyMotion'
     Plugin 'ctrlp.vim'
-    let g:ctrlp_map = '<C-s-o>'
     let g:ctrlp_working_path_mode = 'ra'
 
     Plugin 'node.js'
