@@ -21,7 +21,7 @@ set wmnu           " tab 자동완성시 가능한 목록을 보여줌
 set clipboard=unnamed
 set cursorline
 set foldmethod=syntax
-set foldlevelstart=0
+set nofoldenable
 
 syntax on     " 문법 하이라이트 킴"
 filetype off                  " required
@@ -68,11 +68,12 @@ call vundle#begin()
 
     Plugin 'bling/vim-airline'
  
-    Plugin 'mango.vim'
-
+    "Plugin 'mango.vim'
+    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+    
 call vundle#end()            " required
 filetype plugin indent on    " required
-colorscheme mango
+colorscheme Tomorrow-Night-Bright
     "
     " Brief help
     " :PluginList          - list configured plugins
