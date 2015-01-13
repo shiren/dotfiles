@@ -82,3 +82,6 @@ colorscheme Tomorrow-Night-Bright
     " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
     " see :h vundle for more details or wiki for FAQ
    
+set guioptions-=r
+set guioptions-=l
+set guioptions-=b
