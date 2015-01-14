@@ -82,7 +82,11 @@ colorscheme Tomorrow-Night-Bright
     " :PluginSearch(!) foo - search (or refresh cache first) for foo
     " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
     " see :h vundle for more details or wiki for FAQ
-   
+
+
+"스크롤바들 제거"   
 set guioptions-=r
+set guioptions-=R
 set guioptions-=l
+set guioptions-=L
 set guioptions-=b

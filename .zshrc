@@ -49,13 +49,13 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/apache-maven/apache-maven-3.2.3/bin:/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/mongo/bin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LANG=ko_KR.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -78,4 +78,4 @@ export LANG=ko_KR.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="/usr/local/bin/vim"
+alias vim="/usr/local/bin/mvim -v"
