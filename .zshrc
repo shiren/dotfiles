@@ -49,7 +49,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/mongo/bin:/opt/X11/bin"
+export PATH="/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/mongo/bin:/opt/X11/bin:/usr/local/share/npm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

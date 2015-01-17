@@ -1,3 +1,61 @@
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'L9'
+    Plugin 'git://git.wincent.com/command-t.git'
+    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+   
+    Plugin 'The-NERD-tree'
+    Plugin 'EasyMotion'
+    Plugin 'ctrlp.vim'
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+
+    Plugin 'node.js'
+    Plugin 'wookiehangover/jshint.vim'
+    Plugin 'Enhanced-Javascript-syntax'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'nathanaelkane/vim-indent-guides'
+    hi IndentGuidesOdd  ctermbg=black
+    hi IndentGuidesEven ctermbg=darkgrey
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
+    let g:indent_guides_enable_on_vim_startup = 1
+
+    Plugin 'scrooloose/syntastic'
+    " This does what it says on the tin. It will check your file on open too,
+    " not just on save.
+    " " You might not want this, so just leave it out if you don't.
+    let g:syntastic_check_on_open=1
+
+    Plugin 'Valloric/YouCompleteMe'
+    " These are the tweaks I apply to YCM's config, you don't need them but
+    " they might help.
+    " " YCM gives you popups and splits by default that some people might not
+    " like, so these should tidy it up a bit for you.
+    let g:ycm_add_preview_to_completeopt=0
+    let g:ycm_confirm_extra_conf=0
+    set completeopt-=preview
+   
+    Plugin 'marijnh/tern_for_vim'
+    let tern_show_argument_hint='on_move'
+    let tern_show_signature_in_pum=1
+    
+    Plugin 'bling/vim-airline'
+ 
+    "Plugin 'mango.vim'
+    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+    
+call vundle#end()            " required
+filetype plugin indent on    " required
+colorscheme Tomorrow-Night-Bright
+syntax on     " 문법 하이라이트 킴"
+
 set number            "line 표시를 해줍니다.
 set ai                    " auto index
 set si                    " smart index
@@ -22,67 +80,7 @@ set clipboard=unnamed
 set cursorline
 set foldmethod=syntax
 set nofoldenable
-
-syntax on     " 문법 하이라이트 킴"
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'L9'
-    Plugin 'git://git.wincent.com/command-t.git'
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-   
-    Plugin 'The-NERD-tree'
-    Plugin 'EasyMotion'
-    Plugin 'ctrlp.vim'
-    let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
-
-    Plugin 'node.js'
-    Plugin 'wookiehangover/jshint.vim'
-    Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'nathanaelkane/vim-indent-guides'
-
-    Plugin 'scrooloose/syntastic'
-    " This does what it says on the tin. It will check your file on open too,
-    " not just on save.
-    " " You might not want this, so just leave it out if you don't.
-    let g:syntastic_check_on_open=1
-
-    Plugin 'Valloric/YouCompleteMe'
-    " These are the tweaks I apply to YCM's config, you don't need them but
-    " they might help.
-    " " YCM gives you popups and splits by default that some people might not
-    " like, so these should tidy it up a bit for you.
-    let g:ycm_add_preview_to_completeopt=0
-    let g:ycm_confirm_extra_conf=0
-    set completeopt-=preview
-   
-    Plugin 'marijnh/tern_for_vim'
-    let tern_show_argument_hint='on_move'
-    let tern_show_signature_in_pum=1
-
-    Plugin 'bling/vim-airline'
- 
-    "Plugin 'mango.vim'
-    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-    
-call vundle#end()            " required
-filetype plugin indent on    " required
-colorscheme Tomorrow-Night-Bright
-    "
-    " Brief help
-    " :PluginList          - list configured plugins
-    " :PluginInstall(!)    - install (update) plugins
-    " :PluginSearch(!) foo - search (or refresh cache first) for foo
-    " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-    " see :h vundle for more details or wiki for FAQ
-
+set t_Co=256
 
 "스크롤바들 제거"   
 set guioptions-=r
@@ -90,3 +88,10 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 set guioptions-=b
+
+"키맵"
+map <D-1> :NERDTreeToggle<CR>
+
+"vim시작시 열파일없으면 NERDTree실행"
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
