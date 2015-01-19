@@ -88,6 +88,7 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 set guioptions-=b
+set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 
 "키맵"
 map <D-1> :NERDTreeToggle<CR>
