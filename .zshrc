@@ -50,7 +50,7 @@ plugins=(git)
 # User configuration
 
 #export PATH="$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mongo/bin:/opt/X11/bin"
-export PATH="$HOME/.local/bin:/usr/local/bin:/usr/local/git/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/git/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
