@@ -99,6 +99,9 @@ set guioptions-=b
 set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 
 "키맵"
+imap jj <ESC>
+
+"플러그인 키맵"
 map <D-1> :NERDTreeToggle<CR>
 
 "vim시작시 열파일없으면 NERDTree실행"
