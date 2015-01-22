@@ -63,24 +63,31 @@ call vundle#begin()
     Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
     
 call vundle#end()            " required
+
 filetype plugin indent on    " required
 syntax on     " 문법 하이라이트 킴"
+syntax sync fromstart
 
 set number            "line 표시를 해줍니다.
-set ai                    " auto index
-set si                    " smart index
 set cindent            " c style index
+set autoindent
+set smartindent
+set copyindent
+
 set shiftwidth=4      " shift를 4칸으로 ( >, >>, <, << 등의 명령어)
 set tabstop=4         " tab을 4칸으로
 set expandtab       " tab 대신 띄어쓰기로
+
 set ignorecase      " 검색시 대소문자 구별하지않음
 set hlsearch         " 검색시 하이라이트(색상 강조)
 set incsearch
+
 set background=dark  " 검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set nocompatible   " 방향키로 이동가능
 set fileencodings=utf-8,euc-kr    " 파일인코딩 형식 지정
 set bs=indent,eol,start    " backspace 키 사용 가능
 set history=1000    " 명령어에 대한 히스토리를 1000개까지
+set undolevels=1000
 set ruler              " 상태표시줄에 커서의 위치 표시
 set nobackup      " 백업파일을 만들지 않음
 set title               " 제목을 표시
@@ -93,6 +100,7 @@ set foldmethod=indent
 set nofoldenable
 set t_Co=256
 set showcmd
+set smarttab
 
 "스크롤바들 제거"   
 set guioptions-=r
@@ -104,6 +112,8 @@ set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 
 "키맵"
 imap jj <ESC>
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 "플러그인 키맵"
 map <D-1> :NERDTreeToggle<CR>
