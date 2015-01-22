@@ -7,7 +7,7 @@ call vundle#begin()
     Plugin 'gmarik/Vundle.vim'
     Plugin 'tpope/vim-fugitive'
     Plugin 'L9'
-    Plugin 'git://git.wincent.com/command-t.git'
+    Plugin 'wincent/Command-T'
     Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
    
     Plugin 'The-NERD-tree'
@@ -15,6 +15,8 @@ call vundle#begin()
     Plugin 'ctrlp.vim'
     let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+
+    Plugin 'airblade/vim-gitgutter'
 
     Plugin 'node.js'
     Plugin 'wookiehangover/jshint.vim'
@@ -89,7 +91,6 @@ set bs=indent,eol,start    " backspace 키 사용 가능
 set history=1000    " 명령어에 대한 히스토리를 1000개까지
 set undolevels=1000
 set ruler              " 상태표시줄에 커서의 위치 표시
-set nobackup      " 백업파일을 만들지 않음
 set title               " 제목을 표시
 set showmatch    " 매칭되는 괄호를 보여줌
 set nowrap         " 자동 줄바꿈 하지 않음
