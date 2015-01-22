@@ -55,10 +55,12 @@ call vundle#begin()
  
     "Plugin 'mango.vim'
     "Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-    Plugin 'crusoexia/vim-monokai'
-    let g:monokai_italic = 1
-    let g:monokai_thick_border = 1
-    let g:monokai_zentre = 1
+    "Plugin 'crusoexia/vim-monokai'
+    "let g:monokai_italic = 1
+    "let g:monokai_thick_border = 1
+    "let g:monokai_zentre = 1
+    Plugin 'cocopon/iceberg.vim'
+    Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
     
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -110,7 +112,7 @@ map <D-1> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-colorscheme monokai 
+colorscheme solarized 
 
 if has("gui_macvim")
     set shell=/bin/bash\ -l
