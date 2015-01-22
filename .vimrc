@@ -102,7 +102,14 @@ set t_Co=256
 set showcmd
 set smarttab
 
-"스크롤바들 제거"   
+set hidden
+set nobackup
+set noswapfile
+
+set list
+set listchars=tab:≈.,trail:¬,extends:ø,nbsp:.,eol:√
+
+"스크롤바들 제거" 
 set guioptions-=r
 set guioptions-=R
 set guioptions-=l
@@ -111,9 +118,11 @@ set guioptions-=b
 set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 
 "키맵"
+let mapleader=","
 imap jj <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
+nmap <silent> ,/ :nohlsearch<CR>
 
 "플러그인 키맵"
 map <D-1> :NERDTreeToggle<CR>
