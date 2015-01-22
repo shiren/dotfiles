@@ -23,6 +23,8 @@ call vundle#begin()
     Plugin 'pangloss/vim-javascript'
     let b:javascript_fold = 0
 
+    Plugin 'heavenshell/vim-jsdoc'
+
     Plugin 'nathanaelkane/vim-indent-guides'
     hi IndentGuidesOdd  ctermbg=black
     hi IndentGuidesEven ctermbg=darkgrey
