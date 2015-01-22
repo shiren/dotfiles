@@ -112,7 +112,7 @@ map <D-1> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-colorscheme solarized 
+colorscheme iceberg 
 
 if has("gui_macvim")
     set shell=/bin/bash\ -l
