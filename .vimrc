@@ -3,67 +3,63 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
+    "Plugin
     Plugin 'gmarik/Vundle.vim'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'L9'
-    Plugin 'wincent/Command-T'
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-   
-    Plugin 'The-NERD-tree'
-    Plugin 'EasyMotion'
-    Plugin 'ctrlp.vim'
-    let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
 
+    "File/Buffer
+    Plugin 'The-NERD-tree'
+    Plugin 'ctrlp.vim'
+        let g:ctrlp_working_path_mode = 'ra'
+        let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+
+    "Git
+    Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
 
+    "Javascript
     Plugin 'node.js'
     Plugin 'wookiehangover/jshint.vim'
     Plugin 'Enhanced-Javascript-syntax'
     Plugin 'crusoexia/vim-javascript-lib'
     Plugin 'pangloss/vim-javascript'
-    let b:javascript_fold = 0
-
+        let b:javascript_fold = 0
     Plugin 'heavenshell/vim-jsdoc'
-
-    Plugin 'nathanaelkane/vim-indent-guides'
-    hi IndentGuidesOdd  ctermbg=black
-    hi IndentGuidesEven ctermbg=darkgrey
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_enable_on_vim_startup = 1
-
-    Plugin 'scrooloose/syntastic'
-    " This does what it says on the tin. It will check your file on open too,
-    " not just on save.
-    " " You might not want this, so just leave it out if you don't.
-    let g:syntastic_check_on_open=1
-
-    Plugin 'Valloric/YouCompleteMe'
-    " These are the tweaks I apply to YCM's config, you don't need them but
-    " they might help.
-    " " YCM gives you popups and splits by default that some people might not
-    " like, so these should tidy it up a bit for you.
-    let g:ycm_add_preview_to_completeopt=0
-    let g:ycm_confirm_extra_conf=0
-    set completeopt-=preview
-   
     Plugin 'marijnh/tern_for_vim'
-    let tern_show_argument_hint='on_move'
-    let tern_show_signature_in_pum=1
-    
-    Plugin 'bling/vim-airline'
- 
-    "Plugin 'mango.vim'
-    "Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-    "Plugin 'crusoexia/vim-monokai'
-    "let g:monokai_italic = 1
-    "let g:monokai_thick_border = 1
-    "let g:monokai_zentre = 1
+        let tern_show_argument_hint='on_move'
+        let tern_show_signature_in_pum=1
+
+    "Lint/Autocomplete
+    Plugin 'scrooloose/syntastic'
+        let g:syntastic_check_on_open=1
+
+    Plugin 'Shougo/neocomplcache.vim'
+        let g:neocomplcache_enable_at_startup = 1
+
+
+    "Colorthemes
+    Plugin 'mango.vim'
+    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+    Plugin 'crusoexia/vim-monokai'
+        let g:monokai_italic = 1
+        let g:monokai_thick_border = 1
+        let g:monokai_zentre = 1
     Plugin 'cocopon/iceberg.vim'
     Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
-    
+
+    "Editing
+    Plugin 'tpope/vim-surround'
+
+    "Navigate
+    Plugin 'EasyMotion'
+
+    "ETC
+    Plugin 'nathanaelkane/vim-indent-guides'
+        hi IndentGuidesOdd  ctermbg=black
+        hi IndentGuidesEven ctermbg=darkgrey
+        let g:indent_guides_start_level = 2
+        let g:indent_guides_guide_size = 1
+        let g:indent_guides_enable_on_vim_startup = 1
+    Plugin 'bling/vim-airline'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -103,6 +99,8 @@ set t_Co=256
 set showcmd
 set smarttab
 
+colorscheme iceberg 
+
 set hidden
 set nobackup
 set noswapfile
@@ -128,12 +126,24 @@ nmap <silent> ,/ :nohlsearch<CR>
 "플러그인 키맵"
 map <D-1> :NERDTreeToggle<CR>
 
-"vim시작시 열파일없으면 NERDTree실행"
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-colorscheme iceberg 
+"Neocompletion
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
+
