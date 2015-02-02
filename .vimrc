@@ -128,6 +128,10 @@ nmap <silent> ,/ :nohlsearch<CR>
 map <D-1> :NERDTreeToggle<CR>
 map <D-e> :CtrlPMRUFiles<CR>
 map <D-E> :CtrlPBuffer<CR>
+cmap nt :NERDTreeToggle<CR>
+cmap cp :CtrlP<CR>
+cmap cpm :CtrlPMRUFiles<CR>
+cmap cpb :CtrlPBuffer<CR>
 
 "Neocompletion
 " <CR>: close popup and save indent.
