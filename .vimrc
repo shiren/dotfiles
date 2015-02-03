@@ -32,9 +32,10 @@ call vundle#begin()
     Plugin 'scrooloose/syntastic'
         let g:syntastic_check_on_open=1
 
-    Plugin 'Shougo/neocomplcache.vim'
-        let g:neocomplcache_enable_at_startup = 1
-
+    Plugin 'Valloric/YouCompleteMe'
+        let g:ycm_add_preview_to_completeopt=0
+        let g:ycm_confirm_extra_conf=0
+        set completeopt-=preview
 
     "Colorthemes
     Plugin 'mango.vim'
@@ -132,23 +133,6 @@ cmap nt NERDTreeToggle
 cmap cp CtrlP
 cmap cpm CtrlPMRUFiles
 cmap cpb CtrlPBuffer
-
-"Neocompletion
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 if has("gui_macvim")
     set shell=/bin/bash\ -l
