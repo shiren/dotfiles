@@ -18,7 +18,6 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    Plugin 'wookiehangover/jshint.vim'
     Plugin 'Enhanced-Javascript-syntax'
     Plugin 'crusoexia/vim-javascript-lib'
     Plugin 'pangloss/vim-javascript'
