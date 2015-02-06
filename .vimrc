@@ -105,6 +105,8 @@ set hidden
 set nobackup
 set noswapfile
 
+set shortmess+=c
+
 set list
 set listchars=tab:≈.,trail:¬,extends:ø,nbsp:.,eol:√
 
@@ -132,8 +134,4 @@ cmap nt NERDTreeToggle
 cmap cp CtrlP
 cmap cpm CtrlPMRUFiles
 cmap cpb CtrlPBuffer
-
-if has("gui_macvim")
-    set shell=/bin/bash\ -l
-endif
 
