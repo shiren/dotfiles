@@ -18,7 +18,7 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    Plugin 'wookiehangover/jshint.vim'
+    "Plugin 'wookiehangover/jshint.vim'
     Plugin 'Enhanced-Javascript-syntax'
     Plugin 'crusoexia/vim-javascript-lib'
     Plugin 'pangloss/vim-javascript'
@@ -31,7 +31,7 @@ call vundle#begin()
     "Lint/Autocomplete
     Plugin 'scrooloose/syntastic'
         let g:syntastic_check_on_open=1
-
+        let g:syntastic_javascript_checkers=["eslint"]
     Plugin 'Valloric/YouCompleteMe'
         let g:ycm_add_preview_to_completeopt=0
         let g:ycm_confirm_extra_conf=0
@@ -49,6 +49,7 @@ call vundle#begin()
 
     "Editing
     Plugin 'tpope/vim-surround'
+    Plugin 'scrooloose/nerdcommenter'
 
     "Navigate
     Plugin 'EasyMotion'
