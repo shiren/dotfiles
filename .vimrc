@@ -18,7 +18,6 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    "Plugin 'wookiehangover/jshint.vim'
     Plugin 'Enhanced-Javascript-syntax'
     Plugin 'crusoexia/vim-javascript-lib'
     Plugin 'pangloss/vim-javascript'
@@ -111,13 +110,6 @@ set noswapfile
 set list
 set listchars=tab:≈.,trail:¬,extends:ø,nbsp:.,eol:√
 
-"스크롤바들 제거" 
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-set guioptions-=b
-set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 
 "키맵"
 let mapleader=","
@@ -131,11 +123,19 @@ nmap <silent> ,/ :nohlsearch<CR>
 map <D-1> :NERDTreeToggle<CR>
 map <D-e> :CtrlPMRUFiles<CR>
 map <D-E> :CtrlPBuffer<CR>
-cmap nt NERDTreeToggle
-cmap cp CtrlP
-cmap cpm CtrlPMRUFiles
-cmap cpb CtrlPBuffer
+map <C-n> :NERDTreeToggle<CR>
 
+
+"for Macvim" 
+"remove scrollbars"
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=b
+set guifont=Bitstream\ Vera\ Sans\ Mono:h12
+
+"change shell cause zsh problem"
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
