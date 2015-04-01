@@ -11,6 +11,7 @@ call vundle#begin()
     Plugin 'ctrlp.vim'
         let g:ctrlp_working_path_mode = 'ra'
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+        let NERDTreeQuitOnOpen=1
 
     "Git
     Plugin 'tpope/vim-fugitive'
@@ -61,6 +62,8 @@ call vundle#begin()
         let g:indent_guides_guide_size = 1
         let g:indent_guides_enable_on_vim_startup = 1
     Plugin 'bling/vim-airline'
+    Plugin 'Shougo/unite.vim'
+    Plugin 'Shougo/vimproc.vim'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -120,11 +123,7 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 nmap <silent> ,/ :nohlsearch<CR>
 
 "플러그인 키맵"
-map <D-1> :NERDTreeToggle<CR>
-map <D-e> :CtrlPMRUFiles<CR>
-map <D-E> :CtrlPBuffer<CR>
-map <C-n> :NERDTreeToggle<CR>
-
+map <C-S-n> :NERDTreeToggle<CR>
 
 "for Macvim" 
 "remove scrollbars"
