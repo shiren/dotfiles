@@ -55,15 +55,16 @@ call vundle#begin()
     Plugin 'EasyMotion'
 
     "ETC
-    Plugin 'nathanaelkane/vim-indent-guides'
-        hi IndentGuidesOdd  ctermbg=black
-        hi IndentGuidesEven ctermbg=darkgrey
-        let g:indent_guides_start_level = 2
-        let g:indent_guides_guide_size = 1
-        let g:indent_guides_enable_on_vim_startup = 1
+    "Plugin 'nathanaelkane/vim-indent-guides'
+    "    hi IndentGuidesOdd  ctermbg=black
+    "    hi IndentGuidesEven ctermbg=darkgrey
+    "    let g:indent_guides_start_level = 2
+    "    let g:indent_guides_guide_size = 1
+    "    let g:indent_guides_enable_on_vim_startup = 1
     Plugin 'bling/vim-airline'
     Plugin 'Shougo/unite.vim'
     Plugin 'Shougo/vimproc.vim'
+    Plugin 'tpope/vim-obsession'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -103,6 +104,7 @@ set t_Co=256
 set showcmd
 set smarttab
 set lazyredraw
+set mouse=a
 
 colorscheme iceberg 
 
