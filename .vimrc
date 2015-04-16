@@ -12,6 +12,7 @@ call vundle#begin()
         let g:ctrlp_working_path_mode = 'ra'
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
         let NERDTreeQuitOnOpen=1
+    Plugin 'rking/ag.vim'
 
     "Git
     Plugin 'tpope/vim-fugitive'
