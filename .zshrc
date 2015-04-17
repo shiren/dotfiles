@@ -77,4 +77,5 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="mvim -v"
 alias vi="mvim -v"
+alias mux="tmuxinator"
 export EDITOR="/usr/local/bin/mvim -v"
