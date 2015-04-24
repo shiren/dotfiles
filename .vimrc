@@ -128,6 +128,18 @@ nmap <silent> ,/ :nohlsearch<CR>
 "플러그인 키맵"
 map <C-S-n> :NERDTreeToggle<CR>
 
+"저장시 필요없는 스페이스 지우기"
+function! TrimWhiteSpace()
+    %s/\s\+$//e
+endfunction
+
+nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
+autocmd FileType javascript autocmd FileWritePre    * :call TrimWhiteSpace()
+autocmd FileType javascript autocmd FileAppendPre   * :call TrimWhiteSpace()
+autocmd FileType javascript autocmd FilterWritePre  * :call TrimWhiteSpace()
+autocmd FileType javascript autocmd BufWritePre     * :call TrimWhiteSpace()
+
+
 "for Macvim" 
 "remove scrollbars"
 set guioptions-=r
