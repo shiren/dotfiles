@@ -20,14 +20,18 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'crusoexia/vim-javascript-lib'
-    Plugin 'pangloss/vim-javascript'
-        let b:javascript_fold = 0
+    "Plugin 'Enhanced-Javascript-syntax'
+    Plugin 'othree/yajs'
+    "Plugin 'crusoexia/vim-javascript-lib'
+    "Plugin 'pangloss/vim-javascript'
+        "let b:javascript_fold = 0
+        "let javascript_ignore_javaScriptdoc = 0
     Plugin 'heavenshell/vim-jsdoc'
     Plugin 'marijnh/tern_for_vim'
         let tern_show_argument_hint='on_move'
         let tern_show_signature_in_pum=1
+    Plugin 'javascript-libraries-syntax'
+        let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 
     "Lint/Autocomplete
     Plugin 'scrooloose/syntastic'
