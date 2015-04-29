@@ -13,6 +13,7 @@ call vundle#begin()
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
         let NERDTreeQuitOnOpen=1
     Plugin 'rking/ag.vim'
+    Plugin 'mkitt/tabline.vim'
 
     "Git
     Plugin 'tpope/vim-fugitive'
@@ -143,6 +144,13 @@ autocmd FileType javascript autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FileType javascript autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd FileType javascript autocmd BufWritePre     * :call TrimWhiteSpace()
 
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
 
 "for Macvim" 
 "remove scrollbars"
