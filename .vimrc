@@ -34,6 +34,13 @@ call vundle#begin()
     Plugin 'javascript-libraries-syntax'
         let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 
+    "markdown"
+    Plugin 'jtratner/vim-flavored-markdown'
+    augroup markdown
+        au!
+        au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+    augroup END
+
     "Lint/Autocomplete
     Plugin 'scrooloose/syntastic'
         let g:syntastic_check_on_open=1
