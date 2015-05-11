@@ -151,6 +151,11 @@ autocmd FileType javascript autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FileType javascript autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd FileType javascript autocmd BufWritePre     * :call TrimWhiteSpace()
 
+"Toggl Paste"
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
+
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
