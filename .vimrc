@@ -59,6 +59,7 @@ call vundle#begin()
         let g:monokai_zentre = 1
     Plugin 'cocopon/iceberg.vim'
     Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
+    Plugin 'nanotech/jellybeans.vim'
 
     "Editing
     Plugin 'tpope/vim-surround'
@@ -81,14 +82,16 @@ call vundle#begin()
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-syntax on     " 문법 하이라이트 킴"
+
+"문법 하이라이트 킴"
+syntax on
 syntax sync fromstart
 
 set number            "line 표시를 해줍니다.
 set cindent            " c style index
 set autoindent
 set smartindent
-set copyindent
+"set copyindent
 
 set shiftwidth=4      " shift를 4칸으로 ( >, >>, <, << 등의 명령어)
 set tabstop=4         " tab을 4칸으로
@@ -119,15 +122,14 @@ set smarttab
 set lazyredraw
 set mouse=a
 
-colorscheme iceberg 
+colorscheme jellybeans
 
 set hidden
 set nobackup
 set noswapfile
 
 set list
-set listchars=tab:≈.,trail:¬,extends:ø,nbsp:.,eol:√
-
+set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 
 "키맵"
 let mapleader=","
@@ -164,7 +166,7 @@ vnoremap <leader>d "_d
 " without yanking it
 vnoremap <leader>p "_dP
 
-"for Macvim" 
+"for Macvim"
 "remove scrollbars"
 set guioptions-=r
 set guioptions-=R
