@@ -7,7 +7,8 @@ call vundle#begin()
     Plugin 'gmarik/Vundle.vim'
 
     "File/Buffer
-    Plugin 'The-NERD-tree'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'ctrlp.vim'
         let g:ctrlp_working_path_mode = 'ra'
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
