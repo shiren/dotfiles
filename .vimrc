@@ -92,7 +92,7 @@ set number            "line 표시를 해줍니다.
 set cindent            " c style index
 set autoindent
 set smartindent
-"set copyindent
+set copyindent
 
 set shiftwidth=4      " shift를 4칸으로 ( >, >>, <, << 등의 명령어)
 set tabstop=4         " tab을 4칸으로
@@ -121,6 +121,7 @@ set t_Co=256
 set showcmd
 set smarttab
 set lazyredraw
+set ttyfast
 set mouse=a
 
 colorscheme jellybeans
