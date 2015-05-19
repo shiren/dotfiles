@@ -123,6 +123,9 @@ set smarttab
 set lazyredraw
 set ttyfast
 set mouse=a
+set ttimeout
+set ttimeoutlen=250
+set notimeout
 
 colorscheme jellybeans
 
