@@ -1,3 +1,5 @@
+set shell=bash
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -34,6 +36,7 @@ call vundle#begin()
         let tern_show_signature_in_pum=1
     Plugin 'javascript-libraries-syntax'
         let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
+    Plugin 'juanpabloaj/vim-istanbul'
 
     "markdown"
     Plugin 'jtratner/vim-flavored-markdown'
@@ -84,57 +87,78 @@ call vundle#end()            " required
 
 filetype plugin indent on    " required
 
-"문법 하이라이트 킴"
+
+"문법 하이라이트"
 syntax on
 syntax sync fromstart
 
-set number            "line 표시를 해줍니다.
-set cindent            " c style index
+set t_Co=256
+set lazyredraw
+set ttyfast
+"검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
+set background=dark
+colorscheme jellybeans
+
+"Show line number.
+set number
+"C style indent
+set cindent
 set autoindent
 set smartindent
 set copyindent
 
-set shiftwidth=4      " shift를 4칸으로 ( >, >>, <, << 등의 명령어)
-set tabstop=4         " tab을 4칸으로
-set expandtab       " tab 대신 띄어쓰기로
+"shift를 4칸으로 ( >, >>, <, << 등의 명령어)
+set shiftwidth=4
+"tab을 4칸으로
+set tabstop=4
+"tab 대신 띄어쓰기로
+set expandtab
 
-set ignorecase      " 검색시 대소문자 구별하지않음
-set hlsearch         " 검색시 하이라이트(색상 강조)
+"검색시 대소문자 구별하지않음
+"set ignorecase
+"검색시 하이라이트(색상 강조)
+set hlsearch
 set incsearch
 
-set background=dark  " 검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
-set nocompatible   " 방향키로 이동가능
-set fileencodings=utf-8,euc-kr    " 파일인코딩 형식 지정
-set bs=indent,eol,start    " backspace 키 사용 가능
-set history=1000    " 명령어에 대한 히스토리를 1000개까지
+"방향키로 이동가능
+set nocompatible
+"파일인코딩 형식 지정
+set fileencodings=utf-8,euc-kr
+"backspace 키 사용 가능
+set bs=indent,eol,start
+"명령어에 대한 히스토리를 1000개까지
+set history=1000
 set undolevels=1000
-set ruler              " 상태표시줄에 커서의 위치 표시
-set title               " 제목을 표시
-set showmatch    " 매칭되는 괄호를 보여줌
-set nowrap         " 자동 줄바꿈 하지 않음
-set wildmenu           " tab 자동완성시 가능한 목록을 보여줌
+"상태표시줄에 커서의 위치 표시
+set ruler
+"제목을 표시
+set title
+"매칭되는 괄호를 보여줌
+set showmatch
+"자동 줄바꿈 하지 않음
+set nowrap
+"tab 자동완성시 가능한 목록을 보여줌
+set wildmenu
 set clipboard=unnamed
-set cursorline
 set foldmethod=indent
 set nofoldenable
-set t_Co=256
 set showcmd
 set smarttab
-set lazyredraw
-set ttyfast
-set mouse=a
-set ttimeout
-set ttimeoutlen=250
-set notimeout
 
-colorscheme jellybeans
+set mouse=a
+
+set cursorline
+
+set notimeout
 
 set hidden
 set nobackup
 set noswapfile
 
+"공백문자들
 set list
 set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
+
 
 "키맵"
 let mapleader=","
