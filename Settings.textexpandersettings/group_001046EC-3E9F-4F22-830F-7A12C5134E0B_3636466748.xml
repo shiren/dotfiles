@@ -12,7 +12,7 @@
 	<array>
 		<dict>
 			<key>abbreviation</key>
-			<string>`lends</string>
+			<string>lends</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -20,7 +20,7 @@
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-05-14T02:46:18Z</date>
+			<date>2015-05-29T02:11:54Z</date>
 			<key>plainText</key>
 			<string>/** @lends %filltext:name=object% */</string>
 			<key>snippetType</key>
@@ -30,7 +30,7 @@
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>`author</string>
+			<string>author</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -38,7 +38,7 @@
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-05-15T06:05:43Z</date>
+			<date>2015-05-29T02:11:57Z</date>
 			<key>plainText</key>
 			<string>@author Sungho Kim(sungho-kim@nhnent.com) FE Development Team/NHN Ent.</string>
 			<key>snippetType</key>
@@ -48,7 +48,7 @@
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>`constr</string>
+			<string>constr</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -86,7 +86,7 @@ module.exports = %filltext:name=Name%;}</string>
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-05-15T06:10:47Z</date>
+			<date>2015-05-29T02:11:59Z</date>
 			<key>plainText</key>
 			<string>/**
  * @fileoverview Implements %filltext:name=Name%
@@ -138,7 +138,7 @@ module.exports = %filltext:name=Name%;</string>
 		</dict>
 		<dict>
 			<key>abbreviation</key>
-			<string>`tc</string>
+			<string>testcase</string>
 			<key>abbreviationMode</key>
 			<integer>0</integer>
 			<key>creationDate</key>
@@ -146,7 +146,7 @@ module.exports = %filltext:name=Name%;</string>
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-05-15T06:12:07Z</date>
+			<date>2015-05-29T02:12:19Z</date>
 			<key>plainText</key>
 			<string>'use strict';
 
