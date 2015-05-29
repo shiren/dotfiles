@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Auditory Feedback</key>
+	<false/>
+	<key>Automatic Backup</key>
+	<true/>
+	<key>Backup Frequency</key>
+	<integer>1440</integer>
+	<key>Backup Path</key>
+	<string>~/Library/Application Support/TextExpander/Backups</string>
+	<key>BonjourSendGroups</key>
+	<true/>
+	<key>Capitalize Sentences</key>
+	<false/>
+	<key>Characters Saved</key>
+	<integer>18105</integer>
+	<key>Client Mode</key>
+	<integer>0</integer>
+	<key>Cross Platform Images</key>
+	<true/>
+	<key>Date 3.X Installed</key>
+	<date>2014-07-10T13:04:37Z</date>
+	<key>Date 4.X Installed</key>
+	<date>2014-07-10T13:04:37Z</date>
+	<key>Date 5.X Installed</key>
+	<date>2015-05-28T01:44:05Z</date>
+	<key>Date Installed</key>
+	<date>2014-07-10T13:04:37Z</date>
+	<key>Delimiters</key>
+	<string>	</string>
+	<key>Expander Mode</key>
+	<integer>2</integer>
+	<key>FormattedFontName</key>
+	<string>NanumGothic</string>
+	<key>FormattedFontSize</key>
+	<real>12</real>
+	<key>IconGraphite</key>
+	<true/>
+	<key>IconNameStem</key>
+	<string>SMTEStatusItem2</string>
+	<key>Last Version</key>
+	<string>5.0</string>
+	<key>PlainFontName</key>
+	<string>FantasqueSansMono-Regular</string>
+	<key>PlainFontSize</key>
+	<real>13</real>
+	<key>Restore Pasteboard</key>
+	<true/>
+	<key>Snippet Count</key>
+	<integer>140</integer>
+	<key>Snippet Menu Item Width</key>
+	<integer>327</integer>
+	<key>Status Item</key>
+	<true/>
+	<key>Sync Method</key>
+	<integer>1</integer>
+	<key>TutorialWasOffered</key>
+	<true/>
+	<key>autoCapExceptions</key>
+	<array>
+		<string>Terminal</string>
+	</array>
+	<key>autoCapExceptionsMode</key>
+	<integer>1</integer>
+	<key>checkforupdates</key>
+	<true/>
+	<key>checkfrequency</key>
+	<integer>7</integer>
+	<key>groupsTE5</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>NEMAC</string>
+			<key>uuidString</key>
+			<string>0EA7C738-0E5C-4349-B26C-D0878D4E5618</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MAC</string>
+			<key>uuidString</key>
+			<string>137EBC20-7961-4F00-AAA5-F5CFE324847A</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>javascript</string>
+			<key>uuidString</key>
+			<string>58C330BB-4FF2-4787-AB06-2C9CA456D65D</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>NHNENT.TICKETLINK</string>
+			<key>uuidString</key>
+			<string>3CB742F9-63DF-495C-BD9A-DB259E0859B2</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>NHNENT.DOORAY</string>
+			<key>uuidString</key>
+			<string>4B36AEAE-821E-49B4-ACCB-63DFEE6A9730</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>NHNENT</string>
+			<key>uuidString</key>
+			<string>7FC85413-78B8-464B-A974-6F8DDDD96B1C</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>ETC</string>
+			<key>uuidString</key>
+			<string>30BCDF4F-B637-4524-90DF-0BBDC2E25F61</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>SSH</string>
+			<key>uuidString</key>
+			<string>2853B792-7084-4D07-9033-4B7DE7C7686A</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>jsDoc</string>
+			<key>uuidString</key>
+			<string>001046EC-3E9F-4F22-830F-7A12C5134E0B</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Suggested Snippets</string>
+			<key>uuidString</key>
+			<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
+		</dict>
+	</array>
+	<key>hotKeySuggestCharacters</key>
+	<string>E</string>
+	<key>hotKeySuggestKeyCode</key>
+	<integer>14</integer>
+	<key>hotKeySuggestKeyName</key>
+	<string>e</string>
+	<key>hotKeySuggestModifiers</key>
+	<integer>768</integer>
+	<key>hotKeySuggestOn</key>
+	<true/>
+	<key>outlineState</key>
+	<array>
+		<string>4B36AEAE-821E-49B4-ACCB-63DFEE6A9730</string>
+	</array>
+	<key>rejectedHashes</key>
+	<array>
+		<integer>5764674341948470656</integer>
+		<integer>17447115288984516096</integer>
+		<integer>14881562070146625856</integer>
+		<integer>6746550183353717266</integer>
+	</array>
+	<key>wantsDaemonEnabled</key>
+	<true/>
+</dict>
+</plist>

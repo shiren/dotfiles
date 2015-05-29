@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>expandAfterMode</key>
+	<integer>0</integer>
+	<key>expanderExceptionsMode</key>
+	<integer>4</integer>
+	<key>name</key>
+	<string>Suggested Snippets</string>
+	<key>snippetPlists</key>
+	<array/>
+	<key>snippetUUIDs</key>
+	<array/>
+	<key>suggestAbbreviations</key>
+	<integer>1</integer>
+	<key>updateFrequency</key>
+	<integer>0</integer>
+	<key>uuidString</key>
+	<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
+	<key>writable</key>
+	<integer>1</integer>
+</dict>
+</plist>

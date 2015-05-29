@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>expandAfterMode</key>
+	<integer>0</integer>
+	<key>expanderExceptionsMode</key>
+	<integer>4</integer>
+	<key>name</key>
+	<string>javascript</string>
+	<key>snippetPlists</key>
+	<array>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-12-04T05:14:30Z</date>
+			<key>extraInfo</key>
+			<dict/>
+			<key>label</key>
+			<string>컨스트럭쳐</string>
+			<key>modificationDate</key>
+			<date>2014-12-10T03:12:23Z</date>
+			<key>plainText</key>
+			<string>function %filltext:name=functionName:default=fName%(){
+}
+
+%filltext:name=functionName:default=fName%.prototype.method = function(){
+};</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>509BD472-4B60-43E6-8CD0-27636E95C80E</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-12-04T05:52:49Z</date>
+			<key>label</key>
+			<string>requirejs:define</string>
+			<key>modificationDate</key>
+			<date>2014-12-10T03:16:08Z</date>
+			<key>plainText</key>
+			<string>/**
+ * @fileoverview 
+ */
+define([
+], function(
+) {
+
+    'use strict';
+
+    %snippet:;constr%
+});</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>EBDEDF79-4263-463B-A5E5-230CC5232FC4</string>
+		</dict>
+	</array>
+	<key>snippetUUIDs</key>
+	<array>
+		<string>509BD472-4B60-43E6-8CD0-27636E95C80E</string>
+		<string>EBDEDF79-4263-463B-A5E5-230CC5232FC4</string>
+	</array>
+	<key>suggestAbbreviations</key>
+	<integer>1</integer>
+	<key>updateFrequency</key>
+	<integer>0</integer>
+	<key>uuidString</key>
+	<string>58C330BB-4FF2-4787-AB06-2C9CA456D65D</string>
+	<key>writable</key>
+	<integer>1</integer>
+</dict>
+</plist>

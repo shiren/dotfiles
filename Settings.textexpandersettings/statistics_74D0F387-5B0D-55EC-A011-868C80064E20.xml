@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DeviceStats</key>
+	<dict>
+		<key>2015-01-22</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>8993</integer>
+			<key>endSnippetCount</key>
+			<integer>63</integer>
+			<key>startCharactersSaved</key>
+			<integer>8827</integer>
+			<key>startSnippetCount</key>
+			<integer>60</integer>
+		</dict>
+		<key>2015-01-23</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>9100</integer>
+			<key>endSnippetCount</key>
+			<integer>65</integer>
+			<key>startCharactersSaved</key>
+			<integer>8993</integer>
+			<key>startSnippetCount</key>
+			<integer>63</integer>
+		</dict>
+		<key>2015-01-24</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>9232</integer>
+			<key>endSnippetCount</key>
+			<integer>67</integer>
+			<key>startCharactersSaved</key>
+			<integer>9100</integer>
+			<key>startSnippetCount</key>
+			<integer>65</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>
