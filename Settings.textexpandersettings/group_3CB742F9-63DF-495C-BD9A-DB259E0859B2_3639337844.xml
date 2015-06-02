@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>expandAfterMode</key>
+	<integer>0</integer>
+	<key>expanderExceptionsMode</key>
+	<integer>4</integer>
+	<key>name</key>
+	<string>NHNENT.TICKETLINK</string>
+	<key>snippetPlists</key>
+	<array>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-12-16T02:54:41Z</date>
+			<key>label</key>
+			<string>텍스트브러시테스트</string>
+			<key>modificationDate</key>
+			<date>2014-12-16T02:55:02Z</date>
+			<key>plainText</key>
+			<string>var t = new TB({paper: seatingMap.paper});
+
+    t.addItemBySeat({
+        position: {
+            x: 1500,
+            y: 1000
+        },
+        getText: function() {
+            return "-----한글:1\n21e21-e21-e1\n맵정";
+        }
+    });
+
+    t.setStyle({
+        'font-size': 2,
+        'text-anchor' : 'middle',
+        'fill': '#f00'
+    });
+
+    t.render();</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>16276032-78D3-48B4-B45C-B0ECD6997408</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-12-10T03:12:40Z</date>
+			<key>label</key>
+			<string>define:UIController</string>
+			<key>modificationDate</key>
+			<date>2014-12-23T07:27:32Z</date>
+			<key>plainText</key>
+			<string>/**
+ * @fileoverview %filltext:name=Name%
+ */
+define([
+    'util',
+    'jquery',
+    'ui/uicontroller',
+    'ui/model',
+    'ui/collection'
+], function(
+    util,
+    $,
+    UIController,
+    UIModel,
+    UICollection
+) {
+
+    'use strict';
+
+    /**
+     * %filltext:name=Name%
+     * @exports %filltext:name=Name%
+     * @extends {UIController}
+     * @constructor
+     * @class
+     * **/
+    var %filltext:name=Name% = UIController.extend({
+        className: '',
+        events: {},
+        init: function %filltext:name=Name%(options) {
+            UIController.call(this, options);
+        }
+    });
+
+    return %filltext:name=Name%;
+});</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>BD424BFB-63AC-4CD8-9685-C7EE69A2FE9E</string>
+		</dict>
+	</array>
+	<key>snippetUUIDs</key>
+	<array>
+		<string>16276032-78D3-48B4-B45C-B0ECD6997408</string>
+		<string>BD424BFB-63AC-4CD8-9685-C7EE69A2FE9E</string>
+	</array>
+	<key>suggestAbbreviations</key>
+	<integer>1</integer>
+	<key>updateFrequency</key>
+	<integer>0</integer>
+	<key>uuidString</key>
+	<string>3CB742F9-63DF-495C-BD9A-DB259E0859B2</string>
+	<key>writable</key>
+	<integer>1</integer>
+</dict>
+</plist>

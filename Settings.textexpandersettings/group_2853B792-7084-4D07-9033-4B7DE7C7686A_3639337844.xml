@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>expandAfterMode</key>
+	<integer>0</integer>
+	<key>expanderExceptionsMode</key>
+	<integer>4</integer>
+	<key>name</key>
+	<string>SSH</string>
+	<key>snippetPlists</key>
+	<array>
+		<dict>
+			<key>abbreviation</key>
+			<string>;simpleserver</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-01-27T06:56:33Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2014-01-27T06:56:58Z</date>
+			<key>plainText</key>
+			<string>python -m SimpleHTTPServer</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>0A8CACCA-F09F-4C90-82CA-55C236459FBB</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>`x11vnc</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-05-31T07:46:24Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2014-05-31T07:58:03Z</date>
+			<key>plainText</key>
+			<string>sudo x11vnc -display :0 -auth /var/run/lightdm/root/:0 -forever -bg -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>2326E18F-AB5F-42CD-A06A-DB4ADE61A645</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>`ssh</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-05-31T07:48:23Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2014-05-31T07:58:16Z</date>
+			<key>plainText</key>
+			<string>ssh -c blowfish shiren@shiren.iptime.org</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>08513073-4DFD-49FA-BC58-8327CDA792E5</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>`shutdown</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-05-31T08:17:09Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2014-05-31T08:17:14Z</date>
+			<key>plainText</key>
+			<string>sudo shutdown -h now</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>3AF843C6-27AF-458E-B2DC-931B66069CFA</string>
+		</dict>
+	</array>
+	<key>snippetUUIDs</key>
+	<array>
+		<string>0A8CACCA-F09F-4C90-82CA-55C236459FBB</string>
+		<string>2326E18F-AB5F-42CD-A06A-DB4ADE61A645</string>
+		<string>08513073-4DFD-49FA-BC58-8327CDA792E5</string>
+		<string>3AF843C6-27AF-458E-B2DC-931B66069CFA</string>
+	</array>
+	<key>suggestAbbreviations</key>
+	<integer>1</integer>
+	<key>updateFrequency</key>
+	<integer>0</integer>
+	<key>uuidString</key>
+	<string>2853B792-7084-4D07-9033-4B7DE7C7686A</string>
+	<key>writable</key>
+	<integer>1</integer>
+</dict>
+</plist>

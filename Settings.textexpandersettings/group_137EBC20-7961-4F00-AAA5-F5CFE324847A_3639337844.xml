@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>expandAfterMode</key>
+	<integer>0</integer>
+	<key>expanderExceptionsMode</key>
+	<integer>4</integer>
+	<key>name</key>
+	<string>MAC</string>
+	<key>snippetPlists</key>
+	<array>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-09-03T06:13:52Z</date>
+			<key>label</key>
+			<string>히든파일보이게</string>
+			<key>modificationDate</key>
+			<date>2014-09-03T09:01:11Z</date>
+			<key>plainText</key>
+			<string>defaults write com.apple.finder AppleShowAllFiles -bool true</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-09-03T09:01:26Z</date>
+			<key>label</key>
+			<string>키보드입력속도 빠르게</string>
+			<key>modificationDate</key>
+			<date>2014-09-11T02:59:45Z</date>
+			<key>plainText</key>
+			<string>defaults write NSGlobalDomain KeyRepeat -int 1</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>FA60D92A-44B6-4EF9-861C-B40F483611B9</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-10-21T01:14:07Z</date>
+			<key>label</key>
+			<string>다크테마적용</string>
+			<key>modificationDate</key>
+			<date>2014-10-21T01:14:16Z</date>
+			<key>plainText</key>
+			<string>sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-11-12T13:00:55Z</date>
+			<key>label</key>
+			<string>9876포트 어느프로세스가 쓰는가</string>
+			<key>modificationDate</key>
+			<date>2014-11-12T13:01:35Z</date>
+			<key>plainText</key>
+			<string>lsof -n -i4TCP:9876 | grep LISTEN</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>DAEBA0E2-E090-44C3-BD90-D1899C509AE5</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2014-12-02T05:11:36Z</date>
+			<key>label</key>
+			<string>키연속입력가능하도록</string>
+			<key>modificationDate</key>
+			<date>2014-12-02T05:12:05Z</date>
+			<key>plainText</key>
+			<string>default write -g ApplePressAndHoldEnabled 0</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>758FAAA4-48B0-4A7A-A68C-68E8FD26A10F</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-01-21T16:00:41Z</date>
+			<key>label</key>
+			<string>히든파일안보이게</string>
+			<key>modificationDate</key>
+			<date>2015-01-21T16:00:54Z</date>
+			<key>plainText</key>
+			<string>defaults write com.apple.finder AppleShowAllFiles -bool false</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>C16D6224-B8E3-4928-B8F1-3E6B36DC273D</string>
+		</dict>
+	</array>
+	<key>snippetUUIDs</key>
+	<array>
+		<string>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</string>
+		<string>FA60D92A-44B6-4EF9-861C-B40F483611B9</string>
+		<string>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</string>
+		<string>DAEBA0E2-E090-44C3-BD90-D1899C509AE5</string>
+		<string>758FAAA4-48B0-4A7A-A68C-68E8FD26A10F</string>
+		<string>C16D6224-B8E3-4928-B8F1-3E6B36DC273D</string>
+	</array>
+	<key>suggestAbbreviations</key>
+	<integer>1</integer>
+	<key>updateFrequency</key>
+	<integer>0</integer>
+	<key>uuidString</key>
+	<string>137EBC20-7961-4F00-AAA5-F5CFE324847A</string>
+	<key>writable</key>
+	<integer>1</integer>
+</dict>
+</plist>
