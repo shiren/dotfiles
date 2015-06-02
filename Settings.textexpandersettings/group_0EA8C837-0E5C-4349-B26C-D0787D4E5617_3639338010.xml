@@ -286,6 +286,29 @@
 			<key>uuidString</key>
 			<string>337620A1-E746-4296-A4EF-11F307AE376E</string>
 		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string></string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-02T05:54:08Z</date>
+			<key>extraInfo</key>
+			<dict>
+				<key>pendingSuggestionDate</key>
+				<date>2015-06-02T05:54:08Z</date>
+			</dict>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-02T05:54:08Z</date>
+			<key>plainText</key>
+			<string>git log</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>1169E719-26A5-4907-BAF5-E5B43D8925FB</string>
+		</dict>
 	</array>
 	<key>snippetUUIDs</key>
 	<array>
@@ -301,6 +324,7 @@
 		<string>C8B58EE2-CB99-48BE-9779-4FCC2BE4A2D7</string>
 		<string>2E62F901-FB31-44DB-B5C7-5428868FC5C9</string>
 		<string>337620A1-E746-4296-A4EF-11F307AE376E</string>
+		<string>1169E719-26A5-4907-BAF5-E5B43D8925FB</string>
 	</array>
 	<key>suggestAbbreviations</key>
 	<integer>1</integer>
