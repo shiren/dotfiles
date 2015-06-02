@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>DeviceName</key>
+	<string>shirenui-NEiMac.local</string>
 	<key>DeviceStats</key>
 	<dict>
 		<key>2014-09-03</key>
@@ -598,6 +600,28 @@
 			<key>startSnippetCount</key>
 			<integer>194</integer>
 		</dict>
+		<key>2015-05-29</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>24741</integer>
+			<key>endSnippetCount</key>
+			<integer>206</integer>
+			<key>startCharactersSaved</key>
+			<integer>24705</integer>
+			<key>startSnippetCount</key>
+			<integer>205</integer>
+		</dict>
+		<key>2015-06-01</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>24889</integer>
+			<key>endSnippetCount</key>
+			<integer>210</integer>
+			<key>startCharactersSaved</key>
+			<integer>24741</integer>
+			<key>startSnippetCount</key>
+			<integer>206</integer>
+		</dict>
 	</dict>
 	<key>SnippetLastUsed</key>
 	<dict>
@@ -624,7 +648,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<date>2015-03-30T01:39:27Z</date>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<date>2015-05-27T12:01:49Z</date>
+		<date>2015-06-01T09:13:59Z</date>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
 		<date>2015-01-26T00:29:03Z</date>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
@@ -675,7 +699,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<integer>21</integer>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<integer>44</integer>
+		<integer>49</integer>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
 		<integer>4</integer>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
