@@ -189,9 +189,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-"delete/paste without yanking
+"delete without yanking
 nnoremap <leader>d "_d
-vnoremap <leader>p "_dP
+nnoremap <leader>dd "_dd
 
 "save
 nnoremap <Leader>w :w<CR>
@@ -209,4 +209,3 @@ set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
-
