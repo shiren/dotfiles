@@ -1,6 +1,4 @@
-set shell=bash
-
-filetype off                  " required
+fletype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -68,6 +66,9 @@ call vundle#begin()
     "Editing
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
+    Plugin 'terryma/vim-expand-region'
+        vmap <leader>k <Plug>(expand_region_expand)
+        vmap <leader>j <Plug>(expand_region_shrink)
 
     "Navigate
     Plugin 'EasyMotion'
@@ -83,6 +84,7 @@ call vundle#begin()
     Plugin 'Shougo/unite.vim'
     Plugin 'Shougo/vimproc.vim'
     Plugin 'tpope/vim-obsession'
+    Plugin 'rizzatti/dash.vim'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -161,7 +163,7 @@ set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 
 
 "키맵"
-let mapleader=","
+let mapleader="\<Space>"
 imap jj <ESC>
 imap ㅓㅓ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
@@ -187,18 +189,17 @@ nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-" delete without yanking
+"delete/paste without yanking
 nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
-" replace currently selected text with default register
-" without yanking it
 vnoremap <leader>p "_dP
 
-"for Macvim"
+"save
+nnoremap <Leader>w :w<CR>
+
+"for macvim"
 "remove scrollbars"
 set guioptions-=r
-set guioptions-=R
+set guioptions-=r
 set guioptions-=l
 set guioptions-=L
 set guioptions-=b
