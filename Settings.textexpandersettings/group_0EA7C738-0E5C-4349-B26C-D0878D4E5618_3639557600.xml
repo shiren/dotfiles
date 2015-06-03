@@ -82,6 +82,24 @@
 			<key>uuidString</key>
 			<string>B84D3E97-1B94-4465-BA53-F84A853BCAEA</string>
 		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>gomp</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-02T13:31:07Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-02T13:31:36Z</date>
+			<key>plainText</key>
+			<string>cd /Volumes/Data/Masterpiece</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</string>
+		</dict>
 	</array>
 	<key>snippetUUIDs</key>
 	<array>
@@ -89,6 +107,7 @@
 		<string>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</string>
 		<string>58002A66-426F-44ED-A2CB-5F48B16B8AC6</string>
 		<string>B84D3E97-1B94-4465-BA53-F84A853BCAEA</string>
+		<string>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</string>
 	</array>
 	<key>suggestAbbreviations</key>
 	<integer>1</integer>

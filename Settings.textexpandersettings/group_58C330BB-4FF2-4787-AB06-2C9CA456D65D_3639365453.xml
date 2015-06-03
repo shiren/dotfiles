@@ -62,11 +62,49 @@ define([
 			<key>uuidString</key>
 			<string>EBDEDF79-4263-463B-A5E5-230CC5232FC4</string>
 		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>cl</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-02T06:50:08Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-02T06:50:43Z</date>
+			<key>plainText</key>
+			<string>console.log(</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>E5514B72-50E8-4849-8874-4A03DC5A71D4</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>clc</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-02T06:50:52Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-02T06:51:17Z</date>
+			<key>plainText</key>
+			<string>console.log(%clipboard);</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</string>
+		</dict>
 	</array>
 	<key>snippetUUIDs</key>
 	<array>
 		<string>509BD472-4B60-43E6-8CD0-27636E95C80E</string>
 		<string>EBDEDF79-4263-463B-A5E5-230CC5232FC4</string>
+		<string>E5514B72-50E8-4849-8874-4A03DC5A71D4</string>
+		<string>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</string>
 	</array>
 	<key>suggestAbbreviations</key>
 	<integer>1</integer>

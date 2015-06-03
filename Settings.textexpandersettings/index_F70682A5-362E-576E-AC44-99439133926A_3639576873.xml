@@ -29,7 +29,7 @@
 	<key>Date Installed</key>
 	<date>2014-07-10T13:04:37Z</date>
 	<key>Delimiters</key>
-	<string>	</string>
+	<string>;</string>
 	<key>Expander Mode</key>
 	<integer>2</integer>
 	<key>FormattedFontName</key>
@@ -137,7 +137,7 @@
 	<true/>
 	<key>outlineState</key>
 	<array>
-		<string>7FC85413-78B8-464B-A974-6F8DDDD96B1C</string>
+		<string>0EA7C738-0E5C-4349-B26C-D0878D4E5618</string>
 		<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
 	</array>
 	<key>rejectedHashes</key>
@@ -146,6 +146,22 @@
 		<integer>17447115288984516096</integer>
 		<integer>14881562070146625856</integer>
 		<integer>6746550183353717266</integer>
+		<integer>5204192545536167698</integer>
+		<integer>15478629052747067614</integer>
+		<integer>15670404574675268031</integer>
+		<integer>8682068413614444542</integer>
+		<integer>2927325537851221804</integer>
+		<integer>11267519554229670016</integer>
+		<integer>8703203687755833966</integer>
+		<integer>6728141093757209591</integer>
+		<integer>10979440330577047872</integer>
+		<integer>10306338635758194944</integer>
+		<integer>2646569721622857838</integer>
+		<integer>4878416628939946029</integer>
+		<integer>1946570752137489352</integer>
+		<integer>7525529994621823308</integer>
+		<integer>4480583267398019508</integer>
+		<integer>17991708842991952612</integer>
 	</array>
 	<key>wantsDaemonEnabled</key>
 	<true/>
