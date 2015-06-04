@@ -36,6 +36,9 @@ call vundle#begin()
         let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
     Plugin 'juanpabloaj/vim-istanbul'
 
+    "C
+    Plugin 'c.vim'
+
     "markdown"
     Plugin 'jtratner/vim-flavored-markdown'
     augroup markdown
@@ -82,9 +85,14 @@ call vundle#begin()
     "    let g:indent_guides_enable_on_vim_startup = 1
     Plugin 'bling/vim-airline'
     Plugin 'Shougo/unite.vim'
+        nmap <silent> <leader>u :Unite<CR>
     Plugin 'Shougo/vimproc.vim'
     Plugin 'tpope/vim-obsession'
     Plugin 'rizzatti/dash.vim'
+    Plugin 'vim-xkbswitch'
+        let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+        let g:XkbSwitchEnabled = 1
+        let g:XkbSwitchNLayout = 'us'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -157,6 +165,8 @@ set hidden
 set nobackup
 set noswapfile
 
+set autoread
+
 "공백문자들
 set list
 set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
@@ -168,6 +178,7 @@ imap jj <ESC>
 imap ㅓㅓ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
+
 nmap <silent> ,/ :nohlsearch<CR>
 
 "플러그인 키맵"

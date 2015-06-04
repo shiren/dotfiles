@@ -633,6 +633,17 @@
 			<key>startSnippetCount</key>
 			<integer>210</integer>
 		</dict>
+		<key>2015-06-03</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>25034</integer>
+			<key>endSnippetCount</key>
+			<integer>217</integer>
+			<key>startCharactersSaved</key>
+			<integer>24913</integer>
+			<key>startSnippetCount</key>
+			<integer>211</integer>
+		</dict>
 	</dict>
 	<key>SnippetLastUsed</key>
 	<dict>
@@ -650,6 +661,8 @@
 		<date>2014-07-18T08:21:45Z</date>
 		<key>3AF843C6-27AF-458E-B2DC-931B66069CFA</key>
 		<date>2014-06-06T07:33:05Z</date>
+		<key>4001D513-BBB3-4F3A-9751-74C06B4BE919</key>
+		<date>2015-06-03T12:42:45Z</date>
 		<key>4598587E-D64B-4793-B2E3-1BCCB3DD1639</key>
 		<date>2015-01-23T12:51:07Z</date>
 		<key>509BD472-4B60-43E6-8CD0-27636E95C80E</key>
@@ -659,9 +672,9 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<date>2015-03-30T01:39:27Z</date>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<date>2015-06-01T09:13:59Z</date>
+		<date>2015-06-03T06:47:35Z</date>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
-		<date>2015-06-02T13:31:42Z</date>
+		<date>2015-06-03T12:13:16Z</date>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
 		<date>2015-01-26T00:29:03Z</date>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
@@ -680,6 +693,8 @@
 		<date>2015-01-23T12:56:29Z</date>
 		<key>D0F5562D-D0DC-47E4-A716-F89F1A9903CC</key>
 		<date>2014-01-14T02:13:12Z</date>
+		<key>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</key>
+		<date>2015-06-03T08:23:46Z</date>
 		<key>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</key>
 		<date>2014-10-21T01:14:47Z</date>
 		<key>EBDEDF79-4263-463B-A5E5-230CC5232FC4</key>
@@ -703,6 +718,8 @@
 		<integer>4</integer>
 		<key>3AF843C6-27AF-458E-B2DC-931B66069CFA</key>
 		<integer>3</integer>
+		<key>4001D513-BBB3-4F3A-9751-74C06B4BE919</key>
+		<integer>2</integer>
 		<key>4598587E-D64B-4793-B2E3-1BCCB3DD1639</key>
 		<integer>7</integer>
 		<key>509BD472-4B60-43E6-8CD0-27636E95C80E</key>
@@ -712,9 +729,9 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<integer>21</integer>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<integer>49</integer>
+		<integer>50</integer>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
 		<integer>4</integer>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
@@ -733,6 +750,8 @@
 		<integer>9</integer>
 		<key>D0F5562D-D0DC-47E4-A716-F89F1A9903CC</key>
 		<integer>1</integer>
+		<key>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</key>
+		<integer>2</integer>
 		<key>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</key>
 		<integer>2</integer>
 		<key>EBDEDF79-4263-463B-A5E5-230CC5232FC4</key>

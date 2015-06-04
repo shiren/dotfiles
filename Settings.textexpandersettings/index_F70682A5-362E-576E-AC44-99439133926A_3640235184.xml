@@ -124,6 +124,12 @@
 			<key>uuidString</key>
 			<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
 		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown</string>
+			<key>uuidString</key>
+			<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
+		</dict>
 	</array>
 	<key>hotKeySuggestCharacters</key>
 	<string>E</string>
@@ -137,8 +143,8 @@
 	<true/>
 	<key>outlineState</key>
 	<array>
-		<string>0EA7C738-0E5C-4349-B26C-D0878D4E5618</string>
 		<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
+		<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
 	</array>
 	<key>rejectedHashes</key>
 	<array>
