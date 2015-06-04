@@ -36,6 +36,8 @@
 	<string>NanumGothic</string>
 	<key>FormattedFontSize</key>
 	<real>12</real>
+	<key>Generate Suggested Snippets</key>
+	<false/>
 	<key>IconGraphite</key>
 	<true/>
 	<key>IconNameStem</key>
@@ -120,12 +122,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Suggested Snippets</string>
-			<key>uuidString</key>
-			<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>Markdown</string>
 			<key>uuidString</key>
 			<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
@@ -144,7 +140,6 @@
 	<key>outlineState</key>
 	<array>
 		<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
-		<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
 	</array>
 	<key>rejectedHashes</key>
 	<array>
