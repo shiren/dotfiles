@@ -36,6 +36,8 @@
 	<string>NanumGothic</string>
 	<key>FormattedFontSize</key>
 	<real>12</real>
+	<key>Generate Suggested Snippets</key>
+	<false/>
 	<key>IconGraphite</key>
 	<true/>
 	<key>IconNameStem</key>
