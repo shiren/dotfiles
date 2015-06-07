@@ -41,7 +41,7 @@
 	<key>IconNameStem</key>
 	<string>SMTEStatusItem2</string>
 	<key>Last Version</key>
-	<string>5.0</string>
+	<string>5.0.1</string>
 	<key>PlainFontName</key>
 	<string>FantasqueSansMono-Regular</string>
 	<key>PlainFontSize</key>
@@ -143,8 +143,8 @@
 	<true/>
 	<key>outlineState</key>
 	<array>
+		<string>7FC85413-78B8-464B-A974-6F8DDDD96B1C</string>
 		<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
-		<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
 	</array>
 	<key>rejectedHashes</key>
 	<array>
