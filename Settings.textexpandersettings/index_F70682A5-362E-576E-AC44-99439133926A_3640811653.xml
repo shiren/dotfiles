@@ -126,6 +126,12 @@
 			<key>uuidString</key>
 			<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
 		</dict>
+		<dict>
+			<key>name</key>
+			<string>HTML</string>
+			<key>uuidString</key>
+			<string>D24A4D6C-A24C-402C-AEA5-B4BAC250D603</string>
+		</dict>
 	</array>
 	<key>hotKeySuggestCharacters</key>
 	<string>E</string>
