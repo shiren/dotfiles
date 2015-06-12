@@ -90,13 +90,73 @@ define([
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-06-02T06:51:17Z</date>
+			<date>2015-06-11T04:49:59Z</date>
 			<key>plainText</key>
-			<string>console.log(%clipboard);</string>
+			<string>console.log('%clipboard', %clipboard);</string>
 			<key>snippetType</key>
 			<integer>0</integer>
 			<key>uuidString</key>
 			<string>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>if</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-10T07:17:08Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-10T07:21:15Z</date>
+			<key>plainText</key>
+			<string>if () {
+
+}</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>95A57CC1-EF9A-402D-A209-317C8E596240</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>el</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-10T07:18:21Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-10T07:21:20Z</date>
+			<key>plainText</key>
+			<string>else {
+
+}</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>AB18BD6D-81D3-43FB-A969-0063540B0891</string>
+		</dict>
+		<dict>
+			<key>abbreviation</key>
+			<string>elif</string>
+			<key>abbreviationMode</key>
+			<integer>0</integer>
+			<key>creationDate</key>
+			<date>2015-06-10T07:19:06Z</date>
+			<key>label</key>
+			<string></string>
+			<key>modificationDate</key>
+			<date>2015-06-10T07:21:26Z</date>
+			<key>plainText</key>
+			<string>else if () {
+
+}</string>
+			<key>snippetType</key>
+			<integer>0</integer>
+			<key>uuidString</key>
+			<string>5AE7CBE7-9CAA-4B41-B305-C17FBB9BE6A6</string>
 		</dict>
 	</array>
 	<key>snippetUUIDs</key>
@@ -105,6 +165,9 @@ define([
 		<string>EBDEDF79-4263-463B-A5E5-230CC5232FC4</string>
 		<string>E5514B72-50E8-4849-8874-4A03DC5A71D4</string>
 		<string>D8CE5E4C-DCA5-4228-A5A3-F626795C654B</string>
+		<string>95A57CC1-EF9A-402D-A209-317C8E596240</string>
+		<string>AB18BD6D-81D3-43FB-A969-0063540B0891</string>
+		<string>5AE7CBE7-9CAA-4B41-B305-C17FBB9BE6A6</string>
 	</array>
 	<key>suggestAbbreviations</key>
 	<integer>1</integer>

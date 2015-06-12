@@ -8,11 +8,11 @@ call vundle#begin()
 
     "File/Buffer
     Plugin 'scrooloose/nerdtree'
+        let NERDTreeQuitOnOpen=1
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'ctrlp.vim'
         let g:ctrlp_working_path_mode = 'ra'
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
-        let NERDTreeQuitOnOpen=1
     Plugin 'rking/ag.vim'
     Plugin 'mkitt/tabline.vim'
 
@@ -22,13 +22,14 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    "Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'othree/yajs'
-    "Plugin 'crusoexia/vim-javascript-lib'
-    "Plugin 'pangloss/vim-javascript'
-        "let b:javascript_fold = 0
-        "let javascript_ignore_javaScriptdoc = 0
+    Plugin 'Enhanced-Javascript-syntax'
+    Plugin 'pangloss/vim-javascript'
+        let b:javascript_fold = 0
+        let javascript_ignore_javaScriptdoc = 0
+        let g:javascript_enable_domhtmlcss = 1
     Plugin 'heavenshell/vim-jsdoc'
+        let g:jsdoc_default_mapping = 0
+        let g:jsdoc_underscore_private = 1
     Plugin 'marijnh/tern_for_vim'
         let tern_show_argument_hint='on_move'
         let tern_show_signature_in_pum=1
@@ -56,12 +57,6 @@ call vundle#begin()
         set completeopt-=preview
 
     "Colorthemes
-    Plugin 'mango.vim'
-    Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-    Plugin 'crusoexia/vim-monokai'
-        let g:monokai_italic = 1
-        let g:monokai_thick_border = 1
-        let g:monokai_zentre = 1
     Plugin 'cocopon/iceberg.vim'
     Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
     Plugin 'nanotech/jellybeans.vim'
@@ -93,10 +88,23 @@ call vundle#begin()
         let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
         let g:XkbSwitchEnabled = 1
         let g:XkbSwitchNLayout = 'us'
+    Plugin 'SirVer/ultisnips'
+        let g:UltiSnipsExpandTrigger = "<nop>"
+        let g:ulti_expand_or_jump_res = 0
+        function ExpandSnippetOrCarriageReturn()
+            let snippet = UltiSnips#ExpandSnippetOrJump()
+            if g:ulti_expand_or_jump_res > 0
+                return snippet
+            else
+                return "\<CR>"
+            endif
+        endfunction
+        inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+        Plugin 'honza/vim-snippets'
+    Plugin 'sjl/gundo.vim'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-
 
 "문법 하이라이트"
 syntax on

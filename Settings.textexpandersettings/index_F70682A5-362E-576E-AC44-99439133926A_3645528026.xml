@@ -29,7 +29,7 @@
 	<key>Date Installed</key>
 	<date>2014-07-10T13:04:37Z</date>
 	<key>Delimiters</key>
-	<string>;</string>
+	<string>;</string>
 	<key>Expander Mode</key>
 	<integer>2</integer>
 	<key>FormattedFontName</key>
@@ -43,7 +43,7 @@
 	<key>IconNameStem</key>
 	<string>SMTEStatusItem2</string>
 	<key>Last Version</key>
-	<string>5.0</string>
+	<string>5.0.1</string>
 	<key>PlainFontName</key>
 	<string>FantasqueSansMono-Regular</string>
 	<key>PlainFontSize</key>
@@ -145,6 +145,7 @@
 	<true/>
 	<key>outlineState</key>
 	<array>
+		<string>7FC85413-78B8-464B-A974-6F8DDDD96B1C</string>
 		<string>0EA8C837-0E5C-4349-B26C-D0787D4E5617</string>
 	</array>
 	<key>rejectedHashes</key>
