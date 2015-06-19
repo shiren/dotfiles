@@ -35,7 +35,6 @@ call vundle#begin()
         let tern_show_signature_in_pum=1
     Plugin 'javascript-libraries-syntax'
         let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
-    Plugin 'juanpabloaj/vim-istanbul'
 
     "C
     Plugin 'c.vim'
@@ -58,8 +57,8 @@ call vundle#begin()
 
     "Colorthemes
     Plugin 'cocopon/iceberg.vim'
-    Plugin 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
     Plugin 'nanotech/jellybeans.vim'
+    Plugin 'trusktr/seti.vim'
 
     "Editing
     Plugin 'tpope/vim-surround'
@@ -81,27 +80,14 @@ call vundle#begin()
     Plugin 'bling/vim-airline'
     Plugin 'Shougo/unite.vim'
         nmap <silent> <leader>u :Unite<CR>
-    Plugin 'Shougo/vimproc.vim'
     Plugin 'tpope/vim-obsession'
     Plugin 'rizzatti/dash.vim'
     Plugin 'vim-xkbswitch'
         let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
         let g:XkbSwitchEnabled = 1
         let g:XkbSwitchNLayout = 'us'
-    Plugin 'SirVer/ultisnips'
-        let g:UltiSnipsExpandTrigger = "<nop>"
-        let g:ulti_expand_or_jump_res = 0
-        function ExpandSnippetOrCarriageReturn()
-            let snippet = UltiSnips#ExpandSnippetOrJump()
-            if g:ulti_expand_or_jump_res > 0
-                return snippet
-            else
-                return "\<CR>"
-            endif
-        endfunction
-        inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
-        Plugin 'honza/vim-snippets'
     Plugin 'sjl/gundo.vim'
+    Plugin 'ervandew/supertab'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -115,10 +101,11 @@ set lazyredraw
 set ttyfast
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
-colorscheme jellybeans
+colorscheme seti 
 
 "Show line number.
 set number
+
 "C style indent
 set cindent
 set autoindent
