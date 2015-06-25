@@ -22,11 +22,12 @@ call vundle#begin()
 
     "Javascript
     Plugin 'node.js'
-    Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'pangloss/vim-javascript'
-        let b:javascript_fold = 0
-        let javascript_ignore_javaScriptdoc = 0
-        let g:javascript_enable_domhtmlcss = 1
+    Plugin 'othree/yajs.vim'
+    "Plugin 'Enhanced-Javascript-syntax'
+   " Plugin 'pangloss/vim-javascript'
+        "let b:javascript_fold = 0
+        "let javascript_ignore_javaScriptdoc = 0
+   "     let g:javascript_enable_domhtmlcss = 1
     Plugin 'heavenshell/vim-jsdoc'
         let g:jsdoc_default_mapping = 0
         let g:jsdoc_underscore_private = 1
@@ -48,7 +49,13 @@ call vundle#begin()
 
     "Lint/Autocomplete
     Plugin 'scrooloose/syntastic'
-        let g:syntastic_check_on_open=1
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 0
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
         let g:syntastic_javascript_checkers=["eslint"]
     Plugin 'Valloric/YouCompleteMe'
         let g:ycm_add_preview_to_completeopt=0
