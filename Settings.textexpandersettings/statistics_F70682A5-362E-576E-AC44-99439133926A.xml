@@ -688,6 +688,17 @@
 			<key>startSnippetCount</key>
 			<integer>222</integer>
 		</dict>
+		<key>2015-06-25</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>25286</integer>
+			<key>endSnippetCount</key>
+			<integer>224</integer>
+			<key>startCharactersSaved</key>
+			<integer>25249</integer>
+			<key>startSnippetCount</key>
+			<integer>223</integer>
+		</dict>
 	</dict>
 	<key>SnippetLastUsed</key>
 	<dict>
@@ -716,7 +727,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<date>2015-03-30T01:39:27Z</date>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<date>2015-06-17T02:34:20Z</date>
+		<date>2015-06-25T05:44:16Z</date>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
 		<date>2015-06-03T12:13:16Z</date>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
@@ -777,7 +788,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<integer>21</integer>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<integer>52</integer>
+		<integer>53</integer>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
 		<integer>2</integer>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
