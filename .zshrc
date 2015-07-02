@@ -79,3 +79,6 @@ alias vim="mvim -v"
 alias vi="mvim -v"
 alias mux="tmuxinator"
 export EDITOR="/usr/local/bin/mvim -v"
+
+export NVM_DIR="/Users/shiren/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
