@@ -699,6 +699,39 @@
 			<key>startSnippetCount</key>
 			<integer>223</integer>
 		</dict>
+		<key>2015-06-29</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>25748</integer>
+			<key>endSnippetCount</key>
+			<integer>228</integer>
+			<key>startCharactersSaved</key>
+			<integer>25286</integer>
+			<key>startSnippetCount</key>
+			<integer>224</integer>
+		</dict>
+		<key>2015-06-30</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>26681</integer>
+			<key>endSnippetCount</key>
+			<integer>232</integer>
+			<key>startCharactersSaved</key>
+			<integer>25748</integer>
+			<key>startSnippetCount</key>
+			<integer>228</integer>
+		</dict>
+		<key>2015-07-03</key>
+		<dict>
+			<key>endCharactersSaved</key>
+			<integer>26728</integer>
+			<key>endSnippetCount</key>
+			<integer>234</integer>
+			<key>startCharactersSaved</key>
+			<integer>26681</integer>
+			<key>startSnippetCount</key>
+			<integer>232</integer>
+		</dict>
 	</dict>
 	<key>SnippetLastUsed</key>
 	<dict>
@@ -711,7 +744,7 @@
 		<key>2326E18F-AB5F-42CD-A06A-DB4ADE61A645</key>
 		<date>2014-05-31T07:55:16Z</date>
 		<key>27B253B5-1B25-45D3-B59B-13CAD4F1AA88</key>
-		<date>2015-05-27T08:16:47Z</date>
+		<date>2015-06-30T02:19:57Z</date>
 		<key>2E39C091-4D70-460E-A624-4493E21EB481</key>
 		<date>2014-07-18T08:21:45Z</date>
 		<key>3AF843C6-27AF-458E-B2DC-931B66069CFA</key>
@@ -727,7 +760,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<date>2015-03-30T01:39:27Z</date>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<date>2015-06-25T05:44:16Z</date>
+		<date>2015-07-02T01:40:06Z</date>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
 		<date>2015-06-03T12:13:16Z</date>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
@@ -735,7 +768,7 @@
 		<key>758FAAA4-48B0-4A7A-A68C-68E8FD26A10F</key>
 		<date>2015-06-04T05:53:19Z</date>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
-		<date>2015-05-14T09:04:13Z</date>
+		<date>2015-06-29T06:08:08Z</date>
 		<key>98B3C40E-A50F-49AC-8B15-29657EA0A0DB</key>
 		<date>2013-12-25T15:46:22Z</date>
 		<key>B84D3E97-1B94-4465-BA53-F84A853BCAEA</key>
@@ -743,7 +776,7 @@
 		<key>BD424BFB-63AC-4CD8-9685-C7EE69A2FE9E</key>
 		<date>2014-12-23T07:28:16Z</date>
 		<key>BDE461EE-5DC7-48D9-9278-276004B88375</key>
-		<date>2015-05-27T08:21:11Z</date>
+		<date>2015-06-30T02:24:07Z</date>
 		<key>C16D6224-B8E3-4928-B8F1-3E6B36DC273D</key>
 		<date>2015-01-21T16:01:12Z</date>
 		<key>CD5A8C8F-5F6E-4828-9883-E496D7773D55</key>
@@ -755,7 +788,7 @@
 		<key>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</key>
 		<date>2014-10-21T01:14:47Z</date>
 		<key>E5514B72-50E8-4849-8874-4A03DC5A71D4</key>
-		<date>2015-06-12T07:31:15Z</date>
+		<date>2015-07-02T02:09:38Z</date>
 		<key>EBDEDF79-4263-463B-A5E5-230CC5232FC4</key>
 		<date>2014-12-10T03:09:41Z</date>
 		<key>F3344BC6-E747-4E7B-ACEC-6E246F9C4C21</key>
@@ -772,7 +805,7 @@
 		<key>2326E18F-AB5F-42CD-A06A-DB4ADE61A645</key>
 		<integer>3</integer>
 		<key>27B253B5-1B25-45D3-B59B-13CAD4F1AA88</key>
-		<integer>31</integer>
+		<integer>34</integer>
 		<key>2E39C091-4D70-460E-A624-4493E21EB481</key>
 		<integer>4</integer>
 		<key>3AF843C6-27AF-458E-B2DC-931B66069CFA</key>
@@ -788,7 +821,7 @@
 		<key>58002A66-426F-44ED-A2CB-5F48B16B8AC6</key>
 		<integer>21</integer>
 		<key>5AF8363A-D5FD-4B34-891F-8C888A47B3B4</key>
-		<integer>53</integer>
+		<integer>57</integer>
 		<key>5F24AC3F-09E6-4C9A-B74D-05BBE4E44D0E</key>
 		<integer>2</integer>
 		<key>71FB7CE5-F14F-4C4E-A337-AC5FD4990F8C</key>
@@ -796,7 +829,7 @@
 		<key>758FAAA4-48B0-4A7A-A68C-68E8FD26A10F</key>
 		<integer>2</integer>
 		<key>91D0DDF0-AAB0-4171-B684-8D1822075D66</key>
-		<integer>8</integer>
+		<integer>9</integer>
 		<key>98B3C40E-A50F-49AC-8B15-29657EA0A0DB</key>
 		<integer>8</integer>
 		<key>B84D3E97-1B94-4465-BA53-F84A853BCAEA</key>
@@ -804,7 +837,7 @@
 		<key>BD424BFB-63AC-4CD8-9685-C7EE69A2FE9E</key>
 		<integer>9</integer>
 		<key>BDE461EE-5DC7-48D9-9278-276004B88375</key>
-		<integer>11</integer>
+		<integer>12</integer>
 		<key>C16D6224-B8E3-4928-B8F1-3E6B36DC273D</key>
 		<integer>1</integer>
 		<key>CD5A8C8F-5F6E-4828-9883-E496D7773D55</key>
@@ -816,7 +849,7 @@
 		<key>DDC715D0-10F4-4FB9-A8D1-D31C85F031D1</key>
 		<integer>2</integer>
 		<key>E5514B72-50E8-4849-8874-4A03DC5A71D4</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>EBDEDF79-4263-463B-A5E5-230CC5232FC4</key>
 		<integer>3</integer>
 		<key>F3344BC6-E747-4E7B-ACEC-6E246F9C4C21</key>

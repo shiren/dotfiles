@@ -63,7 +63,7 @@
 
 \f0\fs24 \cf0 /**\
  * @fileoverview Implements %filltext:name=Name%\
- * %snippet:`author%\
+ * %snippet:author%\
  */\
 \
 'use strict';\
@@ -86,11 +86,11 @@ module.exports = %filltext:name=Name%;}</string>
 			<key>label</key>
 			<string></string>
 			<key>modificationDate</key>
-			<date>2015-05-29T02:11:59Z</date>
+			<date>2015-06-29T06:08:02Z</date>
 			<key>plainText</key>
 			<string>/**
  * @fileoverview Implements %filltext:name=Name%
- * %snippet:`author%
+ * %snippet:author%
  */
 
 'use strict';
@@ -112,24 +112,24 @@ module.exports = %filltext:name=Name%;</string>
 			<key>richText</key>
 			<data>
 			BAtzdHJlYW10eXBlZIHoA4QBQISEhBJOU0F0dHJpYnV0ZWRTdHJp
-			bmcAhIQITlNPYmplY3QAhZKEhIQPTlNNdXRhYmxlU3RyaW5nAYSE
-			CE5TU3RyaW5nAZSEASuBRAEvKioKICogQGZpbGVvdmVydmlldyBJ
-			bXBsZW1lbnRzICVmaWxsdGV4dDpuYW1lPU5hbWUlCiAqICVzbmlw
-			cGV0OmBhdXRob3IlCiAqLwoKJ3VzZSBzdHJpY3QnOwoKLyoqCiAq
-			ICVmaWxsdGV4dDpuYW1lPU5hbWUlCiAqIEBleHBvcnRzICVmaWxs
-			dGV4dDpuYW1lPU5hbWUlCiAqIEBhdWdtZW50cwogKiBAY29uc3Ry
-			dWN0b3IKICogQGNsYXNzCiAqLwpmdW5jdGlvbiAlZmlsbHRleHQ6
-			bmFtZT1OYW1lJSgpIHsKfQoKJWZpbGx0ZXh0Om5hbWU9TmFtZSUu
-			cHJvdG90eXBlLiA9IGZ1bmN0aW9uKCkgewp9OwoKbW9kdWxlLmV4
-			cG9ydHMgPSAlZmlsbHRleHQ6bmFtZT1OYW1lJTuGhAJpSQGBRAGS
-			hISEDE5TRGljdGlvbmFyeQCUhAFpApKEl5cQTlNQYXJhZ3JhcGhT
-			dHlsZYaShISEEE5TUGFyYWdyYXBoU3R5bGUAlIQEQ0NAUwAAhISE
-			B05TQXJyYXkAlJoMkoSEhAlOU1RleHRUYWIAlIQCQ2YAHIaShKCf
-			ADiGkoSgnwBUhpKEoJ8AcIaShKCfAIGMAIaShKCfAIGoAIaShKCf
-			AIHEAIaShKCfAIHgAIaShKCfAIH8AIaShKCfAIEYAYaShKCfAIE0
-			AYaShKCfAIFQAYaGgQAIhARbMWZdg83MTD2GkoSXlwZOU0ZvbnSG
-			koSEhAZOU0ZvbnQelJoghAVbMzJjXQYAAAAYAAAA//5OAGEAbgB1
-			AG0ARwBvAHQAaABpAGMAhAFmDIQBYwCkAaQApACGhoY=
+			bmcAhIQITlNPYmplY3QAhZKEhIQITlNTdHJpbmcBlIQBK4FDAS8q
+			KgogKiBAZmlsZW92ZXJ2aWV3IEltcGxlbWVudHMgJWZpbGx0ZXh0
+			Om5hbWU9TmFtZSUKICogJXNuaXBwZXQ6YXV0aG9yJQogKi8KCid1
+			c2Ugc3RyaWN0JzsKCi8qKgogKiAlZmlsbHRleHQ6bmFtZT1OYW1l
+			JQogKiBAZXhwb3J0cyAlZmlsbHRleHQ6bmFtZT1OYW1lJQogKiBA
+			YXVnbWVudHMKICogQGNvbnN0cnVjdG9yCiAqIEBjbGFzcwogKi8K
+			ZnVuY3Rpb24gJWZpbGx0ZXh0Om5hbWU9TmFtZSUoKSB7Cn0KCiVm
+			aWxsdGV4dDpuYW1lPU5hbWUlLnByb3RvdHlwZS4gPSBmdW5jdGlv
+			bigpIHsKfTsKCm1vZHVsZS5leHBvcnRzID0gJWZpbGx0ZXh0Om5h
+			bWU9TmFtZSU7hoQCaUkBgUMBkoSEhAxOU0RpY3Rpb25hcnkAlIQB
+			aQKShJaWEE5TUGFyYWdyYXBoU3R5bGWGkoSEhBBOU1BhcmFncmFw
+			aFN0eWxlAJSEBENDQFMAAISEhAdOU0FycmF5AJSZDJKEhIQJTlNU
+			ZXh0VGFiAJSEAkNmAByGkoSfngA4hpKEn54AVIaShJ+eAHCGkoSf
+			ngCBjACGkoSfngCBqACGkoSfngCBxACGkoSfngCB4ACGkoSfngCB
+			/ACGkoSfngCBGAGGkoSfngCBNAGGkoSfngCBUAGGhoEACIQEWzFm
+			XYPNzEw9hpKElpYGTlNGb250hpKEhIQGTlNGb250HpSZIIQFWzMy
+			Y10GAAAAGAAAAP/+TgBhAG4AdQBtAEcAbwB0AGgAaQBjAIQBZgyE
+			AWMAowGjAKMAhoaG
 			</data>
 			<key>snippetType</key>
 			<integer>1</integer>

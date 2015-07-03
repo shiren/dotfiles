@@ -15,6 +15,7 @@ call vundle#begin()
         let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
     Plugin 'rking/ag.vim'
     Plugin 'mkitt/tabline.vim'
+    Plugin 'jeetsukumaran/vim-buffergator'
 
     "Git
     Plugin 'tpope/vim-fugitive'
@@ -24,10 +25,10 @@ call vundle#begin()
     Plugin 'node.js'
     Plugin 'othree/yajs.vim'
     "Plugin 'Enhanced-Javascript-syntax'
-   " Plugin 'pangloss/vim-javascript'
-        "let b:javascript_fold = 0
-        "let javascript_ignore_javaScriptdoc = 0
-   "     let g:javascript_enable_domhtmlcss = 1
+    Plugin 'pangloss/vim-javascript'
+         let b:javascript_fold = 0
+         let javascript_ignore_javaScriptdoc = 0
+         let g:javascript_enable_domhtmlcss = 1
     Plugin 'heavenshell/vim-jsdoc'
         let g:jsdoc_default_mapping = 0
         let g:jsdoc_underscore_private = 1
@@ -66,6 +67,8 @@ call vundle#begin()
     Plugin 'cocopon/iceberg.vim'
     Plugin 'nanotech/jellybeans.vim'
     Plugin 'trusktr/seti.vim'
+    Plugin 'chriskempson/base16-vim'
+        let base16colorspace=256
 
     "Editing
     Plugin 'tpope/vim-surround'
@@ -86,6 +89,10 @@ call vundle#begin()
     "    let g:indent_guides_enable_on_vim_startup = 1
     Plugin 'bling/vim-airline'
         set laststatus=2
+        " Enable the list of buffers
+        let g:airline#extensions#tabline#enabled = 1
+        " Show just the filename
+        let g:airline#extensions#tabline#fnamemod = ':t'
     Plugin 'Shougo/unite.vim'
         nmap <silent> <leader>u :Unite<CR>
     Plugin 'tpope/vim-obsession'
@@ -109,7 +116,7 @@ set lazyredraw
 set ttyfast
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
-colorscheme seti 
+colorscheme base16-default
 
 "Show line number.
 set number
@@ -209,6 +216,10 @@ nnoremap <leader>dd "_dd
 "save
 nnoremap <Leader>w :w<CR>
 
+"buffer move
+nmap <silent> <leader>h :bn<CR>
+nmap <silent> <leader>l :bn<CR>
+nmap <silent> <leader>w :b#<bar>bd#<CR>
 "for macvim"
 "remove scrollbars"
 set guioptions-=r

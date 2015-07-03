@@ -47,8 +47,11 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git, node, npm, osx, github, bower, tmux, tmuxinator, nvm, brew, vundle)
 
-# User configuration
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
+# User configuration
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -80,5 +83,4 @@ alias vi="mvim -v"
 alias mux="tmuxinator"
 export EDITOR="/usr/local/bin/mvim -v"
 
-export NVM_DIR="/Users/shiren/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
