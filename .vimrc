@@ -93,6 +93,7 @@ call vundle#begin()
         let g:airline#extensions#tabline#enabled = 1
         " Show just the filename
         let g:airline#extensions#tabline#fnamemod = ':t'
+        let g:airline#extensions#tabline#buffer_nr_show = 1
     Plugin 'Shougo/unite.vim'
         nmap <silent> <leader>u :Unite<CR>
     Plugin 'tpope/vim-obsession'
@@ -220,6 +221,7 @@ nnoremap <Leader>w :w<CR>
 nmap <silent> <leader>h :bn<CR>
 nmap <silent> <leader>l :bn<CR>
 nmap <silent> <leader>w :b#<bar>bd#<CR>
+nmap <silent> <leader>f :b
 "for macvim"
 "remove scrollbars"
 set guioptions-=r
