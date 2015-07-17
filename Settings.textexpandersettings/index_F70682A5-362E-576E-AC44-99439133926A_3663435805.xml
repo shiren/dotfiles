@@ -147,9 +147,15 @@
 	<true/>
 	<key>outlineState</key>
 	<array>
+		<string>0EA7C738-0E5C-4349-B26C-D0878D4E5618</string>
+		<string>137EBC20-7961-4F00-AAA5-F5CFE324847A</string>
 		<string>58C330BB-4FF2-4787-AB06-2C9CA456D65D</string>
 		<string>7FC85413-78B8-464B-A974-6F8DDDD96B1C</string>
+		<string>30BCDF4F-B637-4524-90DF-0BBDC2E25F61</string>
+		<string>2853B792-7084-4D07-9033-4B7DE7C7686A</string>
 		<string>001046EC-3E9F-4F22-830F-7A12C5134E0B</string>
+		<string>B3DEA6CC-DA47-41C5-8851-EF16D684171F</string>
+		<string>D24A4D6C-A24C-402C-AEA5-B4BAC250D603</string>
 	</array>
 	<key>rejectedHashes</key>
 	<array>

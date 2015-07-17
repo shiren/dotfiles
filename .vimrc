@@ -35,6 +35,7 @@ call vundle#begin()
     Plugin 'marijnh/tern_for_vim'
         let tern_show_argument_hint='on_move'
         let tern_show_signature_in_pum=1
+        "let g:tern_map_keys=1
     Plugin 'javascript-libraries-syntax'
         let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 
@@ -220,8 +221,13 @@ nnoremap <Leader>w :w<CR>
 "buffer move
 nmap <silent> <leader>h :bn<CR>
 nmap <silent> <leader>l :bn<CR>
-nmap <silent> <leader>w :b#<bar>bd#<CR>
+nmap <silent> <leader>q :b#<bar>bd#<CR>
 nmap <silent> <leader>f :b
+
+"ternjs
+nmap <silent> <leader>td :TernDef<CR>
+nmap <silent> <leader>tp :TernDefPreview<CR>
+
 "for macvim"
 "remove scrollbars"
 set guioptions-=r
