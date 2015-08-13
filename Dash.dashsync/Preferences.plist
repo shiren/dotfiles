@@ -5,7 +5,86 @@
 	<key>DHCheatRepo</key>
 	<dict>
 		<key>installed</key>
-		<dict/>
+		<dict>
+			<key>Git</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:46:43Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array>
+						<string>terminal</string>
+						<string>shell</string>
+						<string>bash</string>
+						<string>zsh</string>
+					</array>
+					<key>name</key>
+					<string>Git</string>
+					<key>platform</key>
+					<string>cheatsheet</string>
+					<key>uniqueIdentifier</key>
+					<string>Git</string>
+				</dict>
+			</dict>
+			<key>Vim</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:47:09Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array/>
+					<key>name</key>
+					<string>Vim</string>
+					<key>platform</key>
+					<string>cheatsheet</string>
+					<key>uniqueIdentifier</key>
+					<string>Vim</string>
+				</dict>
+			</dict>
+			<key>npm</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:47:06Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array>
+						<string>node package manager</string>
+						<string>nodejs package manager</string>
+						<string>node.js package manager</string>
+					</array>
+					<key>name</key>
+					<string>npm</string>
+					<key>platform</key>
+					<string>cheatsheet</string>
+					<key>uniqueIdentifier</key>
+					<string>npm</string>
+				</dict>
+			</dict>
+			<key>tmux</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:47:10Z</date>
+				<key>entry</key>
+				<dict>
+					<key>aliases</key>
+					<array>
+						<string>terminal</string>
+						<string>shell</string>
+						<string>bash</string>
+						<string>zsh</string>
+					</array>
+					<key>name</key>
+					<string>tmux</string>
+					<key>platform</key>
+					<string>cheatsheet</string>
+					<key>uniqueIdentifier</key>
+					<string>tmux</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>uninstalled</key>
 		<dict/>
 	</dict>
@@ -134,6 +213,8 @@
 	<dict>
 		<key>keywords</key>
 		<dict>
+			<key>~/Library/Application Support/Dash/Cheat Sheets/Vim/Vim.docset</key>
+			<string>vim:</string>
 			<key>~/Library/Application Support/Dash/DocSets/JavaScript/JavaScript.docset</key>
 			<string>js:</string>
 		</dict>
@@ -142,6 +223,11 @@
 	<dict>
 		<key>installed</key>
 		<dict>
+			<key>http://kapeli.com/feeds/CSS.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:48:01Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Jasmine.xml</key>
 			<dict>
 				<key>date</key>
@@ -151,6 +237,11 @@
 			<dict>
 				<key>date</key>
 				<date>2015-05-27T00:20:20Z</date>
+			</dict>
+			<key>http://kapeli.com/feeds/Man_Pages.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2015-08-06T02:48:36Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Markdown.xml</key>
 			<dict>
@@ -203,7 +294,7 @@
 		<key>keyCode</key>
 		<integer>-1</integer>
 		<key>modifiers</key>
-		<integer>8395520</integer>
+		<integer>0</integer>
 	</dict>
 	<key>shouldRestoreTabs</key>
 	<true/>
@@ -294,6 +385,6 @@
 		<dict/>
 	</dict>
 	<key>windowStyle</key>
-	<string>HUD</string>
+	<string>Standard</string>
 </dict>
 </plist>

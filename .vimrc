@@ -216,18 +216,20 @@ nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-"delete without yanking
+"paste & delete without yanking
 nnoremap <leader>d "_d
 nnoremap <leader>dd "_dd
+nnoremap <leader>p "0p
 
 "save
 nnoremap <Leader>w :w<CR>
 
 "buffer move
-nmap <silent> <leader>h :bn<CR>
-nmap <silent> <leader>l :bn<CR>
-nmap <silent> <leader>q :b#<bar>bd#<CR>
+nmap <silent> <leader>h :BuffergatorMruCyclePrev<cr>
+nmap <silent> <leader>l :BuffergatorMruCycleNext<CR>
+nmap <silent> <leader>q :bp <bar> bd #<CR>
 nmap <silent> <leader>f :b
+nmap <silent> <leader>e :CtrlPBuffer<cr>
 
 "ternjs
 nmap <silent> <leader>td :TernDef<CR>
@@ -252,6 +254,9 @@ augroup omnisharp_commands
 augroup END
 "Timeout in seconds to wait for a response from the server
 let g:OmniSharp_timeout = 1
+
+"Dash
+nmap <silent> <leader>d <Plug>DashGlobalSearch
 
 "for macvim"
 "remove scrollbars"
