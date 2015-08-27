@@ -78,20 +78,11 @@ call vundle#begin()
     "Editing
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'terryma/vim-expand-region'
-        vmap <leader>k <Plug>(expand_region_expand)
-        vmap <leader>j <Plug>(expand_region_shrink)
 
     "Navigate
     Plugin 'EasyMotion'
 
     "ETC
-    "Plugin 'nathanaelkane/vim-indent-guides'
-    "    hi IndentGuidesOdd  ctermbg=black
-    "    hi IndentGuidesEven ctermbg=darkgrey
-    "    let g:indent_guides_start_level = 2
-    "    let g:indent_guides_guide_size = 1
-    "    let g:indent_guides_enable_on_vim_startup = 1
     Plugin 'bling/vim-airline'
         set laststatus=2
         " Enable the list of buffers
@@ -108,11 +99,6 @@ call vundle#begin()
         let g:XkbSwitchEnabled = 1
         let g:XkbSwitchNLayout = 'us'
     Plugin 'sjl/gundo.vim'
-   " Plugin 'ervandew/supertab'
-   "     let g:SuperTabDefaultCompletionType = 'context'
-   "     let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-   "     let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-   "     let g:SuperTabClosePreviewOnPopupClose = 1
     Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
