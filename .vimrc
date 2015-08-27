@@ -108,7 +108,11 @@ call vundle#begin()
         let g:XkbSwitchEnabled = 1
         let g:XkbSwitchNLayout = 'us'
     Plugin 'sjl/gundo.vim'
-    Plugin 'ervandew/supertab'
+   " Plugin 'ervandew/supertab'
+   "     let g:SuperTabDefaultCompletionType = 'context'
+   "     let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+   "     let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+   "     let g:SuperTabClosePreviewOnPopupClose = 1
     Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
@@ -239,7 +243,7 @@ nmap <silent> <leader>tp :TernDefPreview<CR>
 augroup omnisharp_commands
     autocmd!
     "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+    "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
     " Synchronous build (blocks Vim)
     "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
