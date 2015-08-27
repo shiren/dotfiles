@@ -178,7 +178,6 @@ set autoread
 set list
 set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 
-
 "키맵"
 let mapleader="\<Space>"
 imap jj <ESC>
