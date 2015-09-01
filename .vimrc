@@ -226,7 +226,7 @@ nnoremap <leader>dd "_dd
 nnoremap <leader>p "0p
 
 "save
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>s :w<CR>
 
 "buffer move
 nmap <silent> <leader>h :BuffergatorMruCyclePrev<cr>
