@@ -64,7 +64,6 @@ call vundle#begin()
         let g:syntastic_javascript_checkers=["eslint"]
         let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
     Plugin 'Valloric/YouCompleteMe'
-        let g:ycm_add_preview_to_completeopt=0
         let g:ycm_confirm_extra_conf=0
         set completeopt-=preview
         let g:ycm_auto_trigger = 1
