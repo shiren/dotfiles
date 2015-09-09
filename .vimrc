@@ -62,6 +62,85 @@ call vundle#begin()
     Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
+"=========================== PLUGIN SETTING ==========================
+"-- NERDTree
+let NERDTreeQuitOnOpen=1
+
+"-- vim-jsdoc
+let g:jsdoc_default_mapping = 0
+let g:jsdoc_underscore_private = 1
+
+"-- ternjs
+let tern_show_argument_hint='on_move'
+let tern_show_signature_in_pum=1
+"let g:tern_map_keys=1
+
+"-- syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers=["eslint"]
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+"-- YouCompleteMe
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
+let g:ycm_auto_trigger = 1
+
+"-- base16-vim
+let base16colorspace=256
+
+"-- javascript-libraries-synatx
+let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
+
+"-- vim-flavored-markdown
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
+"-- CTRLP
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+
+"-- Omnisharp
+augroup omnisharp_commands
+    autocmd!
+    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    " Synchronous build (blocks Vim)
+    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+
+    " automatic syntax check on events (TextChanged requires Vim 7.4)
+    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    " Automatically add new cs files to the nearest project on save
+    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+    "show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+augroup END
+"Timeout in seconds to wait for a response from the server
+let g:OmniSharp_timeout = 1
+
+"-- Airline
+set laststatus=2
+"Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"-- vim-xbkswitch
+let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchNLayout = 'us'
+
 "========================= Configuration ==================================
 filetype plugin indent on    " required
 
@@ -72,6 +151,7 @@ syntax sync fromstart
 set t_Co=256
 set lazyredraw
 set ttyfast
+
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
 colorscheme base16-default
@@ -194,84 +274,6 @@ autocmd FileType * autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FileType * autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd FileType * autocmd BufWritePre     * :call TrimWhiteSpace()
 
-"=========================== PLUGIN SETTING ==========================
-"-- NERDTree
-let NERDTreeQuitOnOpen=1
-
-"-- vim-jsdoc
-let g:jsdoc_default_mapping = 0
-let g:jsdoc_underscore_private = 1
-
-"-- ternjs
-let tern_show_argument_hint='on_move'
-let tern_show_signature_in_pum=1
-"let g:tern_map_keys=1
-
-"-- syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers=["eslint"]
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-
-"-- YouCompleteMe
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
-let g:ycm_auto_trigger = 1
-
-"-- base16-vim
-let base16colorspace=256
-
-"-- javascript-libraries-synatx
-let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
-
-"-- vim-flavored-markdown
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-
-"-- CTRLP
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
-
-"-- Omnisharp
-augroup omnisharp_commands
-    autocmd!
-    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-    " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-
-    " automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
-
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    "show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-augroup END
-"Timeout in seconds to wait for a response from the server
-let g:OmniSharp_timeout = 1
-
-"-- Airline
-set laststatus=2
-"Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-"Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-"-- vim-xbkswitch
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchNLayout = 'us'
 
 "=========================== MACVIM =========================="
 "remove scrollbars"
