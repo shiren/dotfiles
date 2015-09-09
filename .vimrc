@@ -11,12 +11,12 @@ call vundle#begin()
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'ctrlp.vim'
     Plugin 'rking/ag.vim'
-    Plugin 'mkitt/tabline.vim'
     Plugin 'jeetsukumaran/vim-buffergator'
 
     "Git
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
+    Plugin 'sjl/gundo.vim'
 
     "Javascript
     Plugin 'node.js'
@@ -51,6 +51,7 @@ call vundle#begin()
 
     "Navigate
     Plugin 'EasyMotion'
+    Plugin 'Shougo/unite-outline'
 
     "ETC
     Plugin 'bling/vim-airline'
@@ -58,7 +59,6 @@ call vundle#begin()
     Plugin 'tpope/vim-obsession'
     Plugin 'rizzatti/dash.vim'
     Plugin 'vim-xkbswitch'
-    Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
