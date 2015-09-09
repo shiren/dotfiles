@@ -260,6 +260,9 @@ nmap <silent> <leader>d <Plug>DashGlobalSearch
 "Unite
 nmap <silent> <leader>u :Unite<CR>
 
+"Unite-outline
+nmap <silent> <leader>o :Unite outline<CR>
+
 "TrimWhiteSpace
 nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
