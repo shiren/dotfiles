@@ -8,11 +8,8 @@ call vundle#begin()
 
     "File/Buffer
     Plugin 'scrooloose/nerdtree'
-        let NERDTreeQuitOnOpen=1
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'ctrlp.vim'
-        let g:ctrlp_working_path_mode = 'ra'
-        let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
     Plugin 'rking/ag.vim'
     Plugin 'mkitt/tabline.vim'
     Plugin 'jeetsukumaran/vim-buffergator'
@@ -26,18 +23,9 @@ call vundle#begin()
     Plugin 'othree/yajs.vim'
     "Plugin 'Enhanced-Javascript-syntax'
     Plugin 'pangloss/vim-javascript'
-         let b:javascript_fold = 0
-         let javascript_ignore_javaScriptdoc = 0
-         let g:javascript_enable_domhtmlcss = 1
     Plugin 'heavenshell/vim-jsdoc'
-        let g:jsdoc_default_mapping = 0
-        let g:jsdoc_underscore_private = 1
     Plugin 'marijnh/tern_for_vim'
-        let tern_show_argument_hint='on_move'
-        let tern_show_signature_in_pum=1
-        "let g:tern_map_keys=1
     Plugin 'javascript-libraries-syntax'
-        let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 
     "C
     Plugin 'c.vim'
@@ -47,33 +35,15 @@ call vundle#begin()
 
     "markdown"
     Plugin 'jtratner/vim-flavored-markdown'
-    augroup markdown
-        au!
-        au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-    augroup END
 
     "Lint/Autocomplete
     Plugin 'scrooloose/syntastic'
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 0
-        let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 0
-        let g:syntastic_javascript_checkers=["eslint"]
-        let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
     Plugin 'Valloric/YouCompleteMe'
-        let g:ycm_confirm_extra_conf=0
-        set completeopt-=preview
-        let g:ycm_auto_trigger = 1
 
     "Colorthemes
     Plugin 'cocopon/iceberg.vim'
     Plugin 'nanotech/jellybeans.vim'
-    Plugin 'trusktr/seti.vim'
     Plugin 'chriskempson/base16-vim'
-        let base16colorspace=256
 
     "Editing
     Plugin 'tpope/vim-surround'
@@ -84,24 +54,15 @@ call vundle#begin()
 
     "ETC
     Plugin 'bling/vim-airline'
-        set laststatus=2
-        " Enable the list of buffers
-        let g:airline#extensions#tabline#enabled = 1
-        " Show just the filename
-        let g:airline#extensions#tabline#fnamemod = ':t'
-        let g:airline#extensions#tabline#buffer_nr_show = 1
     Plugin 'Shougo/unite.vim'
-        nmap <silent> <leader>u :Unite<CR>
     Plugin 'tpope/vim-obsession'
     Plugin 'rizzatti/dash.vim'
     Plugin 'vim-xkbswitch'
-        let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-        let g:XkbSwitchEnabled = 1
-        let g:XkbSwitchNLayout = 'us'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
+"========================= Configuration ==================================
 filetype plugin indent on    " required
 
 "문법 하이라이트"
@@ -178,40 +139,29 @@ set autoread
 set list
 set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 
-"키맵"
+"========================= KEYMAP ==================================
+"basic
 let mapleader="\<Space>"
 imap jj <ESC>
 imap ㅓㅓ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
-nmap <silent> ,/ :nohlsearch<CR>
-
-"플러그인 키맵"
-map <C-S-n> :NERDTreeToggle<CR>
-
-"저장시 필요없는 스페이스 지우기"
-function! TrimWhiteSpace()
-    %s/\s\+$//e
-endfunction
-
-nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
-autocmd FileType javascript autocmd FileWritePre    * :call TrimWhiteSpace()
-autocmd FileType javascript autocmd FileAppendPre   * :call TrimWhiteSpace()
-autocmd FileType javascript autocmd FilterWritePre  * :call TrimWhiteSpace()
-autocmd FileType javascript autocmd BufWritePre     * :call TrimWhiteSpace()
-
-"Toggl Paste"
-nnoremap <F2> :set invpaste paste?<CR>
-imap <F2> <C-O>:set invpaste paste?<CR>
-set pastetoggle=<F2>
+nmap <silent> <Leader>/ :nohlsearch<CR>
 
 "paste & delete without yanking
 nnoremap <leader>d "_d
 nnoremap <leader>dd "_dd
 nnoremap <leader>p "0p
 
+"Toggl Paste"
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
+
 "save
 nnoremap <Leader>s :w<CR>
+
+map <C-S-n> :NERDTreeToggle<CR>
 
 "buffer move
 nmap <silent> <leader>h :BuffergatorMruCyclePrev<cr>
@@ -224,7 +174,72 @@ nmap <silent> <leader>e :CtrlPBuffer<cr>
 nmap <silent> <leader>td :TernDef<CR>
 nmap <silent> <leader>tp :TernDefPreview<CR>
 
-"Omnisharp
+"Dash
+nmap <silent> <leader>d <Plug>DashGlobalSearch
+
+"Unite
+nmap <silent> <leader>u :Unite<CR>
+
+"TrimWhiteSpace
+nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
+
+"========================= ETC ==================================
+"저장시 필요없는 스페이스 지우기
+function! TrimWhiteSpace()
+    %s/\s\+$//e
+endfunction
+
+autocmd FileType * autocmd FileWritePre    * :call TrimWhiteSpace()
+autocmd FileType * autocmd FileAppendPre   * :call TrimWhiteSpace()
+autocmd FileType * autocmd FilterWritePre  * :call TrimWhiteSpace()
+autocmd FileType * autocmd BufWritePre     * :call TrimWhiteSpace()
+
+"=========================== PLUGIN SETTING ==========================
+"-- NERDTree
+let NERDTreeQuitOnOpen=1
+
+"-- vim-jsdoc
+let g:jsdoc_default_mapping = 0
+let g:jsdoc_underscore_private = 1
+
+"-- ternjs
+let tern_show_argument_hint='on_move'
+let tern_show_signature_in_pum=1
+"let g:tern_map_keys=1
+
+"-- syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers=["eslint"]
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+"-- YouCompleteMe
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
+let g:ycm_auto_trigger = 1
+
+"-- base16-vim
+let base16colorspace=256
+
+"-- javascript-libraries-synatx
+let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
+
+"-- vim-flavored-markdown
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
+"-- CTRLP
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+
+"-- Omnisharp
 augroup omnisharp_commands
     autocmd!
     "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
@@ -232,6 +247,7 @@ augroup omnisharp_commands
 
     " Synchronous build (blocks Vim)
     "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+
     " automatic syntax check on events (TextChanged requires Vim 7.4)
     autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
 
@@ -244,10 +260,20 @@ augroup END
 "Timeout in seconds to wait for a response from the server
 let g:OmniSharp_timeout = 1
 
-"Dash
-nmap <silent> <leader>d <Plug>DashGlobalSearch
+"-- Airline
+set laststatus=2
+"Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
-"for macvim"
+"-- vim-xbkswitch
+let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchNLayout = 'us'
+
+"=========================== MACVIM =========================="
 "remove scrollbars"
 set guioptions-=r
 set guioptions-=r
