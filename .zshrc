@@ -74,10 +74,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="mvim -v"
-alias vi="mvim -v"
+alias vim="/usr/local/bin/vim"
+alias vi="/usr/local/bin/vim"
 alias mux="tmuxinator"
-export EDITOR="/usr/local/bin/mvim -v"
+export EDITOR="/usr/local/bin/vim"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
