@@ -15,14 +15,16 @@ call vundle#begin()
 
     "Git
     Plugin 'tpope/vim-fugitive'
-    Plugin 'airblade/vim-gitgutter'
+    "Plugin 'airblade/vim-gitgutter'
+    Plugin 'mhinz/vim-signify'
     Plugin 'sjl/gundo.vim'
 
     "Javascript
-    Plugin 'node.js'
-    Plugin 'othree/yajs.vim'
+    "Plugin 'node.js'
+    "Plugin 'othree/yajs.vim'
     "Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'pangloss/vim-javascript'
+    "Plugin 'pangloss/vim-javascript'
+    "Plugin 'gavocanov/vim-js-indent'
     Plugin 'heavenshell/vim-jsdoc'
     Plugin 'marijnh/tern_for_vim'
     Plugin 'javascript-libraries-syntax'
@@ -32,6 +34,8 @@ call vundle#begin()
 
     "C#
     Plugin 'OmniSharp/omnisharp-vim'
+    "dependency for omnisharp-vim
+    Plugin 'tpope/vim-obsession'
 
     "markdown"
     Plugin 'jtratner/vim-flavored-markdown'
@@ -56,7 +60,6 @@ call vundle#begin()
     "ETC
     Plugin 'bling/vim-airline'
     Plugin 'Shougo/unite.vim'
-    Plugin 'tpope/vim-obsession'
     Plugin 'rizzatti/dash.vim'
     Plugin 'vim-xkbswitch'
     Plugin 'tpope/vim-dispatch'
