@@ -233,6 +233,7 @@ imap ㅓㅓ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 nmap <silent> <Leader>/ :nohlsearch<CR>
+map <silent> <F1> :help quickref<CR>
 
 "paste & delete without yanking
 nnoremap <leader>d "_d
