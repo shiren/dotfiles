@@ -156,7 +156,7 @@ syntax sync fromstart
 
 set t_Co=256
 set lazyredraw
-set ttyfast
+"set ttyfast
 
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
@@ -225,6 +225,10 @@ set autoread
 set list
 set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 
+"자연스러운 분할
+set splitbelow          " Horizontal split below current.
+set splitright          " Vertical split to right of current.
+
 "========================= KEYMAP ==================================
 "basic
 let mapleader="\<Space>"
@@ -256,6 +260,8 @@ nmap <silent> <leader>l :BuffergatorMruCycleNext<CR>
 nmap <silent> <leader>q :bp <bar> bd #<CR>
 nmap <silent> <leader>f :b
 nmap <silent> <leader>e :CtrlPBuffer<cr>
+
+nmap <silent> <leader>r :CtrlPMRUFiles<cr>
 
 "ternjs
 nmap <silent> <leader>td :TernDef<CR>
