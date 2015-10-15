@@ -40,7 +40,23 @@ call vundle#begin()
     Plugin 'jtratner/vim-flavored-markdown'
 
     "Lint/Autocomplete
+if has('nvim')
+    Plugin 'benekastah/neomake'
+    autocmd! BufWritePost * Neomake
+    let g:neomake_javascript_enabled_makers = ['eslint']
+else
     Plugin 'scrooloose/syntastic'
+    "-- syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_javascript_checkers=["eslint"]
+    let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+endif
     Plugin 'Valloric/YouCompleteMe'
 
     "Colorthemes
@@ -76,17 +92,6 @@ let g:jsdoc_underscore_private = 1
 let tern_show_argument_hint='on_move'
 let tern_show_signature_in_pum=1
 "let g:tern_map_keys=1
-
-"-- syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers=["eslint"]
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 "-- YouCompleteMe
 let g:ycm_confirm_extra_conf=0
@@ -327,3 +332,5 @@ set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
+
+
