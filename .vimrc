@@ -17,25 +17,24 @@ call vundle#begin()
     Plugin 'tpope/vim-fugitive'
     "Plugin 'airblade/vim-gitgutter'
     Plugin 'mhinz/vim-signify'
-    Plugin 'sjl/gundo.vim'
+        "Plugin 'sjl/gundo.vim'
 
     "Javascript
-    "Plugin 'node.js'
-    "Plugin 'othree/yajs.vim'
-    "Plugin 'Enhanced-Javascript-syntax'
-    "Plugin 'pangloss/vim-javascript'
-    "Plugin 'gavocanov/vim-js-indent'
+        "Plugin 'node.js'
+        "Plugin 'othree/yajs.vim'
+        "Plugin 'pangloss/vim-javascript'
+        "Plugin 'gavocanov/vim-js-indent'
+    Plugin 'Enhanced-Javascript-syntax'
+    Plugin 'javascript-libraries-syntax'
     Plugin 'heavenshell/vim-jsdoc'
     Plugin 'marijnh/tern_for_vim'
-    Plugin 'javascript-libraries-syntax'
 
     "C
     Plugin 'c.vim'
 
     "C#
     Plugin 'OmniSharp/omnisharp-vim'
-    "dependency for omnisharp-vim
-    Plugin 'tpope/vim-obsession'
+    Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
 
     "markdown"
     Plugin 'jtratner/vim-flavored-markdown'
@@ -58,11 +57,11 @@ call vundle#begin()
     Plugin 'Shougo/unite-outline'
 
     "ETC
+    Plugin 'tpope/vim-obsession'
     Plugin 'bling/vim-airline'
     Plugin 'Shougo/unite.vim'
     Plugin 'rizzatti/dash.vim'
     Plugin 'vim-xkbswitch'
-    Plugin 'tpope/vim-dispatch'
 call vundle#end()            " required
 
 "=========================== PLUGIN SETTING ==========================
@@ -109,6 +108,8 @@ augroup END
 "-- CTRLP
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+let g:ctrlp_mru_files = 1
+let g:ctrlp_dont_split = 'NERD_tree_2'
 
 "-- Omnisharp
 augroup omnisharp_commands
@@ -133,6 +134,8 @@ let g:OmniSharp_timeout = 1
 
 "-- Airline
 set laststatus=2
+"show branch
+let g:airline#extensions#branch#enabled = 1
 "Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 "Show just the filename
@@ -167,7 +170,6 @@ set cindent
 set autoindent
 set smartindent
 set copyindent
-
 "shift를 4칸으로 ( >, >>, <, << 등의 명령어)
 set shiftwidth=4
 "tab을 4칸으로
@@ -179,6 +181,7 @@ set expandtab
 "set ignorecase
 "검색시 하이라이트(색상 강조)
 set hlsearch
+
 set incsearch
 
 "방향키로 이동가능
@@ -280,6 +283,29 @@ autocmd FileType * autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FileType * autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd FileType * autocmd BufWritePre     * :call TrimWhiteSpace()
 
+"모드에따라 커서모양 변경
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    " OS X iTerm 2 settings
+    if exists('$TMUX')
+      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
+  else
+    " linux settings (gnome-terminal)
+    " TODO: Presently in GNOME3 terminal seems to ignore this gconf setting.
+    " Need to open a bug with them...
+    if has("autocmd")
+      au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+      au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+    endif
+  endif
+endif
 
 "=========================== MACVIM =========================="
 "remove scrollbars"
