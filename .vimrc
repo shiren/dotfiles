@@ -3,50 +3,84 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-    "Plugin
-    Plugin 'gmarik/Vundle.vim'
+"Plugin
+Plugin 'gmarik/Vundle.vim'
 
-    "File/Buffer
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
-    Plugin 'ctrlp.vim'
-    Plugin 'rking/ag.vim'
-    Plugin 'jeetsukumaran/vim-buffergator'
+"File/Buffer
+Plugin 'scrooloose/nerdtree'
+    let NERDTreeQuitOnOpen=1
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ctrlp.vim'
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
+    let g:ctrlp_mru_files = 1
+    let g:ctrlp_dont_split = 'NERD_tree_2'
+Plugin 'rking/ag.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
 
-    "Git
-    Plugin 'tpope/vim-fugitive'
-    "Plugin 'airblade/vim-gitgutter'
-    Plugin 'mhinz/vim-signify'
-        "Plugin 'sjl/gundo.vim'
+"Git
+Plugin 'tpope/vim-fugitive'
+"Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
+    "Plugin 'sjl/gundo.vim'
 
-    "Javascript
-        "Plugin 'node.js'
-        "Plugin 'othree/yajs.vim'
-        "Plugin 'pangloss/vim-javascript'
-        "Plugin 'gavocanov/vim-js-indent'
-    Plugin 'Enhanced-Javascript-syntax'
-    Plugin 'javascript-libraries-syntax'
-    Plugin 'heavenshell/vim-jsdoc'
-    Plugin 'marijnh/tern_for_vim'
+"Javascript
+    "Plugin 'node.js'
+    "Plugin 'othree/yajs.vim'
+    "Plugin 'pangloss/vim-javascript'
+    "Plugin 'gavocanov/vim-js-indent'
+Plugin 'Enhanced-Javascript-syntax'
+Plugin 'javascript-libraries-syntax'
+    let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
+Plugin 'heavenshell/vim-jsdoc'
+    let g:jsdoc_default_mapping = 0
+    let g:jsdoc_underscore_private = 1
+Plugin 'marijnh/tern_for_vim'
+    let tern_show_argument_hint='on_move'
+    let tern_show_signature_in_pum=1
+    "let g:tern_map_keys=1
 
-    "C
-    Plugin 'c.vim'
+"C
+Plugin 'c.vim'
 
-    "C#
-    Plugin 'OmniSharp/omnisharp-vim'
-    Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
+"C#
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
+    augroup omnisharp_commands
+        autocmd!
+        "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+        "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
-    "markdown"
-    Plugin 'jtratner/vim-flavored-markdown'
+        " Synchronous build (blocks Vim)
+        "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
 
-    "Lint/Autocomplete
-if has('nvim')
-    Plugin 'benekastah/neomake'
-    autocmd! BufWritePost * Neomake
+        " automatic syntax check on events (TextChanged requires Vim 7.4)
+        autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+        " Automatically add new cs files to the nearest project on save
+        autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+        "show type information automatically when the cursor stops moving
+        autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    augroup END
+    "Timeout in seconds to wait for a response from the server
+    let g:OmniSharp_timeout = 1
+
+"markdown"
+Plugin 'jtratner/vim-flavored-markdown'
+    augroup markdown
+        au!
+        au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+    augroup END
+
+"Lint/Autocomplete
+Plugin 'benekastah/neomake'
+    augroup neomakeau
+        au!
+        autocmd! BufWritePost * Neomake
+    augroup END
     let g:neomake_javascript_enabled_makers = ['eslint']
-else
-    Plugin 'scrooloose/syntastic'
-    "-- syntastic
+Plugin 'scrooloose/syntastic'
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -56,101 +90,49 @@ else
     let g:syntastic_check_on_wq = 0
     let g:syntastic_javascript_checkers=["eslint"]
     let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+if has('nvim')
+    let b:syntastic_mode = "passive"
+else
+    augroup! neomakeau
 endif
-    Plugin 'Valloric/YouCompleteMe'
 
-    "Colorthemes
-    Plugin 'cocopon/iceberg.vim'
-    Plugin 'nanotech/jellybeans.vim'
-    Plugin 'chriskempson/base16-vim'
+Plugin 'Valloric/YouCompleteMe'
+    let g:ycm_confirm_extra_conf=0
+    set completeopt-=preview
+    let g:ycm_auto_trigger = 1
 
-    "Editing
-    Plugin 'tpope/vim-surround'
-    Plugin 'scrooloose/nerdcommenter'
+"Colorthemes
+Plugin 'cocopon/iceberg.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'chriskempson/base16-vim'
+    let base16colorspace=256
 
-    "Navigate
-    Plugin 'EasyMotion'
-    Plugin 'Shougo/unite-outline'
+"Editing
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdcommenter'
 
-    "ETC
-    Plugin 'tpope/vim-obsession'
-    Plugin 'bling/vim-airline'
-    Plugin 'Shougo/unite.vim'
-    Plugin 'rizzatti/dash.vim'
-    Plugin 'vim-xkbswitch'
+"Navigate
+Plugin 'EasyMotion'
+Plugin 'Shougo/unite-outline'
+
+"ETC
+Plugin 'tpope/vim-obsession'
+Plugin 'bling/vim-airline'
+    set laststatus=2
+    "show branch
+    let g:airline#extensions#branch#enabled = 1
+    "Enable the list of buffers
+    let g:airline#extensions#tabline#enabled = 1
+    "Show just the filename
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+Plugin 'Shougo/unite.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'vim-xkbswitch'
+    let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+    let g:XkbSwitchEnabled = 1
+    let g:XkbSwitchNLayout = 'us'
 call vundle#end()            " required
-
-"=========================== PLUGIN SETTING ==========================
-"-- NERDTree
-let NERDTreeQuitOnOpen=1
-
-"-- vim-jsdoc
-let g:jsdoc_default_mapping = 0
-let g:jsdoc_underscore_private = 1
-
-"-- ternjs
-let tern_show_argument_hint='on_move'
-let tern_show_signature_in_pum=1
-"let g:tern_map_keys=1
-
-"-- YouCompleteMe
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
-let g:ycm_auto_trigger = 1
-
-"-- base16-vim
-let base16colorspace=256
-
-"-- javascript-libraries-synatx
-let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
-
-"-- vim-flavored-markdown
-augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-
-"-- CTRLP
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
-let g:ctrlp_mru_files = 1
-let g:ctrlp_dont_split = 'NERD_tree_2'
-
-"-- Omnisharp
-augroup omnisharp_commands
-    autocmd!
-    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-    " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-
-    " automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
-
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    "show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-augroup END
-"Timeout in seconds to wait for a response from the server
-let g:OmniSharp_timeout = 1
-
-"-- Airline
-set laststatus=2
-"show branch
-let g:airline#extensions#branch#enabled = 1
-"Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-"Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-"-- vim-xbkswitch
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchNLayout = 'us'
 
 "========================= Configuration ==================================
 filetype plugin indent on    " required
@@ -161,7 +143,7 @@ syntax sync fromstart
 
 set t_Co=256
 set lazyredraw
-"set ttyfast
+
 
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
@@ -233,6 +215,11 @@ set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 "자연스러운 분할
 set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
+
+"original vim only
+if !has('nvim')
+    set ttyfast
+endif
 
 "========================= KEYMAP ==================================
 "basic
