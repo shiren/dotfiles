@@ -20,16 +20,14 @@ Plugin 'jeetsukumaran/vim-buffergator'
 
 "Git
 Plugin 'tpope/vim-fugitive'
-"Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
     "Plugin 'sjl/gundo.vim'
 
 "Javascript
     "Plugin 'node.js'
-    "Plugin 'othree/yajs.vim'
-    "Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
     "Plugin 'gavocanov/vim-js-indent'
-"Plugin 'Enhanced-Javascript-syntax'
+    "Plugin 'Enhanced-Javascript-syntax'
 Plugin 'javascript-libraries-syntax'
     let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 Plugin 'heavenshell/vim-jsdoc'
