@@ -77,11 +77,11 @@ Plugin 'jtratner/vim-flavored-markdown'
     augroup END
 
 "Lint/Autocomplete
-Plugin 'benekastah/neomake'
 if has('nvim')
+Plugin 'benekastah/neomake'
     autocmd! BufWritePost * Neomake
     let g:neomake_javascript_enabled_makers = ['eslint']
-endif
+else
 Plugin 'scrooloose/syntastic'
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
@@ -92,8 +92,6 @@ Plugin 'scrooloose/syntastic'
     let g:syntastic_check_on_wq = 0
     let g:syntastic_javascript_checkers=["eslint"]
     let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-if has('nvim')
-    let g:syntastic_mode_map = { "mode": "passive"}
 endif
 
 Plugin 'Valloric/YouCompleteMe'
