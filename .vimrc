@@ -219,6 +219,9 @@ if !has('nvim')
     set ttyfast
 endif
 
+set langmenu=en_US.UTF-8
+language messages en_US.UTF-8
+
 "========================= KEYMAP ==================================
 "basic
 let mapleader="\<Space>"

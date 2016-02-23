@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>2387D933-5B6C-448F-B2E0-5C3230A3EBDD</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>nv</string>
+			<key>plusSpaces</key>
+			<false/>
+			<key>text</key>
+			<string>Naver</string>
+			<key>url</key>
+			<string>http://search.naver.com/search.naver?sm=tab_hty&amp;where=se&amp;query={query}&amp;x=0&amp;y=0</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>8F2B10F5-BE24-4B07-8797-F7748D74D26A</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>caniuse</string>
+			<key>plusSpaces</key>
+			<false/>
+			<key>text</key>
+			<string>Can I Use</string>
+			<key>url</key>
+			<string>http://caniuse.com/#search={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>BFA93707-4C8C-4C3B-BC9D-1D0F4F4A0C9D</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>stack</string>
+			<key>plusSpaces</key>
+			<false/>
+			<key>text</key>
+			<string>Stackoverflow</string>
+			<key>url</key>
+			<string>http://stackoverflow.com/search?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>CDBAE183-8303-4FCA-934C-5F846C0E7297</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>mdn</string>
+			<key>plusSpaces</key>
+			<false/>
+			<key>text</key>
+			<string>Mozilla Developer Network</string>
+			<key>url</key>
+			<string>https://developer.mozilla.org/en-US/search?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>E1C5E1D8-0111-461C-8D0B-11D3E98D2965</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>devdoc</string>
+			<key>plusSpaces</key>
+			<false/>
+			<key>text</key>
+			<string>Dev docs</string>
+			<key>url</key>
+			<string>http://devdocs.io/#q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
