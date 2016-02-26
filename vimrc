@@ -2,6 +2,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 "Plugin
 Plugin 'gmarik/Vundle.vim'
@@ -114,6 +115,10 @@ Plugin 'EasyMotion'
 Plugin 'Shougo/unite-outline'
 
 "ETC
+Plugin 'SirVer/ultisnips'
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsListSnippets="<c-l>"
+    let g:UltiSnipsEditSplit="vertical"
 Plugin 'tpope/vim-obsession'
 Plugin 'bling/vim-airline'
     set laststatus=2
@@ -320,5 +325,4 @@ set guifont=Bitstream\ Vera\ Sans\ Mono:h12
 if has("gui_macvim")
     set shell=/bin/bash\ -l
 endif
-
 
