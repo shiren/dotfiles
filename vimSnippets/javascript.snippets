@@ -1,3 +1,140 @@
-snippet nnn
-abcdefawefwaf
+#
+#console
+#
+
+snippet cl
+console.log($0);
 endsnippet
+
+snippet clv
+console.log("${1:what}", $1$2);
+endsnippet
+
+snippet clc
+console.log("${VISUAL}", ${VISUAL});
+endsnippet
+
+#
+#if
+#
+
+snippet if
+if (${1:CONDITION}) {
+	${2:CODE}
+}
+endsnippet
+
+snippet else
+else {
+	${1:CODE}
+}
+endsnippet
+
+snippet elif
+else if (${1:CONDITION}) {
+	${2:CODE}
+}
+endsnippet
+
+snippet ifel
+if (${1:CONDITION}) {
+	${2:CODE}
+} else {
+	${3:CODE}
+}
+endsnippet
+
+#
+#function
+#
+
+snippet iife
+(function() {
+	$1
+})();
+endsnippet
+
+snippet fe
+function($1) {
+	$2
+};
+endsnippet
+
+snippet fd
+function $1($2) {
+	$3
+}
+endsnippet
+
+#
+# loops
+#
+
+snippet for
+for ($1; $2; $3) {
+	$4
+}
+endsnippet
+
+snippet while
+while ($1) {
+	$2
+}
+endsnippet
+
+#
+# JsDoc
+#
+
+snippet constr
+/**
+ * ${1:ModuleName}
+ * @exports $1
+ * @augments
+ * @constructor
+ * @class
+ */
+function $1() {
+}
+
+$1.prototype.${2:method} = function() {
+};
+
+module.exports = $1;
+endsnippet
+
+#
+# etc
+#
+
+snippet testcase
+'use strict';
+
+var ${1:ModuleName} = require('${2:path}');
+
+describe('$1', function() {
+	beforeEach(function() {
+	});
+
+	describe('', function() {
+		it('', function() {
+			expect(true).toEqual(true);
+		});
+	});
+});
+endsnippet
+
+snippet test
+A$1 ${2: mytest ${3:what}}${4: wholetest ${5: ewf}}
+endsnippet
+
+snippet test2
+${1:a text}
+${1/\w+\s*/\u$0/g}
+endsnippet
+
+snippet usingPython
+`!p snip.rv= snip.ft`
+endsnippet
+
+# vim:ft=snippets:
