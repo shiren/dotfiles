@@ -66,7 +66,7 @@
 			<key>tmux</key>
 			<dict>
 				<key>date</key>
-				<date>2016-02-18T02:07:22Z</date>
+				<date>2016-02-27T04:09:23Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -137,7 +137,7 @@
 			<key>Jasmine_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-01-14T09:23:59Z</date>
+				<date>2016-02-27T04:09:23Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -156,7 +156,7 @@
 			<key>JavaScript_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-01-14T09:24:31Z</date>
+				<date>2016-02-27T04:09:37Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -175,7 +175,7 @@
 			<key>iOS_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-01-14T09:24:14Z</date>
+				<date>2016-02-27T04:09:37Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -213,10 +213,22 @@
 	<dict>
 		<key>keywords</key>
 		<dict>
+			<key>~/Library/Application Support/Dash/Cheat Sheets/Chrome Developer Tools/Chrome_Dev_Tools.docset</key>
+			<string>cschrome:</string>
+			<key>~/Library/Application Support/Dash/Cheat Sheets/Git/Git.docset</key>
+			<string>csgit:</string>
 			<key>~/Library/Application Support/Dash/Cheat Sheets/Vim/Vim.docset</key>
-			<string>vim:</string>
+			<string>csvim:</string>
+			<key>~/Library/Application Support/Dash/Cheat Sheets/npm/npm.docset</key>
+			<string>csnpm:</string>
+			<key>~/Library/Application Support/Dash/Cheat Sheets/tmux/tmux.docset</key>
+			<string>cstmux:</string>
 			<key>~/Library/Application Support/Dash/DocSets/JavaScript/JavaScript.docset</key>
 			<string>js:</string>
+			<key>~/Library/Application Support/Dash/DocSets/Markdown/Markdown.docset</key>
+			<string>md</string>
+			<key>~/Library/Application Support/Dash/DocSets/Unity_3D/Unity 3D.docset</key>
+			<string>unity:</string>
 		</dict>
 	</dict>
 	<key>feeds</key>
@@ -241,7 +253,7 @@
 			<key>http://kapeli.com/feeds/Man_Pages.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2015-08-06T02:48:36Z</date>
+				<date>2016-02-27T04:09:23Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Markdown.xml</key>
 			<dict>
@@ -285,6 +297,23 @@
 			<string>Snippets Only</string>
 			<key>placeholder</key>
 			<string>Search Snippets</string>
+			<key>searchSnippets</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>docsets</key>
+			<array>
+				<string>~/Library/Application Support/Dash/DocSets/CSS/CSS.docset</string>
+				<string>~/Library/Application Support/Dash/Cheat Sheets/Chrome Developer Tools/Chrome_Dev_Tools.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/Jasmine/Jasmine.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/JavaScript/JavaScript.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/jQuery/jQuery.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/NodeJS/NodeJS.docset</string>
+				<string>~/Library/Application Support/Dash/Cheat Sheets/Vim/Vim.docset</string>
+				<string>~/Library/Application Support/Dash/DocSets/Vim/Vim.docset</string>
+			</array>
+			<key>name</key>
+			<string>frontend</string>
 			<key>searchSnippets</key>
 			<true/>
 		</dict>
