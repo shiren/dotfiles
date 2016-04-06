@@ -82,6 +82,10 @@ if has('nvim')
 Plugin 'benekastah/neomake'
     autocmd! BufWritePost * Neomake
     let g:neomake_javascript_enabled_makers = ['eslint']
+Plugin 'Shougo/deoplete.nvim'
+let g:deoplete#enable_at_startup=1
+let g:deoplete#file#enable_buffer_path=1
+Plugin 'carlitux/deoplete-ternjs'
 else
 Plugin 'scrooloose/syntastic'
     set statusline+=%#warningmsg#
@@ -93,12 +97,11 @@ Plugin 'scrooloose/syntastic'
     let g:syntastic_check_on_wq = 0
     let g:syntastic_javascript_checkers=["eslint"]
     let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-endif
-
 Plugin 'Valloric/YouCompleteMe'
     let g:ycm_confirm_extra_conf=0
     set completeopt-=preview
     let g:ycm_auto_trigger = 1
+endif
 
 "Colorthemes
 Plugin 'cocopon/iceberg.vim'
@@ -111,14 +114,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 
 "Navigate
-Plugin 'EasyMotion'
+"Plugin 'EasyMotion'
 Plugin 'Shougo/unite-outline'
 
 "ETC
-Plugin 'SirVer/ultisnips'
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    let g:UltiSnipsListSnippets="<c-l>"
-    let g:UltiSnipsEditSplit="vertical"
+"Plugin 'SirVer/ultisnips'
+    "let g:UltiSnipsExpandTrigger="<c-e>"
+    "let g:UltiSnipsListSnippets="<c-l>"
+    "let g:UltiSnipsEditSplit="vertical"
 Plugin 'tpope/vim-obsession'
 Plugin 'bling/vim-airline'
     set laststatus=2
@@ -130,11 +133,11 @@ Plugin 'bling/vim-airline'
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline#extensions#tabline#buffer_nr_show = 1
 Plugin 'Shougo/unite.vim'
-Plugin 'rizzatti/dash.vim'
 Plugin 'vim-xkbswitch'
     let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
     let g:XkbSwitchEnabled = 1
     let g:XkbSwitchNLayout = 'us'
+Plugin 'itchyny/vim-cursorword'
 call vundle#end()            " required
 
 "========================= Configuration ==================================
@@ -154,6 +157,7 @@ colorscheme base16-default
 
 "Show line number.
 set number
+set relativenumber
 
 "C style indent
 set cindent
@@ -288,41 +292,14 @@ autocmd FileType * autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FileType * autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd FileType * autocmd BufWritePre     * :call TrimWhiteSpace()
 
-"모드에따라 커서모양 변경
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    " OS X iTerm 2 settings
-    if exists('$TMUX')
-      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
-      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
+"Change cursor at each mode (command, insert)
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+if exists('$ITERM_PROFILE')
+  if exists('$TMUX')
+    let &t_SI="\<Esc>[3 q"
+    let &t_EI="\<Esc>[0 q"
   else
-    " linux settings (gnome-terminal)
-    " TODO: Presently in GNOME3 terminal seems to ignore this gconf setting.
-    " Need to open a bug with them...
-    if has("autocmd")
-      au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-      au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-    endif
+    let &t_SI="\<Esc>]50;CursorShape=1\x7"
+    let &t_EI="\<Esc>]50;CursorShape=0\x7"
   endif
-endif
-
-"=========================== MACVIM =========================="
-"remove scrollbars"
-set guioptions-=r
-set guioptions-=r
-set guioptions-=l
-set guioptions-=L
-set guioptions-=b
-set guifont=Bitstream\ Vera\ Sans\ Mono:h12
-
-"change shell cause zsh problem"
-if has("gui_macvim")
-    set shell=/bin/bash\ -l
-endif
-
+end
