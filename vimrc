@@ -99,7 +99,6 @@ Plugin 'scrooloose/syntastic'
     let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 Plugin 'Valloric/YouCompleteMe'
     let g:ycm_confirm_extra_conf=0
-    set completeopt-=preview
     let g:ycm_auto_trigger = 1
 endif
 
@@ -214,6 +213,8 @@ set nobackup
 set noswapfile
 
 set autoread
+
+set completeopt-=preview
 
 "공백문자들
 set list
