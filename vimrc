@@ -28,14 +28,15 @@ Plugin 'mhinz/vim-signify'
     "Plugin 'node.js'
     "Plugin 'pangloss/vim-javascript'
     "Plugin 'Enhanced-Javascript-syntax'
-Plugin 'othree/yajs.vim'
-Plugin 'gavocanov/vim-js-indent'
+"Plugin 'othree/yajs.vim'
+Plugin 'everedifice/vim-js-syntax'
+"Plugin 'gavocanov/vim-js-indent'
 Plugin 'othree/jsdoc-syntax.vim'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'othree/jspc.vim'
 Plugin 'moll/vim-node'
-Plugin 'javascript-libraries-syntax'
-    let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
+"Plugin 'javascript-libraries-syntax'
+    "let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 Plugin 'heavenshell/vim-jsdoc'
     let g:jsdoc_default_mapping = 0
     let g:jsdoc_underscore_private = 1
@@ -82,10 +83,6 @@ if has('nvim')
 Plugin 'benekastah/neomake'
     autocmd! BufWritePost * Neomake
     let g:neomake_javascript_enabled_makers = ['eslint']
-Plugin 'Shougo/deoplete.nvim'
-let g:deoplete#enable_at_startup=1
-let g:deoplete#file#enable_buffer_path=1
-Plugin 'carlitux/deoplete-ternjs'
 else
 Plugin 'scrooloose/syntastic'
     set statusline+=%#warningmsg#
@@ -97,10 +94,10 @@ Plugin 'scrooloose/syntastic'
     let g:syntastic_check_on_wq = 0
     let g:syntastic_javascript_checkers=["eslint"]
     let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+endif
 Plugin 'Valloric/YouCompleteMe'
     let g:ycm_confirm_extra_conf=0
     let g:ycm_auto_trigger = 1
-endif
 
 "Colorthemes
 Plugin 'cocopon/iceberg.vim'
@@ -117,10 +114,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Shougo/unite-outline'
 
 "ETC
-"Plugin 'SirVer/ultisnips'
-    "let g:UltiSnipsExpandTrigger="<c-e>"
-    "let g:UltiSnipsListSnippets="<c-l>"
-    "let g:UltiSnipsEditSplit="vertical"
+Plugin 'SirVer/ultisnips'
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsListSnippets="<c-l>"
+    let g:UltiSnipsEditSplit="vertical"
 Plugin 'tpope/vim-obsession'
 Plugin 'bling/vim-airline'
     set laststatus=2
@@ -204,6 +201,8 @@ set smarttab
 
 set mouse=a
 
+set completeopt-=preview
+
 set cursorline
 
 set notimeout
@@ -213,8 +212,6 @@ set nobackup
 set noswapfile
 
 set autoread
-
-set completeopt-=preview
 
 "공백문자들
 set list
