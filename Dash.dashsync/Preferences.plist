@@ -137,7 +137,7 @@
 			<key>Jasmine_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-03-13T03:12:53Z</date>
+				<date>2016-03-14T00:32:48Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -156,7 +156,7 @@
 			<key>JavaScript_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-03-13T03:13:05Z</date>
+				<date>2016-03-14T00:33:04Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -175,7 +175,7 @@
 			<key>iOS_Online</key>
 			<dict>
 				<key>date</key>
-				<date>2016-03-13T03:13:03Z</date>
+				<date>2016-03-14T00:32:59Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -277,7 +277,7 @@
 	<key>isPinned</key>
 	<false/>
 	<key>menuIconBehavior</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>placeholderDelimiter</key>
 	<string>__</string>
 	<key>profiles</key>
