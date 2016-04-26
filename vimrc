@@ -22,21 +22,21 @@ Plugin 'jeetsukumaran/vim-buffergator'
 "Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
-    "Plugin 'sjl/gundo.vim'
+"Plugin 'sjl/gundo.vim'
 
 "Javascript
-    "Plugin 'node.js'
-    "Plugin 'pangloss/vim-javascript'
-    "Plugin 'Enhanced-Javascript-syntax'
+"Plugin 'node.js'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'Enhanced-Javascript-syntax'
 "Plugin 'othree/yajs.vim'
-Plugin 'everedifice/vim-js-syntax'
 "Plugin 'gavocanov/vim-js-indent'
+Plugin 'everedifice/vim-js-syntax'
 Plugin 'othree/jsdoc-syntax.vim'
+"Plugin 'javascript-libraries-syntax'
+"    let g:used_javascript_libs = 'jquery,underscore,jasmine,react'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'othree/jspc.vim'
 Plugin 'moll/vim-node'
-"Plugin 'javascript-libraries-syntax'
-    "let g:used_javascript_libs = 'jquery,underscore,jasmine,requirejs'
 Plugin 'heavenshell/vim-jsdoc'
     let g:jsdoc_default_mapping = 0
     let g:jsdoc_underscore_private = 1
@@ -110,7 +110,18 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 
 "Navigate
-"Plugin 'EasyMotion'
+Plugin 'easymotion/vim-easymotion'
+    " <Leader>f{char} to move to {char}
+    nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
+
+    " s{char}{char} to move to {char}{char}
+    nmap s <Plug>(easymotion-overwin-f2)
+
+    " Move to line
+    nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
+
+    " Move to word
+    nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 Plugin 'Shougo/unite-outline'
 
 "ETC
@@ -257,8 +268,6 @@ map <C-S-n> :NERDTreeToggle<CR>
 "buffer move
 nmap <silent> <leader>h :BuffergatorMruCyclePrev<cr>
 nmap <silent> <leader>l :BuffergatorMruCycleNext<CR>
-nmap <silent> <leader>q :bp <bar> bd #<CR>
-nmap <silent> <leader>f :b
 nmap <silent> <leader>e :CtrlPBuffer<cr>
 
 nmap <silent> <leader>r :CtrlPMRUFiles<cr>
@@ -266,9 +275,6 @@ nmap <silent> <leader>r :CtrlPMRUFiles<cr>
 "ternjs
 nmap <silent> <leader>td :TernDef<CR>
 nmap <silent> <leader>tp :TernDefPreview<CR>
-
-"Dash
-nmap <silent> <leader>d <Plug>DashGlobalSearch
 
 "Unite
 nmap <silent> <leader>u :Unite<CR>
