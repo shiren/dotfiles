@@ -1,0 +1,1 @@
+("~/masterpiece/ws_nhn/fedev/de/" "~/masterpiece/ws_nhn/codemirror.forked/" "~/dotfiles/")

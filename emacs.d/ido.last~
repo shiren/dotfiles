@@ -1,0 +1,28 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/" . "js/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ 
+)
+
+;; ----- ido-work-file-list -----
+(
+ 
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/" (22304 28657 0 0) "test/" "src/" "Session.vim" "report/" "README.md" "package.json" "node_modules/" "lib/" "karma.conf.ne.js" "karma.conf.js" "karma.conf.coverage.js" "gulpfile.js" "dist/" "demo/" "bower.json" ".tern-project" ".karma~" ".karma" ".idea/" ".gitignore" ".git/" ".eslintrc" ".DS_Store" ".bowerrc" "#bold.#" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/" (22168 47441 0 0) "js/" "css/" ".DS_Store" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/js/" (22304 22976 0 0) "wysiwygEditor.js" "wysiwygCommands/" "wwTaskManager.js" "wwTableManager.js" "wwSelectionMarker.js" "wwPManager.js" "wwHrManager.js" "wwHeadingManager.js" "wwCodeBlockManager.js" "wwClipboardManager.js" "viewOnly.js" "vendor/" "ui/" "squireExt.js" "preview.js" "markedCustomRenderer.js" "markdownEditor.js" "markdownCommands/" "lazyRunner.js" "layout.js" "keyMapper.js" "index.js" "importManager.js" "extManager.js" "extensions/" "excelTableParser.js" "eventManager.js" "editor.js" "domUtils.js" "convertor.js" "commandManager.js" "command.js" "codemirror/" ".DS_Store" "#editor.js#" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

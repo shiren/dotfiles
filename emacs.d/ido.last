@@ -1,0 +1,44 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/" . "shiren/")
+ ("/" . "Users/")
+ ("/Users/shiren/" . "Applications/")
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/" . "js/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/shiren/masterpiece/ws_nhn/fedev/de/"
+ "/Users/shiren/masterpiece/ws_nhn/codemirror.forked/lib/"
+ "/Users/shiren/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".tern-project"
+ "codemirror.js"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/" (22305 29331 0 0) "test/" "src/" "Session.vim" "report/" "README.md" "package.json" "node_modules/" "lib/" "karma.conf.ne.js" "karma.conf.js" "karma.conf.coverage.js" "gulpfile.js" "dist/" "demo/" "bower.json" ".tern-project" ".tern-port" ".idea/" ".gitignore" ".git/" ".eslintrc" ".DS_Store" ".bowerrc" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/codemirror.forked/lib/" (21928 42660 0 0) "codemirror.js" "codemirror.css" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/codemirror.forked/" (21928 38128 0 0) "theme/" "test/" "README.md" "package.json" "node_modules/" "mode/" "LICENSE" "lib/" "keymap/" "index.html" "doc/" "demo/" "CONTRIBUTING.md" "bower.json" "bin/" "AUTHORS" "addon/" ".travis.yml" ".npmignore" ".gitignore" ".gitattributes" ".git/" "../" "./")
+
+ ("/Users/" (22029 55512 0 0) "shiren/" "Shared/" ".localized" "../" "./")
+
+ ("/Users/shiren/Applications/" (22264 43462 0 0) "VEGA Conflict.app/" "IE 9 in Windows 7 Applications.app/" "IE 10 in Windows 7 Applications.app/" "Chrome Apps.localized/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/shiren/" (22304 33900 0 0) "Soulseek Chat Logs/" "Snapshots/" "Public/" "Pictures/" "NDrive/" "Music/" "Movies/" "masterpiece/" "Library/" "geeknote/" "Dropbox/" "Downloads/" "dotfiles_old/" "dotfiles/" "Documents/" "Desktop/" "com.googlecode.iterm2.plist" "bin/" "Applications (Parallels)/" "Applications/" ".zshrc.pre-oh-my-zsh" ".zshrc-e" ".zshrc" ".zsh_history" ".zsh-update" ".zprofile" ".zcompdump-shiren의 NEiMac-5.1.1" ".zcompdump-shiren의 NEiMac-5.1" ".zcompdump-shiren의 NEiMac-5.0.7" ".zcompdump-shiren의 NEiMac-5.0.5" ".zcompdump-shirenui-NEiMac-5.1.1" ".zcompdump-shirenui-NEiMac-5.0.7" ".yjp/" ".wapi/" ".w3m/" ".vimrc" ".viminfz.tmp" ".viminfo.tmp" ".viminfo" ".vim/" ".v8flags.5.0.71.35.shiren.json" ".v8flags.4.6.85.31.shiren.json" ".v8flags.3.28.73.shiren.json" ".v8flags.3.28.71.19.shiren.json" ".v8flags.3.14.5.9.shiren.json" ".Trash/" ".tmuxinator/" ".tmux.conf" ".tmux/" ".subversion/" ".ssh/" ".SoulseekQt/" ".rainbow_oauth" ".rainbow_config.json" ".python-eggs/" ".profile" ".pm2/" ".oracle_jre_usage/" ".omnifocus-github" ".oh-my-zsh/" ".nvm/" ".nvimlog" ".nviminfo" ".npmrc" ".npm/" ".node-gyp/" ".NERDTreeBookmarks" ".m2/" ".local/" ".lesshst" ".IntelliJIdea15/" ".IntelliJIdea14/" ".image.so" ".ievms/" ".ideavimrc" ".htoprc" ".gitconfig" ".gem/" ".geeknote/" ".fbPager.sh" ".fbPager.selection.pickle" ".fbPager.pickle" ".fbPager.log" ".emacs.d/" ".elinks/" ".electron/" ".DS_Store" ".cups/" ".config/" ".CFUserTextEncoding" ".cache/" ".bash_profile.macports-saved_2015-01-07_at_00:50:08" ".bash_profile" ".bash_history" ".babel.json" ".atom/" ".android/" "#tmux-client-7949.log#" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/" (22168 47441 0 0) "js/" "css/" ".DS_Store" "../" "./")
+
+ ("/Users/shiren/masterpiece/ws_nhn/fedev/de/src/js/" (22304 22976 0 0) "wysiwygEditor.js" "wysiwygCommands/" "wwTaskManager.js" "wwTableManager.js" "wwSelectionMarker.js" "wwPManager.js" "wwHrManager.js" "wwHeadingManager.js" "wwCodeBlockManager.js" "wwClipboardManager.js" "viewOnly.js" "vendor/" "ui/" "squireExt.js" "preview.js" "markedCustomRenderer.js" "markdownEditor.js" "markdownCommands/" "lazyRunner.js" "layout.js" "keyMapper.js" "index.js" "importManager.js" "extManager.js" "extensions/" "excelTableParser.js" "eventManager.js" "editor.js" "domUtils.js" "convertor.js" "commandManager.js" "command.js" "codemirror/" ".DS_Store" "#editor.js#" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

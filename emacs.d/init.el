@@ -9,6 +9,14 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
+(setq ad-redefinition-action 'accept)
+
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix emacs-tmp-dir)
+
 ;;; Set up package
 (require 'package)
 (add-to-list 'package-archives
@@ -31,7 +39,7 @@
 ;;; tern
 ; NVM을 이용하기때문에 환경변수로 tern의 경로를 로드한다
 (add-to-list 'load-path (concat (substring (getenv "NVM_BIN") 0 (- (length (getenv "NVM_BIN")) 3)) "lib/node_modules/tern/emacs/"))
-(autoload 'tern-mode' "tern.el" nil t) 
+(autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 :
 (eval-after-load 'tern
@@ -53,28 +61,35 @@
 (package-install 'evil)
 (require 'evil)
 (evil-mode 1)
-;;; C-c as general purpose escape key sequence.
-   ;;;
-(defun my-esc (prompt)
-  "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
-  (cond
-   ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
-   ;; Key Lookup will use it.
-   ((or (evil-insert-state-p) (evil-normal-state-p) (evil-replace-state-p) (evil-visual-state-p)) [escape])
-   ;; This is the best way I could infer for now to have C-c work during evil-read-key.
-   ;; Note: As long as I return [escape] in normal-state, I don't need this.
-   ;;((eq overriding-terminal-local-map evil-read-key-map) (keyboard-quit) (kbd ""))
-   (t (kbd "C-g"))))
-(define-key key-translation-map (kbd "C-c") 'my-esc)
-;; Works around the fact that Evil uses read-event directly when in operator state, which
-;; doesn't use the key-translation-map.
-(define-key evil-operator-state-map (kbd "C-c") 'keyboard-quit)
-;; Not sure what behavior this changes, but might as well set it, seeing the Elisp manual's
-;; documentation of it.
-;(set-quit-char "C-c")
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(define-key evil-normal-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-y" 'yank)
+(define-key evil-visual-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
+;(define-key evil-normal-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-r" 'search-backward)
+(define-key evil-visual-state-map "\C-w" 'evil-delete)
 
 ;;; evil-escape
 (package-install 'evil-escape)
+(evil-escape-mode)
+(setq-default evil-escape-key-sequence "jk")
+(setq-default evil-escape-delay 0.2)
 
-(provide 'init) 
+;;; ido
+(require 'ido)
+(ido-mode t)
+
+;;; projectile
+(projectile-global-mode)
+;(setq projectile-enable-caching t)
+
+(provide 'init)
 ;;; init.el ends here
