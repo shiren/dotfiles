@@ -1,4 +1,18 @@
-((("_keyEventHandlers" .
+((("insert" .
+   [2 0 0 0 0 0])
+  ("defun" .
+   [1 0 0 0 0])
+  ("nil" .
+   [1 0 0])
+  ("message-box" .
+   [0 0 0 0 0 0 0 0 1 0 0])
+  ("progn" .
+   [1 0 0 0 0])
+  ("if" .
+   [1 0])
+  ("message" .
+   [1 0 0 0 0 0 1])
+  ("_keyEventHandlers" .
    [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("this" .
    [3 0 0 0])
