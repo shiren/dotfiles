@@ -1,5 +1,5 @@
 ;;; Begin initialization
-;; Turn off mouse interface early in startup to avoid momentary display
+;;; Turn off mouse interface early in startup to avoid momentary display
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -13,13 +13,19 @@
 
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
-;(global-set-key (kbd "<S-SPC>") 'toggle-input-method)
 
-;; Save all tempfiles in $TMPDIR/emacs$UID/
+(global-set-key (kbd "C-q") 'toggle-input-method)
+
+;;; Save all tempfiles in $TMPDIR/emacs$UID/
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
+
+;;; mouse setup
+(require 'mouse)
+(xterm-mouse-mode t)
+(defun track-mouse (e))
 
 ;;; Set up package
 (require 'package)
@@ -36,7 +42,7 @@
 (ac-config-default)
 
 ;;; js2-mode
-(package-install 'auto-complete)
+(package-install 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
@@ -62,30 +68,30 @@
 (load-theme 'base16-default-dark t)
 
 ;;; evil
-(package-install 'evil)
-(require 'evil)
-(evil-mode 1)
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(define-key evil-normal-state-map "\C-y" 'yank)
-(define-key evil-insert-state-map "\C-y" 'yank)
-(define-key evil-visual-state-map "\C-y" 'yank)
-(define-key evil-insert-state-map "\C-e" 'end-of-line)
-;(define-key evil-normal-state-map "\C-w" 'evil-delete)
-(define-key evil-insert-state-map "\C-w" 'evil-delete)
-(define-key evil-insert-state-map "\C-r" 'search-backward)
-(define-key evil-visual-state-map "\C-w" 'evil-delete)
+;; (package-install 'evil)
+;; (require 'evil)
+;; (evil-mode 1)
+;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
+;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
+;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key evil-normal-state-map "\C-y" 'yank)
+;; (define-key evil-insert-state-map "\C-y" 'yank)
+;; (define-key evil-visual-state-map "\C-y" 'yank)
+;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
+;; (define-key evil-normal-state-map "\C-w" 'evil-delete)
+;; (define-key evil-insert-state-map "\C-w" 'evil-delete)
+;; (define-key evil-insert-state-map "\C-r" 'search-backward)
+;; (define-key evil-visual-state-map "\C-w" 'evil-delete)
 
-;;; evil-escape
-(package-install 'evil-escape)
-(evil-escape-mode)
-(setq-default evil-escape-key-sequence "jk")
-(setq-default evil-escape-delay 0.2)
+;; ;;; evil-escape
+;; (package-install 'evil-escape)
+;; (evil-escape-mode)
+;; (setq-default evil-escape-key-sequence "jk")
+;; (setq-default evil-escape-delay 0.2)
 
 ;;; ido
 (require 'ido)
