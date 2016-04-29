@@ -11,6 +11,10 @@
 
 (setq ad-redefinition-action 'accept)
 
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
+;(global-set-key (kbd "<S-SPC>") 'toggle-input-method)
+
 ;; Save all tempfiles in $TMPDIR/emacs$UID/
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
