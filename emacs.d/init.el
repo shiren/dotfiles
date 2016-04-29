@@ -88,8 +88,9 @@
 (ido-mode t)
 
 ;;; projectile
+(package-install 'projectile)
 (projectile-global-mode)
-;(setq projectile-enable-caching t)
+(setq projectile-enable-caching t)
 
 (provide 'init)
 ;;; init.el ends here
