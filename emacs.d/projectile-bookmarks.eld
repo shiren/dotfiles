@@ -1,1 +1,1 @@
-("~/masterpiece/ws_nhn/fedev/de/" "~/masterpiece/ws_nhn/codemirror.forked/" "~/dotfiles/")
+("~/dotfiles/" "~/masterpiece/ws_nhn/fedev/de/" "/usr/local/" "~/.nvm/" "~/masterpiece/ws_nhn/codemirror.forked/")

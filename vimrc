@@ -112,16 +112,16 @@ Plugin 'scrooloose/nerdcommenter'
 "Navigate
 Plugin 'easymotion/vim-easymotion'
     " <Leader>f{char} to move to {char}
-    nmap <Leader><Leader>f <Plug>(easymotion-overwin-f)
+    nmap <Leader>f <Plug>(easymotion-overwin-f)
 
     " s{char}{char} to move to {char}{char}
-    nmap s <Plug>(easymotion-overwin-f2)
+    nmap f <Plug>(easymotion-overwin-f2)
 
     " Move to line
-    nmap <Leader><Leader>L <Plug>(easymotion-overwin-line)
+    nmap <Leader>L <Plug>(easymotion-overwin-line)
 
     " Move to word
-    nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+    nmap <Leader>w <Plug>(easymotion-overwin-w)
 Plugin 'Shougo/unite-outline'
 
 "ETC
@@ -243,8 +243,8 @@ language messages en_US.UTF-8
 "========================= KEYMAP ==================================
 "basic
 let mapleader="\<Space>"
-imap jj <ESC>
-imap ㅓㅓ <ESC>
+imap jk <ESC>
+imap ㅓㅏ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 nmap <silent> <Leader>/ :nohlsearch<CR>
@@ -263,7 +263,7 @@ set pastetoggle=<F2>
 "save
 nnoremap <Leader>s :w<CR>
 
-map <C-S-n> :NERDTreeToggle<CR>
+map <Leader>n :NERDTreeToggle<CR>
 
 "buffer move
 nmap <silent> <leader>h :BuffergatorMruCyclePrev<cr>

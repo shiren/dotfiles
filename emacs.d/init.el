@@ -59,6 +59,7 @@
 
 ;;; evil
 (package-install 'evil)
+(setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -82,6 +83,15 @@
 (evil-escape-mode)
 (setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-delay 0.2)
+
+;;; evil-leader
+(package-install 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key
+  "n" 'dired
+  "f" 'ace-jump-mode
+  "s" 'save-buffer)
 
 ;;; ido
 (require 'ido)

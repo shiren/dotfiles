@@ -1,4 +1,14 @@
-((("importManager" .
+((("save-buffer" .
+   [0 0 0 0 0 0 1 0 0 0 0])
+  ("tern-project-dir" .
+   [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("output" .
+   [1 0 0 0 0 0])
+  ("all-output" .
+   [2 0 0 0 0 0 0 0 0 0])
+  ("message" .
+   [4 0 0 0 0 0 0])
+  ("importManager" .
    [0 0 0 0 0 0 1 0 0 0 0 0 0])
   ("convertor" .
    [1 0 0 0 0 0 0 0 0])
@@ -21,7 +31,7 @@
   ("_keyEventHandlers" .
    [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("this" .
-   [24 0 0 0])
+   [41 0 0 0])
   ("get$Body" .
    [1 0 0 0 0 0 0 0])
   ("emit" .
