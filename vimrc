@@ -164,7 +164,6 @@ colorscheme base16-default
 
 "Show line number.
 set number
-set relativenumber
 
 "C style indent
 set cindent

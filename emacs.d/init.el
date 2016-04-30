@@ -22,6 +22,8 @@
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
 
+(global-linum-mode t)
+
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
@@ -29,8 +31,9 @@
 
 ;;; Set up package
 (require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;(package-refresh-contents)
 (package-initialize)
 
 ;;; flyCheck
@@ -51,7 +54,6 @@
 (add-to-list 'load-path (concat (substring (getenv "NVM_BIN") 0 (- (length (getenv "NVM_BIN")) 3)) "lib/node_modules/tern/emacs/"))
 (autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
-:
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
@@ -93,7 +95,7 @@
 ;; (setq-default evil-escape-key-sequence "jk")
 ;; (setq-default evil-escape-delay 0.2)
 
-;;; evil-leader
+;; ; evil-leader
 ;; (package-install 'evil-leader)
 ;; (global-evil-leader-mode)
 ;; (evil-leader/set-leader "<SPC>")
@@ -103,13 +105,27 @@
 ;;   "s" 'save-buffer)
 
 ;;; ido
-(require 'ido)
-(ido-mode t)
+;(require 'ido)
+;(ido-mode t)
+
+;;; helm
+(package-install 'helm)
+(require 'helm)
+(helm-mode 1)
 
 ;;; projectile
 (package-install 'projectile)
+(package-install 'helm-projectile)
+(require 'projectile)
+(require 'helm-projectile)
 (projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 (setq projectile-enable-caching t)
+
+;;; org
+(require 'org)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 (provide 'init)
 ;;; init.el ends here
