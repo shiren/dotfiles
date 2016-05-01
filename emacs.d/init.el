@@ -22,7 +22,8 @@
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
 
-(global-linum-mode t)
+;;; 라인넘버 보이도록
+;(global-linum-mode t)
 
 ;;; mouse setup
 (require 'mouse)
@@ -67,42 +68,44 @@
 
 ;;; base16
 (package-install 'base16-theme)
-(load-theme 'base16-default-dark t)
+(load-theme 'base16-default-dark t t)
 
 ;;; evil
-;; (package-install 'evil)
-;; (require 'evil)
-;; (evil-mode 1)
-;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key evil-normal-state-map "\C-y" 'yank)
-;; (define-key evil-insert-state-map "\C-y" 'yank)
-;; (define-key evil-visual-state-map "\C-y" 'yank)
-;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
-;; (define-key evil-normal-state-map "\C-w" 'evil-delete)
-;; (define-key evil-insert-state-map "\C-w" 'evil-delete)
-;; (define-key evil-insert-state-map "\C-r" 'search-backward)
-;; (define-key evil-visual-state-map "\C-w" 'evil-delete)
+(package-install 'evil)
+(setq evil-want-C-i-jump nil)
+(require 'evil)
+(evil-mode 1)
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(define-key evil-normal-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-y" 'yank)
+(define-key evil-visual-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
+(define-key evil-normal-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-r" 'search-backward)
+(define-key evil-visual-state-map "\C-w" 'evil-delete)
 
-;; ;;; evil-escape
-;; (package-install 'evil-escape)
-;; (evil-escape-mode)
-;; (setq-default evil-escape-key-sequence "jk")
-;; (setq-default evil-escape-delay 0.2)
+;;; key-chord
+(package-install 'key-chord)
+(require 'key-chord)
+(key-chord-mode 1) ; turn on key-chord-mode
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
-;; ; evil-leader
-;; (package-install 'evil-leader)
-;; (global-evil-leader-mode)
-;; (evil-leader/set-leader "<SPC>")
-;; (evil-leader/set-key
-;;   "n" 'dired
-;;   "f" 'ace-jump-mode
-;;   "s" 'save-buffer)
+;;; evil-leader
+(package-install 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key
+  "n" 'dired
+  "f" 'ace-jump-mode
+  "p" 'projectile-find-file
+  "s" 'save-buffer)
 
 ;;; ido
 ;(require 'ido)
