@@ -1,5 +1,8 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Begin initialization
 ;;; Turn off mouse interface early in startup to avoid momentary display
+;;; Code:
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -62,7 +65,6 @@
 
 ;;; ace jump
 (package-install 'ace-jump-mode)
-(add-to-list 'load-path "which-folder-ace-jump-mode-file-in/")
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
@@ -70,7 +72,33 @@
 (package-install 'base16-theme)
 (load-theme 'base16-default-dark t t)
 
-;;; evil
+;;; helm
+(package-install 'helm)
+(require 'helm)
+(helm-mode 1)
+
+;;; projectile
+(package-install 'projectile)
+(package-install 'helm-projectile)
+(require 'projectile)
+(require 'helm-projectile)
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+(setq projectile-enable-caching t)
+
+;;; org
+(require 'org)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((js . t)
+   (emacs-lisp . nil)
+   ))
+(setq org-confirm-babel-evaluate nil)
+
+;; ;;;; VIM-emulation
+;; ;;; evil
 ;; (package-install 'evil)
 ;; (setq evil-want-C-i-jump nil)
 ;; (require 'evil)
@@ -106,31 +134,6 @@
 ;;   "f" 'ace-jump-mode
 ;;   "p" 'projectile-find-file
 ;;   "s" 'save-buffer)
-
-;;; helm
-(package-install 'helm)
-(require 'helm)
-(helm-mode 1)
-
-;;; projectile
-(package-install 'projectile)
-(package-install 'helm-projectile)
-(require 'projectile)
-(require 'helm-projectile)
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-(setq projectile-enable-caching t)
-
-;;; org
-(require 'org)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((js . t)
-   (emacs-lisp . nil)
-   ))
-(setq org-confirm-babel-evaluate nil)
 
 (provide 'init)
 ;;; init.el ends here
