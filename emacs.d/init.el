@@ -107,10 +107,6 @@
   "p" 'projectile-find-file
   "s" 'save-buffer)
 
-;;; ido
-;(require 'ido)
-;(ido-mode t)
-
 ;;; helm
 (package-install 'helm)
 (require 'helm)
