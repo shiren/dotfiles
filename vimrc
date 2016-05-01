@@ -141,9 +141,8 @@ Plugin 'bling/vim-airline'
     let g:airline#extensions#tabline#buffer_nr_show = 1
 Plugin 'Shougo/unite.vim'
 Plugin 'vim-xkbswitch'
-    let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+    let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
     let g:XkbSwitchEnabled = 1
-    let g:XkbSwitchNLayout = 'us'
 Plugin 'itchyny/vim-cursorword'
 call vundle#end()            " required
 
