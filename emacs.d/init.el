@@ -90,6 +90,8 @@
 (define-key evil-insert-state-map "\C-w" 'evil-delete)
 (define-key evil-insert-state-map "\C-r" 'search-backward)
 (define-key evil-visual-state-map "\C-w" 'evil-delete)
+;C-g를 탈출 키로 만듬
+(define-key evil-insert-state-map "\C-g" 'evil-normal-state)
 
 ;;; key-chord
 (package-install 'key-chord)
