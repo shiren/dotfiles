@@ -110,6 +110,7 @@ Plugin 'scrooloose/nerdcommenter'
 "Navigate
 Plugin 'easymotion/vim-easymotion'
 Plugin 'Shougo/unite-outline'
+
 "ETC
 Plugin 'SirVer/ultisnips'
     let g:UltiSnipsExpandTrigger="<c-e>"
