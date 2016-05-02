@@ -10,15 +10,12 @@ Plugin 'gmarik/Vundle.vim'
 "File/Buffer
 Plugin 'scrooloose/nerdtree'
     let NERDTreeQuitOnOpen=1
-    imap <silent> <Leader>n :NERDTreeToggle<CR>
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlp.vim'
     let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
     let g:ctrlp_mru_files = 1
     let g:ctrlp_dont_split = 'NERD_tree_2'
-    nmap <silent> <leader>e :CtrlPBuffer<cr>
-    nmap <silent> <leader>r :CtrlPMRUFiles<cr>
 Plugin 'rking/ag.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 
@@ -47,8 +44,6 @@ Plugin 'marijnh/tern_for_vim'
     let tern_show_argument_hint='on_move'
     let tern_show_signature_in_pum=1
     "let g:tern_map_keys=1
-    nmap <silent> <leader>td :TernDef<CR>
-    nmap <silent> <leader>tp :TernDefPreview<CR>
 
 "C
 Plugin 'c.vim'
@@ -116,19 +111,7 @@ Plugin 'scrooloose/nerdcommenter'
 
 "Navigate
 Plugin 'easymotion/vim-easymotion'
-    " <Leader>f{char} to move to {char}
-    nmap f <Plug>(easymotion-overwin-f)
-
-    " s{char}{char} to move to {char}{char}
-    nmap <leader>f <Plug>(easymotion-overwin-f2)
-
-    " Move to line
-    nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-    " Move to word
-    nmap <Leader>w <Plug>(easymotion-overwin-w)
 Plugin 'Shougo/unite-outline'
-    nmap <silent> <leader>o :Unite outline<CR>
 "ETC
 Plugin 'SirVer/ultisnips'
     let g:UltiSnipsExpandTrigger="<c-e>"
@@ -145,7 +128,6 @@ Plugin 'bling/vim-airline'
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline#extensions#tabline#buffer_nr_show = 1
 Plugin 'Shougo/unite.vim'
-    nmap <silent> <leader>u :Unite<CR>
 Plugin 'vim-xkbswitch'
     let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
     let g:XkbSwitchEnabled = 1
@@ -265,6 +247,22 @@ set pastetoggle=<F2>
 
 "save
 nnoremap <Leader>s :w<CR>
+
+nmap <silent> <leader>e :CtrlPBuffer<cr>
+nmap <silent> <leader>r :CtrlPMRUFiles<cr>
+
+nmap <silent> <leader>n :NERDTreeToggle<CR>
+
+nmap <silent> <leader>td :TernDef<CR>
+nmap <silent> <leader>tp :TernDefPreview<CR>
+
+nmap f <Plug>(easymotion-overwin-f)
+nmap <leader>f <Plug>(easymotion-overwin-f2)
+nmap <leader>L <Plug>(easymotion-overwin-line)
+nmap <leader>w <Plug>(easymotion-overwin-w)
+
+nmap <silent> <leader>u :Unite<CR>
+nmap <silent> <leader>o :Unite outline<CR>
 
 "========================= ETC ==================================
 "저장시 필요없는 스페이스 지우기

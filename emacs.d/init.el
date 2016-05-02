@@ -14,6 +14,8 @@
 
 (setq ad-redefinition-action 'accept)
 
+(setq-default indent-tabs-mode nil)
+
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 
@@ -96,6 +98,16 @@
    (emacs-lisp . nil)
    ))
 (setq org-confirm-babel-evaluate nil)
+
+;;; Magit
+(package-install 'magit)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+(require 'magit)
+(with-eval-after-load 'info
+  (info-initialize)
+  (add-to-list 'Info-directory-list
+	       "~/.emacs.d/site-lisp/magit/Documentation/"))
+(global-set-key (kbd "C-c g") 'magit-status)
 
 ;; ;;;; VIM-emulation
 ;; ;;; evil
