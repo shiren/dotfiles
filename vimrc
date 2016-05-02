@@ -100,8 +100,6 @@ Plugin 'Valloric/YouCompleteMe'
     let g:ycm_auto_trigger = 1
 
 "Colorthemes
-Plugin 'cocopon/iceberg.vim'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'chriskempson/base16-vim'
     let base16colorspace=256
 
