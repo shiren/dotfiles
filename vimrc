@@ -256,9 +256,9 @@ nmap <silent> <leader>n :NERDTreeToggle<CR>
 nmap <silent> <leader>td :TernDef<CR>
 nmap <silent> <leader>tp :TernDefPreview<CR>
 
-nmap f <Plug>(easymotion-overwin-f)
-nmap <leader>f <Plug>(easymotion-overwin-f2)
-nmap <leader>L <Plug>(easymotion-overwin-line)
+nmap <leader>f <Plug>(easymotion-overwin-f)
+nmap <leader>g <Plug>(easymotion-overwin-f2)
+nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader>w <Plug>(easymotion-overwin-w)
 
 nmap <silent> <leader>u :Unite<CR>
