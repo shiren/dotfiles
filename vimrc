@@ -106,6 +106,7 @@ Plugin 'chriskempson/base16-vim'
 "Editing
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'jiangmiao/auto-pairs'
 
 "Navigate
 Plugin 'easymotion/vim-easymotion'
@@ -261,6 +262,10 @@ nmap <leader>w <Plug>(easymotion-overwin-w)
 
 nmap <silent> <leader>u :Unite<CR>
 nmap <silent> <leader>o :Unite outline<CR>
+
+nmap <silent> <leader>gs :Gstatus<CR>
+nmap <silent> <leader>gd :Gdiff<CR>
+nmap <silent> <leader>gl :Glog -30<CR>
 
 "========================= ETC ==================================
 "저장시 필요없는 스페이스 지우기
