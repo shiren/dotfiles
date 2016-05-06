@@ -21,6 +21,8 @@
 
 (global-set-key (kbd "C-q") 'toggle-input-method)
 
+(setq x-select-enable-clipboard t)
+
 ;;; Save all tempfiles in $TMPDIR/emacs$UID/
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
@@ -50,11 +52,6 @@
 (package-install 'auto-complete)
 (ac-config-default)
 
-;;; js2-mode
-(package-install 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
 ;;; tern
 ; NVM을 이용하기때문에 환경변수로 tern의 경로를 로드한다
 (add-to-list 'load-path (concat (substring (getenv "NVM_BIN") 0 (- (length (getenv "NVM_BIN")) 3)) "lib/node_modules/tern/emacs/"))
@@ -78,6 +75,10 @@
 (package-install 'helm)
 (require 'helm)
 (helm-mode 1)
+(setq helm-quick-update t)
+(setq helm-bookmark-show-location t)
+(setq helm-buffers-fuzzy-matching t)
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;;; projectile
 (package-install 'projectile)
@@ -109,43 +110,43 @@
 	       "~/.emacs.d/site-lisp/magit/Documentation/"))
 (global-set-key (kbd "C-c g") 'magit-status)
 
-;; ;;;; VIM-emulation
-;; ;;; evil
-;; (package-install 'evil)
-;; (setq evil-want-C-i-jump nil)
-;; (require 'evil)
-;; (evil-mode 1)
-;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key evil-normal-state-map "\C-y" 'yank)
-;; (define-key evil-insert-state-map "\C-y" 'yank)
-;; (define-key evil-visual-state-map "\C-y" 'yank)
-;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
-;; (define-key evil-normal-state-map "\C-w" 'evil-delete)
-;; (define-key evil-insert-state-map "\C-w" 'evil-delete)
-;; (define-key evil-insert-state-map "\C-r" 'search-backward)
-;; (define-key evil-visual-state-map "\C-w" 'evil-delete)
+;;;; VIM-emulation
+;;; evil
+(package-install 'evil)
+(setq evil-want-C-i-jump nil)
+(require 'evil)
+(evil-mode 1)
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(define-key evil-normal-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-y" 'yank)
+(define-key evil-visual-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
+(define-key evil-insert-state-map "\C-r" 'search-backward)
+(define-key evil-normal-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-w" 'evil-delete)
+(define-key evil-visual-state-map "\C-w" 'evil-delete)
 
-;; ;;; key-chord
-;; (package-install 'key-chord)
-;; (require 'key-chord)
-;; (key-chord-mode 1) ; turn on key-chord-mode
-;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+;;; key-chord
+(package-install 'key-chord)
+(require 'key-chord)
+(key-chord-mode 1) ; turn on key-chord-mode
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
-;; ;;; evil-leader
-;; (package-install 'evil-leader)
-;; (global-evil-leader-mode)
-;; (evil-leader/set-leader "<SPC>")
-;; (evil-leader/set-key
-;;   "n" 'dired
-;;   "f" 'ace-jump-mode
-;;   "p" 'projectile-find-file
-;;   "s" 'save-buffer)
+;;; evil-leader
+(package-install 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key
+  "n" 'dired
+  "f" 'ace-jump-mode
+  "p" 'projectile-find-file
+  "s" 'save-buffer)
 
 (provide 'init)
 ;;; init.el ends here
