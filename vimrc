@@ -1,6 +1,7 @@
-filetype off                  " required
+"required
+filetype off
 
-" set the runtime path to include Vundle and initialize
+"set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -134,7 +135,8 @@ Plugin 'itchyny/vim-cursorword'
 call vundle#end()            " required
 
 "========================= Configuration ==================================
-filetype plugin indent on    " required
+"required
+filetype plugin indent on
 
 "문법 하이라이트"
 syntax on
@@ -149,6 +151,7 @@ colorscheme base16-default
 
 "Show line number.
 set number
+set relativenumber
 
 "C style indent
 set cindent
@@ -216,13 +219,13 @@ set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
 set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
 
-"original vim only
-if !has('nvim')
-    set ttyfast
-endif
+set ttyfast
 
 set langmenu=en_US.UTF-8
 language messages en_US.UTF-8
+
+"빔 윈도우의 사이즈가 변경되었을때 = 자동 실행
+autocmd VimResized * wincmd =
 
 "========================= KEYMAP ==================================
 "basic
