@@ -35,7 +35,7 @@
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
-(defun track-mouse (e))
+;(defun track-mouse (e))
 
 ;;; Set up package
 (require 'package)
@@ -152,7 +152,7 @@
     "n" 'dired
     "f" 'ace-jump-mode
     "p" 'projectile-find-file
-    "s" 'save-buffer
+    "s" 'save-buffer)
 
 (provide 'init)
 ;;; init.el ends here
