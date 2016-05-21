@@ -107,7 +107,6 @@ Plugin 'chriskempson/base16-vim'
 "Editing
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'jiangmiao/auto-pairs'
 
 "Navigate
 Plugin 'easymotion/vim-easymotion'

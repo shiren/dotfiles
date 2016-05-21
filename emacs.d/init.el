@@ -35,7 +35,7 @@
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
-(defun track-mouse (e))
+;(defun track-mouse (e))
 
 ;;; Set up package
 (require 'package)
@@ -79,6 +79,10 @@
 (setq helm-bookmark-show-location t)
 (setq helm-buffers-fuzzy-matching t)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
 ;;; projectile
 (package-install 'projectile)
@@ -89,6 +93,7 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq projectile-enable-caching t)
+(setq projectile-require-project-root nil)
 
 ;;; org
 (require 'org)
@@ -114,6 +119,7 @@
 ;;; evil
 (package-install 'evil)
 (setq evil-want-C-i-jump nil)
+(setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -143,10 +149,10 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
-  "n" 'dired
-  "f" 'ace-jump-mode
-  "p" 'projectile-find-file
-  "s" 'save-buffer)
+    "n" 'dired
+    "f" 'ace-jump-mode
+    "p" 'projectile-find-file
+    "s" 'save-buffer)
 
 (provide 'init)
 ;;; init.el ends here
