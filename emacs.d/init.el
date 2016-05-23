@@ -30,7 +30,7 @@
 (setq auto-save-list-file-prefix emacs-tmp-dir)
 
 ;;; 라인넘버 보이도록
-;(global-linum-mode t)
+;;; (global-linum-mode t)
 
 ;;; mouse setup
 (require 'mouse)
@@ -137,6 +137,16 @@
 (define-key evil-normal-state-map "\C-w" 'evil-delete)
 (define-key evil-insert-state-map "\C-w" 'evil-delete)
 (define-key evil-visual-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-[" 'evil-normal-state)
+(evil-set-initial-state 'dired-mode 'emacs)
+(evil-set-initial-state 'org-mode 'emacs)
+(evil-set-initial-state 'Info-mode 'emacs)
+(evil-set-initial-state 'help-mode 'emacs)
+; I need copy words from eshell history
+(evil-set-initial-state 'eshell-mode 'emacs)
+(evil-set-initial-state 'shell-mode 'emacs)
+(evil-set-initial-state 'term-mode 'emacs)
+(evil-set-initial-state 'message-mode 'emacs)
 
 ;;; key-chord
 (package-install 'key-chord)
