@@ -48,11 +48,13 @@
 (package-install 'web-mode)
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 
 ;;; js2-mode
 (package-install 'js2-mode)
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(setq js2-include-node-externs t)
 
 ;;; flyCheck
 (package-install 'flycheck)
@@ -132,13 +134,13 @@
 (setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
+;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
+;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (define-key evil-normal-state-map "\C-y" 'yank)
 (define-key evil-insert-state-map "\C-y" 'yank)
 (define-key evil-visual-state-map "\C-y" 'yank)
@@ -148,6 +150,7 @@
 (define-key evil-insert-state-map "\C-w" 'evil-delete)
 (define-key evil-visual-state-map "\C-w" 'evil-delete)
 (define-key evil-insert-state-map "\C-[" 'evil-normal-state)
+
 (evil-set-initial-state 'dired-mode 'emacs)
 (evil-set-initial-state 'org-mode 'emacs)
 (evil-set-initial-state 'Info-mode 'emacs)
