@@ -44,6 +44,16 @@
 ;(package-refresh-contents)
 (package-initialize)
 
+;;; Web mode
+(package-install 'web-mode)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;;; js2-mode
+(package-install 'js2-mode)
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;;; flyCheck
 (package-install 'flycheck)
 (global-flycheck-mode)
@@ -161,7 +171,9 @@
 (evil-leader/set-key
     "n" 'dired
     "f" 'ace-jump-mode
+    "gs" 'magit-status
     "p" 'projectile-find-file
+    "e" 'projectile-switch-to-buffer
     "s" 'save-buffer)
 
 (provide 'init)
