@@ -44,6 +44,14 @@
 ;(package-refresh-contents)
 (package-initialize)
 
+;;; highlight parentheses
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+(require 'paren)
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#def")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+
 ;;; Web mode
 (package-install 'web-mode)
 (require 'web-mode)
@@ -55,6 +63,10 @@
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq js2-include-node-externs t)
+(setq-default js2-basic-offset 2
+              js1-bounce-indent-p nil)
+(setq-default js2-mode-show-parse-errors nil
+              js2-mode-show-strict-warnings nil)
 
 ;;; flyCheck
 (package-install 'flycheck)
@@ -146,9 +158,6 @@
 (define-key evil-visual-state-map "\C-y" 'yank)
 (define-key evil-insert-state-map "\C-e" 'end-of-line)
 (define-key evil-insert-state-map "\C-r" 'search-backward)
-(define-key evil-normal-state-map "\C-w" 'evil-delete)
-(define-key evil-insert-state-map "\C-w" 'evil-delete)
-(define-key evil-visual-state-map "\C-w" 'evil-delete)
 (define-key evil-insert-state-map "\C-[" 'evil-normal-state)
 
 (evil-set-initial-state 'dired-mode 'emacs)
@@ -160,6 +169,25 @@
 (evil-set-initial-state 'shell-mode 'emacs)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'message-mode 'emacs)
+
+(defun set-control-w-shortcuts ()
+  (define-prefix-command 'my-window-map)
+  (global-set-key (kbd "C-w") 'my-window-map)
+  (define-key my-window-map (kbd "h") 'windmove-left)
+  (define-key my-window-map (kbd "j") 'windmove-down)
+  (define-key my-window-map (kbd "k") 'windmove-up)
+  (define-key my-window-map (kbd "l") 'windmove-right)
+  (define-key my-window-map (kbd "v") 'split-window-right)
+  (define-key my-window-map (kbd "b") 'split-window-below)
+  (define-key my-window-map (kbd "x") 'delete-window)
+  (define-key my-window-map (kbd "o") 'delete-other-windows))
+
+  (set-control-w-shortcuts)
+
+  (eval-after-load "evil-maps"
+  '(progn
+      (define-key evil-window-map "\C-w" 'nil)
+      (set-control-w-shortcuts)))
 
 ;;; key-chord
 (package-install 'key-chord)
@@ -174,7 +202,7 @@
 (evil-leader/set-key
     "n" 'dired
     "f" 'ace-jump-mode
-    "gs" 'magit-status
+    "g" 'magit-status
     "p" 'projectile-find-file
     "e" 'projectile-switch-to-buffer
     "s" 'save-buffer)
