@@ -195,6 +195,9 @@
 (key-chord-mode 1) ; turn on key-chord-mode
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+;;; evil-nerd-commenter
+(package-install 'evil-nerd-commenter)
+
 ;;; evil-leader
 (package-install 'evil-leader)
 (global-evil-leader-mode)
@@ -205,6 +208,13 @@
     "g" 'magit-status
     "p" 'projectile-find-file
     "e" 'projectile-switch-to-buffer
+    "ci" 'evilnc-comment-or-uncomment-lines
+    "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+    "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+    "cc" 'evilnc-copy-and-comment-lines
+    "cp" 'evilnc-comment-or-uncomment-paragraphs
+    "cr" 'comment-or-uncomment-region
+    "cv" 'evilnc-toggle-invert-comment-line-by-line
     "s" 'save-buffer)
 
 (provide 'init)
