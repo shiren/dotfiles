@@ -32,6 +32,18 @@
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
 
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
+
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
@@ -128,6 +140,11 @@
    (emacs-lisp . nil)
    ))
 (setq org-confirm-babel-evaluate nil)
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+;; org에서 linewrap 되게 
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
 ;;; Magit
 (package-install 'magit)
@@ -160,15 +177,15 @@
 (define-key evil-insert-state-map "\C-r" 'search-backward)
 (define-key evil-insert-state-map "\C-[" 'evil-normal-state)
 
-(evil-set-initial-state 'dired-mode 'emacs)
-(evil-set-initial-state 'org-mode 'emacs)
-(evil-set-initial-state 'Info-mode 'emacs)
-(evil-set-initial-state 'help-mode 'emacs)
-; I need copy words from eshell history
-(evil-set-initial-state 'eshell-mode 'emacs)
-(evil-set-initial-state 'shell-mode 'emacs)
-(evil-set-initial-state 'term-mode 'emacs)
-(evil-set-initial-state 'message-mode 'emacs)
+;; (evil-set-initial-state 'dired-mode 'emacs)
+;; (evil-set-initial-state 'org-mode 'emacs)
+;; (evil-set-initial-state 'Info-mode 'emacs)
+;; (evil-set-initial-state 'help-mode 'emacs)
+;; ; I need copy words from eshell history
+;; (evil-set-initial-state 'eshell-mode 'emacs)
+;; (evil-set-initial-state 'shell-mode 'emacs)
+;; (evil-set-initial-state 'term-mode 'emacs)
+;; (evil-set-initial-state 'message-mode 'emacs)
 
 (defun set-control-w-shortcuts ()
   (define-prefix-command 'my-window-map)
@@ -182,12 +199,12 @@
   (define-key my-window-map (kbd "x") 'delete-window)
   (define-key my-window-map (kbd "o") 'delete-other-windows))
 
-  (set-control-w-shortcuts)
+(set-control-w-shortcuts)
 
-  (eval-after-load "evil-maps"
+(eval-after-load "evil-maps"
   '(progn
-      (define-key evil-window-map "\C-w" 'nil)
-      (set-control-w-shortcuts)))
+    (define-key evil-window-map "\C-w" 'nil)
+    (set-control-w-shortcuts)))
 
 ;;; key-chord
 (package-install 'key-chord)

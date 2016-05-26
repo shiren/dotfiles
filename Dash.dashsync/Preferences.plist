@@ -240,6 +240,11 @@
 				<key>date</key>
 				<date>2015-08-06T02:48:01Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Emacs_Lisp.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2016-05-26T13:44:02Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Jasmine.xml</key>
 			<dict>
 				<key>date</key>
