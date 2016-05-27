@@ -226,7 +226,7 @@
 (evil-leader/set-key
     "n" 'dired
     "f" 'ace-jump-mode
-    "g" 'magit-status
+    "gs" 'magit-status
     "p" 'projectile-find-file
     "e" 'projectile-switch-to-buffer
     "ci" 'evilnc-comment-or-uncomment-lines
