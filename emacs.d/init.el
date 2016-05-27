@@ -142,6 +142,9 @@
 (setq org-confirm-babel-evaluate nil)
 (eval-after-load "org"
   '(require 'ox-md nil t))
+(add-hook 'org-mode-hook                                                                      
+          (lambda ()                                                                          
+        (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
 ;; org에서 linewrap 되게 
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
