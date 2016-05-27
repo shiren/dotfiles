@@ -157,7 +157,7 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ;;; evil-magit
-(packa-install 'evil-magit)
+(package-install 'evil-magit)
 (require 'evil-magit)
 
 ;;;; VIM-emulation
