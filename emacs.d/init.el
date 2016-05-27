@@ -75,7 +75,7 @@
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq js2-include-node-externs t)
-(setq-default js2-basic-offset 2
+(setq-default js2-basic-offset 4
               js1-bounce-indent-p nil)
 (setq-default js2-mode-show-parse-errors nil
               js2-mode-show-strict-warnings nil)
