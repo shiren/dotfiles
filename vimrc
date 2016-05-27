@@ -73,11 +73,11 @@ Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
     let g:OmniSharp_timeout = 1
 
 "markdown"
-Plugin 'jtratner/vim-flavored-markdown'
-    augroup markdown
-        au!
-        au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-    augroup END
+"Plugin 'jtratner/vim-flavored-markdown'
+    "augroup markdown
+        "au!
+        "au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+    "augroup END
 
 "Lint/Autocomplete
 if has('nvim')
@@ -131,6 +131,10 @@ Plugin 'Shougo/unite.vim'
 Plugin 'vim-xkbswitch'
     let g:XkbSwitchEnabled = 1
 Plugin 'itchyny/vim-cursorword'
+"Plugin 'vimwiki/vimwiki'
+    "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 call vundle#end()            " required
 
 "========================= Configuration ==================================
