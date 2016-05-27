@@ -156,6 +156,10 @@
 	       "~/.emacs.d/site-lisp/magit/Documentation/"))
 (global-set-key (kbd "C-c g") 'magit-status)
 
+;;; evil-magit
+(packa-install 'evil-magit)
+(require 'evil-magit)
+
 ;;;; VIM-emulation
 ;;; evil
 (package-install 'evil)
