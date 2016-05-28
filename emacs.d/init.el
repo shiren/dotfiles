@@ -142,11 +142,8 @@
 (setq org-confirm-babel-evaluate nil)
 (eval-after-load "org"
   '(require 'ox-md nil t))
-(add-hook 'org-mode-hook                                                                      
-          (lambda ()                                                                          
-        (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
-;; org에서 linewrap 되게 
+;; org에서 linewrap 되게
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
 ;;; Magit
@@ -159,87 +156,85 @@
 	       "~/.emacs.d/site-lisp/magit/Documentation/"))
 (global-set-key (kbd "C-c g") 'magit-status)
 
-;;; evil-magit
-(package-install 'evil-magit)
-(require 'evil-magit)
 
 ;;;; VIM-emulation
 ;;; evil
-(package-install 'evil)
-(setq evil-want-C-i-jump nil)
-(setq evil-want-C-u-scroll t)
-(require 'evil)
-(evil-mode 1)
-;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(define-key evil-normal-state-map "\C-y" 'yank)
-(define-key evil-insert-state-map "\C-y" 'yank)
-(define-key evil-visual-state-map "\C-y" 'yank)
-(define-key evil-insert-state-map "\C-e" 'end-of-line)
-(define-key evil-insert-state-map "\C-r" 'search-backward)
-(define-key evil-insert-state-map "\C-[" 'evil-normal-state)
+;(package-install 'evil)
+;(setq evil-want-C-i-jump nil)
+;(setq evil-want-C-u-scroll t)
+;(require 'evil)
+;(evil-mode 1)
+;(define-key evil-normal-state-map "\C-y" 'yank)
+;(define-key evil-insert-state-map "\C-y" 'yank)
+;(define-key evil-visual-state-map "\C-y" 'yank)
+;(define-key evil-insert-state-map "\C-e" 'end-of-line)
+;(define-key evil-insert-state-map "\C-r" 'search-backward)
+;(define-key evil-insert-state-map "\C-[" 'evil-normal-state)
 
-;; (evil-set-initial-state 'dired-mode 'emacs)
-;; (evil-set-initial-state 'org-mode 'emacs)
-;; (evil-set-initial-state 'Info-mode 'emacs)
-;; (evil-set-initial-state 'help-mode 'emacs)
-;; ; I need copy words from eshell history
-;; (evil-set-initial-state 'eshell-mode 'emacs)
-;; (evil-set-initial-state 'shell-mode 'emacs)
-;; (evil-set-initial-state 'term-mode 'emacs)
-;; (evil-set-initial-state 'message-mode 'emacs)
+; (evil-set-initial-state 'dired-mode 'emacs)
+; (evil-set-initial-state 'org-mode 'emacs)
+; (evil-set-initial-state 'Info-mode 'emacs)
+; (evil-set-initial-state 'help-mode 'emacs)
+; ; I need copy words from eshell history
+; (evil-set-initial-state 'eshell-mode 'emacs)
+; (evil-set-initial-state 'shell-mode 'emacs)
+; (evil-set-initial-state 'term-mode 'emacs)
+; (evil-set-initial-state 'message-mode 'emacs)
 
-(defun set-control-w-shortcuts ()
-  (define-prefix-command 'my-window-map)
-  (global-set-key (kbd "C-w") 'my-window-map)
-  (define-key my-window-map (kbd "h") 'windmove-left)
-  (define-key my-window-map (kbd "j") 'windmove-down)
-  (define-key my-window-map (kbd "k") 'windmove-up)
-  (define-key my-window-map (kbd "l") 'windmove-right)
-  (define-key my-window-map (kbd "v") 'split-window-right)
-  (define-key my-window-map (kbd "b") 'split-window-below)
-  (define-key my-window-map (kbd "x") 'delete-window)
-  (define-key my-window-map (kbd "o") 'delete-other-windows))
+;(defun set-control-w-shortcuts ()
+  ;(define-prefix-command 'my-window-map)
+  ;(global-set-key (kbd "C-w") 'my-window-map)
+  ;(define-key my-window-map (kbd "h") 'windmove-left)
+  ;(define-key my-window-map (kbd "j") 'windmove-down)
+  ;(define-key my-window-map (kbd "k") 'windmove-up)
+  ;(define-key my-window-map (kbd "l") 'windmove-right)
+  ;(define-key my-window-map (kbd "v") 'split-window-right)
+  ;(define-key my-window-map (kbd "b") 'split-window-below)
+  ;(define-key my-window-map (kbd "x") 'delete-window)
+  ;(define-key my-window-map (kbd "o") 'delete-other-windows))
 
-(set-control-w-shortcuts)
+;(set-control-w-shortcuts)
 
-(eval-after-load "evil-maps"
-  '(progn
-    (define-key evil-window-map "\C-w" 'nil)
-    (set-control-w-shortcuts)))
+;(eval-after-load "evil-maps"
+  ;'(progn
+    ;(define-key evil-window-map "\C-w" 'nil)
+    ;(set-control-w-shortcuts)))
 
-;;; key-chord
-(package-install 'key-chord)
-(require 'key-chord)
-(key-chord-mode 1) ; turn on key-chord-mode
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+;; key-chord
+;(package-install 'key-chord)
+;(require 'key-chord)
+;(key-chord-mode 1) ; turn on key-chord-mode
+;(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
-;;; evil-nerd-commenter
-(package-install 'evil-nerd-commenter)
+;; evil-nerd-commenter
+;(package-install 'evil-nerd-commenter)
 
-;;; evil-leader
-(package-install 'evil-leader)
-(global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
-(evil-leader/set-key
-    "n" 'dired
-    "f" 'ace-jump-mode
-    "gs" 'magit-status
-    "p" 'projectile-find-file
-    "e" 'projectile-switch-to-buffer
-    "ci" 'evilnc-comment-or-uncomment-lines
-    "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-    "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
-    "cc" 'evilnc-copy-and-comment-lines
-    "cp" 'evilnc-comment-or-uncomment-paragraphs
-    "cr" 'comment-or-uncomment-region
-    "cv" 'evilnc-toggle-invert-comment-line-by-line
-    "s" 'save-buffer)
+;; evil-leader
+;(package-install 'evil-leader)
+;(global-evil-leader-mode)
+;(evil-leader/set-leader "<SPC>")
+;(evil-leader/set-key
+    ;"n" 'dired
+    ;"f" 'ace-jump-mode
+    ;"gs" 'magit-status
+    ;"p" 'projectile-find-file
+    ;"e" 'projectile-switch-to-buffer
+    ;"ci" 'evilnc-comment-or-uncomment-lines
+    ;"cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+    ;"ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+    ;"cc" 'evilnc-copy-and-comment-lines
+    ;"cp" 'evilnc-comment-or-uncomment-paragraphs
+    ;"cr" 'comment-or-uncomment-region
+    ;"cv" 'evilnc-toggle-invert-comment-line-by-line
+    ;"s" 'save-buffer)
+
+;; evil-magit
+;(package-install 'evil-magit)
+;(require 'evil-magit)
+
+;(add-hook 'org-mode-hook
+          ;(lambda ()
+        ;(define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
 (provide 'init)
 ;;; init.el ends here
