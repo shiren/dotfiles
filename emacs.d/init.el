@@ -64,6 +64,11 @@
 (set-face-foreground 'show-paren-match "#def")
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
+;;; expand region
+(package-install 'expand-region)
+(require 'expand-region)
+(global-set-key (kbd "C-c C-v") 'er/expand-region)
+
 ;;; Web mode
 (package-install 'web-mode)
 (require 'web-mode)
@@ -97,7 +102,6 @@
   '(progn
      (require 'tern-auto-complete)
      (tern-ac-setup)))
-
 ;;; ace jump
 (package-install 'ace-jump-mode)
 (require 'ace-jump-mode)
