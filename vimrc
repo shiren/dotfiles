@@ -23,7 +23,7 @@ Plugin 'jeetsukumaran/vim-buffergator'
 "Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
-"Plugin 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'
 
 "Javascript
 "Plugin 'node.js'
@@ -131,8 +131,6 @@ Plugin 'Shougo/unite.vim'
 Plugin 'vim-xkbswitch'
     let g:XkbSwitchEnabled = 1
 Plugin 'itchyny/vim-cursorword'
-"Plugin 'vimwiki/vimwiki'
-    "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 call vundle#end()            " required
@@ -237,22 +235,18 @@ imap jk <ESC>
 imap ㅓㅏ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
-nmap <silent> <Leader>/ :nohlsearch<CR>
-map <silent> <F1> :help quickref<CR>
-
-"paste & delete without yanking
-nnoremap <leader>d "_d
-nnoremap <leader>dd "_dd
-nnoremap <leader>p "0p
 
 "Toggl Paste"
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-"save
+"=== Leader ====
 nnoremap <Leader>s :w<CR>
 
+nmap <silent> <Leader>/ :nohlsearch<CR>
+
+nmap <silent> <leader>p :CtrlP<cr>
 nmap <silent> <leader>e :CtrlPBuffer<cr>
 nmap <silent> <leader>r :CtrlPMRUFiles<cr>
 
