@@ -22,7 +22,7 @@ Plugin 'jeetsukumaran/vim-buffergator'
 
 "Git
 Plugin 'tpope/vim-fugitive'
-Plugin 'mhinz/vim-signify'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'sjl/gundo.vim'
 
 "Javascript
