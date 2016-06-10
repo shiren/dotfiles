@@ -277,6 +277,8 @@ nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gl :Glog -30<CR>
 
+nmap <silent> <leader>bb :BuffergatorOpen<CR>
+
 "========================= ETC ==================================
 "저장시 필요없는 스페이스 지우기
 function! TrimWhiteSpace()
