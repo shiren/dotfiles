@@ -119,7 +119,6 @@ Plugin 'SirVer/ultisnips'
     let g:UltiSnipsEditSplit="vertical"
 Plugin 'tpope/vim-obsession'
 Plugin 'bling/vim-airline'
-    set laststatus=2
     "show branch
     let g:airline#extensions#branch#enabled = 1
     "Enable the list of buffers
@@ -166,6 +165,7 @@ set tabstop=4
 "tab 대신 띄어쓰기로
 set expandtab
 
+set laststatus=2
 "검색시 대소문자 구별하지않음
 "set ignorecase
 "검색시 하이라이트(색상 강조)
@@ -178,10 +178,11 @@ set nocompatible
 "파일인코딩 형식 지정
 set fileencodings=utf-8,euc-kr
 "backspace 키 사용 가능
-set bs=indent,eol,start
+set backspace=indent,eol,start
 "명령어에 대한 히스토리를 1000개까지
 set history=1000
 set undolevels=1000
+set tabpagemax=50
 "상태표시줄에 커서의 위치 표시
 set ruler
 "제목을 표시
@@ -201,6 +202,12 @@ set smarttab
 set mouse=a
 
 set completeopt-=preview
+set complete-=i
+
+set ttimeout
+set ttimeoutlen=100
+
+set nrformats-=octal
 
 set cursorline
 
@@ -214,7 +221,7 @@ set autoread
 
 "공백문자들
 set list
-set listchars=tab:≈.,trail:·,extends:ø,nbsp:·
+set listchars=tab:≈.,trail:·,extends:ø,nbsp:+
 
 "자연스러운 분할
 set splitbelow          " Horizontal split below current.
@@ -224,6 +231,10 @@ set ttyfast
 
 set langmenu=en_US.UTF-8
 language messages en_US.UTF-8
+
+set shell=/usr/local/bin/zsh
+
+set sessionoptions-=options
 
 "빔 윈도우의 사이즈가 변경되었을때 = 자동 실행
 autocmd VimResized * wincmd =
