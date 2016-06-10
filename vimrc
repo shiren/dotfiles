@@ -18,8 +18,8 @@ Plugin 'ctrlp.vim'
     let g:ctrlp_mru_files = 1
     let g:ctrlp_dont_split = 'NERD_tree_2'
 Plugin 'rking/ag.vim'
-"Plugin 'jeetsukumaran/vim-buffergator'
-    "let g:buffergator_suppress_keymaps = 1
+Plugin 'jeetsukumaran/vim-buffergator'
+    let g:buffergator_suppress_keymaps = 1
 
 "Git
 Plugin 'tpope/vim-fugitive'
@@ -46,6 +46,7 @@ Plugin 'marijnh/tern_for_vim'
     let tern_show_argument_hint='on_move'
     let tern_show_signature_in_pum=1
     let g:tern_map_keys=1
+    let g:tern_map_prefix='<Leader>'
 
 "C
 Plugin 'c.vim'
