@@ -264,6 +264,7 @@ nmap <silent> <leader>e :CtrlPBuffer<cr>
 nmap <silent> <leader>r :CtrlPMRUFiles<cr>
 
 nmap <silent> <leader>n :NERDTreeToggle<CR>
+nmap <silent> <leader>l :NERDTreeFind<CR>
 
 nmap <leader>f <Plug>(easymotion-overwin-f)
 nmap <leader>g <Plug>(easymotion-overwin-f2)
