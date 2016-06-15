@@ -138,14 +138,24 @@
 ;;; org
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq org-agenda-files (list "~/org"))
+(setq org-default-notes-file (concat org-directory "~/org/notes.org"))
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((js . t)
    (emacs-lisp . nil)
+   (plantuml . t)
    ))
 (setq org-confirm-babel-evaluate nil)
 (eval-after-load "org"
   '(require 'ox-md nil t))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-plantuml-jar-path
+      (expand-file-name "~/plantuml/plantuml.jar"))
+
 
 ;; org에서 linewrap 되게
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
