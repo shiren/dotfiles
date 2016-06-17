@@ -94,7 +94,7 @@
 (ac-config-default)
 
 ;;; tern
-; NVM을 이용하기때문에 환경변수로 tern의 경로를 로드한다
+;NVM을 이용하기때문에 환경변수로 tern의 경로를 로드한다
 (add-to-list 'load-path (concat (substring (getenv "NVM_BIN") 0 (- (length (getenv "NVM_BIN")) 3)) "lib/node_modules/tern/emacs/"))
 (autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
@@ -102,6 +102,7 @@
   '(progn
      (require 'tern-auto-complete)
      (tern-ac-setup)))
+
 ;;; ace jump
 (package-install 'ace-jump-mode)
 (require 'ace-jump-mode)
@@ -109,7 +110,10 @@
 
 ;;; base16
 (package-install 'base16-theme)
-(load-theme 'base16-default-dark t t)
+;(load-theme 'base16-default-dark t)
+
+(package-install 'cyberpunk-theme)
+(load-theme 'cyberpunk t)
 
 ;;; helm
 (package-install 'helm)
@@ -156,7 +160,6 @@
 (setq org-plantuml-jar-path
       (expand-file-name "~/plantuml/plantuml.jar"))
 
-
 ;; org에서 linewrap 되게
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
@@ -167,11 +170,10 @@
 (with-eval-after-load 'info
   (info-initialize)
   (add-to-list 'Info-directory-list
-	       "~/.emacs.d/site-lisp/magit/Documentation/"))
+               "~/.emacs.d/site-lisp/magit/Documentation/"))
 (global-set-key (kbd "C-c g") 'magit-status)
 
-
-;;;; VIM-emulation
+;; VIM-emulation
 ;;; evil
 ;(package-install 'evil)
 ;(setq evil-want-C-i-jump nil)
@@ -185,15 +187,15 @@
 ;(define-key evil-insert-state-map "\C-r" 'search-backward)
 ;(define-key evil-insert-state-map "\C-[" 'evil-normal-state)
 
-; (evil-set-initial-state 'dired-mode 'emacs)
-; (evil-set-initial-state 'org-mode 'emacs)
-; (evil-set-initial-state 'Info-mode 'emacs)
-; (evil-set-initial-state 'help-mode 'emacs)
-; ; I need copy words from eshell history
-; (evil-set-initial-state 'eshell-mode 'emacs)
-; (evil-set-initial-state 'shell-mode 'emacs)
-; (evil-set-initial-state 'term-mode 'emacs)
-; (evil-set-initial-state 'message-mode 'emacs)
+;(evil-set-initial-state 'dired-mode 'emacs)
+;(evil-set-initial-state 'org-mode 'emacs)
+;(evil-set-initial-state 'Info-mode 'emacs)
+;(evil-set-initial-state 'help-mode 'emacs)
+; I need copy words from eshell history
+;(evil-set-initial-state 'eshell-mode 'emacs)
+;(evil-set-initial-state 'shell-mode 'emacs)
+;(evil-set-initial-state 'term-mode 'emacs)
+;(evil-set-initial-state 'message-mode 'emacs)
 
 ;(defun set-control-w-shortcuts ()
   ;(define-prefix-command 'my-window-map)
@@ -214,16 +216,16 @@
     ;(define-key evil-window-map "\C-w" 'nil)
     ;(set-control-w-shortcuts)))
 
-;; key-chord
+;;; key-chord
 ;(package-install 'key-chord)
 ;(require 'key-chord)
 ;(key-chord-mode 1) ; turn on key-chord-mode
 ;(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
-;; evil-nerd-commenter
+;;; evil-nerd-commenter
 ;(package-install 'evil-nerd-commenter)
 
-;; evil-leader
+;;; evil-leader
 ;(package-install 'evil-leader)
 ;(global-evil-leader-mode)
 ;(evil-leader/set-leader "<SPC>")
@@ -242,13 +244,12 @@
     ;"cv" 'evilnc-toggle-invert-comment-line-by-line
     ;"s" 'save-buffer)
 
-;; evil-magit
+;;; evil-magit
 ;(package-install 'evil-magit)
 ;(require 'evil-magit)
 
 ;(add-hook 'org-mode-hook
-          ;(lambda ()
-        ;(define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
+    ;(lambda () (define-key evil-normal-state-map (kbd "TAB") 'org-cycle)))
 
 (provide 'init)
 ;;; init.el ends here
