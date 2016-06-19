@@ -29,6 +29,10 @@
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
 
+;;; GUI모드에서는 nvm이 제대로 안되서 node경로를 지정해줘야
+(when window-system
+  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v6.0.0/bin")))
+
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
 
