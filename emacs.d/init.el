@@ -94,9 +94,6 @@
 (ac-config-default)
 
 ;;; tern
-;NVM을 이용하기때문에 환경변수로 tern의 경로를 로드한다
-;(add-to-list 'load-path (concat (substring (getenv "NVM_BIN") 0 (- (length (getenv "NVM_BIN")) 3)) "lib/node_modules/tern/emacs/"))
-
 (package-install 'tern)
 (package-install 'tern-auto-complete)
 (autoload 'tern-mode' "tern.el" nil t)
