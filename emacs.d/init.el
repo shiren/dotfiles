@@ -19,8 +19,6 @@
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 
-(global-set-key (kbd "C-q") 'toggle-input-method)
-
 (setq x-select-enable-clipboard t)
 
 ;;; Save all tempfiles in $TMPDIR/emacs$UID/
