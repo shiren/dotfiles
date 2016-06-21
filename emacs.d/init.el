@@ -21,6 +21,11 @@
 
 (setq x-select-enable-clipboard t)
 
+(setq mac-option-key-is-meta nil)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
