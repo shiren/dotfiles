@@ -23,12 +23,13 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; Save all tempfiles in $TMPDIR/emacs$UID/
-;(defconst emacs-tmp-dir (format "%s:/%s%s/" temporary-file-directory "emacs" (user-uid)))
-(defconst emacs-tmp-dir "~/emacsTmp")
-(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix emacs-tmp-dir)
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(custom-set-variables
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
 
 ;;; GUI모드에서는 nvm이 제대로 안되서 node경로를 지정해줘야
 (when window-system
