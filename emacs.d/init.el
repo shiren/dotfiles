@@ -21,8 +21,11 @@
 
 (setq x-select-enable-clipboard t)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;;; Save all tempfiles in $TMPDIR/emacs$UID/
-(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+;(defconst emacs-tmp-dir (format "%s:/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(defconst emacs-tmp-dir "~/emacsTmp")
 (setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
