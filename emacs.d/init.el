@@ -19,12 +19,8 @@
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 
-(setq x-select-enable-clipboard t)
-
-(setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -52,8 +48,9 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-(setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+(unless window-system
+  (setq interprogram-cut-function 'paste-to-osx)
+  (setq interprogram-paste-function 'copy-from-osx))
 
 ;;; mouse setup
 (require 'mouse)
