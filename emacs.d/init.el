@@ -71,7 +71,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-;(package-refresh-contents)
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -87,6 +86,10 @@
 (set-face-background 'show-paren-match (face-background 'default))
 (set-face-foreground 'show-paren-match "#def")
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+
+;; recent file list
+(require 'recentf)
+(recentf-mode t)
 
 ;;; expand region
 (package-install 'expand-region)
