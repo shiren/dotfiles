@@ -38,9 +38,13 @@
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
 
+;;nvm이 환경 셋팅
+(add-to-list 'exec-path "/Users/shiren/.nvm/versions/node/v6.0.0/bin")
+
 ;;; GUI모드에서는 nvm이 제대로 안되서 node경로를 지정해줘야
 (when window-system
-  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v6.0.0/bin")))
+  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v6.0.0/bin"))
+)
 
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
