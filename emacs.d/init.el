@@ -73,6 +73,12 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 ;(package-refresh-contents)
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
 
 ;;; highlight parentheses
 (show-paren-mode 1)
@@ -190,6 +196,16 @@
   (add-to-list 'Info-directory-list
                "~/.emacs.d/site-lisp/magit/Documentation/"))
 (global-set-key (kbd "C-c g") 'magit-status)
+
+;;; markdown mode
+(package-install 'markdown-mode)
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 ;; VIM-emulation
 ;;; evil
