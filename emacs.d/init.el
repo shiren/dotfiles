@@ -19,7 +19,7 @@
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 
-(when (eq system-type 'darwin)
+(when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source code pro")
   (set-face-attribute 'default nil :height 140)
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
