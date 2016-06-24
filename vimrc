@@ -149,7 +149,7 @@ set lazyredraw
 
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
-colorscheme base16-default
+colorscheme base16-tomorrow
 
 "Show line number.
 set number
