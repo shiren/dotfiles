@@ -18,8 +18,10 @@ Plugin 'ctrlp.vim'
     let g:ctrlp_mru_files = 1
     let g:ctrlp_dont_split = 'NERD_tree_2'
     let g:ctrlp_prompt_mappings = {
-        \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
-        \ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
+        \ 'PrtSelectMove("j")':   ['<c-n>'],
+        \ 'PrtSelectMove("k")':   ['<c-p>'],
+        \ 'PrtHistory(-1)':       ['<up>'],
+        \ 'PrtHistory(1)':        ['<down>'],
     \ }
 Plugin 'rking/ag.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
