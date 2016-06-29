@@ -17,6 +17,10 @@ Plugin 'ctrlp.vim'
     let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|dist\|lib\|report\|build'
     let g:ctrlp_mru_files = 1
     let g:ctrlp_dont_split = 'NERD_tree_2'
+    let g:ctrlp_prompt_mappings = {
+        \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
+        \ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
+    \ }
 Plugin 'rking/ag.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
     let g:buffergator_suppress_keymaps = 1
