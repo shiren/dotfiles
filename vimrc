@@ -82,11 +82,7 @@ Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
     let g:OmniSharp_timeout = 1
 
 "markdown"
-"Plugin 'jtratner/vim-flavored-markdown'
-    "augroup markdown
-        "au!
-        "au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-    "augroup END
+Plugin 'plasticboy/vim-markdown'
 
 "Lint/Autocomplete
 if has('nvim')
@@ -140,7 +136,8 @@ Plugin 'vim-xkbswitch'
     let g:XkbSwitchEnabled = 1
 Plugin 'itchyny/vim-cursorword'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'Yggdroot/indentLine'
+    "let g:indentLine_color_term = 239
 call vundle#end()            " required
 
 "========================= Configuration ==================================
@@ -328,3 +325,7 @@ if exists('$ITERM_PROFILE')
     let &t_EI="\<Esc>]50;CursorShape=0\x7"
   endif
 end
+
+"Color override"
+"Avoid hidden Errors by cursorLine"
+hi Error cterm=reverse ctermbg=white ctermfg=red
