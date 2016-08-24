@@ -248,6 +248,25 @@ set sessionoptions-=options
 "빔 윈도우의 사이즈가 변경되었을때 = 자동 실행
 autocmd VimResized * wincmd =
 
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
+
+"======================= File Type settings ========================
+
+au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
+au BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
+au BufNewFile,BufRead *.yml,*.yaml setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
+
+augroup filetypedetect
+  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+  au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+augroup END
+
 "========================= KEYMAP ==================================
 "basic
 let mapleader="\<Space>"
