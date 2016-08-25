@@ -137,7 +137,7 @@ Plugin 'vim-xkbswitch'
 Plugin 'itchyny/vim-cursorword'
 Plugin 'godlygeek/tabular'
 Plugin 'Yggdroot/indentLine'
-    "let g:indentLine_color_term = 239
+    let g:indentLine_color_term = 18
 call vundle#end()            " required
 
 "========================= Configuration ==================================
