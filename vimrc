@@ -38,6 +38,7 @@ Plugin 'sjl/gundo.vim'
 "Plugin 'pangloss/vim-javascript'
 "Plugin 'Enhanced-Javascript-syntax'
 Plugin 'othree/yajs.vim'
+Plugin 'othree/es.next.syntax.vim'
 Plugin 'gavocanov/vim-js-indent'
 "Plugin 'everedifice/vim-js-syntax'
 Plugin 'othree/jsdoc-syntax.vim'
@@ -90,20 +91,28 @@ Plugin 'benekastah/neomake'
     autocmd! BufWritePost * Neomake
     let g:neomake_javascript_enabled_makers = ['eslint']
 else
-Plugin 'scrooloose/syntastic'
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 0
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_javascript_checkers=["eslint"]
-    let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-endif
+"Plugin 'scrooloose/syntastic'
+    "set statusline+=%#warningmsg#
+    "set statusline+=%{SyntasticStatuslineFlag()}
+    "set statusline+=%*
+    "let g:syntastic_always_populate_loc_list = 1
+    "let g:syntastic_auto_loc_list = 0
+    "let g:syntastic_check_on_open = 1
+    "let g:syntastic_check_on_wq = 0
+    "let g:syntastic_javascript_checkers=["eslint"]
+    "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+Plugin 'maralla/validator.vim'
+    let g:validator_javascript_checkers=['eslint']
+    let g:validator_filetype_map={'javascript.jsx': 'javascript'}
+    let g:validator_warning_symbol='✓'
+    let g:validator_error_symbol='✗'
+    highlight ValidatorErrorSign ctermbg=18 ctermfg=09
+    highlight ValidatorWarningSign ctermbg=18 ctermfg=12
 Plugin 'Valloric/YouCompleteMe'
     let g:ycm_confirm_extra_conf=0
     let g:ycm_auto_trigger = 1
+endif
 
 "Colorthemes
 Plugin 'chriskempson/base16-vim'
