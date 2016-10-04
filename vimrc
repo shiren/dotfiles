@@ -59,29 +59,6 @@ Plugin 'marijnh/tern_for_vim'
 "C
 Plugin 'c.vim'
 
-"C#
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'tpope/vim-dispatch' "dependency for omnisharp-vim
-    augroup omnisharp_commands
-        autocmd!
-        "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-        "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-        " Synchronous build (blocks Vim)
-        "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-
-        " automatic syntax check on events (TextChanged requires Vim 7.4)
-        autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
-
-        " Automatically add new cs files to the nearest project on save
-        autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-        "show type information automatically when the cursor stops moving
-        autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-    augroup END
-    "Timeout in seconds to wait for a response from the server
-    let g:OmniSharp_timeout = 1
-
 "markdown"
 Plugin 'plasticboy/vim-markdown'
 
