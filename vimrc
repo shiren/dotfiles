@@ -79,6 +79,10 @@ else
     "let g:syntastic_javascript_checkers=["eslint"]
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
+Plugin 'Valloric/YouCompleteMe'
+    let g:ycm_confirm_extra_conf=0
+    let g:ycm_auto_trigger = 1
+
 Plugin 'maralla/validator.vim'
     let g:validator_javascript_checkers=['eslint']
     let g:validator_filetype_map={'javascript.jsx': 'javascript'}
@@ -86,9 +90,6 @@ Plugin 'maralla/validator.vim'
     let g:validator_error_symbol='✗'
     highlight ValidatorErrorSign ctermbg=18 ctermfg=09
     highlight ValidatorWarningSign ctermbg=18 ctermfg=12
-Plugin 'Valloric/YouCompleteMe'
-    let g:ycm_confirm_extra_conf=0
-    let g:ycm_auto_trigger = 1
 endif
 
 "Colorthemes
@@ -139,7 +140,12 @@ set lazyredraw
 
 "검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
 set background=dark
-colorscheme base16-tomorrow
+"colorscheme base16-tomorrow
+"base16 setting
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 "Show line number.
 set number
