@@ -76,7 +76,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
-alias emacs="/usr/local/Cellar/emacs/24.5/bin/emacs"
 alias mux="tmuxinator"
 export EDITOR="/usr/local/bin/vim"
 
