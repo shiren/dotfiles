@@ -18,6 +18,7 @@
 
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
+(split-window-horizontally)
 
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source code pro")
@@ -49,7 +50,7 @@
 (defvar NODE_VERSION "7.0.0")
 ;;nvm이 환경 셋팅
 (add-to-list 'exec-path (concat "/Users/shiren/.nvm/versions/node/v" NODE_VERSION "/bin"))
-;;; GUI모드에서는 nvm이 제대로 안되서 node경로를 지정해줘야
+;;; GUI모드에서는 nvmp이 제대로 안되서 node경로를 지정해줘야
 (when window-system
   (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v" NODE_VERSION "/bin"))
 )
@@ -221,6 +222,11 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+;;; multi term
+(package-install 'multi-term)
+(require 'multi-term)
+(setq multi-term-program "/usr/local/bin/zsh")
 
 ;;;; VIM-emulation
 ;; evil
