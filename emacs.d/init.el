@@ -45,12 +45,13 @@
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
 
+;;; NODE관련 셋팅
+(defvar NODE_VERSION "7.0.0")
 ;;nvm이 환경 셋팅
-(add-to-list 'exec-path "/Users/shiren/.nvm/versions/node/v6.0.0/bin")
-
+(add-to-list 'exec-path (concat "/Users/shiren/.nvm/versions/node/v" NODE_VERSION "/bin"))
 ;;; GUI모드에서는 nvm이 제대로 안되서 node경로를 지정해줘야
 (when window-system
-  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v6.0.0/bin"))
+  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v" NODE_VERSION "/bin"))
 )
 
 ;;; 라인넘버 보이도록
@@ -122,6 +123,10 @@
 ;;; flyCheck
 (package-install 'flycheck)
 (global-flycheck-mode)
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+(setq flycheck-checkers '(javascript-eslint))
 
 ;;; autocomplete
 (package-install 'auto-complete)
