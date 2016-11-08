@@ -79,7 +79,7 @@ alias vi="/usr/local/bin/vim"
 alias mux="tmuxinator"
 export EDITOR="/usr/local/bin/vim"
 
-If [ -z $EMACS ]; then
+if [ -z $EMACS ]; then
     # Base16 Shell
     BASE16_SHELL=$HOME/.config/base16-shell/
     [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
