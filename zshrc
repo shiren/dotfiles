@@ -77,6 +77,10 @@ export LANG=ko_KR.UTF-8
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
 alias mux="tmuxinator"
+alias gochart="~/masterpiece/ws_nhn/fedev/tui.chart"
+alias gofe="~/masterpiece/ws_nhn/fedev/"
+alias godot="~/dotfiles"
+
 export EDITOR="/usr/local/bin/vim"
 
 if [ -z $EMACS ]; then
