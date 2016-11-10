@@ -41,7 +41,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
+    (ox-gfm org multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -178,7 +178,9 @@
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
 (setq projectile-enable-caching t)
-(setq projectile-require-project-root nil)
+;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
+;(setq projectile-require-project-root nil)
+(setq projectile-indexing-method 'native)
 
 ;;; org
 (require 'org)
@@ -192,8 +194,10 @@
    (plantuml . t)
    ))
 (setq org-confirm-babel-evaluate nil)
+(setq org-src-fontify-natively t)
+(package-install 'ox-gfm)
 (eval-after-load "org"
-  '(require 'ox-md nil t))
+  '(require 'ox-gfm nil t))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
