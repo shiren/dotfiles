@@ -51,7 +51,7 @@ plugins=(git, node, npm, osx, github, bower, tmux, tmuxinator, nvm, brew, vundle
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=ko_KR.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -77,11 +77,17 @@ source $ZSH/oh-my-zsh.sh
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
 alias mux="tmuxinator"
+alias gochart="~/masterpiece/ws_nhn/fedev/tui.chart"
+alias gofe="~/masterpiece/ws_nhn/fedev/"
+alias godot="~/dotfiles"
+
 export EDITOR="/usr/local/bin/vim"
 
-# Base16 Shell
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+if [ -z $EMACS ]; then
+    # Base16 Shell
+    BASE16_SHELL=$HOME/.config/base16-shell/
+    [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
