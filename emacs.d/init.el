@@ -41,7 +41,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
+    (multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
