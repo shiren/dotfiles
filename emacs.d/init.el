@@ -41,7 +41,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (ox-gfm org multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
+    (hydra ace-window ox-gfm org multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -232,6 +232,30 @@
 (package-install 'multi-term)
 (require 'multi-term)
 (setq multi-term-program "/usr/local/bin/zsh")
+
+;;; ace window
+(package-install 'ace-window)
+(require 'ace-window)
+(global-set-key (kbd "M-p") 'ace-window)
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(defvar aw-dispatch-alist
+'((?x aw-delete-window " Ace - Delete Window")
+    (?m aw-swap-window " Ace - Swap Window")
+    (?n aw-flip-window)
+    (?v aw-split-window-vert " Ace - Split Vert Window")
+    (?b aw-split-window-horz " Ace - Split Horz Window")
+    (?i delete-other-windows " Ace - Maximize Window")
+    (?o delete-other-windows))
+"List of actions for `aw-dispatch-default'.")
+
+;;; hydra
+(package-install `hydra)
+(defhydra hydra (global-map "C-.")
+  "window hydra"
+  ("x" 'aw-delete-window "delete window")
+  ("r" 'aw-swap-window "swap window"))
+
+
 
 ;;;; VIM-emulation
 ;; evil
