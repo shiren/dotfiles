@@ -9,13 +9,6 @@
   (scroll-bar-mode -1)
   (tooltip-mode -1))
 
-;; fix the PATH variable
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(when window-system (set-exec-path-from-shell-PATH))
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
@@ -53,14 +46,20 @@
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
 
+;; fix the PATH variable
+;; (defun set-exec-path-from-shell-PATH ()
+;;   (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
+;;     (setenv "PATH" path-from-shell)
+;;     (setq exec-path (split-string path-from-shell path-separator))))
+;; (when window-system (set-exec-path-from-shell-PATH))
+
 ;;; NODE관련 셋팅
 (defvar NODE_VERSION "7.0.0")
 ;;nvm이 환경 셋팅
 (add-to-list 'exec-path (concat "/Users/shiren/.nvm/versions/node/v" NODE_VERSION "/bin"))
 ;;; GUI모드에서는 nvmp이 제대로 안되서 node경로를 지정해줘야
 (when window-system
-  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v" NODE_VERSION "/bin"))
-)
+  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v" NODE_VERSION "/bin")))
 
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
@@ -108,7 +107,7 @@
 (require 'recentf)
 (recentf-mode t)
 
-;;; expand region
+;;; Expand Region
 (unless (package-installed-p 'expand-region)
   (package-install 'expand-region))
 (require 'expand-region)
@@ -150,7 +149,7 @@
 (unless (package-installed-p 'tern)
   (package-install 'tern))
 (unless (package-installed-p 'tern-auto-complete)
-  (package-install 'tern-auto-complete))
+ pp (package-install 'tern-auto-complete))
 
 (autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
@@ -208,6 +207,9 @@
 ;;; org
 (unless (package-installed-p 'org)
   (package-install 'org))
+(unless (package-installed-p 'ox-gfm)
+  (package-install 'ox-gfm))
+
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-agenda-files (list "~/org"))
@@ -220,7 +222,6 @@
    ))
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-fontify-natively t)
-(package-install 'ox-gfm)
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 (global-set-key "\C-cl" 'org-store-link)
