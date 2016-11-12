@@ -9,6 +9,13 @@
   (scroll-bar-mode -1)
   (tooltip-mode -1))
 
+;; fix the PATH variable
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
@@ -41,7 +48,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (hydra ace-window ox-gfm org multi-term projectile helm tern auto-complete web-mode use-package tern-auto-complete markdown-mode magit key-chord js2-mode helm-projectile flycheck expand-region evil-leader cyberpunk-theme base16-theme ace-jump-mode))))
+    (web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -81,6 +88,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -101,18 +109,21 @@
 (recentf-mode t)
 
 ;;; expand region
-(package-install 'expand-region)
+(unless (package-installed-p 'expand-region)
+  (package-install 'expand-region))
 (require 'expand-region)
 (global-set-key (kbd "C-c C-v") 'er/expand-region)
 
 ;;; Web mode
-(package-install 'web-mode)
+(unless (package-installed-p 'web-mode)
+  (package-install 'web-mode))
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 
 ;;; js2-mode
-(package-install 'js2-mode)
+(unless (package-installed-p 'js2-mode)
+  (package-install 'js2-mode))
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq js2-include-node-externs t)
@@ -122,7 +133,8 @@
               js2-mode-show-strict-warnings nil)
 
 ;;; flyCheck
-(package-install 'flycheck)
+(unless (package-installed-p 'flycheck)
+  (package-install 'flycheck))
 (global-flycheck-mode)
 (setq-default flycheck-disabled-checkers
               (append flycheck-disabled-checkers
@@ -130,12 +142,16 @@
 (setq flycheck-checkers '(javascript-eslint))
 
 ;;; autocomplete
-(package-install 'auto-complete)
+(unless (package-installed-p 'auto-complete)
+  (package-install 'auto-complete))
 (ac-config-default)
 
 ;;; tern
-(package-install 'tern)
-(package-install 'tern-auto-complete)
+(unless (package-installed-p 'tern)
+  (package-install 'tern))
+(unless (package-installed-p 'tern-auto-complete)
+  (package-install 'tern-auto-complete))
+
 (autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (eval-after-load 'tern
@@ -144,19 +160,23 @@
      (tern-ac-setup)))
 
 ;;; ace jump
-(package-install 'ace-jump-mode)
+(unless (package-installed-p 'ace-jump-mode)
+  (package-install 'ace-jump-mode))
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;; base16
-(package-install 'base16-theme)
-;(load-theme 'base16-tomorrow-dark t)
+(unless (package-installed-p 'base16-theme)
+  (package-install 'base16-theme))
+;;(load-theme 'base16-tomorrow-dark t)
 
-(package-install 'cyberpunk-theme)
+(unless (package-installed-p 'cyberpunk-theme)
+  (package-install 'cyberpunk-theme))
 (load-theme 'cyberpunk t)
 
 ;;; helm
-(package-install 'helm)
+(unless (package-installed-p 'helm)
+  (package-install 'helm))
 (require 'helm)
 (helm-mode 1)
 (setq helm-quick-update t)
@@ -170,8 +190,11 @@
 (global-set-key (kbd "C-c e") 'helm-buffers-list)
 
 ;;; projectile
-(package-install 'projectile)
-(package-install 'helm-projectile)
+(unless (package-installed-p 'projectile)
+  (package-install 'projectile))
+(unless (package-installed-p 'helm-projectile)
+  (package-install 'helm-projectile))
+
 (require 'projectile)
 (require 'helm-projectile)
 (projectile-global-mode)
@@ -183,6 +206,8 @@
 (setq projectile-indexing-method 'native)
 
 ;;; org
+(unless (package-installed-p 'org)
+  (package-install 'org))
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-agenda-files (list "~/org"))
@@ -209,7 +234,8 @@
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
 ;;; Magit
-(package-install 'magit)
+(unless (package-installed-p 'magit)
+  (package-install 'magit))
 (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
 (require 'magit)
 (with-eval-after-load 'info
@@ -219,7 +245,8 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ;;; markdown mode
-(package-install 'markdown-mode)
+(unless (package-installed-p 'markdown-mode)
+  (package-install 'markdown-mode))
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -229,12 +256,14 @@
   :init (setq markdown-command "multimarkdown"))
 
 ;;; multi term
-(package-install 'multi-term)
+(unless (package-installed-p 'multi-term)
+  (package-install 'multi-term))
 (require 'multi-term)
 (setq multi-term-program "/usr/local/bin/zsh")
 
 ;;; ace window
-(package-install 'ace-window)
+(unless (package-installed-p 'ace-window)
+  (package-install 'ace-window))
 (require 'ace-window)
 (global-set-key (kbd "M-p") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -249,13 +278,20 @@
 "List of actions for `aw-dispatch-default'.")
 
 ;;; hydra
-(package-install `hydra)
+(unless (package-installed-p 'hydra)
+  (package-install 'hydra))
 (defhydra hydra (global-map "C-.")
   "window hydra"
   ("x" 'aw-delete-window "delete window")
   ("r" 'aw-swap-window "swap window"))
 
+;;; Clojure setup
+;; CIDER
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
 
+(unless (package-installed-p 'clojure-mode)
+  (package-install 'clojure-mode))
 
 ;;;; VIM-emulation
 ;; evil
