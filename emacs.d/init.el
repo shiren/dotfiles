@@ -41,25 +41,10 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
-
-;; fix the PATH variable
-;; (defun set-exec-path-from-shell-PATH ()
-;;   (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
-;;     (setenv "PATH" path-from-shell)
-;;     (setq exec-path (split-string path-from-shell path-separator))))
-;; (when window-system (set-exec-path-from-shell-PATH))
-
-;;; NODE관련 셋팅
-(defvar NODE_VERSION "7.0.0")
-;;nvm이 환경 셋팅
-(add-to-list 'exec-path (concat "/Users/shiren/.nvm/versions/node/v" NODE_VERSION "/bin"))
-;;; GUI모드에서는 nvmp이 제대로 안되서 node경로를 지정해줘야
-(when window-system
-  (setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/.nvm/versions/node/v" NODE_VERSION "/bin")))
 
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
@@ -94,6 +79,12 @@
 
 (eval-when-compile
   (require 'use-package))
+
+(unless (package-installed-p 'exec-path-from-shell)
+  (package-install 'exec-path-from-shell))
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;;; highlight parentheses
 (show-paren-mode 1)
