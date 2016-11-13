@@ -82,6 +82,7 @@ alias gofe="~/masterpiece/ws_nhn/fedev/"
 alias godot="~/dotfiles"
 
 export EDITOR="/usr/local/bin/vim"
+#export PATH="/usr/local/bin:/usr/local/git/bin:$PATH"
 
 if [ -z $EMACS ]; then
     # Base16 Shell
