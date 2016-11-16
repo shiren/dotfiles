@@ -17,6 +17,10 @@
 (setq-default indent-tabs-mode nil)
 
 (set-language-environment "Korean")
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (split-window-horizontally)
 
@@ -210,9 +214,12 @@
  '((js . t)
    (emacs-lisp . nil)
    (plantuml . t)
+   (clojure . t)
+   (sh . t)
    ))
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 (global-set-key "\C-cl" 'org-store-link)
