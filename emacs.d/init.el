@@ -144,7 +144,7 @@
 (unless (package-installed-p 'tern)
   (package-install 'tern))
 (unless (package-installed-p 'tern-auto-complete)
- pp (package-install 'tern-auto-complete))
+  (package-install 'tern-auto-complete))
 
 (autoload 'tern-mode' "tern.el" nil t)
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
@@ -219,7 +219,7 @@
    ))
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-fontify-natively t)
-(setq org-src-tab-acts-natively t)
+;(setq org-src-tab-acts-natively t)
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 (global-set-key "\C-cl" 'org-store-link)
