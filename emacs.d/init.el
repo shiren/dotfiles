@@ -45,7 +45,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -84,6 +84,7 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Setup PATH environment
 (unless (package-installed-p 'exec-path-from-shell)
   (package-install 'exec-path-from-shell))
 
@@ -204,8 +205,13 @@
   (package-install 'org))
 (unless (package-installed-p 'ox-gfm)
   (package-install 'ox-gfm))
+(unless (package-installed-p 'ox-reveal)
+  (package-install 'ox-reveal))
 
 (require 'org)
+(require 'ox-reveal)
+(setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/")
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-agenda-files (list "~/org"))
 (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
