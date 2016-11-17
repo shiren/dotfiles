@@ -45,7 +45,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -168,6 +168,11 @@
 (unless (package-installed-p 'cyberpunk-theme)
   (package-install 'cyberpunk-theme))
 (load-theme 'cyberpunk t)
+
+;;; Eyebrowse
+(unless (package-installed-p 'eyebrowse)
+  (package-install 'eyebrowse))
+(eyebrowse-mode t)
 
 ;;; helm
 (unless (package-installed-p 'helm)
