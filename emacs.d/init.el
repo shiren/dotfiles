@@ -22,7 +22,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-(split-window-horizontally)
 
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source code pro")
@@ -45,7 +44,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -127,6 +126,14 @@
 (setq-default js2-mode-show-parse-errors nil
               js2-mode-show-strict-warnings nil)
 
+;;; Clojure setup
+;; CIDER
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
+;; clojure-mode
+(unless (package-installed-p 'clojure-mode)
+  (package-install 'clojure-mode))
+
 ;;; flyCheck
 (unless (package-installed-p 'flycheck)
   (package-install 'flycheck))
@@ -188,6 +195,7 @@
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 (global-set-key (kbd "C-c e") 'helm-buffers-list)
+(global-set-key (kbd "C-c r") 'helm-recentf)
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
@@ -290,18 +298,22 @@
 ;;; hydra
 (unless (package-installed-p 'hydra)
   (package-install 'hydra))
-(defhydra hydra (global-map "C-.")
+(defhydra hydra (global-map "C-;")
   "window hydra"
   ("x" 'aw-delete-window "delete window")
   ("r" 'aw-swap-window "swap window"))
 
-;;; Clojure setup
-;; CIDER
-(unless (package-installed-p 'cider)
-  (package-install 'cider))
+;;; rainbow-delimiters
+(unless (package-installed-p 'rainbow-delimiters)
+  (package-install 'rainbow-delimiters))
+(require 'rainbow-delimiters)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
 
-(unless (package-installed-p 'clojure-mode)
-  (package-install 'clojure-mode))
+(unless (package-installed-p 'git-gutter)
+  (package-install 'git-gutter))
+(require 'git-gutter)
+(global-git-gutter-mode +1)
 
 (provide 'init)
 ;;; init.el ends here
