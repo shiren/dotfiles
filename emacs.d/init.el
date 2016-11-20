@@ -42,10 +42,9 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
-
  '(package-selected-packages
    (quote
-    (git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -107,7 +106,7 @@
 (unless (package-installed-p 'expand-region)
   (package-install 'expand-region))
 (require 'expand-region)
-(global-set-key (kbd "C-c C-v") 'er/expand-region)
+(global-set-key (kbd "C-c v") 'er/expand-region)
 
 ;;; Web mode
 (unless (package-installed-p 'web-mode)
@@ -261,7 +260,7 @@
   (info-initialize)
   (add-to-list 'Info-directory-list
                "~/.emacs.d/site-lisp/magit/Documentation/"))
-(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c m") 'magit-status)
 
 ;;; markdown mode
 (unless (package-installed-p 'markdown-mode)
@@ -317,6 +316,10 @@
 
 (unless (package-installed-p 'git-timemachine)
   (package-install 'git-timemachine))
+
+(unless (package-installed-p 'goto-last-change)
+  (package-install 'goto-last-change))
+(global-set-key (kbd "C-c gl") 'goto-last-change)
 
 (provide 'init)
 ;;; init.el ends here
