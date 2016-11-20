@@ -42,9 +42,10 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+
  '(package-selected-packages
    (quote
-    (git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -299,9 +300,8 @@
 (unless (package-installed-p 'hydra)
   (package-install 'hydra))
 (defhydra hydra (global-map "C-;")
-  "window hydra"
-  ("x" 'aw-delete-window "delete window")
-  ("r" 'aw-swap-window "swap window"))
+  "leader"
+  ("g" git-timemachine-toggle "Git timemachine"))
 
 ;;; rainbow-delimiters
 (unless (package-installed-p 'rainbow-delimiters)
@@ -314,6 +314,9 @@
   (package-install 'git-gutter))
 (require 'git-gutter)
 (global-git-gutter-mode +1)
+
+(unless (package-installed-p 'git-timemachine)
+  (package-install 'git-timemachine))
 
 (provide 'init)
 ;;; init.el ends here
