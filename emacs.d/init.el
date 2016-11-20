@@ -205,9 +205,7 @@
 
 (require 'projectile)
 (require 'helm-projectile)
-(projectile-global-mode)
 (setq projectile-completion-system 'helm)
-(helm-projectile-on)
 (setq projectile-enable-caching t)
 ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
 ;(setq projectile-require-project-root nil)
@@ -238,6 +236,8 @@
         "*.gif"
         )
           projectile-globally-ignored-files))
+(projectile-global-mode)
+(helm-projectile-on)
 
 ;;; org
 (unless (package-installed-p 'org)
