@@ -278,6 +278,7 @@
   (package-install 'multi-term))
 (require 'multi-term)
 (setq multi-term-program "/usr/local/bin/zsh")
+(global-set-key (kbd "C-c t") 'multi-term)
 
 ;;; ace window
 (unless (package-installed-p 'ace-window)
