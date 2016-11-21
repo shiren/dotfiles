@@ -74,7 +74,8 @@
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -352,7 +353,7 @@
   ("k" avy-goto-char-2 "to 2char")
   ("w" avy-goto-word "to word")
   ("l" avy-goto-line "to line")
-  ("j" avy-goto-char "to
+  ("j" avy-goto-char "to char"))
 
 (provide 'init)
 ;;; init.el ends here
