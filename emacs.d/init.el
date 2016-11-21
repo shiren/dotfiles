@@ -348,12 +348,12 @@
 ;; avy
 (defhydra hydra (global-map "C-j")
   "jump"
-  ("t" git-timemachine-toggle "to timemachine")
-  ("u" goto-last-change "to last Change")
+  ("j" avy-goto-char "to char")
   ("k" avy-goto-char-2 "to 2char")
-  ("w" avy-goto-word "to word")
+  ("w" avy-goto-word-1 "to word")
   ("l" avy-goto-line "to line")
-  ("j" avy-goto-char "to char"))
+  ("u" goto-last-change "to last Change")
+  ("t" git-timemachine-toggle "to timemachine"))
 
 (provide 'init)
 ;;; init.el ends here
