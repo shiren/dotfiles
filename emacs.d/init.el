@@ -108,6 +108,24 @@
 (require 'expand-region)
 (global-set-key (kbd "C-c v") 'er/expand-region)
 
+;;; rainbow-delimiters
+(unless (package-installed-p 'rainbow-delimiters)
+  (package-install 'rainbow-delimiters))
+(require 'rainbow-delimiters)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
+
+(unless (package-installed-p 'git-gutter)
+  (package-install 'git-gutter))
+(require 'git-gutter)
+(global-git-gutter-mode +1)
+
+(unless (package-installed-p 'git-timemachine)
+  (package-install 'git-timemachine))
+
+(unless (package-installed-p 'goto-last-change)
+  (package-install 'goto-last-change))
+
 ;;; Web mode
 (unless (package-installed-p 'web-mode)
   (package-install 'web-mode))
@@ -166,12 +184,6 @@
 ;;   (package-install 'ace-jump-mode))
 ;; (require 'ace-jump-mode)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-;; avy
-(global-set-key (kbd "C-jj") 'avy-goto-char)
-(global-set-key (kbd "C-jk") 'avy-goto-char-2)
-(global-set-key (kbd "C-jw") 'avy-goto-word-1)
-(global-set-key (kbd "C-jl") 'avy-goto-line)
 
 ;;; base16
 (unless (package-installed-p 'base16-theme)
@@ -332,28 +344,15 @@
 ;;; hydra
 (unless (package-installed-p 'hydra)
   (package-install 'hydra))
-(defhydra hydra (global-map "C-;")
-  "leader"
-  ("g" git-timemachine-toggle "Git timemachine"))
-
-;;; rainbow-delimiters
-(unless (package-installed-p 'rainbow-delimiters)
-  (package-install 'rainbow-delimiters))
-(require 'rainbow-delimiters)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
-
-(unless (package-installed-p 'git-gutter)
-  (package-install 'git-gutter))
-(require 'git-gutter)
-(global-git-gutter-mode +1)
-
-(unless (package-installed-p 'git-timemachine)
-  (package-install 'git-timemachine))
-
-(unless (package-installed-p 'goto-last-change)
-  (package-install 'goto-last-change))
-(global-set-key (kbd "C-c gl") 'goto-last-change)
+;; avy
+(defhydra hydra (global-map "C-j")
+  "jump"
+  ("t" git-timemachine-toggle "to timemachine")
+  ("u" goto-last-change "to last Change")
+  ("k" avy-goto-char-2 "to 2char")
+  ("w" avy-goto-word "to word")
+  ("l" avy-goto-line "to line")
+  ("j" avy-goto-char "to
 
 (provide 'init)
 ;;; init.el ends here
