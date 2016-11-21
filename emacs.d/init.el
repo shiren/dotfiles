@@ -34,24 +34,8 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
- '(package-selected-packages
-   (quote
-    (goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
-
-;; create the autosave dir if necessary, since emacs won't.
-(make-directory "~/.emacs.d/autosaves/" t)
-
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
-
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
 
@@ -70,10 +54,27 @@
 (xterm-mouse-mode t)
 ;(defun track-mouse (e))
 
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(package-selected-packages
+   (quote
+    (goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+
 ;;; Set up package
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -86,7 +87,6 @@
 ;; Setup PATH environment
 (unless (package-installed-p 'exec-path-from-shell)
   (package-install 'exec-path-from-shell))
-
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
@@ -162,10 +162,16 @@
      (tern-ac-setup)))
 
 ;;; ace jump
-(unless (package-installed-p 'ace-jump-mode)
-  (package-install 'ace-jump-mode))
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;; (unless (package-installed-p 'ace-jump-mode)
+;;   (package-install 'ace-jump-mode))
+;; (require 'ace-jump-mode)
+;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; avy
+(global-set-key (kbd "C-jj") 'avy-goto-char)
+(global-set-key (kbd "C-jk") 'avy-goto-char-2)
+(global-set-key (kbd "C-jw") 'avy-goto-word-1)
+(global-set-key (kbd "C-jl") 'avy-goto-line)
 
 ;;; base16
 (unless (package-installed-p 'base16-theme)
