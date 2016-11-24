@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (js-doc swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;;; Set up package
 (require 'package)
@@ -145,10 +145,25 @@
 (setq-default js2-mode-show-parse-errors nil
               js2-mode-show-strict-warnings nil)
 
+;;; jsdoc
+(unless (package-installed-p 'js-doc)
+  (package-install 'js-doc))
+
+(setq js-doc-mail-address "your email address"
+      js-doc-author (format "your name <%s>" js-doc-mail-address)
+      js-doc-url "url of your website"
+      js-doc-license "MIT")
+
+(add-hook 'js2-mode-hook
+          '(lambda ()
+             (define-key js2-mode-map "\C-cd" 'js-doc-insert-function-doc)
+             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
 ;;; Clojure setup
 ;; CIDER
 (unless (package-installed-p 'cider)
   (package-install 'cider))
+
 ;; clojure-mode
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
