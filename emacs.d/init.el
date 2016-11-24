@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;;; Set up package
 (require 'package)
@@ -204,6 +204,7 @@
 (unless (package-installed-p 'helm)
   (package-install 'helm))
 (require 'helm)
+
 (helm-mode 1)
 (setq helm-quick-update t)
 (setq helm-bookmark-show-location t)
@@ -215,6 +216,15 @@
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 (global-set-key (kbd "C-c e") 'helm-buffers-list)
 (global-set-key (kbd "C-c r") 'helm-recentf)
+
+;;; helm-ag
+(unless (package-installed-p 'helm-ag)
+  (package-install 'helm-ag))
+(require 'helm-ag)
+
+;;; Swiper-helm
+(unless (package-installed-p 'swiper-helm)
+  (package-install 'swiper-helm))
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
@@ -231,16 +241,20 @@
 (setq projectile-indexing-method 'native)
 (setq projectile-globally-ignored-directories
       (append '(
+        ".DS_Store"
         ".git"
         ".svn"
         "out"
         "repl"
         "target"
         "venv"
+        "dist"
+        "lib"
         "node_modules"
         "libs"
         )
-          projectile-globally-ignored-directories))
+              projectile-globally-ignored-directories))
+
 (setq projectile-globally-ignored-files
       (append '(
         ".DS_Store"
@@ -254,7 +268,23 @@
         "*.jpg"
         "*.gif"
         )
-          projectile-globally-ignored-files))
+              projectile-globally-ignored-files))
+
+(setq projectile-globally-ignored-file-suffixes
+      (append '(
+        ".DS_Store"
+        ".gz"
+        ".pyc"
+        ".jar"
+        ".tar.gz"
+        ".tgz"
+        ".zip"
+        ".png"
+        ".jpg"
+        ".gif"
+        )
+              projectile-globally-ignored-file-suffixes))
+
 (projectile-global-mode)
 (helm-projectile-on)
 
@@ -345,15 +375,18 @@
 ;;; hydra
 (unless (package-installed-p 'hydra)
   (package-install 'hydra))
-;; avy
-(defhydra hydra (global-map "C-j")
-  "jump"
+
+(defhydra hydra-jump (:hint nil)
+  "MOVE"
+  ("i" swiper-helm "swiper!")
   ("j" avy-goto-char "to char")
   ("k" avy-goto-char-2 "to 2char")
   ("w" avy-goto-word-1 "to word")
-  ("l" avy-goto-line "to line")
-  ("u" goto-last-change "to last Change")
+  ("g" avy-goto-line "to line")
+  ("l" goto-last-change "to last Change")
   ("t" git-timemachine-toggle "to timemachine"))
+
+(define-key global-map (kbd "C-j") 'hydra-jump/body)
 
 (provide 'init)
 ;;; init.el ends here
