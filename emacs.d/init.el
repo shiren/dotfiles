@@ -404,14 +404,22 @@
   :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
   :args '("run" "dev")
   :port 8080
-  :tags '(node npm tui.chart))
+  :tags '(webpack-server))
 
 (prodigy-define-service
   :name "Tui Chart test"
   :command "npm"
   :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
   :args '("run" "test")
-  :tags '(node npm tui.chart))
+  :tags '(karma))
+
+(prodigy-define-tag
+  :name 'webpack-server
+  :ready-message "Http://0.0.0.0:[0-9]+/webpack-dev-server/")
+
+(prodigy-define-tag
+  :name 'karma
+  :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS")
 
 ;;; hydra
 (unless (package-installed-p 'hydra)
