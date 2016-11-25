@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (js-doc swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (iedit prodigy js-doc swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
 
 ;;; Set up package
 (require 'package)
@@ -386,6 +386,32 @@
     (?i delete-other-windows " Ace - Maximize Window")
     (?o delete-other-windows))
 "List of actions for `aw-dispatch-default'.")
+
+;;; Iedit
+(unless (package-installed-p 'iedit)
+  (package-install 'iedit))
+(require 'iedit)
+
+;;; prodigy
+(unless (package-installed-p 'prodigy)
+  (package-install 'prodigy))
+(require 'prodigy)
+(define-key global-map (kbd "C-c f") 'prodigy)
+
+(prodigy-define-service
+  :name "Tui Chart server"
+  :command "npm"
+  :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
+  :args '("run" "dev")
+  :port 8080
+  :tags '(node npm tui.chart))
+
+(prodigy-define-service
+  :name "Tui Chart test"
+  :command "npm"
+  :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
+  :args '("run" "test")
+  :tags '(node npm tui.chart))
 
 ;;; hydra
 (unless (package-installed-p 'hydra)
