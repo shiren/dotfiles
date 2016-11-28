@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -229,7 +229,7 @@
 (global-set-key (kbd "C-c r") 'counsel-recentf)
 (global-set-key (kbd "C-c g") 'counsel-ag)
 (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
-(global-set-key (kbd "C-c E") 'ivy-switch-buffer-other-window)
+(global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
