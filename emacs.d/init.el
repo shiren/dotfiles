@@ -212,7 +212,7 @@
 
 ;;(load-theme 'cyberpunk t)
 ;;(load-theme 'zenburn t)
-(load-theme 'base16-tomorrow-dark t)
+(load-theme 'base16-tomorrow-night t)
 
 ;;; Eyebrowse
 (unless (package-installed-p 'eyebrowse)
