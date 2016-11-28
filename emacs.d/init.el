@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (iedit prodigy js-doc swiper-helm helm-ag goto-last-change git-timemachine git-gutter rainbow-delimiters eyebrowse eyebrowse-mode ox-reveal projectile helm exec-path-from-shell web-mode use-package tern-auto-complete ox-gfm multi-term markdown-mode magit js2-mode hydra helm-projectile flycheck expand-region cyberpunk-theme cider base16-theme ace-window ace-jump-mode))))
+    (hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -201,55 +201,42 @@
 ;; (require 'ace-jump-mode)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+;;;; Themes
 ;;; base16
 (unless (package-installed-p 'base16-theme)
   (package-install 'base16-theme))
-;;(load-theme 'base16-tomorrow-dark t)
-
 (unless (package-installed-p 'cyberpunk-theme)
   (package-install 'cyberpunk-theme))
-(load-theme 'cyberpunk t)
+(unless (package-installed-p 'zenburn-theme)
+  (package-install 'zenburn-theme))
+
+;;(load-theme 'cyberpunk t)
+;;(load-theme 'zenburn t)
+(load-theme 'base16-tomorrow-dark t)
 
 ;;; Eyebrowse
 (unless (package-installed-p 'eyebrowse)
   (package-install 'eyebrowse))
 (eyebrowse-mode t)
 
-;;; helm
-(unless (package-installed-p 'helm)
-  (package-install 'helm))
-(require 'helm)
-
-(helm-mode 1)
-(setq helm-quick-update t)
-(setq helm-bookmark-show-location t)
-(setq helm-buffers-fuzzy-matching t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h o") 'helm-occur)
-(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-(global-set-key (kbd "C-c e") 'helm-buffers-list)
-(global-set-key (kbd "C-c r") 'helm-recentf)
-
-;;; helm-ag
-(unless (package-installed-p 'helm-ag)
-  (package-install 'helm-ag))
-(require 'helm-ag)
-
-;;; Swiper-helm
-(unless (package-installed-p 'swiper-helm)
-  (package-install 'swiper-helm))
+;; swiper and ivy
+(unless (package-installed-p 'swiper)
+  (package-install 'swiper))
+(require 'ivy)
+(ivy-mode 1)
+;;(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-c r") 'counsel-recentf)
+(global-set-key (kbd "C-c g") 'counsel-ag)
+(global-set-key (kbd "C-c e") 'ivy-switch-buffer)
+(global-set-key (kbd "C-c E") 'ivy-switch-buffer-other-window)
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
   (package-install 'projectile))
-(unless (package-installed-p 'helm-projectile)
-  (package-install 'helm-projectile))
 
 (require 'projectile)
-(require 'helm-projectile)
-(setq projectile-completion-system 'helm)
+(setq projectile-completion-system 'ivy)
 (setq projectile-enable-caching t)
 ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
 ;(setq projectile-require-project-root nil)
@@ -300,8 +287,14 @@
         )
               projectile-globally-ignored-file-suffixes))
 
+(global-set-key (kbd "C-c p F") 'projectile-find-file-other-window)
+(global-set-key (kbd "C-c p B") 'projectile-switch-to-buffer-other-window)
 (projectile-global-mode)
-(helm-projectile-on)
+
+;;; countsel-projectile
+(unless (package-installed-p 'counsel-projectile)
+  (package-install 'counsel-projectile))
+(counsel-projectile-on)
 
 ;;; org
 (unless (package-installed-p 'org)
@@ -392,6 +385,26 @@
   (package-install 'iedit))
 (require 'iedit)
 
+;;; Paredit
+(unless (package-installed-p 'paredit)
+  (package-install 'paredit))
+(require 'paredit)
+;; (add-hook 'clojure-mode-hook #'enable-paredit-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+;; (add-hook 'js2-mode-hook #'enable-paredit-mode)
+;; (define-key js2-mode-map "{" 'paredit-open-curly)
+;; (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
+;; (define-key js2-mode-map "[" 'paredit-open-square)
+;; (define-key js2-mode-map "]" 'paredit-close-square-and-newline)
+;; (define-key js2-mode-map "(" 'paredit-round-square)
+;; (define-key js2-mode-map ")" 'paredit-close-round-and-newline)
+
+;;; Auto pair
+(unless (package-installed-p 'autopair)
+  (package-install 'autopair))
+(require 'autopair)
+(add-hook 'js2-mode-hook #'autopair-mode)
+
 ;;; prodigy
 (unless (package-installed-p 'prodigy)
   (package-install 'prodigy))
@@ -425,17 +438,26 @@
 (unless (package-installed-p 'hydra)
   (package-install 'hydra))
 
-(defhydra hydra-jump (:hint nil)
-  "MOVE"
-  ("i" swiper-helm "swiper!")
-  ("j" avy-goto-char "to char")
-  ("k" avy-goto-char-2 "to 2char")
-  ("w" avy-goto-word-1 "to word")
-  ("g" avy-goto-line "to line")
-  ("l" goto-last-change "to last Change")
-  ("t" git-timemachine-toggle "to timemachine"))
+;; (defhydra hydra-jump (:hint nil)
+;;   "MOVE"
+;;   ("i" swiper "swiper!")
+;;   ("j" avy-goto-char "to char")
+;;   ("k" avy-goto-char-2 "to 2char")
+;;   ("w" avy-goto-word-1 "to word")
+;;   ("g" avy-goto-line "to line")
+;;   ("l" goto-last-change "to last Change")
+;;   ("t" git-timemachine-toggle "to timemachine"))
 
-(define-key global-map (kbd "C-j") 'hydra-jump/body)
+;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
+
+(define-key global-map (kbd "C-j") nil)
+(define-key global-map (kbd "C-j j") 'avy-goto-char)
+(define-key global-map (kbd "C-j k") 'avy-goth-char-2)
+(define-key global-map (kbd "C-j w") 'avy-goth-word-1)
+(define-key global-map (kbd "C-j g") 'avy-goth-line)
+(define-key global-map (kbd "C-j l") 'goto-last-change)
+(define-key global-map (kbd "C-j t") 'git-timemachine-toggle)
+(define-key global-map (kbd "C-j i") 'swiper)
 
 (provide 'init)
 ;;; init.el ends here
