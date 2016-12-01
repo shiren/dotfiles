@@ -67,12 +67,12 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -123,6 +123,7 @@
 (unless (package-installed-p 'rainbow-delimiters)
   (package-install 'rainbow-delimiters))
 (require 'rainbow-delimiters)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
 
@@ -224,11 +225,16 @@
   (package-install 'eyebrowse))
 (eyebrowse-mode t)
 
+(unless (package-installed-p 'counsel)
+  (package-install 'counsel))
+(require 'counsel)
+
 ;; swiper and ivy
 (unless (package-installed-p 'swiper)
   (package-install 'swiper))
 (require 'ivy)
 (ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-c r") 'counsel-recentf)
@@ -239,7 +245,6 @@
 ;;; projectile
 (unless (package-installed-p 'projectile)
   (package-install 'projectile))
-
 (require 'projectile)
 (setq projectile-completion-system 'ivy)
 (setq projectile-enable-caching t)
@@ -294,8 +299,8 @@
 (projectile-global-mode)
 
 ;;; countsel-projectile
-(unless (package-installed-p 'counsel-projectile)
-  (package-install 'counsel-projectile))
+;; (unless (package-installed-p 'counsel-projectile)
+;;  (package-install 'counsel-projectile))
 ;; (counsel-projectile-on)
 
 ;;; org
@@ -319,8 +324,8 @@
  'org-babel-load-languages
  '((js . t)
    (emacs-lisp . t)
-   (plantuml . t)
    (clojure . t)
+   (plantuml . t)
    (sh . t)
    ))
 (setq org-confirm-babel-evaluate nil)
