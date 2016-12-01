@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -92,12 +92,22 @@
   (exec-path-from-shell-initialize))
 
 ;;; highlight parentheses
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-(require 'paren)
-(set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#def")
-(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+;; (show-paren-mode 1)
+;; (setq show-paren-delay 0)
+;; (require 'paren)
+;; (set-face-background 'show-paren-match (face-background 'default))
+;; (set-face-foreground 'show-paren-match "#def")
+;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(unless (package-installed-p 'highlight-parentheses)
+  (package-install 'highlight-parentheses))
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)
+
+;; hl line
+(global-hl-line-mode +1)
 
 ;; recent file list
 (require 'recentf)
@@ -163,6 +173,7 @@
 ;; CIDER
 (unless (package-installed-p 'cider)
   (package-install 'cider))
+(require 'cider)
 
 ;; clojure-mode
 (unless (package-installed-p 'clojure-mode)
@@ -195,12 +206,6 @@
      (require 'tern-auto-complete)
      (tern-ac-setup)))
 
-;;; ace jump
-;; (unless (package-installed-p 'ace-jump-mode)
-;;   (package-install 'ace-jump-mode))
-;; (require 'ace-jump-mode)
-;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
 ;;;; Themes
 ;;; base16
 (unless (package-installed-p 'base16-theme)
@@ -224,7 +229,7 @@
   (package-install 'swiper))
 (require 'ivy)
 (ivy-mode 1)
-;;(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "C-c r") 'counsel-recentf)
 (global-set-key (kbd "C-c g") 'counsel-ag)
@@ -240,7 +245,7 @@
 (setq projectile-enable-caching t)
 ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
 ;(setq projectile-require-project-root nil)
-(setq projectile-indexing-method 'native)
+(setq projectile-indexing-method 'alien)
 (setq projectile-globally-ignored-directories
       (append '(
         ".DS_Store"
@@ -286,15 +291,12 @@
         ".gif"
         )
               projectile-globally-ignored-file-suffixes))
-
-(global-set-key (kbd "C-c p F") 'projectile-find-file-other-window)
-(global-set-key (kbd "C-c p B") 'projectile-switch-to-buffer-other-window)
 (projectile-global-mode)
 
 ;;; countsel-projectile
 (unless (package-installed-p 'counsel-projectile)
   (package-install 'counsel-projectile))
-(counsel-projectile-on)
+;; (counsel-projectile-on)
 
 ;;; org
 (unless (package-installed-p 'org)
@@ -306,15 +308,17 @@
 
 (require 'org)
 (require 'ox-reveal)
+(require 'ob-clojure)
 (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/")
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-agenda-files (list "~/org"))
 (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
+(setq org-babel-clojure-backend 'cider)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((js . t)
-   (emacs-lisp . nil)
+   (emacs-lisp . t)
    (plantuml . t)
    (clojure . t)
    (sh . t)
@@ -367,7 +371,7 @@
 (unless (package-installed-p 'ace-window)
   (package-install 'ace-window))
 (require 'ace-window)
-(global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "C-c C-c") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
 (setq aw-dispatch-always t)
 (defvar aw-dispatch-alist
@@ -451,13 +455,14 @@
 ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
 
 (define-key global-map (kbd "C-j") nil)
-(define-key global-map (kbd "C-j j") 'avy-goto-char)
-(define-key global-map (kbd "C-j k") 'avy-goth-char-2)
-(define-key global-map (kbd "C-j w") 'avy-goth-word-1)
-(define-key global-map (kbd "C-j g") 'avy-goth-line)
+(define-key global-map (kbd "C-j j") 'avy-goto-char-2)
+(define-key global-map (kbd "C-j k") 'avy-goto-char)
+(define-key global-map (kbd "C-j w") 'avy-goto-word-1)
+(define-key global-map (kbd "C-j g") 'avy-goto-line)
 (define-key global-map (kbd "C-j l") 'goto-last-change)
 (define-key global-map (kbd "C-j t") 'git-timemachine-toggle)
 (define-key global-map (kbd "C-j i") 'swiper)
+(define-key global-map (kbd "C-j o") 'swiper-all)
 
 (provide 'init)
 ;;; init.el ends here
