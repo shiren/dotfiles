@@ -234,7 +234,7 @@
 (global-set-key (kbd "C-c r") 'counsel-recentf)
 (global-set-key (kbd "C-c g") 'counsel-ag)
 (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
-(global-set-key (kbd "C-c E") 'ivy-switch-buffer-other-window)
+(global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
