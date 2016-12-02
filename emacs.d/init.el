@@ -155,6 +155,7 @@
               js1-bounce-indent-p nil)
 (setq-default js2-mode-show-parse-errors nil
               js2-mode-show-strict-warnings nil)
+(js2-imenu-extras-mode)
 
 ;;; jsdoc
 (unless (package-installed-p 'js-doc)
@@ -241,6 +242,8 @@
 (global-set-key (kbd "C-c g") 'counsel-ag)
 (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
 (global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
+(global-set-key (kbd "C-c o") 'counsel-imenu)
+
 
 ;;; projectile
 (unless (package-installed-p 'projectile)
@@ -332,7 +335,7 @@
    ))
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-fontify-natively t)
-;(setq org-src-tab-acts-natively t)
+(setq org-src-tab-acts-natively t)
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
 (global-set-key "\C-cl" 'org-store-link)
@@ -378,7 +381,7 @@
 (unless (package-installed-p 'ace-window)
   (package-install 'ace-window))
 (require 'ace-window)
-(global-set-key (kbd "C-c C-c") 'ace-window)
+(global-set-key (kbd "<C-return>") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
 (setq aw-dispatch-always t)
 (defvar aw-dispatch-alist
