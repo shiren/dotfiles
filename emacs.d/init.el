@@ -91,13 +91,27 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
+;;;; Themes
+;;; base16
+(unless (package-installed-p 'base16-theme)
+  (package-install 'base16-theme))
+(unless (package-installed-p 'cyberpunk-theme)
+  (package-install 'cyberpunk-theme))
+(unless (package-installed-p 'zenburn-theme)
+  (package-install 'zenburn-theme))
+
+;;(load-theme 'cyberpunk t)
+;;(load-theme 'zenburn t)
+(load-theme 'base16-solarized-dark t)
+
 ;;; highlight parentheses
-;; (show-paren-mode 1)
-;; (setq show-paren-delay 0)
-;; (require 'paren)
+(require 'paren)
+(setq show-paren-delay 0)
 ;; (set-face-background 'show-paren-match (face-background 'default))
-;; (set-face-foreground 'show-paren-match "#def")
-;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(set-face-foreground 'show-paren-match "#f00")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(show-paren-mode 1)
+
 (unless (package-installed-p 'highlight-parentheses)
   (package-install 'highlight-parentheses))
 (define-globalized-minor-mode global-highlight-parentheses-mode
@@ -155,7 +169,9 @@
               js1-bounce-indent-p nil)
 (setq-default js2-mode-show-parse-errors nil
               js2-mode-show-strict-warnings nil)
-(js2-imenu-extras-mode)
+(add-hook 'js2-mode-hook
+          '(lambda ()
+             (js2-imenu-extras-mode)))
 
 ;;; jsdoc
 (unless (package-installed-p 'js-doc)
@@ -206,20 +222,8 @@
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
+     (setq tern-ac-on-dot t)
      (tern-ac-setup)))
-
-;;;; Themes
-;;; base16
-(unless (package-installed-p 'base16-theme)
-  (package-install 'base16-theme))
-(unless (package-installed-p 'cyberpunk-theme)
-  (package-install 'cyberpunk-theme))
-(unless (package-installed-p 'zenburn-theme)
-  (package-install 'zenburn-theme))
-
-;;(load-theme 'cyberpunk t)
-;;(load-theme 'zenburn t)
-(load-theme 'base16-tomorrow-night t)
 
 ;;; Eyebrowse
 (unless (package-installed-p 'eyebrowse)
