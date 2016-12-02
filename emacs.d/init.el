@@ -381,7 +381,7 @@
 (unless (package-installed-p 'ace-window)
   (package-install 'ace-window))
 (require 'ace-window)
-(global-set-key (kbd "M-p") 'ace-window)
+(define-key global-map (kbd "M-p") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
 (setq aw-dispatch-always t)
 
