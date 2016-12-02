@@ -381,18 +381,9 @@
 (unless (package-installed-p 'ace-window)
   (package-install 'ace-window))
 (require 'ace-window)
-(global-set-key (kbd "<C-return>") 'ace-window)
+(global-set-key (kbd "M-p") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
 (setq aw-dispatch-always t)
-(defvar aw-dispatch-alist
-'((?x aw-delete-window " Ace - Delete Window")
-    (?r aw-swap-window " Ace - Swap Window")
-    (?n aw-flip-window " Ace- Flip window")
-    (?v aw-split-window-vert " Ace - Split Vert Window")
-    (?h aw-split-window-horz " Ace - Split Horz Window")
-    (?i delete-other-windows " Ace - Maximize Window")
-    (?o delete-other-windows))
-"List of actions for `aw-dispatch-default'.")
 
 ;;; Iedit
 (unless (package-installed-p 'iedit)
