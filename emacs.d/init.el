@@ -67,7 +67,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -310,6 +310,8 @@
   (package-install 'ox-gfm))
 (unless (package-installed-p 'ox-reveal)
   (package-install 'ox-reveal))
+(unless (package-installed-p 'org-tree-slide)
+  (package-install 'org-tree-slide))
 
 (require 'org)
 (require 'ox-reveal)
@@ -398,21 +400,21 @@
 (unless (package-installed-p 'paredit)
   (package-install 'paredit))
 (require 'paredit)
-;; (add-hook 'clojure-mode-hook #'enable-paredit-mode)
-;; (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-;; (add-hook 'js2-mode-hook #'enable-paredit-mode)
-;; (define-key js2-mode-map "{" 'paredit-open-curly)
-;; (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
-;; (define-key js2-mode-map "[" 'paredit-open-square)
-;; (define-key js2-mode-map "]" 'paredit-close-square-and-newline)
-;; (define-key js2-mode-map "(" 'paredit-round-square)
-;; (define-key js2-mode-map ")" 'paredit-close-round-and-newline)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+(add-hook 'js2-mode-hook #'enable-paredit-mode)
+(define-key js2-mode-map "{" 'paredit-open-curly)
+(define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
+(define-key js2-mode-map "[" 'paredit-open-square)
+(define-key js2-mode-map "]" 'paredit-close-square-and-newline)
+(define-key js2-mode-map "(" 'paredit-round-square)
+(define-key js2-mode-map ")" 'paredit-close-round-and-newline)
 
 ;;; Auto pair
-(unless (package-installed-p 'autopair)
-  (package-install 'autopair))
-(require 'autopair)
-(add-hook 'js2-mode-hook #'autopair-mode)
+;; (unless (package-installed-p 'autopair)
+;;   (package-install 'autopair))
+;; (require 'autopair)
+;; (add-hook 'js2-mode-hook #'autopair-mode)
 
 ;;; prodigy
 (unless (package-installed-p 'prodigy)
