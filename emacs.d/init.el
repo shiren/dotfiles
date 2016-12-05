@@ -49,6 +49,13 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+(setq scroll-conservatively 200) ;; 스크롤 도중에 센터로 커서 이동하지 않도록
+(setq scroll-margin 3) ;; 스크롤시 여백
+
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
@@ -67,7 +74,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -128,10 +135,11 @@
 (recentf-mode t)
 
 ;;; Expand Region
-(unless (package-installed-p 'expand-region)
-  (package-install 'expand-region))
-(require 'expand-region)
-(global-set-key (kbd "C-c v") 'er/expand-region)
+(use-package expand-region
+  :ensure t ;; 없으면 자동으로 인스톨
+  :config
+  (global-set-key (kbd "C-c v") 'er/expand-region)
+  )
 
 ;;; rainbow-delimiters
 (unless (package-installed-p 'rainbow-delimiters)
