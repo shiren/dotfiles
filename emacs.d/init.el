@@ -390,12 +390,12 @@
 (global-set-key (kbd "C-c t") 'multi-term)
 
 ;;; ace window
-(unless (package-installed-p 'ace-window)
-  (package-install 'ace-window))
-(require 'ace-window)
-(define-key global-map (kbd "M-p") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
-(setq aw-dispatch-always t)
+(use-package ace-window
+  :ensure t
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
+  ;(setq aw-dispatch-always t)
+  :bind ("C-x o" . ace-window))
 
 ;;; Iedit
 (unless (package-installed-p 'iedit)
