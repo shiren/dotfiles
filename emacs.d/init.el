@@ -170,19 +170,6 @@
 (use-package goto-last-change
   :ensure t)
 
-(use-package yasnippet
-  :ensure t
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'yas-minor-mode)
-  (add-hook 'clojure-mode-hook #'yas-minor-mode)
-  (add-hook 'js2-mode-hook #'yas-minor-mode)
-  :config
-  (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
-  (yas-reload-all))
-
 ;;; Web mode
 (use-package web-mode
   :ensure t
@@ -238,9 +225,11 @@
 (setq flycheck-checkers '(javascript-eslint))
 
 ;;; autocomplete
-(unless (package-installed-p 'auto-complete)
-  (package-install 'auto-complete))
-(ac-config-default)
+(use-package auto-complete
+  :ensure t
+  :init
+  (require 'auto-complete-config)
+  (ac-config-default))
 
 ;;; tern
 (unless (package-installed-p 'tern)
@@ -255,6 +244,19 @@
      (require 'tern-auto-complete)
      (setq tern-ac-on-dot t)
      (tern-ac-setup)))
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'yas-minor-mode)
+  (add-hook 'clojure-mode-hook #'yas-minor-mode)
+  (add-hook 'js2-mode-hook #'yas-minor-mode)
+  :config
+  (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<C-return>") 'yas-expand)
+  (yas-reload-all))
 
 ;;; Eyebrowse
 (unless (package-installed-p 'eyebrowse)
