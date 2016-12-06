@@ -54,7 +54,7 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
 (setq scroll-conservatively 200) ;; 스크롤 도중에 센터로 커서 이동하지 않도록
-(setq scroll-margin 3) ;; 스크롤시 여백
+(setq scroll-margin 3) ;; 스크롤시 남기는 여백
 
 ;;; mouse setup
 (require 'mouse)
@@ -74,7 +74,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region exec-path-from-shell use-package))))
+    (yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -93,46 +93,53 @@
   (require 'use-package))
 
 ;; Setup PATH environment
-(unless (package-installed-p 'exec-path-from-shell)
-  (package-install 'exec-path-from-shell))
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
 
 ;;;; Themes
-;;; base16
-(unless (package-installed-p 'base16-theme)
-  (package-install 'base16-theme))
-(unless (package-installed-p 'cyberpunk-theme)
-  (package-install 'cyberpunk-theme))
-(unless (package-installed-p 'zenburn-theme)
-  (package-install 'zenburn-theme))
+(use-package cyberpunk-theme
+  :ensure t)
 
-;;(load-theme 'cyberpunk t)
-;;(load-theme 'zenburn t)
-(load-theme 'base16-solarized-dark t)
+(use-package base16-theme
+  :ensure t
+  :init
+  (load-theme 'base16-solarized-dark t))
+
 
 ;;; highlight parentheses
-(require 'paren)
-(setq show-paren-delay 0)
-;; (set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#f00")
-(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-(show-paren-mode 1)
+;; (require 'paren)
 
-(unless (package-installed-p 'highlight-parentheses)
-  (package-install 'highlight-parentheses))
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
-(global-highlight-parentheses-mode t)
+;; (show-paren-mode 1)
+
+(use-package paren
+  :init (show-paren-mode 1)
+  :config
+  (setq show-paren-delay 0)
+  ;; (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-foreground 'show-paren-match "#f00")
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold))
+
+(use-package highlight-parentheses
+  :ensure t
+  :init
+  (define-globalized-minor-mode global-highlight-parentheses-mode
+    highlight-parentheses-mode
+    (lambda ()
+      (highlight-parentheses-mode t)))
+  (global-highlight-parentheses-mode t))
 
 ;; hl line
-(global-hl-line-mode +1)
+(use-package hl-line
+  :init
+  (global-hl-line-mode +1))
 
 ;; recent file list
-(require 'recentf)
-(recentf-mode t)
+(use-package recentf
+  :init
+  (recentf-mode t))
 
 ;;; Expand Region
 (use-package expand-region
@@ -142,30 +149,46 @@
   )
 
 ;;; rainbow-delimiters
-(unless (package-installed-p 'rainbow-delimiters)
-  (package-install 'rainbow-delimiters))
-(require 'rainbow-delimiters)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode))
 
-(unless (package-installed-p 'git-gutter)
-  (package-install 'git-gutter))
-(require 'git-gutter)
-(global-git-gutter-mode +1)
+(use-package git-gutter
+  :ensure t
+  :init
+  (global-git-gutter-mode +1))
 
 (unless (package-installed-p 'git-timemachine)
   (package-install 'git-timemachine))
 
-(unless (package-installed-p 'goto-last-change)
-  (package-install 'goto-last-change))
+(use-package git-timemachine
+  :ensure t)
+
+(use-package goto-last-change
+  :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'yas-minor-mode)
+  (add-hook 'clojure-mode-hook #'yas-minor-mode)
+  (add-hook 'js2-mode-hook #'yas-minor-mode)
+  :config
+  (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
+  (yas-reload-all))
 
 ;;; Web mode
-(unless (package-installed-p 'web-mode)
-  (package-install 'web-mode))
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
 
 ;;; js2-mode
 (unless (package-installed-p 'js2-mode)
