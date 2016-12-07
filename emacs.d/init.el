@@ -74,7 +74,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -300,7 +300,18 @@
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
 
-;;; js2-mode
+;;; flyCheck
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+  (setq flycheck-checkers '(javascript-eslint)))
+
+;;;; javascript
+;; js2-mode
 (use-package js2-mode
   :ensure t
   :init
@@ -315,7 +326,20 @@
   (setq-default js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
 
-;;; jsdoc
+;; tern
+(use-package tern
+  :ensure t
+  :init
+  (autoload 'tern-mode' "tern.el" nil t)
+  (add-hook 'js-mode-hook (lambda () (tern-mode t))))
+
+(use-package tern-auto-complete
+  :ensure t
+  :config
+  (setq tern-ac-on-dot t)
+  (tern-ac-setup))
+
+;; jsdoc
 (use-package js-doc
   :ensure t
   :init
@@ -338,31 +362,14 @@
 (use-package clojure-mode
   :ensure t)
 
-;;; flyCheck
-(use-package flycheck
+;;; C# and Unity
+(use-package csharp-mode
+  :ensure t)
+
+(use-package omnisharp
   :ensure t
   :init
-  (global-flycheck-mode)
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint)))
-
-;;; tern
-(unless (package-installed-p 'tern)
-  (package-install 'tern))
-
-(use-package tern
-  :ensure t
-  :init
-  (autoload 'tern-mode' "tern.el" nil t)
-  (add-hook 'js-mode-hook (lambda () (tern-mode t))))
-
-(use-package tern-auto-complete
-  :ensure t
-  :config
-  (setq tern-ac-on-dot t)
-  (tern-ac-setup))
+  (add-hook 'csharp-mode-hook 'omnisharp-mode))
 
 ;;; org
 (unless (package-installed-p 'org)
@@ -414,6 +421,14 @@
 ;; (require 'ox-reveal)
 ;; (require 'ob-clojure)
 
+;;; markdown mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 ;;; Magit
 (use-package magit
@@ -425,15 +440,6 @@
     (add-to-list 'Info-directory-list
                  "~/.emacs.d/site-lisp/magit/Documentation/"))
   (global-set-key (kbd "C-c m") 'magit-status))
-
-;;; markdown mode
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
 
 ;;; prodigy
 (use-package prodigy
@@ -493,4 +499,8 @@
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:background "#002b36")))))
