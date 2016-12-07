@@ -237,7 +237,7 @@
   (projectile-global-mode)
   :config
   (setq projectile-completion-system 'ivy)
-  (setq projectile-enable-caching t)
+  (setq projectile-enable-caching nil)
   ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
   ;; (setq projectile-require-project-root nil)
   (setq projectile-indexing-method 'alien)
@@ -493,8 +493,4 @@
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(ac-completion-face ((t (:background "#002b36")))))
