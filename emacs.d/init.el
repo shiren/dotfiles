@@ -108,15 +108,16 @@
   :init
   (load-theme 'base16-solarized-dark t))
 
-
-;;; highlight parentheses
-;; (require 'paren)
-
-;; (show-paren-mode 1)
+;;; multi term
+(use-package multi-term
+  :ensure t
+  :init
+  (global-set-key (kbd "C-c t") 'multi-term)
+  (setq multi-term-program "/usr/local/bin/zsh"))
 
 (use-package paren
-  :init (show-paren-mode 1)
-  :config
+  :init
+  (show-paren-mode 1)
   (setq show-paren-delay 0)
   ;; (set-face-background 'show-paren-match (face-background 'default))
   (set-face-foreground 'show-paren-match "#f00")
@@ -136,18 +137,6 @@
   :init
   (global-hl-line-mode +1))
 
-;; recent file list
-(use-package recentf
-  :init
-  (recentf-mode t))
-
-;;; Expand Region
-(use-package expand-region
-  :ensure t ;; 없으면 자동으로 인스톨
-  :config
-  (global-set-key (kbd "C-c v") 'er/expand-region)
-  )
-
 ;;; rainbow-delimiters
 (use-package rainbow-delimiters
   :ensure t
@@ -164,65 +153,38 @@
 (unless (package-installed-p 'git-timemachine)
   (package-install 'git-timemachine))
 
+;;; Eyebrowse
+(unless (package-installed-p 'eyebrowse)
+  (package-install 'eyebrowse))
+(eyebrowse-mode t)
+
+;;; ace window
+(use-package ace-window
+  :ensure t
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
+  ;(setq aw-dispatch-always t)
+  :bind ("C-x o" . ace-window))
+
+;; swiper and ivy
+(use-package swiper
+  :ensure t
+  :init
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-c r") 'counsel-recentf)
+  (global-set-key (kbd "C-c g") 'counsel-ag)
+  (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
+  (global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
+  (global-set-key (kbd "C-c o") 'counsel-imenu))
+
 (use-package git-timemachine
   :ensure t)
 
 (use-package goto-last-change
   :ensure t)
-
-;;; Web mode
-(use-package web-mode
-  :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
-
-;;; js2-mode
-(unless (package-installed-p 'js2-mode)
-  (package-install 'js2-mode))
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(setq js2-include-node-externs t)
-(setq-default js2-basic-offset 4
-              js1-bounce-indent-p nil)
-(setq-default js2-mode-show-parse-errors nil
-              js2-mode-show-strict-warnings nil)
-(add-hook 'js2-mode-hook
-          '(lambda ()
-             (js2-imenu-extras-mode)))
-
-;;; jsdoc
-(unless (package-installed-p 'js-doc)
-  (package-install 'js-doc))
-
-(setq js-doc-mail-address "your email address"
-      js-doc-author (format "your name <%s>" js-doc-mail-address)
-      js-doc-url "url of your website"
-      js-doc-license "MIT")
-
-(add-hook 'js2-mode-hook
-          '(lambda ()
-             (define-key js2-mode-map "\C-cd" 'js-doc-insert-function-doc)
-             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
-
-;;; Clojure setup
-;; CIDER
-(unless (package-installed-p 'cider)
-  (package-install 'cider))
-(require 'cider)
-
-;; clojure-mode
-(unless (package-installed-p 'clojure-mode)
-  (package-install 'clojure-mode))
-
-;;; flyCheck
-(unless (package-installed-p 'flycheck)
-  (package-install 'flycheck))
-(global-flycheck-mode)
-(setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
-(setq flycheck-checkers '(javascript-eslint))
 
 ;;; autocomplete
 (use-package auto-complete
@@ -230,20 +192,6 @@
   :init
   (require 'auto-complete-config)
   (ac-config-default))
-
-;;; tern
-(unless (package-installed-p 'tern)
-  (package-install 'tern))
-(unless (package-installed-p 'tern-auto-complete)
-  (package-install 'tern-auto-complete))
-
-(autoload 'tern-mode' "tern.el" nil t)
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-  '(progn
-     (require 'tern-auto-complete)
-     (setq tern-ac-on-dot t)
-     (tern-ac-setup)))
 
 (use-package yasnippet
   :ensure t
@@ -258,147 +206,227 @@
   (define-key yas-minor-mode-map (kbd "<C-return>") 'yas-expand)
   (yas-reload-all))
 
-;;; Eyebrowse
-(unless (package-installed-p 'eyebrowse)
-  (package-install 'eyebrowse))
-(eyebrowse-mode t)
+;;; Iedit
+(use-package iedit
+  :ensure t)
 
-(unless (package-installed-p 'counsel)
-  (package-install 'counsel))
-(require 'counsel)
+;;; Auto pair
+(use-package autopair
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook #'autopair-mode))
 
-;; swiper and ivy
-(unless (package-installed-p 'swiper)
-  (package-install 'swiper))
-(require 'ivy)
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-c r") 'counsel-recentf)
-(global-set-key (kbd "C-c g") 'counsel-ag)
-(global-set-key (kbd "C-c e") 'ivy-switch-buffer)
-(global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
-(global-set-key (kbd "C-c o") 'counsel-imenu)
+;;; Expand Region
+(use-package expand-region
+  :ensure t ;; 없으면 자동으로 인스톨
+  :init
+  (global-set-key (kbd "C-c v") 'er/expand-region))
 
+;; recent file list
+(use-package recentf
+  :init
+  (recentf-mode t))
+
+(use-package counsel
+  :ensure t)
 
 ;;; projectile
-(unless (package-installed-p 'projectile)
-  (package-install 'projectile))
-(require 'projectile)
-(setq projectile-completion-system 'ivy)
-(setq projectile-enable-caching t)
-;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
-;(setq projectile-require-project-root nil)
-(setq projectile-indexing-method 'alien)
-(setq projectile-globally-ignored-directories
-      (append '(
-        ".DS_Store"
-        ".git"
-        ".svn"
-        "out"
-        "repl"
-        "target"
-        "venv"
-        "dist"
-        "lib"
-        "node_modules"
-        "libs"
-        )
-              projectile-globally-ignored-directories))
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-global-mode)
+  :config
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
+  ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
+  ;; (setq projectile-require-project-root nil)
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-globally-ignored-directories
+        (append '(
+                  ".DS_Store"
+                  ".git"
+                  ".svn"
+                  "out"
+                  "repl"
+                  "target"
+                  "venv"
+                  "dist"
+                  "lib"
+                  "node_modules"
+                  "libs"
+                  )
+                projectile-globally-ignored-directories))
 
-(setq projectile-globally-ignored-files
-      (append '(
-        ".DS_Store"
-        "*.gz"
-        "*.pyc"
-        "*.jar"
-        "*.tar.gz"
-        "*.tgz"
-        "*.zip"
-        "*.png"
-        "*.jpg"
-        "*.gif"
-        )
-              projectile-globally-ignored-files))
+  (setq projectile-globally-ignored-files
+        (append '(
+                  ".DS_Store"
+                  "*.gz"
+                  "*.pyc"
+                  "*.jar"
+                  "*.tar.gz"
+                  "*.tgz"
+                  "*.zip"
+                  "*.png"
+                  "*.jpg"
+                  "*.gif"
+                  )
+                projectile-globally-ignored-files))
 
-(setq projectile-globally-ignored-file-suffixes
-      (append '(
-        ".DS_Store"
-        ".gz"
-        ".pyc"
-        ".jar"
-        ".tar.gz"
-        ".tgz"
-        ".zip"
-        ".png"
-        ".jpg"
-        ".gif"
-        )
-              projectile-globally-ignored-file-suffixes))
-(projectile-global-mode)
+  (setq projectile-globally-ignored-file-suffixes
+        (append '(
+                  ".DS_Store"
+                  ".gz"
+                  ".pyc"
+                  ".jar"
+                  ".tar.gz"
+                  ".tgz"
+                  ".zip"
+                  ".png"
+                  ".jpg"
+                  ".gif"
+                  )
+                projectile-globally-ignored-file-suffixes)))
 
 ;;; countsel-projectile
-;; (unless (package-installed-p 'counsel-projectile)
-;;  (package-install 'counsel-projectile))
-;; (counsel-projectile-on)
+(use-package counsel-projectile
+  :ensure t
+  :init
+  (counsel-projectile-on))
+
+;;; Web mode
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
+
+;;; js2-mode
+(use-package js2-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js2-mode-hook
+          '(lambda ()
+             (js2-imenu-extras-mode)))
+  :config
+  (setq js2-include-node-externs t)
+  (setq-default js2-basic-offset 4
+                js1-bounce-indent-p nil)
+  (setq-default js2-mode-show-parse-errors nil
+                js2-mode-show-strict-warnings nil))
+
+;;; jsdoc
+(use-package js-doc
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook
+          '(lambda ()
+             (define-key js2-mode-map "\C-cd" 'js-doc-insert-function-doc)
+             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+  :config
+  (setq js-doc-mail-address "your email address"
+      js-doc-author (format "your name <%s>" js-doc-mail-address)
+      js-doc-url "url of your website"
+      js-doc-license "MIT"))
+
+;;; Clojure setup
+;; CIDER
+(use-package cider
+  :ensure t)
+
+;; clojure-mode
+(use-package clojure-mode
+  :ensure t)
+
+;;; flyCheck
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+  (setq flycheck-checkers '(javascript-eslint)))
+
+;;; tern
+(unless (package-installed-p 'tern)
+  (package-install 'tern))
+
+(use-package tern
+  :ensure t
+  :init
+  (autoload 'tern-mode' "tern.el" nil t)
+  (add-hook 'js-mode-hook (lambda () (tern-mode t))))
+
+(use-package tern-auto-complete
+  :ensure t
+  :config
+  (setq tern-ac-on-dot t)
+  (tern-ac-setup))
 
 ;;; org
 (unless (package-installed-p 'org)
   (package-install 'org))
-(unless (package-installed-p 'ox-gfm)
-  (package-install 'ox-gfm))
-(unless (package-installed-p 'ox-reveal)
-  (package-install 'ox-reveal))
-(unless (package-installed-p 'org-tree-slide)
-  (package-install 'org-tree-slide))
 
-(require 'org)
-(require 'ox-reveal)
-(require 'ob-clojure)
-(setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/")
+(use-package org
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+  (setq org-agenda-files (list "~/org"))
+  (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
+  (setq org-babel-clojure-backend 'cider)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((js . t)
+     (emacs-lisp . t)
+     (clojure . t)
+     (plantuml . t)
+     (sh . t)
+     ))
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (eval-after-load "org"
+    '(require 'ox-gfm nil t))
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-iswitchb)
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/plantuml/plantuml.jar"))
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(setq org-agenda-files (list "~/org"))
-(setq org-default-notes-file (concat org-directory "~/org/notes.org"))
-(setq org-babel-clojure-backend 'cider)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((js . t)
-   (emacs-lisp . t)
-   (clojure . t)
-   (plantuml . t)
-   (sh . t)
-   ))
-(setq org-confirm-babel-evaluate nil)
-(setq org-src-fontify-natively t)
-(setq org-src-tab-acts-natively t)
-(eval-after-load "org"
-  '(require 'ox-gfm nil t))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cb" 'org-iswitchb)
-(setq org-plantuml-jar-path
-      (expand-file-name "~/plantuml/plantuml.jar"))
+  ;; org에서 linewrap 되게
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil))))
 
-;; org에서 linewrap 되게
-(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+(use-package ox-gfm
+  :ensure t)
+
+(use-package ox-reveal
+  :ensure t
+  :init
+  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/")
+  )
+
+(use-package org-tree-slide
+  :ensure t)
+
+;; (require 'org)
+;; (require 'ox-reveal)
+;; (require 'ob-clojure)
+
 
 ;;; Magit
-(unless (package-installed-p 'magit)
-  (package-install 'magit))
-(add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
-(require 'magit)
-(with-eval-after-load 'info
-  (info-initialize)
-  (add-to-list 'Info-directory-list
-               "~/.emacs.d/site-lisp/magit/Documentation/"))
-(global-set-key (kbd "C-c m") 'magit-status)
+(use-package magit
+  :ensure t
+  :init
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+  (with-eval-after-load 'info
+    (info-initialize)
+    (add-to-list 'Info-directory-list
+                 "~/.emacs.d/site-lisp/magit/Documentation/"))
+  (global-set-key (kbd "C-c m") 'magit-status))
 
 ;;; markdown mode
-(unless (package-installed-p 'markdown-mode)
-  (package-install 'markdown-mode))
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -407,90 +435,50 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;;; multi term
-(unless (package-installed-p 'multi-term)
-  (package-install 'multi-term))
-(require 'multi-term)
-(setq multi-term-program "/usr/local/bin/zsh")
-(global-set-key (kbd "C-c t") 'multi-term)
-
-;;; ace window
-(use-package ace-window
-  :ensure t
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
-  ;(setq aw-dispatch-always t)
-  :bind ("C-x o" . ace-window))
-
-;;; Iedit
-(unless (package-installed-p 'iedit)
-  (package-install 'iedit))
-(require 'iedit)
-
-;;; Paredit
-;; (unless (package-installed-p 'paredit)
-;;   (package-install 'paredit))
-;; (require 'paredit)
-;; (add-hook 'clojure-mode-hook #'enable-paredit-mode)
-;; (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
-;; (add-hook 'js2-mode-hook #'enable-paredit-mode)
-;; (define-key js2-mode-map "{" 'paredit-open-curly)
-;; (define-key js2-mode-map "}" 'paredit-close-curly-and-newline)
-;; (define-key js2-mode-map "[" 'paredit-open-square)
-;; (define-key js2-mode-map "]" 'paredit-close-square-and-newline)
-;; (define-key js2-mode-map "(" 'paredit-round-square)
-;; (define-key js2-mode-map ")" 'paredit-close-round-and-newline)
-
-;;; Auto pair
-(unless (package-installed-p 'autopair)
-  (package-install 'autopair))
-(require 'autopair)
-(add-hook 'js2-mode-hook #'autopair-mode)
-
 ;;; prodigy
-(unless (package-installed-p 'prodigy)
-  (package-install 'prodigy))
-(require 'prodigy)
-(define-key global-map (kbd "C-c f") 'prodigy)
+(use-package prodigy
+  :ensure t
+  :init
+  (define-key global-map (kbd "C-c f") 'prodigy)
+  (prodigy-define-service
+    :name "Tui Chart server"
+    :command "npm"
+    :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
+    :args '("run" "dev")
+    :port 8080
+    :tags '(webpack-server))
 
-(prodigy-define-service
-  :name "Tui Chart server"
-  :command "npm"
-  :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
-  :args '("run" "dev")
-  :port 8080
-  :tags '(webpack-server))
+  (prodigy-define-service
+    :name "Tui Chart test"
+    :command "npm"
+    :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
+    :args '("run" "test")
+    :tags '(karma))
 
-(prodigy-define-service
-  :name "Tui Chart test"
-  :command "npm"
-  :cwd "~/masterpiece/ws_nhn/fedev/tui.chart"
-  :args '("run" "test")
-  :tags '(karma))
+  (prodigy-define-tag
+    :name 'webpack-server
+    :ready-message "Http://0.0.0.0:[0-9]+/webpack-dev-server/")
 
-(prodigy-define-tag
-  :name 'webpack-server
-  :ready-message "Http://0.0.0.0:[0-9]+/webpack-dev-server/")
-
-(prodigy-define-tag
-  :name 'karma
-  :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS")
+  (prodigy-define-tag
+    :name 'karma
+    :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS"))
 
 ;;; hydra
-(unless (package-installed-p 'hydra)
-  (package-install 'hydra))
+(use-package hydra
+  :ensure t
+  :init
+  ;; (defhydra hydra-jump (:hint nil)
+  ;;   "MOVE"
+  ;;   ("i" swiper "swiper!")
+  ;;   ("j" avy-goto-char "to char")
+  ;;   ("k" avy-goto-char-2 "to 2char")
+  ;;   ("w" avy-goto-word-1 "to word")
+  ;;   ("g" avy-goto-line "to line")
+  ;;   ("l" goto-last-change "to last Change")
+  ;;   ("t" git-timemachine-toggle "to timemachine"))
 
-;; (defhydra hydra-jump (:hint nil)
-;;   "MOVE"
-;;   ("i" swiper "swiper!")
-;;   ("j" avy-goto-char "to char")
-;;   ("k" avy-goto-char-2 "to 2char")
-;;   ("w" avy-goto-word-1 "to word")
-;;   ("g" avy-goto-line "to line")
-;;   ("l" goto-last-change "to last Change")
-;;   ("t" git-timemachine-toggle "to timemachine"))
-
-;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
+  ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
+  )
 
 (define-key global-map (kbd "C-j") nil)
 (define-key global-map (kbd "C-j j") 'avy-goto-char-2)
