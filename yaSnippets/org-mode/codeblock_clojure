@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: expand clode block clojure
+# key: <scl
+# --
+
+\#+BEGIN_SRC clojure
+$1
+\#+END_SRC
