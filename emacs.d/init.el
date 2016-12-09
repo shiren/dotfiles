@@ -92,6 +92,15 @@
 (eval-when-compile
   (require 'use-package))
 
+;; dashboard
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-items '((recents  . 10)
+                          (bookmarks . 10)
+                          (projects . 10))))
+
 ;; Setup PATH environment
 (use-package exec-path-from-shell
   :ensure t
@@ -118,10 +127,7 @@
 (use-package paren
   :init
   (show-paren-mode 1)
-  (setq show-paren-delay 0)
-  ;; (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "#f00")
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold))
+  (setq show-paren-delay 0))
 
 ;; rainbow delimiters랑 같이 쓰면 엄청 정신 없다.
 ;; (use-package highlight-parentheses
@@ -137,6 +143,13 @@
 (use-package hl-line
   :init
   (global-hl-line-mode +1))
+
+(use-package highlight-thing
+  :ensure t
+  :init
+  (setq highlight-thing-case-sensitive-p t)
+  ;; (setq highlight-thing-what-thing 'word)
+  (global-highlight-thing-mode))
 
 ;;; rainbow-delimiters
 (use-package rainbow-delimiters
@@ -154,10 +167,15 @@
 (unless (package-installed-p 'git-timemachine)
   (package-install 'git-timemachine))
 
+(use-package git-timemachine
+  :ensure t)
+
 ;;; Eyebrowse
-(unless (package-installed-p 'eyebrowse)
-  (package-install 'eyebrowse))
-(eyebrowse-mode t)
+(use-package eyebrowse
+  :ensure t
+  :init
+  (eyebrowse-mode t)
+  (global-set-key (kbd "C-c C-w C-w") 'eyebrowse-next-window-config))
 
 ;;; ace window
 (use-package ace-window
@@ -220,7 +238,7 @@
 
 ;;; Expand Region
 (use-package expand-region
-  :ensure t ;; 없으면 자동으로 인스톨
+  :ensure t
   :init
   (global-set-key (kbd "C-c v") 'er/expand-region))
 
@@ -244,50 +262,12 @@
   ;; (setq projectile-require-project-root nil)
   (setq projectile-indexing-method 'alien)
   (setq projectile-globally-ignored-directories
-        (append '(
-                  ".DS_Store"
-                  ".git"
-                  ".svn"
-                  "out"
-                  "repl"
-                  "target"
-                  "venv"
-                  "dist"
-                  "lib"
-                  "node_modules"
-                  "libs"
-                  )
+        (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs")
                 projectile-globally-ignored-directories))
 
   (setq projectile-globally-ignored-files
-        (append '(
-                  ".DS_Store"
-                  "*.gz"
-                  "*.pyc"
-                  "*.jar"
-                  "*.tar.gz"
-                  "*.tgz"
-                  "*.zip"
-                  "*.png"
-                  "*.jpg"
-                  "*.gif"
-                  )
-                projectile-globally-ignored-files))
-
-  (setq projectile-globally-ignored-file-suffixes
-        (append '(
-                  ".DS_Store"
-                  ".gz"
-                  ".pyc"
-                  ".jar"
-                  ".tar.gz"
-                  ".tgz"
-                  ".zip"
-                  ".png"
-                  ".jpg"
-                  ".gif"
-                  )
-                projectile-globally-ignored-file-suffixes)))
+        (append '(".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
+                projectile-globally-ignored-files)))
 
 ;;; countsel-projectile
 (use-package counsel-projectile
@@ -501,8 +481,8 @@
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:background "#002b36")))))
+ '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold))))
+ '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
+ '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
+ '(hi-yellow ((t (:foreground nil :background nil :underline t))))
+ '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold)))))
