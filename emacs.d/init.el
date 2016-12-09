@@ -74,7 +74,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -123,14 +123,15 @@
   (set-face-foreground 'show-paren-match "#f00")
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold))
 
-(use-package highlight-parentheses
-  :ensure t
-  :init
-  (define-globalized-minor-mode global-highlight-parentheses-mode
-    highlight-parentheses-mode
-    (lambda ()
-      (highlight-parentheses-mode t)))
-  (global-highlight-parentheses-mode t))
+;; rainbow delimiters랑 같이 쓰면 엄청 정신 없다.
+;; (use-package highlight-parentheses
+;;   :ensure t
+;;   :init
+;;   (define-globalized-minor-mode global-highlight-parentheses-mode
+;;     highlight-parentheses-mode
+;;     (lambda ()
+;;       (highlight-parentheses-mode t)))
+;;   (global-highlight-parentheses-mode t))
 
 ;; hl line
 (use-package hl-line
