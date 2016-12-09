@@ -200,11 +200,12 @@
   (add-hook 'emacs-lisp-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'js2-mode-hook #'yas-minor-mode)
+  (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<C-return>") 'yas-expand)
+  (define-key yas-minor-mode-map (kbd "<C-M-return>") 'yas-expand)
   (yas-reload-all))
 
 ;;; Iedit
