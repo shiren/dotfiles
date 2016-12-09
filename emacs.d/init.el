@@ -89,6 +89,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; I use C-j my custom key bindings
+(define-key global-map (kbd "C-j") nil)
+
 (eval-when-compile
   (require 'use-package))
 
@@ -148,8 +151,9 @@
   :ensure t
   :init
   (setq highlight-thing-case-sensitive-p t)
-  ;; (setq highlight-thing-what-thing 'word)
-  (global-highlight-thing-mode))
+  (add-hook 'emacs-lisp-mode-hook 'highlight-thing-mode)
+  (add-hook 'clojure-mode-hook 'highlight-thing-mode)
+  (add-hook 'js2-mode-hook 'highlight-thing-mode))
 
 ;;; rainbow-delimiters
 (use-package rainbow-delimiters
@@ -164,11 +168,10 @@
   :init
   (global-git-gutter-mode +1))
 
-(unless (package-installed-p 'git-timemachine)
-  (package-install 'git-timemachine))
-
 (use-package git-timemachine
-  :ensure t)
+  :ensure t
+  :init
+  (define-key global-map (kbd "C-j t") 'git-timemachine-toggle))
 
 ;;; Eyebrowse
 (use-package eyebrowse
@@ -197,13 +200,27 @@
   (global-set-key (kbd "C-c g") 'counsel-ag)
   (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
   (global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
-  (global-set-key (kbd "C-c o") 'counsel-imenu))
+  (global-set-key (kbd "C-c o") 'counsel-imenu)
+
+  (define-key global-map (kbd "C-j i") 'swiper)
+  (define-key global-map (kbd "C-j o") 'swiper-all))
+
+;;; Avy
+(use-package avy
+  :ensure t
+  :init
+  (define-key global-map (kbd "C-j j") 'avy-goto-char-2)
+  (define-key global-map (kbd "C-j k") 'avy-goto-char)
+  (define-key global-map (kbd "C-j w") 'avy-goto-word-1)
+  (define-key global-map (kbd "C-j g") 'avy-goto-line))
 
 (use-package git-timemachine
   :ensure t)
 
 (use-package goto-last-change
-  :ensure t)
+  :ensure t
+  :init
+  (define-key global-map (kbd "C-j l") 'goto-last-change))
 
 ;;; autocomplete
 (use-package auto-complete
@@ -354,9 +371,6 @@
   (add-hook 'csharp-mode-hook 'omnisharp-mode))
 
 ;;; org
-(unless (package-installed-p 'org)
-  (package-install 'org))
-
 (use-package org
   :ensure t
   :init
@@ -372,15 +386,15 @@
      (plantuml . t)
      (sh . t)
      ))
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-iswitchb)
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
-  (global-set-key "\C-cl" 'org-store-link)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cc" 'org-capture)
-  (global-set-key "\C-cb" 'org-iswitchb)
   (setq org-plantuml-jar-path
         (expand-file-name "~/plantuml/plantuml.jar"))
 
@@ -467,16 +481,6 @@
 
   ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
   )
-
-(define-key global-map (kbd "C-j") nil)
-(define-key global-map (kbd "C-j j") 'avy-goto-char-2)
-(define-key global-map (kbd "C-j k") 'avy-goto-char)
-(define-key global-map (kbd "C-j w") 'avy-goto-word-1)
-(define-key global-map (kbd "C-j g") 'avy-goto-line)
-(define-key global-map (kbd "C-j l") 'goto-last-change)
-(define-key global-map (kbd "C-j t") 'git-timemachine-toggle)
-(define-key global-map (kbd "C-j i") 'swiper)
-(define-key global-map (kbd "C-j o") 'swiper-all)
 
 (provide 'init)
 ;;; init.el ends here
