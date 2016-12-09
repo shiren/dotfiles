@@ -178,7 +178,9 @@
   :ensure t
   :init
   (eyebrowse-mode t)
-  (global-set-key (kbd "C-c C-w C-w") 'eyebrowse-next-window-config))
+  :config
+  (global-set-key (kbd "<F1>") 'eyebrowse-prev-window-config)
+  (global-set-key (kbd "<F2>") 'eyebrowse-next-window-config))
 
 ;;; ace window
 (use-package ace-window
