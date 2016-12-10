@@ -74,7 +74,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -223,6 +223,12 @@
   :ensure t
   :init
   (define-key global-map (kbd "C-j l") 'goto-last-change))
+
+(use-package dumb-jump
+  :bind (("C-j n" . dumb-jump-go-other-window)
+         ("C-j m" . dumb-jump-go))
+  :config (setq dumb-jump-selector 'ivy)
+  :ensure t)
 
 ;;; autocomplete
 (use-package auto-complete
@@ -487,8 +493,12 @@
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
- '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold))))
+ '(hi-yellow ((t (:foreground nil :background nil :underline t))))
  '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
  '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
- '(hi-yellow ((t (:foreground nil :background nil :underline t))))
- '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold)))))
+ '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold)))))
