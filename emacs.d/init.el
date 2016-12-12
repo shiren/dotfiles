@@ -116,8 +116,10 @@
   :ensure t)
 
 (use-package base16-theme
-  :ensure t
-  :init
+  :ensure t)
+
+;; GUI일때만 테마를 적용한다 터미널은 기본적으로 base16으로 설정되어있음
+(when window-system
   (load-theme 'base16-solarized-dark t))
 
 ;;; multi term
@@ -487,8 +489,12 @@
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
- '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold))))
+ '(hi-yellow ((t (:foreground nil :background nil :underline t))))
  '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
  '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
- '(hi-yellow ((t (:foreground nil :background nil :underline t))))
- '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold)))))
+ '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold)))))
