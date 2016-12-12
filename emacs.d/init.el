@@ -72,6 +72,19 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+;; no popup frame(새버퍼열때 현재 프레임에서 열기)
+(setq ns-pop-up-frames nil)
+(setq pop-up-frames nil)
+
+;; 소리 끄기
+(setq visible-bell t)
+
+;; splitting
+(defun split-horizontally-for-temp-buffers () (split-window-horizontally))
+(add-hook 'temp-buffer-setup-hook 'split-horizontally-for-temp-buffers)
+(setq split-height-threshold nil)
+(setq split-width-threshold 160)
+
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -80,7 +93,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (god-mode dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -193,6 +206,13 @@
   (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
   ;(setq aw-dispatch-always t)
   :bind ("C-x o" . ace-window))
+
+;;; god mode
+(use-package god-mode
+  :ensure t
+  :config
+  (progn
+    (global-set-key (kbd "<escape>") 'god-local-mode)))
 
 ;; swiper and ivy
 (use-package swiper
