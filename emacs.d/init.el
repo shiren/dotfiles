@@ -61,8 +61,16 @@
 (xterm-mouse-mode t)
 ;(defun track-mouse (e))
 
-;; create the autosave dir if necessary, since emacs won't.
-(make-directory "~/.emacs.d/autosaves/" t)
+(defconst emacs-tmp-dir
+  (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)));
+(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix emacs-tmp-dir)
+
+;; 백업들 끄기
+(setq backup-inhibited t)
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
@@ -70,8 +78,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
     (dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
@@ -153,17 +159,13 @@
   :ensure t
   :init
   (setq highlight-thing-case-sensitive-p t)
-  (add-hook 'emacs-lisp-mode-hook 'highlight-thing-mode)
-  (add-hook 'clojure-mode-hook 'highlight-thing-mode)
-  (add-hook 'js2-mode-hook 'highlight-thing-mode))
+  (add-hook 'prog-mode-hook 'highlight-thing-mode))
 
 ;;; rainbow-delimiters
 (use-package rainbow-delimiters
   :ensure t
   :init
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode))
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (use-package git-gutter
   :ensure t
@@ -242,9 +244,7 @@
 (use-package yasnippet
   :ensure t
   :init
-  (add-hook 'emacs-lisp-mode-hook #'yas-minor-mode)
-  (add-hook 'clojure-mode-hook #'yas-minor-mode)
-  (add-hook 'js2-mode-hook #'yas-minor-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
