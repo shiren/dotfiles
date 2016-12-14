@@ -268,8 +268,8 @@
   (yas-reload-all)
   :bind
   (:map yas-minor-mode-map
-        ("<tab>" . il)
-        ("TAB" . il)
+        ("<tab>" . nil)
+        ("TAB" . nil)
         ("<C-M-return>" . yas-expand)))
 
 ;;; Iedit
