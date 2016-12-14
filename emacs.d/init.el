@@ -26,8 +26,7 @@
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source code pro")
   (set-face-attribute 'default nil :height 140)
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-)
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
 
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
@@ -218,7 +217,7 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   :bind
-  ("M-x". counsel-M-x)
+  (("M-x". counsel-M-x)
   ("C-x C-f". counsel-find-file)
   ("C-c r". counsel-recentf)
   ("C-c g". counsel-ag)
@@ -226,7 +225,9 @@
   ("C-c 4 e". ivy-switch-buffer-other-window)
   ("C-c o". counsel-imenu)
   ("C-j i". swiper)
-  ("C-j o". swiper-all))
+  ("C-j o". swiper-all)
+  :map ivy-mode-map
+  ("S-SPC" . toggle-input-method)))
 
 ;;; Avy
 (use-package avy
