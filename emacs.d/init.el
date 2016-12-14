@@ -402,10 +402,10 @@
 (use-package org
   :ensure t
   :bind
-  ("\C-cl" . org-store-link)
+  (("\C-cl" . org-store-link)
   ("\C-ca" . org-agenda)
   ("\C-cc" . org-capture)
-  ("\C-cb" . org-iswitchb)
+  ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (list "~/org"))
@@ -428,7 +428,9 @@
         (expand-file-name "~/plantuml/plantuml.jar"))
 
   ;; org에서 linewrap 되게
-  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil))))
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+  :config
+  (define-key org-mode-map (kbd "C-j") nil))
 
 (use-package ox-gfm
   :ensure t)
