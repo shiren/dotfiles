@@ -410,7 +410,7 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (list "~/org"))
-  (setq org-default-notes-file (concat org-directory "~/org/notes.org"))
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
