@@ -108,7 +108,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; I use C-j my custom key bindings
+;; unset some default keybinding for my custom key bindings
 (define-key global-map (kbd "C-j") nil)
 
 (eval-when-compile
@@ -145,8 +145,9 @@
 (use-package multi-term
   :ensure t
   :init
-  (global-set-key (kbd "C-c t") 'multi-term)
-  (setq multi-term-program "/usr/local/bin/zsh"))
+  (setq multi-term-program "/usr/local/bin/zsh")
+  :bind
+  ("C-c t" . multi-term))
 
 (use-package paren
   :init
@@ -187,17 +188,20 @@
 
 (use-package git-timemachine
   :ensure t
-  :init
-  (define-key global-map (kbd "C-j t") 'git-timemachine-toggle))
+  :bind
+  ("C-j t" . git-timemachine-toggle))
 
 ;;; Eyebrowse
 (use-package eyebrowse
   :ensure t
   :init
   (eyebrowse-mode t)
-  :config
-  (global-set-key (kbd "<F1>") 'eyebrowse-prev-window-config)
-  (global-set-key (kbd "<F2>") 'eyebrowse-next-window-config))
+  :bind
+  ("C-j ;" . eyebrowse-last-window-config)
+  ("C-j 0" . eyebrowse-close-window-config)
+  ("C-j 1" . eyebrowse-switch-to-window-config-1)
+  ("C-j 2" . eyebrowse-switch-to-window-config-2)
+  ("C-j 3" . eyebrowse-switch-to-window-config-3))
 
 ;;; ace window
 (use-package ace-window
@@ -207,46 +211,39 @@
   ;(setq aw-dispatch-always t)
   :bind ("C-x o" . ace-window))
 
-;;; god mode
-(use-package god-mode
-  :ensure t
-  :config
-  (progn
-    (global-set-key (kbd "<escape>") 'god-local-mode)))
-
 ;; swiper and ivy
 (use-package swiper
   :ensure t
   :init
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "C-c r") 'counsel-recentf)
-  (global-set-key (kbd "C-c g") 'counsel-ag)
-  (global-set-key (kbd "C-c e") 'ivy-switch-buffer)
-  (global-set-key (kbd "C-c 4 e") 'ivy-switch-buffer-other-window)
-  (global-set-key (kbd "C-c o") 'counsel-imenu)
-
-  (define-key global-map (kbd "C-j i") 'swiper)
-  (define-key global-map (kbd "C-j o") 'swiper-all))
+  :bind
+  ("M-x". counsel-M-x)
+  ("C-x C-f". counsel-find-file)
+  ("C-c r". counsel-recentf)
+  ("C-c g". counsel-ag)
+  ("C-c e". ivy-switch-buffer)
+  ("C-c 4 e". ivy-switch-buffer-other-window)
+  ("C-c o". counsel-imenu)
+  ("C-j i". swiper)
+  ("C-j o". swiper-all))
 
 ;;; Avy
 (use-package avy
   :ensure t
-  :init
-  (define-key global-map (kbd "C-j j") 'avy-goto-char-2)
-  (define-key global-map (kbd "C-j k") 'avy-goto-char)
-  (define-key global-map (kbd "C-j w") 'avy-goto-word-1)
-  (define-key global-map (kbd "C-j g") 'avy-goto-line))
+  :bind
+  ("C-j j". avy-goto-char-2)
+  ("C-j k". avy-goto-char)
+  ("C-j w". avy-goto-word-1)
+  ("C-j g". avy-goto-line))
 
 (use-package git-timemachine
   :ensure t)
 
 (use-package goto-last-change
   :ensure t
-  :init
-  (define-key global-map (kbd "C-j l") 'goto-last-change))
+  :bind
+  ("C-j l" . goto-last-change))
 
 (use-package dumb-jump
   :bind (("C-j n" . dumb-jump-go-other-window)
@@ -268,10 +265,12 @@
   (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<C-M-return>") 'yas-expand)
-  (yas-reload-all))
+  (yas-reload-all)
+  :bind
+  (:map yas-minor-mode-map
+        ("<tab>" . il)
+        ("TAB" . il)
+        ("<C-M-return>" . yas-expand)))
 
 ;;; Iedit
 (use-package iedit
@@ -286,8 +285,8 @@
 ;;; Expand Region
 (use-package expand-region
   :ensure t
-  :init
-  (global-set-key (kbd "C-c v") 'er/expand-region))
+  :bind
+  ("C-c v" . er/expand-region))
 
 ;; recent file list
 (use-package recentf
@@ -371,11 +370,10 @@
 ;; jsdoc
 (use-package js-doc
   :ensure t
-  :init
-  (add-hook 'js2-mode-hook
-          '(lambda ()
-             (define-key js2-mode-map "\C-cd" 'js-doc-insert-function-doc)
-             (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+  :bind
+  (:map js2-mode-map
+        ("\C-cd" . js-doc-insert-function-doc)
+        ("@" . js-doc-insert-tag))
   :config
   (setq js-doc-mail-address "your email address"
       js-doc-author (format "your name <%s>" js-doc-mail-address)
@@ -403,6 +401,11 @@
 ;;; org
 (use-package org
   :ensure t
+  :bind
+  ("\C-cl" . org-store-link)
+  ("\C-ca" . org-agenda)
+  ("\C-cc" . org-capture)
+  ("\C-cb" . org-iswitchb)
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (list "~/org"))
@@ -416,10 +419,6 @@
      (plantuml . t)
      (sh . t)
      ))
-  (global-set-key "\C-cl" 'org-store-link)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cc" 'org-capture)
-  (global-set-key "\C-cb" 'org-iswitchb)
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
@@ -465,13 +464,15 @@
     (info-initialize)
     (add-to-list 'Info-directory-list
                  "~/.emacs.d/site-lisp/magit/Documentation/"))
-  (global-set-key (kbd "C-c m") 'magit-status))
+  :bind
+  ("C-c m" . magit-status))
 
 ;;; prodigy
 (use-package prodigy
   :ensure t
+  :bind
+  ("C-c f" . prodigy)
   :init
-  (define-key global-map (kbd "C-c f") 'prodigy)
   (prodigy-define-service
     :name "Tui Chart server"
     :command "npm"
