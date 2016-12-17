@@ -92,7 +92,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -189,6 +189,14 @@
   :ensure t
   :bind
   ("C-j t" . git-timemachine-toggle))
+
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode 1)
+  :bind
+  ("C-z" . undo)
+  ("C-S-z" . undo-tree-redo))
 
 ;;; Eyebrowse
 (use-package eyebrowse
