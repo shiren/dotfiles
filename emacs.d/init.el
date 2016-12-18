@@ -410,7 +410,7 @@
 (use-package csharp-mode
   :ensure t
   :init
-  (defun my-ac-()
+  (defun my-ac()
     (auto-complete-mode t))
   (add-hook 'csharp-mode-hook 'my-ac))
 
