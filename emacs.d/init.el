@@ -116,6 +116,11 @@
 ;; dired
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; auto revert
+(global-auto-revert-mode 1)
+(setq auto-revert-interval 1)
+(setq auto-revert-check-vc-info t)
+
 ;; dashboard
 (use-package dashboard
   :ensure t
