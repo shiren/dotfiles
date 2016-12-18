@@ -75,7 +75,7 @@
 (setq ns-pop-up-frames nil)
 (setq pop-up-frames nil)
 
-;; 소리 끄기
+;; 소리 끄고 비쥬얼벨로
 (setq visible-bell t)
 
 ;; splitting
