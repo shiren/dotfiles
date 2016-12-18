@@ -113,6 +113,9 @@
 (eval-when-compile
   (require 'use-package))
 
+;; dired
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; dashboard
 (use-package dashboard
   :ensure t
