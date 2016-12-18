@@ -265,7 +265,20 @@
   :ensure t
   :init
   (require 'auto-complete-config)
-  (ac-config-default))
+  (ac-config-default)
+  (global-auto-complete-mode 1)
+  (setq ac-ignore-case nil)
+  (setq ac-auto-start 2)
+  (ac-set-trigger-key "TAB")
+  (ac-set-trigger-key "<tab>")
+  (add-hook 'auto-complete-mode-hook
+            (lambda ()
+              (define-key ac-completing-map (kbd "C-n") 'ac-next)
+              (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+  (setq-default ac-sources '(ac-source-yasnippet
+                             ac-source-abbrev
+                             ac-source-dictionary
+                             ac-source-words-in-same-mode-buffers)))
 
 (use-package yasnippet
   :ensure t
@@ -274,12 +287,7 @@
   (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
-  (yas-reload-all)
-  :bind
-  (:map yas-minor-mode-map
-        ("<tab>" . nil)
-        ("TAB" . nil)
-        ("<C-M-return>" . yas-expand)))
+  (yas-reload-all))
 
 ;;; Iedit
 (use-package iedit
@@ -400,12 +408,17 @@
 
 ;;; C# and Unity
 (use-package csharp-mode
-  :ensure t)
-
-(use-package omnisharp
   :ensure t
   :init
-  (add-hook 'csharp-mode-hook 'omnisharp-mode))
+  (defun my-ac-()
+    (auto-complete-mode t))
+  (add-hook 'csharp-mode-hook 'my-ac))
+
+;; (use-package omnisharp
+;;   :ensure t
+;;   :init
+;;     (add-hook 'csharp-mode-hook 'omnisharp-mode)
+;;   )
 
 ;;; org
 (use-package org
