@@ -296,10 +296,10 @@
   (setq ac-auto-start 2)
   (ac-set-trigger-key "TAB")
   (ac-set-trigger-key "<tab>")
-  (add-hook 'auto-complete-mode-hook
-            (lambda ()
-              (define-key ac-completing-map (kbd "C-n") 'ac-next)
-              (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+  (setq ac-use-menu-map t)
+  ;; Default settings
+  (define-key ac-menu-map "\C-n" 'ac-next)
+  (define-key ac-menu-map "\C-p" 'ac-previous)
   (setq-default ac-sources '(ac-source-yasnippet
                              ac-source-abbrev
                              ac-source-dictionary
