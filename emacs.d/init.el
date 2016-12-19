@@ -92,7 +92,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (dash-at-point dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -251,6 +251,23 @@
          ("C-j m" . dumb-jump-go))
   :config (setq dumb-jump-selector 'ivy)
   :ensure t)
+
+;;; hydra
+(use-package hydra
+  :ensure t
+  :init
+  ;; (defhydra hydra-jump (:hint nil)
+  ;;   "MOVE"
+  ;;   ("i" swiper "swiper!")
+  ;;   ("j" avy-goto-char "to char")
+  ;;   ("k" avy-goto-char-2 "to 2char")
+  ;;   ("w" avy-goto-word-1 "to word")
+  ;;   ("g" avy-goto-line "to line")
+  ;;   ("l" goto-last-change "to last Change")
+  ;;   ("t" git-timemachine-toggle "to timemachine"))
+
+  ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
+  )
 
 ;;; autocomplete
 (use-package auto-complete
@@ -499,22 +516,16 @@
     :name 'karma
     :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS"))
 
-;;; hydra
-(use-package hydra
+(use-package dash-at-point
   :ensure t
   :init
-  ;; (defhydra hydra-jump (:hint nil)
-  ;;   "MOVE"
-  ;;   ("i" swiper "swiper!")
-  ;;   ("j" avy-goto-char "to char")
-  ;;   ("k" avy-goto-char-2 "to 2char")
-  ;;   ("w" avy-goto-word-1 "to word")
-  ;;   ("g" avy-goto-line "to line")
-  ;;   ("l" goto-last-change "to last Change")
-  ;;   ("t" git-timemachine-toggle "to timemachine"))
-
-  ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
-  )
+  (add-to-list 'dash-at-point-mode-alist '(js2-mode . "js"))
+  (add-to-list 'dash-at-point-mode-alist '(elisp-mode . "elisp"))
+  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure"))
+  (add-to-list 'dash-at-point-mode-alist '(csharp-mode . "unity3d"))
+  :bind
+  ("C-c d" . dash-at-point)
+  ("C-c ." . dash-at-point-with-docset))
 
 (provide 'init)
 ;;; init.el ends here
