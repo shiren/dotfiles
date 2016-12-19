@@ -75,7 +75,7 @@
 (setq ns-pop-up-frames nil)
 (setq pop-up-frames nil)
 
-;; 소리 끄기
+;; 소리 끄고 비쥬얼벨로
 (setq visible-bell t)
 
 ;; splitting
@@ -92,7 +92,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dash-at-point dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -112,6 +112,14 @@
 
 (eval-when-compile
   (require 'use-package))
+
+;; dired
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; auto revert
+(global-auto-revert-mode 1)
+(setq auto-revert-interval 1)
+(setq auto-revert-check-vc-info t)
 
 ;; dashboard
 (use-package dashboard
@@ -189,6 +197,14 @@
   :ensure t
   :bind
   ("C-j t" . git-timemachine-toggle))
+
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode 1)
+  :bind
+  ("C-z" . undo)
+  ("C-S-z" . undo-tree-redo))
 
 ;;; Eyebrowse
 (use-package eyebrowse
@@ -274,7 +290,20 @@
   :ensure t
   :init
   (require 'auto-complete-config)
-  (ac-config-default))
+  (ac-config-default)
+  (global-auto-complete-mode 1)
+  (setq ac-ignore-case nil)
+  (setq ac-auto-start 2)
+  (ac-set-trigger-key "TAB")
+  (ac-set-trigger-key "<tab>")
+  (add-hook 'auto-complete-mode-hook
+            (lambda ()
+              (define-key ac-completing-map (kbd "C-n") 'ac-next)
+              (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+  (setq-default ac-sources '(ac-source-yasnippet
+                             ac-source-abbrev
+                             ac-source-dictionary
+                             ac-source-words-in-same-mode-buffers)))
 
 (use-package yasnippet
   :ensure t
@@ -283,12 +312,7 @@
   (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
-  (yas-reload-all)
-  :bind
-  (:map yas-minor-mode-map
-        ("<tab>" . nil)
-        ("TAB" . nil)
-        ("<C-M-return>" . yas-expand)))
+  (yas-reload-all))
 
 ;;; Iedit
 (use-package iedit
@@ -409,12 +433,17 @@
 
 ;;; C# and Unity
 (use-package csharp-mode
-  :ensure t)
-
-(use-package omnisharp
   :ensure t
   :init
-  (add-hook 'csharp-mode-hook 'omnisharp-mode))
+  (defun my-ac()
+    (auto-complete-mode t))
+  (add-hook 'csharp-mode-hook 'my-ac))
+
+;; (use-package omnisharp
+;;   :ensure t
+;;   :init
+;;     (add-hook 'csharp-mode-hook 'omnisharp-mode)
+;;   )
 
 ;;; org
 (use-package org
