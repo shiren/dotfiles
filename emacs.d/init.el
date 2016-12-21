@@ -353,7 +353,6 @@
   (setq projectile-globally-ignored-directories
         (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs")
                 projectile-globally-ignored-directories))
-
   (setq projectile-globally-ignored-files
         (append '(".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
                 projectile-globally-ignored-files)))
