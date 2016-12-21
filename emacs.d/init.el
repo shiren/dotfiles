@@ -31,6 +31,8 @@
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 
+(setq echo-keystrokes 0.01)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;; 라인넘버 보이도록
@@ -59,12 +61,6 @@
 (require 'mouse)
 (xterm-mouse-mode t)
 ;(defun track-mouse (e))
-
-(defconst emacs-tmp-dir
-  (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)));
-(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix emacs-tmp-dir)
 
 ;; 백업들 끄기
 (setq backup-inhibited t)
