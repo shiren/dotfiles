@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -140,9 +140,12 @@
 (use-package base16-theme
   :ensure t)
 
+(use-package solarized-theme
+  :ensure t)
+
 ;; GUI일때만 테마를 적용한다 터미널은 기본적으로 base16으로 설정되어있음
 (when window-system
-  (load-theme 'base16-solarized-dark t))
+  (load-theme 'solarized-dark t))
 
 ;;; multi term
 (use-package multi-term
@@ -281,26 +284,15 @@
   ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
   )
 
-;;; autocomplete
-(use-package auto-complete
+(use-package company
   :ensure t
   :init
-  (require 'auto-complete-config)
-  (ac-config-default)
-  (global-auto-complete-mode 1)
-  (setq ac-ignore-case nil)
-  (setq ac-auto-start 2)
-  (setq ac-use-menu-map t)
-  ;; Default settings
-  (define-key ac-menu-map "\C-n" 'ac-next)
-  (define-key ac-menu-map "\C-p" 'ac-previous)
-  (define-key ac-menu-map (kbd "TAB") 'ac-complete)
-  (ac-set-trigger-key "TAB")
-  (ac-set-trigger-key "<tab>")
-  (setq-default ac-sources '(ac-source-yasnippet
-                             ac-source-abbrev
-                             ac-source-dictionary
-                             ac-source-words-in-same-mode-buffers)))
+  (add-hook 'prog-mode-hook 'global-company-mode)
+  :config
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 (use-package yasnippet
   :ensure t
@@ -399,11 +391,10 @@
   (autoload 'tern-mode' "tern.el" nil t)
   (add-hook 'js-mode-hook (lambda () (tern-mode t))))
 
-(use-package tern-auto-complete
+(use-package company-tern
   :ensure t
-  :config
-  (setq tern-ac-on-dot t)
-  (tern-ac-setup))
+  :init
+  (add-to-list 'company-backends 'company-tern))
 
 ;; jsdoc
 (use-package js-doc
@@ -421,7 +412,10 @@
 ;;; Clojure setup
 ;; CIDER
 (use-package cider
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (add-hook 'cider-mode-hook #'company-mode))
 
 ;; clojure-mode
 (use-package clojure-mode
@@ -431,9 +425,7 @@
 (use-package csharp-mode
   :ensure t
   :init
-  (defun my-ac()
-    (auto-complete-mode t))
-  (add-hook 'csharp-mode-hook 'my-ac))
+  (add-hook 'csharp-mode-hook #'company-mode))
 
 ;; (use-package omnisharp
 ;;   :ensure t
@@ -552,6 +544,16 @@
   ("C-c d" . dash-at-point)
   ("C-c ." . dash-at-point-with-docset))
 
+(require 'color)
+
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
@@ -559,7 +561,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:background nil :foreground "dim gray" :weight extra-bold))))
+ '(company-scrollbar-bg ((t (:background "#005369"))))
+ '(company-scrollbar-fg ((t (:background "#003f4f"))))
+ '(company-tooltip ((t (:inherit default :background "#003340"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(hi-yellow ((t (:foreground nil :background nil :underline t))))
  '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
  '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
