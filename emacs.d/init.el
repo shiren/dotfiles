@@ -134,18 +134,10 @@
     (exec-path-from-shell-initialize)))
 
 ;;;; Themes
-(use-package cyberpunk-theme
-  :ensure t)
-
-(use-package base16-theme
-  :ensure t)
-
-(use-package solarized-theme
-  :ensure t)
-
-;; GUI일때만 테마를 적용한다 터미널은 기본적으로 base16으로 설정되어있음
-(when window-system
-  (load-theme 'solarized-dark t))
+(use-package zenburn-theme
+  :ensure t
+  :init
+  (load-theme 'zenburn t))
 
 ;;; multi term
 (use-package multi-term
@@ -179,6 +171,7 @@
   :ensure t
   :init
   (setq highlight-thing-case-sensitive-p t)
+  (setq highlight-thing-limit-to-defun t)
   (add-hook 'prog-mode-hook 'highlight-thing-mode))
 
 ;;; rainbow-delimiters
@@ -561,12 +554,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "#005369"))))
- '(company-scrollbar-fg ((t (:background "#003f4f"))))
- '(company-tooltip ((t (:inherit default :background "#003340"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(hi-yellow ((t (:foreground nil :background nil :underline t))))
- '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
- '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
- '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold)))))
+ ;; '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
+ ;; '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
+ ;; '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold))))
+ )
