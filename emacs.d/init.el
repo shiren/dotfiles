@@ -193,7 +193,7 @@
 (use-package undo-tree
   :ensure t
   :init
-  (global-undo-tree-mode 1)
+  (global-undo-tree-mode)
   :bind
   ("C-z" . undo)
   ("C-S-z" . undo-tree-redo))
