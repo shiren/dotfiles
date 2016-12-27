@@ -282,6 +282,9 @@
   :init
   (add-hook 'prog-mode-hook 'global-company-mode)
   :config
+  (setq company-idle-delay 0.3)
+  (setq company-show-numbers t)
+  (setq company-minimum-prefix-length 2)
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
   (define-key company-active-map (kbd "C-n") #'company-select-next)
@@ -327,7 +330,7 @@
   (projectile-global-mode)
   :config
   (setq projectile-completion-system 'ivy)
-  (setq projectile-enable-caching nil)
+  (setq projectile-enable-caching t)
   ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
   ;; (setq projectile-require-project-root nil)
   (setq projectile-indexing-method 'alien)
