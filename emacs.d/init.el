@@ -275,7 +275,7 @@
 (use-package company
   :ensure t
   :init
-  (add-hook 'prog-mode-hook 'global-company-mode)
+  (add-hook 'prog-mode-hook 'company-mode)
   :config
   (setq company-idle-delay 0.3)
   (setq company-show-numbers t)
