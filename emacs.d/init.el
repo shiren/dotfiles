@@ -112,11 +112,6 @@
 ;; dired
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; auto revert
-(global-auto-revert-mode 1)
-(setq auto-revert-interval 1)
-(setq auto-revert-check-vc-info t)
-
 ;; dashboard
 (use-package dashboard
   :ensure t
@@ -284,6 +279,7 @@
   :config
   (setq company-idle-delay 0.3)
   (setq company-show-numbers t)
+  (setq company-dabbrev-downcase nil)
   (setq company-minimum-prefix-length 2)
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
@@ -338,7 +334,7 @@
         (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs")
                 projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-files
-        (append '(".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
+        (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
                 projectile-globally-ignored-files)))
 
 ;;; countsel-projectile
