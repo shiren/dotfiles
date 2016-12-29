@@ -489,6 +489,7 @@
   :ensure t
   :init
   (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
+  (setq auto-revert-check-vc-info t)
   (with-eval-after-load 'info
     (info-initialize)
     (add-to-list 'Info-directory-list
