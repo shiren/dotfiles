@@ -314,6 +314,11 @@
 ;; recent file list
 (use-package recentf
   :init
+  (setq recentf-max-saved-items 300
+        recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
+                          "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
+                          ".gz"
+                          "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
   (recentf-mode t))
 
 (use-package counsel
