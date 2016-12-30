@@ -77,8 +77,8 @@
 ;; splitting
 (defun split-horizontally-for-temp-buffers () (split-window-horizontally))
 (add-hook 'temp-buffer-setup-hook 'split-horizontally-for-temp-buffers)
+(setq split-width-threshold 250)
 (setq split-height-threshold nil)
-(setq split-width-threshold 160)
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
