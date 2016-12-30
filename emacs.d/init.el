@@ -88,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 
 ;;; Set up package
 (require 'package)
@@ -543,15 +543,17 @@
   ("C-c d" . dash-at-point)
   ("C-c ." . dash-at-point-with-docset))
 
-(require 'color)
+(use-package google-translate
+  :ensure t
+  :init
+  (require 'google-translate)
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-translation-directions-alist
+        '(("en" . "ko") ("ko" . "en")))
+  (setq google-translate-pop-up-buffer-set-focus t)
+  :bind
+  ("C-c n" . google-translate-smooth-translate))
 
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 (provide 'init)
 ;;; init.el ends here
@@ -560,8 +562,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hi-yellow ((t (:foreground nil :background nil :underline t))))
- ;; '(iedit-occurrence ((t (:background nil :foreground "DeepPink3"))))
- ;; '(iedit-read-only-occurrence ((t (:background nil :foreground "DeepPink2"))))
- ;; '(show-paren-match ((t (:foreground nil :background "black" :weight ultra-bold))))
- )
+ '(hi-yellow ((t (:foreground nil :background nil :underline t)))))
