@@ -209,7 +209,7 @@
 (use-package ace-window
   :ensure t
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?1 ?2 ?3 ?4 ?5))
+  (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
   ;(setq aw-dispatch-always t)
   :bind ("C-x o" . ace-window))
 
