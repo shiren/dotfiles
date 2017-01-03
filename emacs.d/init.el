@@ -218,7 +218,7 @@
   :ensure t
   :init
   (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
+  (setq ivy-use-virtual-buffers nil)
   :bind
   (("M-x". counsel-M-x)
   ("C-x C-f". counsel-find-file)
