@@ -75,10 +75,13 @@
 (setq visible-bell t)
 
 ;; splitting
-(defun split-horizontally-for-temp-buffers () (split-window-horizontally))
-(add-hook 'temp-buffer-setup-hook 'split-horizontally-for-temp-buffers)
-(setq split-width-threshold 250)
-(setq split-height-threshold nil)
+(defun split-smart ()
+  (if (< (window-pixel-width) (window-pixel-height))
+      (split-window-vertically)
+    (split-window-horizontally)))
+(add-hook 'temp-buffer-setup-hook 'split-smart)
+(setq split-width-threshold 120)
+;;(setq split-height-threshold nil)
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
@@ -219,6 +222,10 @@
   :init
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers nil)
+  ;; number of result lines to display
+  (setq ivy-height 12)
+  ;; does not count candidates
+  (setq ivy-count-format "")
   :bind
   (("M-x". counsel-M-x)
   ("C-x C-f". counsel-find-file)
@@ -227,6 +234,7 @@
   ("C-c e". ivy-switch-buffer)
   ("C-c 4 e". ivy-switch-buffer-other-window)
   ("C-c o". counsel-imenu)
+  ("C-c y" . counsel-yank-pop)
   ("C-j i". swiper)
   ("C-j o". swiper-all)
   :map ivy-mode-map
@@ -551,6 +559,8 @@
   (setq google-translate-translation-directions-alist
         '(("en" . "ko") ("ko" . "en")))
   (setq google-translate-pop-up-buffer-set-focus t)
+  (setq google-translate-output-destination 'echo-area)
+  (setq max-mini-window-height 0.5)
   :bind
   ("C-c n" . google-translate-smooth-translate))
 
