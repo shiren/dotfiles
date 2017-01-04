@@ -83,16 +83,6 @@
 (setq split-width-threshold 120)
 ;;(setq split-height-threshold nil)
 
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
-
 ;;; Set up package
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -371,7 +361,9 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint)))
+  (setq flycheck-checkers '(javascript-eslint))
+  :config
+  (flycheck-swift-setup))
 
 ;;;; javascript
 ;; js2-mode
@@ -432,13 +424,37 @@
   :init
   (add-hook 'csharp-mode-hook #'company-mode))
 
-;; (use-package omnisharp
-;;   :ensure t
-;;   :init
-;;     (add-hook 'csharp-mode-hook 'omnisharp-mode)
-;;   )
+;;; Swift
+(use-package swift-mode
+  :ensure t)
+
+(use-package flycheck-swift
+  :ensure t
+  :init
+  (setq flycheck-swift-target "arm64-apple-ios10"))
+
+;; Sourcekittendaemon이 설치 되어 있어야함
+;; https://github.com/terhechte/SourceKittenDaemon
+(use-package company-sourcekit
+  :ensure t
+  :init
+  (add-to-list 'company-backends 'company-sourcekit))
 
 ;;; org
+(use-package ob-swift
+  :ensure t)
+
+(use-package ox-gfm
+  :ensure t)
+
+(use-package ox-reveal
+  :ensure t
+  :init
+  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/"))
+
+(use-package org-tree-slide
+  :ensure t)
+
 (use-package org
   :ensure t
   :bind
@@ -457,6 +473,7 @@
      (emacs-lisp . t)
      (clojure . t)
      (plantuml . t)
+     (swift . t)
      (sh . t)
      ))
   (setq org-confirm-babel-evaluate nil)
@@ -467,22 +484,21 @@
   (setq org-plantuml-jar-path
         (expand-file-name "~/plantuml/plantuml.jar"))
 
+  ;; yasnippet 하고 tab 충돌 해결
+  (defun yas/org-very-safe-expand ()
+    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+
+  (add-hook 'org-mode-hook
+                    (lambda ()
+                      (make-variable-buffer-local 'yas/trigger-key)
+                      (setq yas/trigger-key [tab])
+                      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+                      (define-key yas/keymap [tab] 'yas/next-field)))
+
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
   :config
   (define-key org-mode-map (kbd "C-j") nil))
-
-(use-package ox-gfm
-  :ensure t)
-
-(use-package ox-reveal
-  :ensure t
-  :init
-  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.3.0/")
-  )
-
-(use-package org-tree-slide
-  :ensure t)
 
 ;; (require 'org)
 ;; (require 'ox-reveal)
@@ -573,3 +589,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(hi-yellow ((t (:foreground nil :background nil :underline t)))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))

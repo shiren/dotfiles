@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Swift code block
+# key: <swift
+# --
+#+BEGIN_SRC swift
+$0
+#+END_SRC
