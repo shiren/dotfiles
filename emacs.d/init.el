@@ -498,7 +498,9 @@
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
   :config
-  (define-key org-mode-map (kbd "C-j") nil))
+  (define-key org-mode-map (kbd "C-j") nil)
+  (define-key org-mode-map (kbd "M-j") 'org-return-indent)
+  (define-key org-mode-map (kbd "<return>") 'org-return-indent))
 
 ;; (require 'org)
 ;; (require 'ox-reveal)
