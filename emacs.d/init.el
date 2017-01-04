@@ -361,9 +361,7 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint))
-  :config
-  (flycheck-swift-setup))
+  (setq flycheck-checkers '(javascript-eslint)))
 
 ;;;; javascript
 ;; js2-mode
@@ -428,11 +426,6 @@
 (use-package swift-mode
   :ensure t)
 
-(use-package flycheck-swift
-  :ensure t
-  :init
-  (setq flycheck-swift-target "arm64-apple-ios10"))
-
 ;; Sourcekittendaemon이 설치 되어 있어야함
 ;; https://github.com/terhechte/SourceKittenDaemon
 (use-package company-sourcekit
@@ -479,6 +472,10 @@
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
+  (setq org-src-strip-leading-and-trailing-blank-lines t)
+  (setq org-log-done t)
+  (setq org-edit-src-content-indentation 0)
+  (setq org-adapt-indentation nil)
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
   (setq org-plantuml-jar-path
