@@ -35,6 +35,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;; 미니 버퍼로 들어갈때 영문키입력으로 전환(그냥되는것같은데 예제로 남김)
+;; (add-hook 'minibuffer-setup-hook (lambda () (set-input-method nil)))
+
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
 (defun copy-from-osx ()
@@ -76,6 +79,7 @@
 
 ;; splitting
 (defun split-smart ()
+  (print "split-smart")
   (if (< (window-pixel-width) (window-pixel-height))
       (split-window-vertically)
     (split-window-horizontally)))
@@ -473,14 +477,14 @@
 
   ;;yasnippet 하고 tab 충돌 해결
   (defun yas/org-very-safe-expand ()
-    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+    (let ((yas/fallback-behavior 'return-nil)) (yas-expand)))
 
   (add-hook 'org-mode-hook
             (lambda ()
-              (make-variable-buffer-local 'yas/trigger-key)
-              (setq yas/trigger-key [tab])
+              (make-variable-buffer-local 'yas-expand-from-trigger-key)
+              (setq yas-expand-from-trigger-key [tab])
               (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas-keymap [tab] 'yas/next-field)))
+              (define-key yas/keymap [tab] 'yas-next-field)))
 
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
