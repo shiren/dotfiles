@@ -268,6 +268,7 @@
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'company-mode)
+  (add-hook 'org-mode-hook 'company-mode)
   :config
   (setq company-idle-delay 0.3)
   (setq company-show-numbers t)
@@ -477,7 +478,7 @@
 
   ;;yasnippet 하고 tab 충돌 해결
   (defun yas/org-very-safe-expand ()
-    (let ((yas/fallback-behavior 'return-nil)) (yas-expand)))
+    (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
 
   (add-hook 'org-mode-hook
             (lambda ()
