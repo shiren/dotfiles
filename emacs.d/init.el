@@ -76,6 +76,7 @@
 
 ;; splitting
 (defun split-smart ()
+  (print "split-smart")
   (if (< (window-pixel-width) (window-pixel-height))
       (split-window-vertically)
     (split-window-horizontally)))
