@@ -35,6 +35,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;; 미니 버퍼로 들어갈때 영문키입력으로 전환(그냥되는것같은데 예제로 남김)
+;; (add-hook 'minibuffer-setup-hook (lambda () (set-input-method nil)))
+
 ;;; 라인넘버 보이도록
 ;;; (global-linum-mode t)
 (defun copy-from-osx ()
