@@ -356,7 +356,8 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint)))
+  (setq flycheck-checkers '(javascript-eslint))
+  (setq flycheck-highlighting-mode 'lines))
 
 ;;;; javascript
 ;; js2-mode
