@@ -140,16 +140,6 @@
   (show-paren-mode 1)
   (setq show-paren-delay 0))
 
-;; rainbow delimiters랑 같이 쓰면 엄청 정신 없다.
-;; (use-package highlight-parentheses
-;;   :ensure t
-;;   :init
-;;   (define-globalized-minor-mode global-highlight-parentheses-mode
-;;     highlight-parentheses-mode
-;;     (lambda ()
-;;       (highlight-parentheses-mode t)))
-;;   (global-highlight-parentheses-mode t))
-
 ;; hl line
 (use-package hl-line
   :init
@@ -481,16 +471,16 @@
   (setq org-plantuml-jar-path
         (expand-file-name "~/plantuml/plantuml.jar"))
 
-  ;; yasnippet 하고 tab 충돌 해결
+  ;;yasnippet 하고 tab 충돌 해결
   (defun yas/org-very-safe-expand ()
     (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
 
   (add-hook 'org-mode-hook
-                    (lambda ()
-                      (make-variable-buffer-local 'yas/trigger-key)
-                      (setq yas/trigger-key [tab])
-                      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-                      (define-key yas/keymap [tab] 'yas/next-field)))
+            (lambda ()
+              (make-variable-buffer-local 'yas/trigger-key)
+              (setq yas/trigger-key [tab])
+              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+              (define-key yas-keymap [tab] 'yas/next-field)))
 
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
