@@ -63,7 +63,6 @@
 ;;; mouse setup
 (require 'mouse)
 (xterm-mouse-mode t)
-;(defun track-mouse (e))
 
 ;; 백업들 끄기
 (setq backup-inhibited t)
@@ -77,15 +76,24 @@
 ;; 소리 끄고 비쥬얼벨로
 (setq visible-bell t)
 
-;; splitting
+;; 에러시 디버그모드
+(setq debug-on-error t)
+
+;; split smart!
 (defun split-smart ()
-  (print "split-smart")
+  "split smart!"
   (if (< (window-pixel-width) (window-pixel-height))
-      (split-window-vertically)
-    (split-window-horizontally)))
-(add-hook 'temp-buffer-setup-hook 'split-smart)
-(setq split-width-threshold 120)
-;;(setq split-height-threshold nil)
+      (with-selected-window (selected-window)
+        (split-window-vertically))
+    (with-selected-window (selected-window)
+      (split-window-horizontally)
+      )))
+
+(defcustom split-window-preferred-function 'split-smart
+  "split smart"
+  :type 'function
+  :version "25.1"
+  :group 'windows)
 
 ;;; Set up package
 (require 'package)
