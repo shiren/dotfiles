@@ -14,8 +14,6 @@
 
 (setq ad-redefinition-action 'accept)
 
-(setq-default indent-tabs-mode nil)
-
 (set-language-environment "Korean")
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -33,13 +31,10 @@
 
 (setq echo-keystrokes 0.01)
 
+(setq-default indent-tabs-mode nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; 미니 버퍼로 들어갈때 영문키입력으로 전환(그냥되는것같은데 예제로 남김)
-;; (add-hook 'minibuffer-setup-hook (lambda () (set-input-method nil)))
-
-;;; 라인넘버 보이도록
-;;; (global-linum-mode t)
+;;; Paste setup
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
 
@@ -48,11 +43,11 @@
     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
       (process-send-string proc text)
       (process-send-eof proc))))
-
 (unless window-system
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
+;;; Scroll setup
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -318,8 +313,7 @@
   (setq recentf-max-saved-items 300
         recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
                           "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
-                          ".gz"
-                          "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
+                          ".gz" "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
   (recentf-mode t))
 
 (use-package counsel
