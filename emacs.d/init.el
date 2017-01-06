@@ -32,7 +32,6 @@
 (setq echo-keystrokes 0.01)
 
 (setq-default indent-tabs-mode nil)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;; Paste setup
 (defun copy-from-osx ()
@@ -112,6 +111,11 @@
 ;; dired
 (put 'dired-find-alternate-file 'disabled nil)
 
+(use-package whitespace-cleanup-mode
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'whitespace-cleanup-mode))
+
 ;; dashboard
 (use-package dashboard
   :ensure t
@@ -165,6 +169,15 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+(use-package rainbow-mode
+  :ensure t)
+
+(use-package indent-guide
+  :ensure t
+  :init
+  (setq indent-guide-char "|")
+  (indent-guide-global-mode))
+
 (use-package git-gutter
   :ensure t
   :init
@@ -194,6 +207,25 @@
   ("C-j 1" . eyebrowse-switch-to-window-config-1)
   ("C-j 2" . eyebrowse-switch-to-window-config-2)
   ("C-j 3" . eyebrowse-switch-to-window-config-3))
+
+(use-package buffer-move
+  :ensure t
+  :init
+  (setq buffer-move-stay-after-swap t)
+  (setq buffer-move-behavior 'move)
+  :config
+  (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+  (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+  (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+  (global-set-key (kbd "<C-S-right>")  'buf-move-right))
+
+;;; windmove
+(windmove-default-keybindings)
+;; Make windmove work in org-mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
 
 ;;; ace window
 (use-package ace-window
@@ -594,4 +626,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
