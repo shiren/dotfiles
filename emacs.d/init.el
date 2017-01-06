@@ -116,6 +116,15 @@
   :init
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode))
 
+(use-package which-key
+  :ensure t
+  :init
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-max-description-length 40)
+  (setq which-key-max-display-columns nil)
+  (which-key-setup-side-window-bottom)
+  (which-key-mode))
+
 ;; dashboard
 (use-package dashboard
   :ensure t
