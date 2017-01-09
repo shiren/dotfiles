@@ -3,6 +3,10 @@
 ;;; Begin initialization
 ;;; Turn off mouse interface early in startup to avoid momentary display
 ;;; Code:
+
+;; 에러시 디버그모드
+;; (setq debug-on-error t)
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -69,9 +73,6 @@
 
 ;; 소리 끄고 비쥬얼벨로
 (setq visible-bell t)
-
-;; 에러시 디버그모드
-(setq debug-on-error t)
 
 ;; split smart!
 (defun split-smart ()
