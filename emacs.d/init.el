@@ -62,6 +62,9 @@
 (require 'mouse)
 (xterm-mouse-mode t)
 
+;;; 이맥스가 다룰 VCS선택 디폴트는 훨씬 많은데 많으면 이맥스가 느려진다
+(setq vc-handled-backends '(Git))
+
 ;; 백업들 끄기
 (setq backup-inhibited t)
 (setq make-backup-files nil)
@@ -401,7 +404,12 @@
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
   (setq flycheck-checkers '(javascript-eslint))
-  (setq flycheck-highlighting-mode 'lines))
+  (setq flycheck-highlighting-mode 'lines)
+  (add-hook 'js2-init-hook
+            '(lambda ()
+               (setq next-error-function 'flycheck-next-error)
+               )
+            ))
 
 ;;;; javascript
 ;; js2-mode
