@@ -123,7 +123,7 @@
 (use-package which-key
   :ensure t
   :init
-  (setq which-key-idle-delay 0.5)
+  (setq which-key-idle-delay 2)
   (setq which-key-max-description-length 40)
   (setq which-key-max-display-columns nil)
   (which-key-setup-side-window-bottom)
@@ -220,17 +220,6 @@
   ("C-j 1" . eyebrowse-switch-to-window-config-1)
   ("C-j 2" . eyebrowse-switch-to-window-config-2)
   ("C-j 3" . eyebrowse-switch-to-window-config-3))
-
-(use-package buffer-move
-  :ensure t
-  :init
-  (setq buffer-move-stay-after-swap t)
-  (setq buffer-move-behavior 'move)
-  :config
-  (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-  (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-  (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-  (global-set-key (kbd "<C-S-right>")  'buf-move-right))
 
 ;;; windmove
 (windmove-default-keybindings)
@@ -546,10 +535,6 @@
   (define-key org-mode-map (kbd "C-j") nil)
   (define-key org-mode-map (kbd "M-j") 'org-return-indent)
   (define-key org-mode-map (kbd "<return>") 'org-return-indent))
-
-;; (require 'org)
-;; (require 'ox-reveal)
-;; (require 'ob-clojure)
 
 ;;; markdown mode
 (use-package markdown-mode
