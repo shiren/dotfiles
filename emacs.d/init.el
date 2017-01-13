@@ -62,9 +62,6 @@
 (require 'mouse)
 (xterm-mouse-mode t)
 
-;;; 이맥스가 다룰 VCS선택 디폴트는 훨씬 많은데 많으면 이맥스가 느려진다
-(setq vc-handled-backends '(Git))
-
 ;; 백업들 끄기
 (setq backup-inhibited t)
 (setq make-backup-files nil)
@@ -556,6 +553,9 @@
     (info-initialize)
     (add-to-list 'Info-directory-list
                  "~/.emacs.d/site-lisp/magit/Documentation/"))
+
+  ;;; 이맥스가 기본적으로 제공하는 Git 백엔드를 켜두면 매우 느려진다. magit만 쓴다.
+  (setq vc-handled-backends nil)
   :bind
   ("C-c m" . magit-status))
 
