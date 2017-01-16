@@ -281,23 +281,6 @@
   :config (setq dumb-jump-selector 'ivy)
   :ensure t)
 
-;;; hydra
-(use-package hydra
-  :ensure t
-  :init
-  ;; (defhydra hydra-jump (:hint nil)
-  ;;   "MOVE"
-  ;;   ("i" swiper "swiper!")
-  ;;   ("j" avy-goto-char "to char")
-  ;;   ("k" avy-goto-char-2 "to 2char")
-  ;;   ("w" avy-goto-word-1 "to word")
-  ;;   ("g" avy-goto-line "to line")
-  ;;   ("l" goto-last-change "to last Change")
-  ;;   ("t" git-timemachine-toggle "to timemachine"))
-
-  ;; (define-key global-map (kbd "C-j") 'hydra-jump/body)
-  )
-
 (use-package company
   :ensure t
   :init
