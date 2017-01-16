@@ -333,6 +333,12 @@
 (use-package counsel
   :ensure t)
 
+(use-package ibuffer
+  :ensure t
+  :init
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (autoload 'ibuffer "ibuffer" "List buffers." t))
+
 ;;; projectile
 (use-package projectile
   :ensure t
