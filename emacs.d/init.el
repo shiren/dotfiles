@@ -355,7 +355,20 @@
                 projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-files
         (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
-                projectile-globally-ignored-files)))
+                projectile-globally-ignored-files))
+  :bind
+  ;; 오타방지용 바인드들
+  ("C-c C-p f" . projectile-find-file)
+  ("C-c C-p 4 f" . projectile-find-file-other-window)
+  ("C-c C-p b" . projectile-switch-to-buffer)
+  ("C-c C-p 4 b" . projectile-switch-to-buffer-other-window)
+  ("C-c C-p D" . projectile-dired)
+  ("C-c C-p d" . projectile-find-dir)
+  ("C-c C-p j" . projectile-find-tag)
+  ("C-c C-p r" . projectile-replace)
+  ("C-c C-p o" . projectile-multi-occur)
+  ("C-c C-p s s" . projectile-ag)
+  ("C-c C-p I" . projectile-ibuffer))
 
 ;;; countsel-projectile
 (use-package counsel-projectile
