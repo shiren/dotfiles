@@ -368,7 +368,8 @@
   ("C-c C-p r" . projectile-replace)
   ("C-c C-p o" . projectile-multi-occur)
   ("C-c C-p s s" . projectile-ag)
-  ("C-c C-p I" . projectile-ibuffer))
+  ("C-c C-p I" . projectile-ibuffer)
+  ("C-c C-p p" . projectile-switch-project))
 
 ;;; countsel-projectile
 (use-package counsel-projectile
