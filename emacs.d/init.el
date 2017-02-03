@@ -285,7 +285,6 @@
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'company-mode)
-  (add-hook 'org-mode-hook 'company-mode)
   :config
   (setq company-idle-delay 0.1)
   (setq company-show-numbers t)
