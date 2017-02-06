@@ -154,7 +154,7 @@
   :init
   (setq multi-term-program "/usr/local/bin/zsh")
   :bind
-  ("C-c t" . multi-term))
+  ("C-c i" . multi-term))
 
 (use-package paren
   :init
