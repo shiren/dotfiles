@@ -173,12 +173,6 @@
   (setq highlight-thing-limit-to-defun t)
   (add-hook 'prog-mode-hook 'highlight-thing-mode))
 
-;;; rainbow-delimiters
-(use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
 (use-package rainbow-mode
   :ensure t)
 
@@ -192,19 +186,6 @@
   :ensure t
   :init
   (global-git-gutter-mode +1))
-
-(use-package git-timemachine
-  :ensure t
-  :bind
-  ("C-j t" . git-timemachine-toggle))
-
-(use-package undo-tree
-  :ensure t
-  :init
-  (global-undo-tree-mode)
-  :bind
-  ("C-z" . undo)
-  ("C-S-z" . undo-tree-redo))
 
 ;;; Eyebrowse
 (use-package eyebrowse
@@ -268,7 +249,17 @@
   ("C-j g". avy-goto-line))
 
 (use-package git-timemachine
-  :ensure t)
+  :ensure t
+  :bind
+  ("C-j t" . git-timemachine-toggle))
+
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode)
+  :bind
+  ("C-z" . undo)
+  ("C-S-z" . undo-tree-redo))
 
 (use-package goto-last-change
   :ensure t
@@ -329,9 +320,6 @@
                           ".gz" "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
   (recentf-mode t))
 
-(use-package counsel
-  :ensure t)
-
 (use-package ibuffer
   :ensure t
   :init
@@ -369,6 +357,9 @@
   ("C-c C-p s s" . projectile-ag)
   ("C-c C-p I" . projectile-ibuffer)
   ("C-c C-p p" . projectile-switch-project))
+
+(use-package counsel
+  :ensure t)
 
 ;;; countsel-projectile
 (use-package counsel-projectile
