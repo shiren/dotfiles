@@ -269,7 +269,9 @@
 (use-package dumb-jump
   :bind (("C-j n" . dumb-jump-go-other-window)
          ("C-j m" . dumb-jump-go))
-  :config (setq dumb-jump-selector 'ivy)
+  :config
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-force-searcher 'ag)
   :ensure t)
 
 (use-package company
@@ -433,7 +435,11 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("containers\\/.*\\.js\\'" . rjsx-mode)))
+  (add-to-list 'auto-mode-alist '("containers\\/.*\\.js\\'" . rjsx-mode))
+  :config
+  (with-eval-after-load 'rjsx
+    (define-key rjsx-mode-map "<" nil)
+    (define-key rjsx-mode-map (kbd "C-d") nil)))
 
 ;;; Clojure setup
 ;; CIDER
@@ -617,6 +623,11 @@
   :bind
   ("C-c n" . google-translate-smooth-translate))
 
+;;; Utilities
+(use-package wttrin
+  :ensure t
+  :init
+  (setq wttrin-default-accept-language '("Accept-Language" . "ko-KR")))
 
 (provide 'init)
 ;;; init.el ends here
