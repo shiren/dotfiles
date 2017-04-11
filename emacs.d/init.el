@@ -225,6 +225,12 @@
   (setq ivy-height 12)
   ;; does not count candidates
   (setq ivy-count-format "")
+  (setq ivy-switch-buffer-faces-alist
+        '((emacs-lisp-mode . outline-1)
+          (dired-mode . outline-2)
+          (js2-mode . outline-4)
+          (clojure-mode . outline-5)
+          (org-mode . outline-3)))
   :bind
   (("M-x". counsel-M-x)
   ("C-x C-f". counsel-find-file)
