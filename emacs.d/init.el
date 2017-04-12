@@ -235,11 +235,12 @@
   (("M-x". counsel-M-x)
   ("C-x C-f". counsel-find-file)
   ("C-c r". counsel-recentf)
-  ("C-c g". counsel-ag)
+  ("C-c g". counsel-projectile-rg)
   ("C-c e". ivy-switch-buffer)
   ("C-c 4 e". ivy-switch-buffer-other-window)
   ("C-c o". counsel-imenu)
   ("C-c y" . counsel-yank-pop)
+  ("C-x r l" . counsel-bookmark)
   ("C-j i". swiper)
   ("C-j o". swiper-all)
   :map ivy-mode-map
