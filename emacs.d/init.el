@@ -270,7 +270,7 @@
          ("C-j m" . dumb-jump-go))
   :config
   (setq dumb-jump-selector 'ivy)
-  (setq dumb-jump-force-searcher 'ag)
+  (setq dumb-jump-force-searcher 'rg)
   :ensure t)
 
 (use-package company
@@ -355,7 +355,8 @@
   ("C-c C-p j" . projectile-find-tag)
   ("C-c C-p r" . projectile-replace)
   ("C-c C-p o" . projectile-multi-occur)
-  ("C-c C-p s s" . projectile-ag)
+  ("C-c C-p s s" . counsel-projectile-ag)
+  ("C-c C-g" . counsel-projectile-rg)
   ("C-c C-p I" . projectile-ibuffer)
   ("C-c C-p p" . projectile-switch-project))
 
