@@ -207,14 +207,6 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-;;; ace window
-(use-package ace-window
-  :ensure t
-  :config
-  (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
-  ;(setq aw-dispatch-always t)
-  :bind ("C-x o" . ace-window))
-
 ;; swiper and ivy
 (use-package swiper
   :ensure t
