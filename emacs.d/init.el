@@ -303,12 +303,6 @@
 (use-package iedit
   :ensure t)
 
-;;; Auto pair
-(use-package autopair
-  :ensure t
-  :init
-  (add-hook 'js2-mode-hook #'autopair-mode))
-
 ;;; Expand Region
 (use-package expand-region
   :ensure t
