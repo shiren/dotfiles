@@ -112,6 +112,9 @@
 ;; dired
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; hippie-expand)
+(global-set-key "\M-n" 'hippie-expand)
+
 (use-package whitespace-cleanup-mode
   :ensure t
   :init
