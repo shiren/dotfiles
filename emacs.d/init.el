@@ -620,11 +620,14 @@
   :bind
   ("C-c n" . google-translate-smooth-translate))
 
-;;; Utilities
+;;; Tools
 (use-package wttrin
   :ensure t
   :init
   (setq wttrin-default-accept-language '("Accept-Language" . "ko-KR")))
+
+(use-package restclient
+  :ensure t)
 
 (provide 'init)
 ;;; init.el ends here
