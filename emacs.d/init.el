@@ -428,6 +428,7 @@
       js-doc-url "url of your website"
       js-doc-license "MIT"))
 
+;;; react
 (use-package rjsx-mode
   :ensure t
   :init
@@ -438,15 +439,33 @@
     (define-key rjsx-mode-map "<" nil)
     (define-key rjsx-mode-map (kbd "C-d") nil)))
 
+;;; typescript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1))
+
+(use-package tide
+  :ensure t
+  :init
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (setup-tide-mode)))))
+
 ;;; Clojure setup
-;; CIDER
 (use-package cider
   :ensure t
   :init
   (add-hook 'cider-repl-mode-hook #'company-mode)
   (add-hook 'cider-mode-hook #'company-mode))
 
-;; clojure-mode
 (use-package clojure-mode
   :ensure t)
 
@@ -469,6 +488,9 @@
 
 ;;; org
 (use-package ob-swift
+  :ensure t)
+
+(use-package ob-typescript
   :ensure t)
 
 (use-package ox-gfm
@@ -501,6 +523,7 @@
    '((js . t)
      (emacs-lisp . t)
      (clojure . t)
+     (typescript . t)
      (plantuml . t)
      (swift . t)
      (sh . t)
@@ -544,7 +567,33 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-;;; Magit
+
+;;; Utilities
+(use-package dash-at-point
+  :ensure t
+  :init
+  (add-to-list 'dash-at-point-mode-alist '(js2-mode . "js"))
+  (add-to-list 'dash-at-point-mode-alist '(elisp-mode . "elisp"))
+  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure"))
+  (add-to-list 'dash-at-point-mode-alist '(csharp-mode . "unity3d"))
+  :bind
+  ("C-c d" . dash-at-point)
+  ("C-c ." . dash-at-point-with-docset))
+
+(use-package google-translate
+  :ensure t
+  :init
+  (require 'google-translate)
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-translation-directions-alist
+        '(("en" . "ko") ("ko" . "en")))
+  (setq google-translate-pop-up-buffer-set-focus t)
+  (setq google-translate-output-destination 'echo-area)
+  (setq max-mini-window-height 0.5)
+  :bind
+  ("C-c n" . google-translate-smooth-translate))
+
+;;; Tools
 (use-package magit
   :commands magit-get-top-dir
   :ensure t
@@ -567,7 +616,6 @@
   :bind
   ("C-c m" . magit-status))
 
-;;; prodigy
 (use-package prodigy
   :ensure t
   :bind
@@ -596,31 +644,6 @@
     :name 'karma
     :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS"))
 
-(use-package dash-at-point
-  :ensure t
-  :init
-  (add-to-list 'dash-at-point-mode-alist '(js2-mode . "js"))
-  (add-to-list 'dash-at-point-mode-alist '(elisp-mode . "elisp"))
-  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure"))
-  (add-to-list 'dash-at-point-mode-alist '(csharp-mode . "unity3d"))
-  :bind
-  ("C-c d" . dash-at-point)
-  ("C-c ." . dash-at-point-with-docset))
-
-(use-package google-translate
-  :ensure t
-  :init
-  (require 'google-translate)
-  (require 'google-translate-smooth-ui)
-  (setq google-translate-translation-directions-alist
-        '(("en" . "ko") ("ko" . "en")))
-  (setq google-translate-pop-up-buffer-set-focus t)
-  (setq google-translate-output-destination 'echo-area)
-  (setq max-mini-window-height 0.5)
-  :bind
-  ("C-c n" . google-translate-smooth-translate))
-
-;;; Tools
 (use-package wttrin
   :ensure t
   :init
