@@ -428,6 +428,17 @@
       js-doc-url "url of your website"
       js-doc-license "MIT"))
 
+(use-package js2-refactor
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  :bind
+  (:map js2-mode-map
+        ("\C-k" . js2r-kill)))
+
+(use-package xref-js2
+  :ensure t)
+
 ;;; react
 (use-package rjsx-mode
   :ensure t
