@@ -112,8 +112,11 @@
 ;; dired
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; hippie-expand)
+;; hippie-expand
 (global-set-key "\M-n" 'hippie-expand)
+
+;; quit-window-on
+(global-set-key "\C-xj" 'quit-windows-on)
 
 (use-package whitespace-cleanup-mode
   :ensure t
