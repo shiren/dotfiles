@@ -399,7 +399,10 @@
           '(lambda ()
              (js2-imenu-extras-mode)))
   :config
+  (define-key js2-mode-map (kbd "M-.") nil)
+  (define-key js2-mode-map (kbd "C-c C-j") nil)
   (setq js2-include-node-externs t)
+  (setq js2-pretty-multiline-declarations nil)
   (setq-default js2-basic-offset 2
                 js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
@@ -409,7 +412,11 @@
   :ensure t
   :init
   (autoload 'tern-mode' "tern.el" nil t)
-  (add-hook 'js-mode-hook (lambda () (tern-mode t))))
+  (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+  :config
+  (define-key tern-mode-keymap (kbd "C-c C-r") nil)
+  (define-key tern-mode-keymap (kbd "M-.") nil)
+  (define-key tern-mode-keymap (kbd "M-,") nil))
 
 (use-package company-tern
   :ensure t
@@ -431,13 +438,24 @@
 (use-package js2-refactor
   :ensure t
   :init
+  (setq js2r-always-insert-parens-around-arrow-function-params t)
+  :config
+  (js2r-add-keybindings-with-prefix "C-c C-r")
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
   :bind
   (:map js2-mode-map
         ("\C-k" . js2r-kill)))
 
+(defun setup-xref-js2-backend ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
+
 (use-package xref-js2
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook 'setup-xref-js2-backend)
+  (add-hook 'rjsx-mode-hook 'setup-xref-js2-backend)
+  :config
+  (add-to-list 'xref-js2-ignored-dirs "dist"))
 
 ;;; react
 (use-package rjsx-mode
