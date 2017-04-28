@@ -310,6 +310,7 @@
 (use-package expand-region
   :ensure t
   :bind
+  ("C-c C-v" . er/expand-region)
   ("C-c v" . er/expand-region))
 
 ;; recent file list
@@ -458,7 +459,13 @@
   (add-hook 'js2-mode-hook 'setup-xref-js2-backend)
   (add-hook 'rjsx-mode-hook 'setup-xref-js2-backend)
   :config
-  (add-to-list 'xref-js2-ignored-dirs "dist"))
+  (add-to-list 'xref-js2-ignored-dirs "dist")
+  (defun my/do-then-quit (&rest args)
+    (let ((win (selected-window)))
+      (apply (car args) (rest args))
+      (quit-window nil win)))
+
+  (advice-add #'xref-goto-xref :around #'my/do-then-quit))
 
 ;;; react
 (use-package rjsx-mode
