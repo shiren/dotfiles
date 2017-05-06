@@ -182,6 +182,12 @@
 (use-package rainbow-mode
   :ensure t)
 
+;;; rainbow-delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+
 (use-package indent-guide
   :ensure t
   :init
