@@ -74,6 +74,9 @@
 ;; 소리 끄고 비쥬얼벨로
 (setq visible-bell t)
 
+;; 풀스크린키 변경
+(define-key global-map (kbd "C-M-f") 'toggle-frame-fullscreen)
+
 ;; split smart!
 (defun split-smart ()
   "split smart!"
