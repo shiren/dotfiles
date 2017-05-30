@@ -429,7 +429,8 @@
   :config
   (define-key tern-mode-keymap (kbd "C-c C-r") nil)
   (define-key tern-mode-keymap (kbd "M-.") nil)
-  (define-key tern-mode-keymap (kbd "M-,") nil))
+  (define-key tern-mode-keymap (kbd "M-,") nil)
+  (setq tern-command '("tern" "--no-port-file")))
 
 (use-package company-tern
   :ensure t
