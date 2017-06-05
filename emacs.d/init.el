@@ -349,11 +349,12 @@
   ;; (setq projectile-require-project-root nil)
   (setq projectile-indexing-method 'alien)
   (setq projectile-globally-ignored-directories
-        (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs")
+        (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs" "deploy")
                 projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-files
         (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
                 projectile-globally-ignored-files))
+  (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))   
   :bind
   ;; 오타방지용 바인드들
   ("C-c C-p f" . projectile-find-file)
