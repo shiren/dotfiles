@@ -161,7 +161,7 @@
 (use-package multi-term
   :ensure t
   :init
-  (setq multi-term-program "/usr/local/bin/zsh")
+  (setq multi-term-program "/bin/zsh")
   :bind
   ("C-c i" . multi-term))
 

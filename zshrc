@@ -75,11 +75,7 @@ export LC_ALL=ko_KR.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="/usr/local/bin/vim"
-alias vi="/usr/local/bin/vim"
 alias mux="tmuxinator"
-alias gochart="~/masterpiece/ws_nhn/fedev/tui.chart"
-alias gofe="~/masterpiece/ws_nhn/fedev/"
 alias godot="~/dotfiles"
 
 export EDITOR="/usr/local/bin/vim"
@@ -89,9 +85,9 @@ if [ -z $EMACS ]; then
     # Base16 Shell
     BASE16_SHELL=$HOME/.config/base16-shell/
     [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
