@@ -401,6 +401,19 @@
                )
             ))
 
+;; use local eslint from node_modules before global
+;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+(defun my/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
 (use-package wgrep
   :ensure t)
 
@@ -674,7 +687,7 @@
   (prodigy-define-service
     :name "WebPlayer server"
     :command "npm"
-    :cwd "~/Masterpiece/videoinfra/webPlayer"
+    :cwd "~/masterpiece/vp/webPlayer"
     :args '("run" "dev")
     :port 8080
     :tags '(webpack-server))
@@ -682,7 +695,7 @@
   (prodigy-define-service
     :name "WebPlayer test"
     :command "npm"
-    :cwd "~/Masterpiece/videoinfra/webPlayer"    
+    :cwd "~/masterpiece/vp/webPlayer"    
     :args '("run" "test")
     :tags '(karma))
 
