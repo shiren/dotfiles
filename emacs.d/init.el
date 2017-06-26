@@ -463,17 +463,6 @@
       js-doc-url "url of your website"
       js-doc-license "MIT"))
 
-(use-package js2-refactor
-  :ensure t
-  :init
-  (setq js2r-always-insert-parens-around-arrow-function-params t)
-  :config
-  (js2r-add-keybindings-with-prefix "C-c C-r")
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  :bind
-  (:map js2-mode-map
-        ("\C-k" . js2r-kill)))
-
 (defun setup-xref-js2-backend ()
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
 
