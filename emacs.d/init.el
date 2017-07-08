@@ -458,9 +458,9 @@
         ("\C-cd" . js-doc-insert-function-doc)
         ("@" . js-doc-insert-tag))
   :config
-  (setq js-doc-mail-address "your email address"
-      js-doc-author (format "your name <%s>" js-doc-mail-address)
-      js-doc-url "url of your website"
+  (setq js-doc-mail-address "shirenbeat@gmail.com"
+      js-doc-author (format "Sungho Kim <%s>" js-doc-mail-address)
+      js-doc-url "shiren.github.io"
       js-doc-license "MIT"))
 
 (defun setup-xref-js2-backend ()
