@@ -121,6 +121,9 @@
 ;; quit-window-on
 (global-set-key "\C-xj" 'quit-windows-on)
 
+;; delete highlighted region before yank
+(delete-selection-mode 1)
+
 (use-package whitespace-cleanup-mode
   :ensure t
   :init
