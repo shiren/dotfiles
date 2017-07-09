@@ -206,6 +206,7 @@
 (use-package eyebrowse
   :ensure t
   :init
+  (setq eyebrowse-keymap-prefix (kbd "C-c C-e"))  
   (eyebrowse-mode t)
   :bind
   ("C-j ;" . eyebrowse-last-window-config)
@@ -565,10 +566,32 @@
   ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  (setq org-agenda-files (list "~/org"))
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
-  (setq org-mobile-inbox-for-pull (concat org-directory "/notes.org"))
+  (setq org-agenda-files '("~/org/agenda/inbox.org"
+                           "~/org/agenda/gtd.org"))
+  (setq org-default-notes-file "/agenda/inbox.org")
+  (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
+  
+  (setq org-capture-templates '(("t" "Inbox" entry
+                                 (file+headline "~/org/agenda/inbox.org" "Inbox")
+                                 "* TODO %i%?")
+                                ("g" "GTD" entry
+                                 (file+headline "~/org/agenda/gtd.org" "GTD")
+                                 "* TODO %i%?")))
+
+  (setq org-refile-targets
+        '(("~/org/agenda/inbox.org" :level . 1)
+          ("~/org/agenda/gtd.org" :maxlevel . 2)))
+  
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+  (setq org-agenda-custom-commands 
+        '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
+           ((org-agenda-files '("~/org/agenda/inbox.org" "~/org/agenda/gtd.org")) ;; (5)
+            (org-agenda-sorting-strategy '(priority-up effort-down))))
+          ;; ...other commands here
+          ))  
+  
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
