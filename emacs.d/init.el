@@ -569,8 +569,7 @@
   ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  (setq org-agenda-files '("~/org/agenda/inbox.org"
-                           "~/org/agenda/gtd.org"))
+  (setq org-agenda-files '("~/org/agenda"))
   (setq org-default-notes-file "/agenda/inbox.org")
   (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
@@ -580,17 +579,21 @@
                                  "* TODO %i%?")
                                 ("g" "GTD" entry
                                  (file+headline "~/org/agenda/gtd.org" "GTD")
+                                 "* TODO %i%?")
+                                ("d" "Development" entry
+                                 (file+headline "~/org/agenda/development.org" "Development")
                                  "* TODO %i%?")))
 
   (setq org-refile-targets
         '(("~/org/agenda/inbox.org" :level . 1)
-          ("~/org/agenda/gtd.org" :maxlevel . 2)))
+          ("~/org/agenda/gtd.org" :maxlevel . 2)
+          ("~/org/agenda/development.org" :maxlevel . 2)))
   
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "DONE(d)" "CANCELLED(c)")))
 
   (setq org-agenda-custom-commands 
         '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
-           ((org-agenda-files '("~/org/agenda/inbox.org" "~/org/agenda/gtd.org")) ;; (5)
+           ((org-agenda-files '("~/org/agenda")) ;; (5)
             (org-agenda-sorting-strategy '(priority-up effort-down))))
           ;; ...other commands here
           ))  
