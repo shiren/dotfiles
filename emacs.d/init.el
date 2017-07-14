@@ -209,7 +209,7 @@
 (use-package eyebrowse
   :ensure t
   :init
-  (setq eyebrowse-keymap-prefix (kbd "C-c C-e"))  
+  (setq eyebrowse-keymap-prefix (kbd "C-c C-c"))
   (eyebrowse-mode t)
   :bind
   ("C-j ;" . eyebrowse-last-window-config)
