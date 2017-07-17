@@ -639,13 +639,6 @@
   (define-key org-mode-map (kbd "M-j") 'org-return-indent)
   (define-key org-mode-map (kbd "<return>") 'org-return-indent))
 
-(use-package org-gcal
-  :ensure t
-  :init
-  (setq org-gcal-client-id "162488538499-5h64rf7iiokmqtphoc7m6gj7p0trs6rc.apps.googleusercontent.com"
-        org-gcal-client-secret "QvjogrcGM4QVFDgtVWcOGFfs"
-        org-gcal-file-alist '(("153qsmtobrcfsbd9etcsp4lr20@group.calendar.google.com" .  "~/org/agenda/gtd.org"))))
-
 ;;; markdown mode
 (use-package markdown-mode
   :ensure t
