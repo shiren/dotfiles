@@ -560,6 +560,7 @@
 (use-package org-tree-slide
   :ensure t)
 
+(load-library "find-lisp")
 (use-package org
   :ensure t
   :bind
@@ -569,7 +570,8 @@
   ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  (setq org-agenda-files '("~/org/agenda"))
+  ;;(setq org-agenda-files '("~/org/agenda"))
+  (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))  
   (setq org-default-notes-file "/agenda/inbox.org")
   (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
