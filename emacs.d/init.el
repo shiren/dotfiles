@@ -679,7 +679,6 @@
   :commands magit-get-top-dir
   :ensure t
   :init
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/magit/lisp")
   ;; magit 오토 리버트시 버퍼의 브랜치명까지 갱신하도록
   (setq auto-revert-check-vc-info t)
   (with-eval-after-load 'info
