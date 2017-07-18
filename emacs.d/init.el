@@ -593,12 +593,12 @@
   
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "DONE(d)" "CANCELLED(c)")))
 
-  (setq org-agenda-custom-commands 
-        '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
-           ((org-agenda-files '("~/org/agenda")) ;; (5)
-            (org-agenda-sorting-strategy '(priority-up effort-down))))
-          ;; ...other commands here
-          ))  
+  ;; (setq org-agenda-custom-commands 
+  ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
+  ;;          ((org-agenda-files '("~/org/agenda")) ;; (5)
+  ;;           (org-agenda-sorting-strategy '(priority-up effort-down))))
+  ;;         ;; ...other commands here
+  ;;         ))  
   
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
