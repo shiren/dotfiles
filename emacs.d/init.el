@@ -400,6 +400,7 @@
                         '(javascript-jshint)))
   (setq flycheck-checkers '(javascript-eslint))
   (setq flycheck-highlighting-mode 'lines)
+  (setq flycheck-indication-mode 'left-fringe)
   (add-hook 'js2-init-hook
             '(lambda ()
                (setq next-error-function 'flycheck-next-error)
@@ -689,6 +690,17 @@
   (setq magit-rewrite-inclusive 'ask)
   (setq magit-save-some-buffers t)
   (setq magit-set-upstream-on-push 'askifnotset)
+
+  (defun commit-and-push-agendas ()
+    (interactive)
+    (let ((files (append (find-lisp-find-files "~/org" "\.org_archive$") org-agenda-files)))
+      (when (magit-anything-modified-p nil files)
+        (magit-call-git "add" files)
+        (magit-call-git "commit" "-m" "org files update")
+        (magit-call-git "push" "origin")
+        (magit-refresh))))
+
+  (add-hook 'kill-emacs-hook #'commit-and-push-agenda)
   :bind
   ("C-c m" . magit-status))
 
@@ -708,7 +720,7 @@
   (prodigy-define-service
     :name "WebPlayer test"
     :command "npm"
-    :cwd "~/masterpiece/vp/webPlayer"    
+    :cwd "~/masterpiece/vp/webPlayer"
     :args '("run" "test")
     :tags '(karma))
 
