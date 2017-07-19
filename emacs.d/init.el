@@ -127,7 +127,8 @@
 (use-package whitespace-cleanup-mode
   :ensure t
   :init
-  (add-hook 'prog-mode-hook 'whitespace-cleanup-mode))
+  (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
+  (add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
 (use-package which-key
   :ensure t
@@ -595,6 +596,7 @@
           ("~/org/agenda/development.org" :maxlevel . 2)))
   
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "DONE(d)" "CANCELLED(c)")))
+  (add-to-list 'org-modules "org-habit")
 
   ;; (setq org-agenda-custom-commands 
   ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
