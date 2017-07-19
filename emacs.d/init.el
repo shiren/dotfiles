@@ -359,7 +359,7 @@
   (setq projectile-globally-ignored-files
         (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
                 projectile-globally-ignored-files))
-  (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))   
+  (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))
   :bind
   ;; 오타방지용 바인드들
   ("C-c C-p f" . projectile-find-file)
@@ -573,11 +573,11 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   ;;(setq org-agenda-files '("~/org/agenda"))
-  (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))  
+  (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))
   (setq org-default-notes-file "/agenda/inbox.org")
   (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
-  
+
   (setq org-capture-templates '(("t" "Inbox" entry
                                  (file+headline "~/org/agenda/inbox.org" "Inbox")
                                  "* TODO %i%?")
@@ -595,17 +595,17 @@
         '(("~/org/agenda/inbox.org" :level . 1)
           ("~/org/agenda/gtd.org" :maxlevel . 2)
           ("~/org/agenda/development.org" :maxlevel . 2)))
-  
+
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
   (add-to-list 'org-modules "org-habit")
 
-  ;; (setq org-agenda-custom-commands 
+  ;; (setq org-agenda-custom-commands
   ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
   ;;          ((org-agenda-files '("~/org/agenda")) ;; (5)
   ;;           (org-agenda-sorting-strategy '(priority-up effort-down))))
   ;;         ;; ...other commands here
-  ;;         ))  
-  
+  ;;         ))
+
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -691,7 +691,7 @@
   (setq magit-save-some-buffers t)
   (setq magit-set-upstream-on-push 'askifnotset)
 
-  (defun commit-and-push-agendas ()
+  (defun commit-and-push-agenda ()
     (interactive)
     (let ((files (append (find-lisp-find-files "~/org" "\.org_archive$") org-agenda-files)))
       (when (magit-anything-modified-p nil files)
