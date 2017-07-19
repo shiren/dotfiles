@@ -595,7 +595,7 @@
           ("~/org/agenda/gtd.org" :maxlevel . 2)
           ("~/org/agenda/development.org" :maxlevel . 2)))
   
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "DONE(d)" "CANCELLED(c)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
   (add-to-list 'org-modules "org-habit")
 
   ;; (setq org-agenda-custom-commands 
