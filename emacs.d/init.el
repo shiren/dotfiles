@@ -652,17 +652,6 @@
 
 
 ;;; Utilities
-(use-package dash-at-point
-  :ensure t
-  :init
-  (add-to-list 'dash-at-point-mode-alist '(js2-mode . "js"))
-  (add-to-list 'dash-at-point-mode-alist '(elisp-mode . "elisp"))
-  (add-to-list 'dash-at-point-mode-alist '(clojure-mode . "clojure"))
-  (add-to-list 'dash-at-point-mode-alist '(csharp-mode . "unity3d"))
-  :bind
-  ("C-c d" . dash-at-point)
-  ("C-c ." . dash-at-point-with-docset))
-
 (use-package google-translate
   :ensure t
   :init
