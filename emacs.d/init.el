@@ -579,9 +579,12 @@
   (setq org-capture-templates '(("t" "Inbox" entry
                                  (file+headline "~/org/agenda/inbox.org" "Inbox")
                                  "* TODO %i%?")
-                                ("g" "GTD" entry
-                                 (file+headline "~/org/agenda/gtd.org" "GTD")
+                                ("g" "Task" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
                                  "* TODO %i%?")
+                                ("n" "Note" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Note")
+                                 "* %i%?")
                                 ("d" "Development" entry
                                  (file+headline "~/org/agenda/development.org" "Development")
                                  "* TODO %i%?")))
