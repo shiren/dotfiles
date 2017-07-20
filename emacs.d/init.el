@@ -573,7 +573,7 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   ;;(setq org-agenda-files '("~/org/agenda"))
-  (setq org-agenda-files (find-lisp-find-files "~/org" "\.org$"))
+  (setq org-agenda-files (find-lisp-find-files "~/org/agenda" "\.org$"))
   (setq org-default-notes-file "/agenda/inbox.org")
   (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
@@ -597,7 +597,6 @@
           ("~/org/agenda/development.org" :maxlevel . 2)))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
-  (add-to-list 'org-modules "org-habit")
 
   ;; (setq org-agenda-custom-commands
   ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
@@ -672,6 +671,26 @@
   ("C-c n" . google-translate-smooth-translate))
 
 ;;; Tools
+(defun auto-commit-files (list)
+  (while list
+    (let* ((file (car list))
+           (file-buffer (get-file-buffer file)))
+      (when file-buffer
+        (print file)
+        (set-buffer file-buffer)
+        (when (magit-anything-modified-p nil file)
+          (print "has")
+          (magit-call-git "add" file)
+          (magit-call-git "commit" "-m" (concat file " update"))
+          (magit-call-git "push" "origin")
+          (magit-refresh)
+          )
+        )
+      )
+    (setq list (cdr list))
+    )
+  )
+
 (use-package magit
   :commands magit-get-top-dir
   :ensure t
@@ -691,16 +710,11 @@
   (setq magit-save-some-buffers t)
   (setq magit-set-upstream-on-push 'askifnotset)
 
-  (defun commit-and-push-agenda ()
+  (defun commit-and-push-myfiles ()
     (interactive)
-    (let ((files (append (find-lisp-find-files "~/org" "\.org_archive$") org-agenda-files)))
-      (when (magit-anything-modified-p nil files)
-        (magit-call-git "add" files)
-        (magit-call-git "commit" "-m" "org files update")
-        (magit-call-git "push" "origin")
-        (magit-refresh))))
+    (auto-commit-files (append '("~/dotfiles/emacs.d/init.el") (find-lisp-find-files "~/org/agenda" "\.org_archive$") org-agenda-files)))
 
-  (add-hook 'kill-emacs-hook #'commit-and-push-agenda)
+  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
