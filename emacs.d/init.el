@@ -676,10 +676,8 @@
     (let* ((file (car list))
            (file-buffer (get-file-buffer file)))
       (when file-buffer
-        (print file)
         (set-buffer file-buffer)
         (when (magit-anything-modified-p nil file)
-          (print "has")
           (magit-call-git "add" file)
           (magit-call-git "commit" "-m" (concat file " update"))
           (magit-call-git "push" "origin")
@@ -712,7 +710,11 @@
 
   (defun commit-and-push-myfiles ()
     (interactive)
-    (auto-commit-files (append '("~/dotfiles/emacs.d/init.el") (find-lisp-find-files "~/org/agenda" "\.org_archive$") org-agenda-files)))
+    (auto-commit-files
+     (append
+      (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
+      (find-lisp-find-files "~/org/agenda" "\.org_archive$")
+      org-agenda-files)))
 
   (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
   :bind
