@@ -589,7 +589,18 @@
                                  "* %i%?")
                                 ("d" "Development" entry
                                  (file+headline "~/org/agenda/development.org" "Development")
-                                 "* TODO %i%?")))
+                                 "* TODO %i%?")
+                                ("p" "Project" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Project\n:END:")
+                                ("s" "Study" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Study\n:END:")
+                                ("r" "SProject" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: SProject\n:END:")
+                                )
+        )
 
   (setq org-refile-targets
         '(("~/org/agenda/inbox.org" :level . 1)
