@@ -672,6 +672,7 @@
 
 ;;; Tools
 (defun auto-commit-files (list)
+  "내 첫작품 list를 입력받아서 변경된게 있으면 자동으로 커밋한다."
   (while list
     (let* ((file (car list))
            (file-buffer (get-file-buffer file)))
