@@ -4,7 +4,7 @@
 ;;; Turn off mouse interface early in startup to avoid momentary display
 ;;; Code:
 
-;; 에러시 디버그모드
+;; 에러시 디버그모드eeee
 ;; (setq debug-on-error t)
 
 (when window-system
