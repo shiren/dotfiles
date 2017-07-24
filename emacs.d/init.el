@@ -1,10 +1,10 @@
 ;;; package --- Summary
-;;; Commentary:
+;;; Commentary: e
 ;;; Begin initialization
 ;;; Turn off mouse interface early in startup to avoid momentary display
 ;;; Code:
 
-;; 에러시 디버그모드eeee
+;; 에러시 디버그모드
 ;; (setq debug-on-error t)
 
 (when window-system
@@ -731,9 +731,10 @@
      (append
       (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
       (find-lisp-find-files "~/org/agenda" "\.org_archive$")
-      org-agenda-files)))
+      org-agenda-files))
+    t)
 
-  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
+  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
