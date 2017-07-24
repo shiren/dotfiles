@@ -727,7 +727,7 @@
       (find-lisp-find-files "~/org/agenda" "\.org_archive$")
       org-agenda-files)))
 
-  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
+  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
