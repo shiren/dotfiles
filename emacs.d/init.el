@@ -1,5 +1,5 @@
 ;;; package --- Summary
-;;; Commentary:
+;;; Commentary: e
 ;;; Begin initialization
 ;;; Turn off mouse interface early in startup to avoid momentary display
 ;;; Code:
