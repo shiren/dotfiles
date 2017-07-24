@@ -729,6 +729,7 @@
     t)
 
   (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
+  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
