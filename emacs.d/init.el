@@ -768,7 +768,8 @@
 (use-package wttrin
   :ensure t
   :init
-  (setq wttrin-default-accept-language '("Accept-Language" . "ko-KR")))
+  (setq wttrin-default-accept-language '("Accept-Language"
+  . "ko-KR")))
 
 (use-package restclient
   :ensure t)
