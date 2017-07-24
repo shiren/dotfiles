@@ -590,15 +590,9 @@
                                 ("d" "Development" entry
                                  (file+headline "~/org/agenda/development.org" "Development")
                                  "* TODO %i%?")
-                                ("p" "Project" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Project\n:END:")
                                 ("s" "Study" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
                                  "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Study\n:END:")
-                                ("r" "SProject" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: SProject\n:END:")
                                 )
         )
 
@@ -731,10 +725,9 @@
      (append
       (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
       (find-lisp-find-files "~/org/agenda" "\.org_archive$")
-      org-agenda-files))
-    t)
+      org-agenda-files)))
 
-  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
+  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
