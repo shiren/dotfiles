@@ -691,9 +691,7 @@
            (file-buffer (get-file-buffer file)))
       (when file-buffer
         (set-buffer file-buffer)
-        (print "1")
         (when (magit-anything-modified-p nil file)
-                  (print "2")
           (magit-call-git "add" file)
           (magit-call-git "commit" "-m" (concat file " update"))
           (magit-call-git "push" "origin")
