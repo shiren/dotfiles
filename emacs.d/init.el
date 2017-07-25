@@ -690,7 +690,7 @@
           (magit-call-git "commit" "-m" (concat file " update"))
           (magit-call-git "push" "origin")
           (magit-refresh)
-          (print (concat file "is pushed!!!"))
+          (print (concat file " is pushed!!!"))
           )
         )
       )
