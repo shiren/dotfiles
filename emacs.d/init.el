@@ -685,7 +685,7 @@
 (defun auto-commit-files (list)
   (interactive
     (list (list (buffer-file-name (current-buffer)))))
-  "내 첫작품 list를 입력받아서 변경된게 있으면 자동으로 커밋한다.interactive에선 현재 버퍼를 자동으로 커밋하고 푸시"
+  "LIST to be auto commit"
   (while list
     (let* ((file (car list))
            (file-buffer (get-file-buffer file)))
