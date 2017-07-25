@@ -698,7 +698,7 @@
     )
   )
 
-(global-set-key (kbd "C-j m") 'auto-commit-files)
+(global-set-key (kbd "C-j m") #'auto-commit-files)
 
 (use-package magit
   :commands magit-get-top-dir
