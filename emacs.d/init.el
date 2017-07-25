@@ -593,10 +593,6 @@
                                 )
         )
 
-  ;; (setq org-refile-targets
-  ;;       '(("~/org/agenda/inbox.org" :level . 1)
-  ;;         ("~/org/agenda/gtd.org" :level . 1)
-  ;;         ("~/org/agenda/development.org" :level . 1)))
   (setq org-refile-targets '((org-agenda-files :level . 1)))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
