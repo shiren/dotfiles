@@ -587,19 +587,17 @@
                                 ("n" "Note" entry
                                  (file+headline "~/org/agenda/gtd.org" "Note")
                                  "* %i%?")
-                                ("d" "Development" entry
-                                 (file+headline "~/org/agenda/development.org" "Development")
-                                 "* TODO %i%?")
                                 ("s" "Study" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
                                  "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Study\n:END:")
                                 )
         )
 
-  (setq org-refile-targets
-        '(("~/org/agenda/inbox.org" :level . 1)
-          ("~/org/agenda/gtd.org" :maxlevel . 2)
-          ("~/org/agenda/development.org" :maxlevel . 2)))
+  ;; (setq org-refile-targets
+  ;;       '(("~/org/agenda/inbox.org" :level . 1)
+  ;;         ("~/org/agenda/gtd.org" :level . 1)
+  ;;         ("~/org/agenda/development.org" :level . 1)))
+  (setq org-refile-targets '((org-agenda-files :level . 1)))
 
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
 
