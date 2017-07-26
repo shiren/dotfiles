@@ -584,18 +584,20 @@
                                 ("g" "Task" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
                                  "* TODO %i%?")
+                                ("l" "Task with link" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 "* TODO %i%?\n%a")
+                                ("q" "Task with category" entry
+                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
                                 ("n" "Note" entry
                                  (file+headline "~/org/agenda/gtd.org" "Note")
                                  "* %i%?")
-                                ("s" "Study" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: Study\n:END:")
                                 )
         )
 
   (setq org-refile-targets '((org-agenda-files :level . 1)))
-
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "NEXT(n)" "|" "HOLD(h)" "DONE(d)" "CANCELLED(c)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
 
   ;; (setq org-agenda-custom-commands
   ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
