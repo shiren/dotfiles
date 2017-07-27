@@ -50,6 +50,8 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
 
+(setq tab-width 2)
+
 ;;; Scroll setup
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -256,7 +258,9 @@
   ("C-j i". swiper)
   ("C-j o". swiper-all)
   :map ivy-mode-map
-  ("S-SPC" . toggle-input-method)))
+  ("S-SPC" . toggle-input-method)
+  :map ivy-minibuffer-map
+  ("C-j" . ivy-alt-done)))
 
 ;;; Avy
 (use-package avy
@@ -485,7 +489,13 @@
 
   (advice-add #'xref-goto-xref :around #'my/do-then-quit))
 
-;;; react
+(use-package vue-mode
+  :ensure t
+  :init
+  :config
+  (setq js-indent-level 2)
+  (setq mmm-submode-decoration-level 0))
+
 (use-package rjsx-mode
   :ensure t
   :init
@@ -781,4 +791,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
