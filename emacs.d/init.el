@@ -210,14 +210,14 @@
 (use-package eyebrowse
   :ensure t
   :init
-  (setq eyebrowse-keymap-prefix (kbd "C-j <SPC>"))
+  (setq eyebrowse-keymap-prefix (kbd "C-c <SPC>"))
   (eyebrowse-mode t)
   :bind
-  ("C-j ;" . eyebrowse-last-window-config)
-  ("C-j 0" . eyebrowse-close-window-config)
-  ("C-j 1" . eyebrowse-switch-to-window-config-1)
-  ("C-j 2" . eyebrowse-switch-to-window-config-2)
-  ("C-j 3" . eyebrowse-switch-to-window-config-3))
+  ("C-c ;" . eyebrowse-last-window-config)
+  ("C-c 0" . eyebrowse-close-window-config)
+  ("C-c 1" . eyebrowse-switch-to-window-config-1)
+  ("C-c 2" . eyebrowse-switch-to-window-config-2)
+  ("C-c 3" . eyebrowse-switch-to-window-config-3))
 
 ;;; windmove
 (windmove-default-keybindings)
@@ -262,9 +262,8 @@
 (use-package avy
   :ensure t
   :bind
-  ("C-j j". avy-goto-char-2)
-  ("C-j k". avy-goto-char)
-  ("C-j w". avy-goto-word-1)
+  ("C-j j". avy-goto-word-1)
+  ("C-j k". avy-goto-char-2)
   ("C-j g". avy-goto-line))
 
 (use-package git-timemachine
