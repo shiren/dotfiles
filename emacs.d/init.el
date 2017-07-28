@@ -613,7 +613,7 @@
             (org-agenda-files '("~/org/agenda")) ;; (5)
             (org-agenda-sorting-strategy '(priority-up effort-down))))
            )
-          ))
+          )
 
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
