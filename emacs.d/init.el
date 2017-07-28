@@ -591,13 +591,13 @@
                                  "* TODO %i%?")
                                 ("g" "Task" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?")
+                                 "* TODO %^G%i%?")
                                 ("l" "Task with link" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?\n%a")
+                                 "* TODO %^G%i%?\n%a")
                                 ("q" "Task with category" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %i%?\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
+                                 "* TODO %^G%i%?\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
                                 ("n" "Note" entry
                                  (file+headline "~/org/agenda/gtd.org" "Note")
                                  "* %i%?")
@@ -607,12 +607,13 @@
   (setq org-refile-targets '((org-agenda-files :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
 
-  ;; (setq org-agenda-custom-commands
-  ;;       '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
-  ;;          ((org-agenda-files '("~/org/agenda")) ;; (5)
-  ;;           (org-agenda-sorting-strategy '(priority-up effort-down))))
-  ;;         ;; ...other commands here
-  ;;         ))
+  (setq org-agenda-custom-commands
+        '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
+           ((agenda "")
+            (org-agenda-files '("~/org/agenda")) ;; (5)
+            (org-agenda-sorting-strategy '(priority-up effort-down))))
+           )
+          ))
 
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
