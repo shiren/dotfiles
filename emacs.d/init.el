@@ -499,8 +499,7 @@
 (use-package rjsx-mode
   :ensure t
   :init
-  (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("containers\\/.*\\.js\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
   :config
   (with-eval-after-load 'rjsx
     (define-key rjsx-mode-map "<" nil)
