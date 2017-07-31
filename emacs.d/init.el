@@ -594,13 +594,13 @@
                                  "* TODO %i%?")
                                 ("g" "Task" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %^G%i%?")
+                                 "* TODO %i%? %^G")
                                 ("l" "Task with link" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %^G%i%?\n%a")
+                                 "* TODO %i%? %^G\n%a")
                                 ("q" "Task with category" entry
                                  (file+headline "~/org/agenda/gtd.org" "Task")
-                                 "* TODO %^G%i%?\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
+                                 "* TODO %i%? %^G\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
                                 ("n" "Note" entry
                                  (file+headline "~/org/agenda/gtd.org" "Note")
                                  "* %i%?")
