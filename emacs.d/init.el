@@ -26,9 +26,9 @@
 (prefer-coding-system 'utf-8)
 
 (when (and window-system (eq system-type 'darwin))
-  (set-face-attribute 'default nil :family "Source code pro")
-  (set-face-attribute 'default nil :height 140)
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
+  (set-face-attribute 'default nil :family "Source Code Pro")
+  (set-face-attribute 'default nil :height 130 :weight 'ultralight)
+  (set-fontset-font t 'hangul (font-spec :name "나눔고딕")))
 
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
@@ -735,11 +735,10 @@
      (append
       (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
       (find-lisp-find-files "~/org/agenda" "\.org_archive$")
-      org-agenda-files))
-    t)
+      org-agenda-files)))
 
-  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
   (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
+  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
