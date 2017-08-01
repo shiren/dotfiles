@@ -735,7 +735,8 @@
      (append
       (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
       (find-lisp-find-files "~/org/agenda" "\.org_archive$")
-      org-agenda-files)))
+      org-agenda-files))
+    t)
 
   (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
   (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
