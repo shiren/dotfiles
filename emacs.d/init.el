@@ -267,8 +267,10 @@
   :ensure t
   :bind
   ("C-j j". avy-goto-word-1)
+  ("C-j C-j". avy-goto-word-1)
   ("C-j k". avy-goto-char-2)
-  ("C-j g". avy-goto-line))
+  ("C-j g". avy-goto-line)
+  ("C-j C-g". avy-goto-line))
 
 (use-package git-timemachine
   :ensure t
