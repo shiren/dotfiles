@@ -14,7 +14,7 @@
   (tooltip-mode -1))
 
 (setq inhibit-startup-message t)
-(setq initial-scratch-message "")
+(setq initial-scratch-message "SHIREN IN THE HOUSE")
 
 (setq ad-redefinition-action 'accept)
 
