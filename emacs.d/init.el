@@ -221,6 +221,13 @@
   ("C-c 2" . eyebrowse-switch-to-window-config-2)
   ("C-c 3" . eyebrowse-switch-to-window-config-3))
 
+;;; ace window
+(use-package ace-window
+  :ensure t
+  :config
+ (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
+  :bind ("C-x o" . ace-window))
+
 ;;; windmove
 (windmove-default-keybindings)
 ;; Make windmove work in org-mode:
