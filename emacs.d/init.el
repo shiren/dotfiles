@@ -547,6 +547,7 @@
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (setup-tide-mode))))
   :config
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
   (flycheck-add-mode 'typescript-tide 'typescript-mode))
 
 ;;; Clojure setup
