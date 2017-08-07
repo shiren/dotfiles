@@ -410,7 +410,7 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint))
+  (setq flycheck-checkers '(javascript-eslint typescript-tslint))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (add-hook 'js2-init-hook
@@ -515,6 +515,18 @@
     (define-key rjsx-mode-map (kbd "C-d") nil)))
 
 ;;; typescript
+(defun my/use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/tslint/bin/tslint"
+                                        root))))
+    (when (and tslint (file-executable-p tslint))
+      (setq-local flycheck-typescript-tslint-executable tslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
