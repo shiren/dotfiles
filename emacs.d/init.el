@@ -539,17 +539,15 @@
   :ensure t
   :init
   (setq typescript-indent-level 2)
-  (eval-after-load 'flycheck
-  '(progn
-     (flycheck-add-mode 'typescript-tide 'typescript-mode)
-     (flycheck-add-mode 'typescript-tslint 'typescript-mode)))
   (add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode)))))
+                (setup-tide-mode))))
+  :config
+  (flycheck-add-mode 'typescript-tide 'typescript-mode))
 
 ;;; Clojure setup
 (use-package cider
