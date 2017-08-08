@@ -25,10 +25,10 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(when (and window-system (eq system-type 'darwin))
-  (set-face-attribute 'default nil :family "Source Code Pro")
-  (set-face-attribute 'default nil :height 130 :weight 'ultralight)
-  (set-fontset-font t 'hangul (font-spec :name "나눔고딕")))
+;; (when (and window-system (eq system-type 'darwin))
+;;   (set-face-attribute 'default nil :family "Source Code Pro")
+;;   (set-face-attribute 'default nil :height 130 :weight 'ultralight)
+;;   (set-fontset-font t 'hangul (font-spec :name "나눔고딕")))
 
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
