@@ -28,7 +28,7 @@
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 130 :weight 'ultralight)
-  (set-fontset-font t 'hangul (font-spec :name "나눔고딕")))
+  (set-fontset-font t 'hangul (font-spec :name "나눔고딕코딩")))
 
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
@@ -221,6 +221,13 @@
   ("C-c 2" . eyebrowse-switch-to-window-config-2)
   ("C-c 3" . eyebrowse-switch-to-window-config-3))
 
+;;; ace window
+(use-package ace-window
+  :ensure t
+  :config
+ (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
+  :bind ("C-x o" . ace-window))
+
 ;;; windmove
 (windmove-default-keybindings)
 ;; Make windmove work in org-mode:
@@ -403,7 +410,7 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint))
+  (setq flycheck-checkers '(javascript-eslint typescript-tslint))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (add-hook 'js2-init-hook
@@ -508,6 +515,18 @@
     (define-key rjsx-mode-map (kbd "C-d") nil)))
 
 ;;; typescript
+(defun my/use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/tslint/bin/tslint"
+                                        root))))
+    (when (and tslint (file-executable-p tslint))
+      (setq-local flycheck-typescript-tslint-executable tslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -526,7 +545,10 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode)))))
+                (setup-tide-mode))))
+  :config
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  (flycheck-add-mode 'typescript-tide 'typescript-mode))
 
 ;;; Clojure setup
 (use-package cider
