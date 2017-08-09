@@ -773,17 +773,17 @@
   ("C-c f" . prodigy)
   :init
   (prodigy-define-service
-    :name "WebPlayer server"
+    :name "ToastBeauty server"
     :command "npm"
-    :cwd "~/masterpiece/vp/webPlayer"
+    :cwd "~/masterpiece/toast-beuaty"
     :args '("run" "dev")
     :port 8080
     :tags '(webpack-server))
 
   (prodigy-define-service
-    :name "WebPlayer test"
+    :name "ToastBeauty test"
     :command "npm"
-    :cwd "~/masterpiece/vp/webPlayer"
+    :cwd "~/masterpiece/toast-beuaty"
     :args '("run" "test")
     :tags '(karma))
 
