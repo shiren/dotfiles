@@ -709,6 +709,11 @@
   :bind
   ("C-c n" . google-translate-smooth-translate))
 
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
+
 ;;; Tools
 (defun auto-commit-files (list)
   (interactive
@@ -820,4 +825,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
