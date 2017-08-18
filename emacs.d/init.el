@@ -16,6 +16,7 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
+;; 함수 redefine으로 인한 경고 생략
 (setq ad-redefinition-action 'accept)
 
 (set-language-environment "Korean")
@@ -28,9 +29,13 @@
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 
-(setq echo-keystrokes 0.01)
+;; 키입력시 에코창에 표시되는 딜레이 타임, 거이 없게 설정
+(setq echo-keystrokes 0.001)
 
+;; 탭인덴트 생략
 (setq-default indent-tabs-mode nil)
+
+(setq tab-width 2)
 
 ;;; Paste setup
 (defun copy-from-osx ()
@@ -44,8 +49,6 @@
 (unless window-system
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
-
-(setq tab-width 2)
 
 ;;; Scroll setup
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
