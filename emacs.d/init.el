@@ -32,9 +32,6 @@
 ;; 키입력시 에코창에 표시되는 딜레이 타임, 거이 없게 설정
 (setq echo-keystrokes 0.001)
 
-;; 탭인덴트 생략
-(setq-default indent-tabs-mode nil)
-
 (setq tab-width 2)
 
 ;;; Paste setup
@@ -57,10 +54,6 @@
 
 (setq scroll-conservatively 200) ;; 스크롤 도중에 센터로 커서 이동하지 않도록
 (setq scroll-margin 3) ;; 스크롤시 남기는 여백
-
-;;; mouse setup
-(require 'mouse)
-(xterm-mouse-mode t)
 
 ;; 백업들 끄기
 (setq backup-inhibited t)
@@ -97,6 +90,22 @@
   (set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
   (set-fontset-font t 'hangul (font-spec :name "나눔고딕코딩")))
 
+;;; default modes
+;; unset some default keybinding for my custom key bindings
+(define-key global-map (kbd "C-j") nil)
+
+;; dired
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; hippie-expand
+(global-set-key "\M-n" 'hippie-expand)
+
+;; delete highlighted region before yank
+(delete-selection-mode 1)
+
+;; 탭인덴트 생략
+(setq-default indent-tabs-mode nil)
+
 ;;; Set up package
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -110,23 +119,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; unset some default keybinding for my custom key bindings
-(define-key global-map (kbd "C-j") nil)
-
 (eval-when-compile
   (require 'use-package))
-
-;; dired
-(put 'dired-find-alternate-file 'disabled nil)
-
-;; hippie-expand
-(global-set-key "\M-n" 'hippie-expand)
-
-;; quit-window-on
-(global-set-key "\C-xj" 'quit-windows-on)
-
-;; delete highlighted region before yank
-(delete-selection-mode 1)
 
 (use-package whitespace-cleanup-mode
   :ensure t
@@ -148,7 +142,7 @@
   :ensure t
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-items '((recents  . 10)
+  (setq dashboard-items '((recents  . 20)
                           (bookmarks . 10)
                           (projects . 10))))
 
