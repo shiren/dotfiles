@@ -384,6 +384,15 @@
   ("C-c C-p I" . projectile-ibuffer)
   ("C-c C-p p" . projectile-switch-project))
 
+(use-package ibuffer-projectile
+  :ensure t
+  :init
+  (add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-projectile-set-filter-groups)
+      (unless (eq ibuffer-sorting-mode 'alphabetic)
+        (ibuffer-do-sort-by-alphabetic)))))
+
 (use-package counsel
   :ensure t)
 
