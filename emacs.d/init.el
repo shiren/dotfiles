@@ -615,27 +615,22 @@
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   ;;(setq org-agenda-files '("~/org/agenda"))
   (setq org-agenda-files (find-lisp-find-files "~/org/agenda" "\.org$"))
-  (setq org-default-notes-file "/agenda/inbox.org")
-  (setq org-mobile-inbox-for-pull "/agenda/inbox.org")
+  (setq org-default-notes-file "/agenda/index.org")
+  (setq org-mobile-inbox-for-pull "/agenda/index.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
 
-  (setq org-capture-templates '(("t" "Inbox" entry
-                                 (file+headline "~/org/agenda/inbox.org" "Inbox")
-                                 "* TODO %i%?")
-                                ("g" "Task" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
+  (setq org-capture-templates '(("g" "Task" entry
+                                 (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G")
                                 ("l" "Task with link" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G\n%a")
                                 ("q" "Task with category" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Task")
+                                 (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
                                 ("n" "Note" entry
-                                 (file+headline "~/org/agenda/gtd.org" "Note")
-                                 "* %i%?")
-                                )
-        )
+                                 (file+headline "~/org/agenda/index.org" "Note")
+                                 "* %i%?")))
 
   (setq org-refile-targets '((org-agenda-files :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
