@@ -515,9 +515,8 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
   :config
-  (with-eval-after-load 'rjsx
-    (define-key rjsx-mode-map "<" nil)
-    (define-key rjsx-mode-map (kbd "C-d") nil)))
+  (define-key rjsx-mode-map "<" nil)
+  (define-key rjsx-mode-map (kbd "C-d") nil))
 
 ;;; typescript
 (defun my/use-tslint-from-node-modules ()
