@@ -146,7 +146,11 @@
                           (projects . 10))))
 
 (use-package helpful
-  :ensure t)
+  :ensure t
+  :bind
+  ("C-h f" . helpful-function)
+  ("C-h F" . helpful-command)
+  ("C-h v" . helpful-variable))
 
 ;; Setup PATH environment
 (use-package exec-path-from-shell
