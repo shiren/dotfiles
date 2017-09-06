@@ -176,6 +176,12 @@
   :bind
   ("C-c i" . multi-term))
 
+;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록 훅
+(add-hook 'term-mode-hook
+          (lambda ()
+            (define-key term-raw-map (kbd "C-j")
+               (lookup-key (current-global-map) (kbd "C-j")))))
+
 (use-package paren
   :init
   (show-paren-mode 1)
