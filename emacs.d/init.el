@@ -70,6 +70,9 @@
 ;; 풀스크린키 변경
 (define-key global-map (kbd "C-M-f") 'toggle-frame-fullscreen)
 
+;; 저장키 변경
+(define-key global-map (kbd "M-s") 'save-buffer)
+
 ;; split smart!
 (defun split-smart ()
   "split smart!"
