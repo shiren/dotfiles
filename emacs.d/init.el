@@ -542,6 +542,10 @@
   :config
   (setq prettier-js-args '(
                            "--trailing-comma" "none"
+                           "--print-width" "120"
+                           "--single-quote"
+                           "--no-bracket-spacing"
+                           "--tab-width" "2"
                            ))
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
