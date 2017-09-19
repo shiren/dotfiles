@@ -537,21 +537,21 @@
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
-(use-package prettier-js
-  :ensure t
-  :init
-  :config
-  (setq prettier-js-args '(
-                           "--trailing-comma" "none"
-                           "--print-width" "120"
-                           "--single-quote"
-                           "--no-bracket-spacing"
-                           "--tab-width" "2"
-                           ))
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'typescript-mode-hook 'prettier-js-mode))
+;; (use-package prettier-js
+;;   :ensure t
+;;   :init
+;;   :config
+;;   (setq prettier-js-args '(
+;;                            "--trailing-comma" "none"
+;;                            "--print-width" "120"
+;;                            "--single-quote"
+;;                            "--no-bracket-spacing"
+;;                            "--tab-width" "2"
+;;                            ))
+;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
+;;   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+;;   (add-hook 'web-mode-hook 'prettier-js-mode)
+;;   (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 ;;; typescript
 (defun my/use-tslint-from-node-modules ()
