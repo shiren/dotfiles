@@ -90,8 +90,8 @@
   :group 'windows)
 
 (when (and window-system (eq system-type 'darwin))
-  ;;(set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
-  (set-face-attribute 'default nil :family "Hack" :height 130 :weight 'light)
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
+  ;;(set-face-attribute 'default nil :family "Hack" :height 130 :weight 'light)
   (set-fontset-font t 'hangul (font-spec :name "나눔고딕코딩")))
 
 ;;; default modes
