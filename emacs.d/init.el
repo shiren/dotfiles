@@ -7,6 +7,9 @@
 ;; 에러시 디버그모드
 ;; (setq debug-on-error t)
 
+(require 'org)
+(org-babel-load-file "~/dotfiles/emacs-init.org")
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
