@@ -184,26 +184,12 @@ n(setq make-backup-files nil)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 
-;;; multi term
-(use-package multi-term
-  :ensure t
-  :init
-  (setq multi-term-program "/bin/zsh")
-  :bind
-  ("C-c i" . multi-term))
-
-;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록 훅
-(add-hook 'term-mode-hook
-          (lambda ()
-            (define-key term-raw-map (kbd "C-j")
-               (lookup-key (current-global-map) (kbd "C-j")))))
-
+;;;; Highlighting
 (use-package paren
   :init
   (show-paren-mode 1)
   (setq show-paren-delay 0))
 
-;; hl line
 (use-package hl-line
   :init
   (global-hl-line-mode +1))
@@ -218,7 +204,6 @@ n(setq make-backup-files nil)
 (use-package rainbow-mode
   :ensure t)
 
-;;; rainbow-delimiters
 (use-package rainbow-delimiters
   :ensure t
   :init
@@ -235,7 +220,8 @@ n(setq make-backup-files nil)
   :init
   (global-git-gutter-mode +1))
 
-;;; Eyebrowse
+
+;;;; Window 
 (use-package eyebrowse
   :ensure t
   :init
@@ -248,7 +234,6 @@ n(setq make-backup-files nil)
   ("C-j 2" . eyebrowse-switch-to-window-config-2)
   ("C-j 3" . eyebrowse-switch-to-window-config-3))
 
-;;; ace window
 (use-package ace-window
   :ensure t
   :config
@@ -306,6 +291,8 @@ n(setq make-backup-files nil)
   ("C-j g". avy-goto-line)
   ("C-j C-g". avy-goto-line))
 
+
+;;; Move&History
 (use-package git-timemachine
   :ensure t
   :bind
@@ -332,20 +319,8 @@ n(setq make-backup-files nil)
   (setq dumb-jump-force-searcher 'rg)
   :ensure t)
 
-(use-package company
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook 'company-mode)
-  :config
-  (setq company-idle-delay 0.1)
-  (setq company-show-numbers t)
-  (setq company-dabbrev-downcase nil)
-  (setq company-minimum-prefix-length 2)
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
+;;; Editing
 (use-package yasnippet
   :ensure t
   :init
@@ -355,18 +330,17 @@ n(setq make-backup-files nil)
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
   (yas-reload-all))
 
-;;; Iedit
+
 (use-package iedit
   :ensure t)
 
-;;; Expand Region
 (use-package expand-region
   :ensure t
   :bind
   ("C-c C-v" . er/expand-region)
   ("C-c v" . er/expand-region))
 
-;; recent file list
+;; File & Buffer
 (use-package recentf
   :init
   (setq recentf-max-saved-items 300
@@ -381,7 +355,6 @@ n(setq make-backup-files nil)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (autoload 'ibuffer "ibuffer" "List buffers." t))
 
-;;; projectile
 (use-package projectile
   :ensure t
   :init
@@ -433,11 +406,23 @@ n(setq make-backup-files nil)
   :init
   (counsel-projectile-on))
 
-(use-package web-mode
+(use-package wgrep
+  :ensure t)
+
+;;; Coding
+(use-package company
   :ensure t
   :init
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
+  (add-hook 'prog-mode-hook 'company-mode)
+  :config
+  (setq company-idle-delay 0.1)
+  (setq company-show-numbers t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-minimum-prefix-length 2)
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 (use-package flycheck
   :ensure t
@@ -468,8 +453,12 @@ n(setq make-backup-files nil)
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
-(use-package wgrep
-  :ensure t)
+;;;; Web
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
 
 ;;;; javascript
 (use-package js2-mode
@@ -631,6 +620,36 @@ n(setq make-backup-files nil)
   :init
   (add-to-list 'company-backends 'company-sourcekit))
 
+;;; markdown mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+
+;;; Utilities
+(use-package google-translate
+  :ensure t
+  :init
+  (require 'google-translate)
+  (require 'google-translate-smooth-ui)
+  (setq google-translate-translation-directions-alist
+        '(("en" . "ko") ("ko" . "en")))
+  (setq google-translate-pop-up-buffer-set-focus t)
+  (setq google-translate-output-destination 'echo-area)
+  (setq max-mini-window-height 0.5)
+  :bind
+  ("C-c n" . google-translate-smooth-translate))
+
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
+
+;;; Tools
 ;;; org
 (use-package ob-swift
   :ensure t)
@@ -739,36 +758,19 @@ n(setq make-backup-files nil)
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-;;; markdown mode
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-
-
-;;; Utilities
-(use-package google-translate
+(use-package multi-term
   :ensure t
   :init
-  (require 'google-translate)
-  (require 'google-translate-smooth-ui)
-  (setq google-translate-translation-directions-alist
-        '(("en" . "ko") ("ko" . "en")))
-  (setq google-translate-pop-up-buffer-set-focus t)
-  (setq google-translate-output-destination 'echo-area)
-  (setq max-mini-window-height 0.5)
+  (setq multi-term-program "/bin/zsh")
   :bind
-  ("C-c n" . google-translate-smooth-translate))
+  ("C-c i" . multi-term))
 
-(use-package beacon
-  :ensure t
-  :config
-  (beacon-mode 1))
+;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록 훅
+(add-hook 'term-mode-hook
+          (lambda ()
+            (define-key term-raw-map (kbd "C-j")
+               (lookup-key (current-global-map) (kbd "C-j")))))
 
-;;; Tools
 (defun auto-commit-files (list)
   (interactive
     (list (list (buffer-file-name (current-buffer)))))
