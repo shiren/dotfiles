@@ -57,7 +57,7 @@
 
 ;; 백업들 끄기
 (setq backup-inhibited t)
-n(setq make-backup-files nil)
+(setq make-backup-files nil)
 (setq auto-save-default nil)
 
 ;; no popup frame(새버퍼열때 현재 프레임에서 열기)
