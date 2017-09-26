@@ -179,7 +179,6 @@
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
-  :config
   (spaceline-spacemacs-theme))
 
 ;;;; Highlighting
