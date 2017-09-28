@@ -163,10 +163,11 @@
     (exec-path-from-shell-initialize)))
 
 ;;;; Themes
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'zenburn t))
+(use-package zenburn-theme
+  :disabled
+  :ensure t
+  :init
+  (load-theme 'zenburn t))
 
 (use-package spacemacs-theme
   :ensure t
@@ -179,7 +180,6 @@
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
-  :config
   (spaceline-spacemacs-theme))
 
 ;;;; Highlighting
