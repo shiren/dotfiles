@@ -467,10 +467,13 @@
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
 
 ;;;; javascript
+(setq js-indent-level 4)
+
 (use-package js2-mode
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
   (add-hook 'js2-mode-hook
           '(lambda ()
              (js2-imenu-extras-mode)))
@@ -533,7 +536,6 @@
   :ensure t
   :init
   :config
-  (setq js-indent-level 2)
   (setq mmm-submode-decoration-level 0))
 
 (use-package rjsx-mode
