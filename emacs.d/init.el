@@ -180,7 +180,8 @@
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
-  (spaceline-spacemacs-theme))
+  :config
+  (spaceline-emacs-theme))
 
 ;;;; Highlighting
 (use-package paren
