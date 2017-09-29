@@ -131,6 +131,7 @@
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
   (add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
+;;;; Emacs extend
 (use-package which-key
   :ensure t
   :init
@@ -155,7 +156,6 @@
   ("C-h F" . helpful-command)
   ("C-h v" . helpful-variable))
 
-;; Setup PATH environment
 (use-package exec-path-from-shell
   :ensure t
   :init
@@ -177,12 +177,21 @@
   (setq spacemacs-theme-org-height nil))
 
 (use-package spaceline-config
-  :disabled
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
   :config
-  (spaceline-emacs-theme))
+  (spaceline-emacs-theme)
+  (spaceline-toggle-buffer-id-on)
+  (spaceline-toggle-input-method-on)
+  (spaceline-toggle-buffer-modified-on)
+  (spaceline-toggle-process-on)
+  (spaceline-toggle-projectile-root-on)
+  (spaceline-toggle-version-control-on)
+  (spaceline-toggle-battery-on)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-line-column-on)
+  (spaceline-info-mode))
 
 ;;;; Highlighting
 (use-package paren
