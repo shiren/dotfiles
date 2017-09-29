@@ -189,7 +189,7 @@
   (spaceline-toggle-projectile-root-on)
   (spaceline-toggle-version-control-on)
   (spaceline-toggle-battery-on)
-  (spaceline-toggle-major-mode-off)
+  (spaceline-toggle-major-mode-on)
   (spaceline-toggle-minor-modes-on)
   (spaceline-toggle-line-column-on)
   (spaceline-info-mode))
