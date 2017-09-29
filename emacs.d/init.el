@@ -134,6 +134,7 @@
 ;;;; Emacs extend
 (use-package which-key
   :ensure t
+  :diminish which-key-mode
   :init
   (setq which-key-idle-delay 2)
   (setq which-key-max-description-length 40)
@@ -194,18 +195,6 @@
   (spaceline-toggle-line-column-on)
   (spaceline-info-mode))
 
-(use-package diminish
-  :ensure t
-  :config
-  (diminish 'company-mode nil)
-  (diminish 'undo-tree-mode nil)
-  (diminish 'git-gutter-mode nil)
-  (diminish 'ivy-mode nil)
-  (diminish 'yas-minor-mode nil)
-  (diminish 'indent-guide-mode nil)
-  (diminish 'highlight-thing-mode nil)
-  (diminish 'which-key-mode nil))
-
 ;;;; Highlighting
 (use-package paren
   :init
@@ -218,6 +207,7 @@
 
 (use-package highlight-thing
   :ensure t
+  :diminish highlight-thing-mode
   :init
   (setq highlight-thing-case-sensitive-p t)
   (setq highlight-thing-limit-to-defun t)
@@ -233,12 +223,14 @@
 
 (use-package indent-guide
   :ensure t
+  :diminish indent-guide-mode
   :init
   (setq indent-guide-char "|")
   (indent-guide-global-mode))
 
 (use-package git-gutter
   :ensure t
+  :diminish git-gutter-mode
   :init
   (global-git-gutter-mode +1))
 
@@ -273,6 +265,7 @@
 ;;;; swiper and ivy
 (use-package swiper
   :ensure t
+  :diminish ivy-mode
   :init
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers nil)
@@ -322,6 +315,7 @@
 
 (use-package undo-tree
   :ensure t
+  :diminish undo-tree-mode
   :init
   (global-undo-tree-mode)
   :bind
@@ -345,6 +339,7 @@
 ;;;; Editing
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :init
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'org-mode-hook #'yas-minor-mode)
@@ -442,6 +437,7 @@
 ;;; Coding
 (use-package company
   :ensure t
+  :diminish company-mode
   :init
   (add-hook 'prog-mode-hook 'company-mode)
   :config
