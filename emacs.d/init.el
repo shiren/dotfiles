@@ -189,9 +189,22 @@
   (spaceline-toggle-projectile-root-on)
   (spaceline-toggle-version-control-on)
   (spaceline-toggle-battery-on)
-  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-major-mode-off)
+  (spaceline-toggle-minor-modes-on)
   (spaceline-toggle-line-column-on)
   (spaceline-info-mode))
+
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'company-mode nil)
+  (diminish 'undo-tree-mode nil)
+  (diminish 'git-gutter-mode nil)
+  (diminish 'ivy-mode nil)
+  (diminish 'yas-minor-mode nil)
+  (diminish 'indent-guide-mode nil)
+  (diminish 'highlight-thing-mode nil)
+  (diminish 'which-key-mode nil))
 
 ;;;; Highlighting
 (use-package paren
