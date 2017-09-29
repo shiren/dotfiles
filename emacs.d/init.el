@@ -128,6 +128,7 @@
 (use-package whitespace-cleanup-mode
   :ensure t
   :init
+  (setq whitespace-cleanup-mode-only-if-initially-clean nil)
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
   (add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
@@ -186,11 +187,13 @@
   (spaceline-toggle-buffer-id-on)
   (spaceline-toggle-input-method-on)
   (spaceline-toggle-buffer-modified-on)
+  (spaceline-toggle-buffer-encoding-on)
+  (spaceline-toggle-buffer-encoding-abbrev-off)
   (spaceline-toggle-process-on)
   (spaceline-toggle-projectile-root-on)
   (spaceline-toggle-version-control-on)
   (spaceline-toggle-battery-on)
-  (spaceline-toggle-major-mode-on)
+  (spaceline-toggle-major-mode-off)
   (spaceline-toggle-minor-modes-on)
   (spaceline-toggle-line-column-on)
   (spaceline-info-mode))
@@ -235,7 +238,7 @@
   (global-git-gutter-mode +1))
 
 
-;;;; Window 
+;;;; Window
 (use-package eyebrowse
   :ensure t
   :init
@@ -877,7 +880,7 @@
     :cwd "~/masterpiece/toast-beuaty"
     :args '("run" "test")
     :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t    
+    :kill-process-buffer-on-stop t
     :tags '(karma))
 
   (prodigy-define-service
@@ -887,7 +890,7 @@
     :args '("tomcat7:run")
     :port 18080
     :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t    
+    :kill-process-buffer-on-stop t
     :tags '(tomcat))
 
   (prodigy-define-service
@@ -896,7 +899,7 @@
     :cwd "~/masterpiece/dooray.task-tracker/src/main/webapp/client"
     :args '("watch")
     :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t    
+    :kill-process-buffer-on-stop t
     :tags '(gulp-watch))
 
   (prodigy-define-tag
@@ -909,7 +912,7 @@
 
   (prodigy-define-tag
     :name 'gulp-watch
-    :ready-message "Finished 'watch'")  
+    :ready-message "Finished 'watch'")
 
   (prodigy-define-tag
     :name 'tomcat
