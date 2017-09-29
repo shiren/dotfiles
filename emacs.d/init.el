@@ -824,6 +824,7 @@
 
 (use-package magit
   :commands magit-get-top-dir
+  :diminish auto-revert-mode
   :ensure t
   :init
   ;; magit 오토 리버트시 버퍼의 브랜치명까지 갱신하도록
