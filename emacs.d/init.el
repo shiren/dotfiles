@@ -177,6 +177,7 @@
   (setq spacemacs-theme-org-height nil))
 
 (use-package spaceline-config
+  :disabled
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
