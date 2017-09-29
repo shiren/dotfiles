@@ -471,7 +471,7 @@
 
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun my/use-eslint-from-node-modules ()
+(defun shiren/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
                 "node_modules"))
@@ -482,7 +482,7 @@
       (setq-local flycheck-javascript-eslint-executable eslint))
     eslint))
 
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+(add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
 ;;;; Web
 (use-package web-mode
@@ -497,10 +497,7 @@
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
-  (let ((eslint (my/use-eslint-from-node-modules)))
-    (unless (file-executable-p eslint)
-      (setq eslint (executable-find "eslint")))
-
+  (let ((eslint (or (shiren/use-eslint-from-node-modules) (executable-find "eslint"))))
     (if (file-executable-p eslint)
         (progn (call-process eslint nil "*ESLint Errors*" nil "--fix" buffer-file-name)
                (revert-buffer t t t))
