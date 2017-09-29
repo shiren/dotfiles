@@ -479,7 +479,9 @@
                       (expand-file-name "node_modules/eslint/bin/eslint.js"
                                         root))))
     (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
+      (setq-local flycheck-javascript-eslint-executable eslint))
+    eslint))
+
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 ;;;; Web
@@ -491,6 +493,15 @@
 
 ;;;; javascript
 (setq js-indent-level 4)
+
+(defun eslint-fix ()
+  "Format the current file with ESLint."
+  (interactive)
+  (let ((eslint (my/use-eslint-from-node-modules)))
+    (if eslint
+        (progn (call-process eslint nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+               (revert-buffer t t t))
+      (message "ESLint not found."))))
 
 (use-package js2-mode
   :ensure t
@@ -505,6 +516,7 @@
   (define-key js2-mode-map (kbd "C-c C-j") nil)
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
+  (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t)))
   (setq-default js2-basic-offset 4
                 js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
