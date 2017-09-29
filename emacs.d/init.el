@@ -499,7 +499,7 @@
   (interactive)
   (let ((eslint (my/use-eslint-from-node-modules)))
     (if eslint
-        (progn (call-process eslint nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+        (progn (call-process eslint nil "*ESLint Errors*" nil "--fix" buffer-file-name "|" "cat")
                (revert-buffer t t t))
       (message "ESLint not found."))))
 
