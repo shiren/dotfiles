@@ -842,19 +842,42 @@
   ("C-c f" . prodigy)
   :init
   (prodigy-define-service
-    :name "ToastBeauty server"
+    :name "tui.chart dev server"
     :command "npm"
-    :cwd "~/masterpiece/toast-beuaty"
+    :cwd "~/masterpiece/tui.chart"
     :args '("run" "dev")
     :port 8080
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t
     :tags '(webpack-server))
 
   (prodigy-define-service
-    :name "ToastBeauty test"
+    :name "tui.chart test"
     :command "npm"
     :cwd "~/masterpiece/toast-beuaty"
     :args '("run" "test")
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t    
     :tags '(karma))
+
+  (prodigy-define-service
+    :name "dooray drive dev server"
+    :command "mvn"
+    :cwd "~/masterpiece/dooray.task-tracker"
+    :args '("tomcat7:run")
+    :port 18080
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t    
+    :tags '(tomcat))
+
+  (prodigy-define-service
+    :name "dooray drive gulp watch"
+    :command "gulp"
+    :cwd "~/masterpiece/dooray.task-tracker/src/main/webapp/client"
+    :args '("watch")
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t    
+    :tags '(gulp-watch))
 
   (prodigy-define-tag
     :name 'webpack-server
@@ -862,13 +885,20 @@
 
   (prodigy-define-tag
     :name 'karma
-    :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS"))
+    :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS")
+
+  (prodigy-define-tag
+    :name 'gulp-watch
+    :ready-message "Finished 'watch'")  
+
+  (prodigy-define-tag
+    :name 'tomcat
+    :ready-message "Running war on http://localhost:[0-9]+/"))
 
 (use-package wttrin
   :ensure t
   :init
-  (setq wttrin-default-accept-language '("Accept-Language"
-  . "ko-KR")))
+  (setq wttrin-default-accept-language '("Accept-Language" . "ko-KR")))
 
 (use-package restclient
   :ensure t)
