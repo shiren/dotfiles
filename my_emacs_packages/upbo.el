@@ -29,20 +29,32 @@
 ;;  Karma Test Runner Emacs Integration
 
 ;;  Usage:
-;;
+;;  (add-to-list 'upbo-project-config '("~/masterpiece/tui.chart/" "~/masterpiece/tui.chart/karma.conf.js"))
 
 ;;; Code:
+(defgroup upbo nil
+  "Karma Test Runner Emacs Integration"
+  :prefix "upbo-"
+  :group 'applications
+  :link '(url-link :tag "Github" "https://github.com/shiren")
+  :link '(emacs-commentary-link :tag "Commentary" "karma"))
+
+(defcustom upbo-project-config '()
+            "Each element is a list of the form (KEY VALUE).")
+
 (make-local-variable 'upbo-proc)
 (make-local-variable 'upbo-buffer-name)
 (make-local-variable 'upbo-proejct-root)
+(make-local-variable 'upbo-karma-conf-path)
 
 (setq upbo-proc nil)
 (setq upbo-buffer-name nil)
 (setq upbo-project-root nil)
+(setq upbo-karma-conf-path nil)
 
 (defun karma-start (args)
   (let ((inhibit-read-only t))
-    (insert (concat "\n" upbo-project-root " start karma\n")))
+    (insert (concat "\n" "start karma\n")))
 
   ;; 프로세스 설정
   (when (process-live-p upbo-proc)
@@ -51,7 +63,7 @@
 
   (let ((default-directory upbo-project-root))
     (setq upbo-proc (apply 'start-process-shell-command
-                           (append (list "upboProcess" upbo-buffer-name "npx" "karma" "start")
+                           (append (list "upboProcess" upbo-buffer-name "npx" "karma" "start" upbo-karma-conf-path)
                                    args))))
   ;; 프로세스 필터 설정
   (set-process-filter upbo-proc 'upbo-process-filter))
@@ -85,18 +97,23 @@ NIL if the current directory is not in a Git repo."
     (when dir
       (file-name-directory dir))))
 
-(defun create-upbo-buffer (upbo-buffer-name)
-  (let ((buffer (generate-new-buffer upbo-buffer-name)))
+(defun get-karma-conf-setting (project-root-path)
+  (car (cdr (car (seq-filter
+   (lambda (el)
+     (string= (car el) project-root-path)) upbo-project-config)))))
+
+(defun create-upbo-buffer (buffer-name)
+  (let ((buffer (generate-new-buffer buffer-name)))
     (with-current-buffer buffer
       (upbo-mode)
       (switch-to-buffer buffer))))
 
 (defun run-upbo ()
   (interactive)
-  (let ((upbo-buffer-name (concat "*upbo:" (git-root-dir) "*")))
-    (if (get-buffer upbo-buffer-name)
-        (switch-to-buffer upbo-buffer-name)
-      (create-upbo-buffer upbo-buffer-name))))
+  (let ((buffer-name (concat "*upbo:" (git-root-dir) "*")))
+    (if (get-buffer buffer-name)
+        (switch-to-buffer buffer-name)
+      (create-upbo-buffer buffer-name))))
 
 (define-key global-map (kbd "C-c u") 'run-upbo)
 
@@ -117,8 +134,11 @@ NIL if the current directory is not in a Git repo."
   (setq upbo-proc nil)
   (setq upbo-buffer-name (concat "*upbo:" (git-root-dir) "*"))
   (setq upbo-project-root (git-root-dir))
+  (setq upbo-karma-conf-path (get-karma-conf-setting upbo-project-root))
 
   (let ((inhibit-read-only t))
+    (insert (concat "Project: " upbo-project-root "\n"))
+    (insert (concat "Karma conf: " upbo-karma-conf-path "\n"))
     (insert "upbo started\nw: auto-watch, r: single-run, k: kill upbo")))
 
 (provide 'upbo)
