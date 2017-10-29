@@ -105,7 +105,7 @@ NIL if the current directory is not in a Git repo."
 (defun create-upbo-buffer (buffer-name)
   (let ((buffer (generate-new-buffer buffer-name)))
     (with-current-buffer buffer
-      (upbo-mode)
+      (upbo-view-mode)
       (switch-to-buffer buffer))))
 
 (defun run-upbo ()
@@ -117,20 +117,20 @@ NIL if the current directory is not in a Git repo."
 
 (define-key global-map (kbd "C-c u") 'run-upbo)
 
-(defvar upbo-mode-map
+(defvar upbo-view-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "w") 'karma-auto-watch)
     (define-key map (kbd "r") 'karma-single-run)
     (define-key map (kbd "k") 'kill-upbo-buffer)
     map))
 
-(define-key upbo-mode-map (kbd "w") 'karma-auto-watch)
-(define-key upbo-mode-map (kbd "r") 'karma-single-run)
-(define-key upbo-mode-map (kbd "k") 'kill-upbo-buffer)
+(define-key upbo-view-mode-map (kbd "w") 'karma-auto-watch)
+(define-key upbo-view-mode-map (kbd "r") 'karma-single-run)
+(define-key upbo-view-mode-map (kbd "k") 'kill-upbo-buffer)
 
-(define-derived-mode upbo-mode special-mode "Upbo"
+(define-derived-mode upbo-view-mode special-mode "upbo-view"
   "Major mode for upbo"
-  (use-local-map upbo-mode-map)
+  (use-local-map upbo-view-mode-map)
   (setq upbo-proc nil)
   (setq upbo-buffer-name (concat "*upbo:" (git-root-dir) "*"))
   (setq upbo-project-root (git-root-dir))
@@ -140,6 +140,45 @@ NIL if the current directory is not in a Git repo."
     (insert (concat "Project: " upbo-project-root "\n"))
     (insert (concat "Karma conf: " upbo-karma-conf-path "\n"))
     (insert "upbo started\nw: auto-watch, r: single-run, k: kill upbo")))
+
+;; (define-key global-map (kbd "C-c u") 'run-upbo)
+
+;;;;;;;; Minor
+(defvar upbo-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key global-map (kbd "C-c u") 'run-upbo)
+    (define-key global-map (kbd "C-c h") 'update-mode-line)
+    map)
+  "The keymap used when `upbo-mode' is active.")
+
+(defun upbo-mode-hook ()
+  "Hook which enables `upbo-mode'"
+  (upbo-mode 1))
+
+(defun update-mode-line ()
+  (interactive)
+  (setq mode-line-format
+        (list
+         "%m"
+         "upbo:fuck"
+         '(:eval (mode-line-mode-name))
+         ))
+  (force-mode-line-update))
+
+;;;###autoload
+(define-minor-mode upbo-mode
+  "Toggle upbo mode.
+Key bindings:
+\\{upbo-mode-map}"
+  nil
+  ;; The indicator for the mode line.
+  " upbo"
+  :group 'upbo
+  :global nil
+  :keymap 'upbo-mode-map)
+
+(add-hook 'js-mode-hook 'upbo-mode-hook)
+(add-hook 'js2-mode-hook 'upbo-mode-hook)
 
 (provide 'upbo)
 ;;; upbo.el ends here
