@@ -183,6 +183,7 @@
 
 (use-package spaceline-config
   :ensure spaceline
+  :disabled
   :init
   (setq powerline-default-separator 'arrow-fade)
   :config
@@ -532,6 +533,7 @@
 
 (use-package tern
   :ensure t
+  :diminish tern-mode
   :init
   (autoload 'tern-mode' "tern.el" nil t)
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
