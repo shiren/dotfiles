@@ -202,6 +202,8 @@
   (spaceline-toggle-major-mode-off)
   (spaceline-toggle-minor-modes-on)
   (spaceline-toggle-line-column-on)
+  (spaceline-toggle-org-clock-on)
+  (spaceline-toggle-window-number-on)
   (spaceline-info-mode))
 
 ;;;; Highlighting
