@@ -42,16 +42,6 @@
 (defcustom upbo-project-config '()
             "Each element is a list of the form (KEY VALUE).")
 
-(make-local-variable 'upbo-proc)
-(make-local-variable 'upbo-buffer-name)
-(make-local-variable 'upbo-proejct-root)
-(make-local-variable 'upbo-karma-conf-path)
-
-(setq upbo-proc nil)
-(setq upbo-buffer-name nil)
-(setq upbo-project-root nil)
-(setq upbo-karma-conf-path nil)
-
 (defun karma-start (args)
   (let ((inhibit-read-only t))
     (insert (concat "\n" "start karma\n")))
@@ -82,6 +72,7 @@
   (kill-buffer (current-buffer)))
 
 (defun upbo-process-filter (process output)
+  (setq upbo-last-result (current-time-string))
   ;; 리드온리 버퍼에 무언가를 출력하려면 inhibit-read-only가 t여야함
   (let ((inhibit-read-only t))
     (set-buffer (process-buffer process))
@@ -131,6 +122,12 @@ NIL if the current directory is not in a Git repo."
 (define-derived-mode upbo-view-mode special-mode "upbo-view"
   "Major mode for upbo"
   (use-local-map upbo-view-mode-map)
+
+  (make-local-variable 'upbo-proc)
+  (make-local-variable 'upbo-buffer-name)
+  (make-local-variable 'upbo-proejct-root)
+  (make-local-variable 'upbo-karma-conf-path)
+
   (setq upbo-proc nil)
   (setq upbo-buffer-name (concat "*upbo:" (git-root-dir) "*"))
   (setq upbo-project-root (git-root-dir))
@@ -144,9 +141,31 @@ NIL if the current directory is not in a Git repo."
 ;; (define-key global-map (kbd "C-c u") 'run-upbo)
 
 ;;;;;;;; Minor
+(defun karma-single-run-minor ()
+  (interactive)
+  (setq upbo-last-result "KARMA-START")
+  (when (process-live-p upbo-proc)
+    (print "kill-proc")
+    (kill-process upbo-proc))
+
+  (let ((default-directory upbo-project-root))
+    (setq upbo-proc (apply 'start-process-shell-command
+                           (append (list "upboProcess" nil "npx" "karma" "start" upbo-karma-conf-path "--single-run")))))
+  ;; 프로세스 필터 설정
+  (set-process-filter upbo-proc 'upbo-minor-process-filter))
+
+(defun upbo-minor-process-filter (process output)
+  ;;(setq upbo-last-result (current-time-string))
+  (message output)
+
+  (when (string-match "==> END: +" output)
+    (setq upbo-last-result (replace-match "" nil nil output)))
+  (force-mode-line-update))
+
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key global-map (kbd "C-c u") 'run-upbo)
+    (define-key global-map (kbd "C-c k") 'karma-single-run-minor)
     (define-key global-map (kbd "C-c h") 'update-mode-line)
     map)
   "The keymap used when `upbo-mode' is active.")
@@ -165,17 +184,27 @@ NIL if the current directory is not in a Git repo."
          ))
   (force-mode-line-update))
 
+(defun project-test-result ()
+  (or upbo-last-result " "))
+
 ;;;###autoload
 (define-minor-mode upbo-mode
   "Toggle upbo mode.
 Key bindings:
 \\{upbo-mode-map}"
-  nil
-  ;; The indicator for the mode line.
-  " upbo"
+  :lighter (:eval (format " upbo[%s]" (project-test-result)))
   :group 'upbo
   :global nil
-  :keymap 'upbo-mode-map)
+  :keymap 'upbo-mode-map
+  (make-local-variable 'upbo-proc)
+  (make-local-variable 'upbo-last-result)
+  (make-local-variable 'upbo-proejct-root)
+  (make-local-variable 'upbo-karma-conf-path)
+
+  (setq upbo-proc nil)
+  (setq upbo-project-root (git-root-dir))
+  (setq upbo-karma-conf-path (get-karma-conf-setting upbo-project-root))
+  (setq upbo-last-result nil))
 
 (add-hook 'js-mode-hook 'upbo-mode-hook)
 (add-hook 'js2-mode-hook 'upbo-mode-hook)
