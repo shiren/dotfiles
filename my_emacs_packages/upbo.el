@@ -106,8 +106,6 @@ NIL if the current directory is not in a Git repo."
         (switch-to-buffer buffer-name)
       (create-upbo-buffer buffer-name))))
 
-(define-key global-map (kbd "C-c u") 'run-upbo)
-
 (defvar upbo-view-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "w") 'karma-auto-watch)
@@ -137,13 +135,11 @@ NIL if the current directory is not in a Git repo."
     (insert (concat "Project: " upbo-project-root "\n"))
     (insert (concat "Karma conf: " upbo-karma-conf-path "\n"))
     (insert "upbo started\nw: auto-watch, r: single-run, k: kill upbo")))
-
-;; (define-key global-map (kbd "C-c u") 'run-upbo)
+;;(define-key global-map (kbd "C-c u") 'run-upbo)
 
 ;;;;;;;; Minor
 (defun karma-single-run-minor ()
   (interactive)
-  (setq upbo-last-result "KARMA-START")
   (when (process-live-p upbo-proc)
     (print "kill-proc")
     (kill-process upbo-proc))
@@ -154,16 +150,30 @@ NIL if the current directory is not in a Git repo."
   ;; 프로세스 필터 설정
   (set-process-filter upbo-proc 'upbo-minor-process-filter))
 
+(defun karma-auto-watch-minor ()
+  (interactive)
+  (when (process-live-p upbo-proc)
+    (print "kill-proc")
+    (kill-process upbo-proc))
+
+  (let ((default-directory upbo-project-root))
+    (setq upbo-proc (apply 'start-process-shell-command
+                           (append (list "upboProcess" nil "npx" "karma" "start" upbo-karma-conf-path "--auto-watch" "--reporters" "dots")))))
+  ;; 프로세스 필터 설정
+  (set-process-filter upbo-proc 'upbo-minor-process-filter))
+
 (defun upbo-minor-process-filter (process output)
-  (when (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
-    (setq upbo-last-result (concat (match-string 1 output) "/" (match-string 2 output))))
+  (setq upbo-last-result
+        (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
+            (concat (match-string 1 output) "/" (match-string 2 output))
+          "~"))
   (force-mode-line-update))
 
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key global-map (kbd "C-c u") 'run-upbo)
-    (define-key global-map (kbd "C-c k") 'karma-single-run-minor)
-    (define-key global-map (kbd "C-c h") 'update-mode-line)
+    (define-key global-map (kbd "C-c u r") 'run-upbo)
+    (define-key global-map (kbd "C-c u s") 'karma-single-run-minor)
+    (define-key global-map (kbd "C-c u w") 'karma-auto-watch-minor)
     map)
   "The keymap used when `upbo-mode' is active.")
 
