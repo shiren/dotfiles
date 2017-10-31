@@ -150,16 +150,13 @@ NIL if the current directory is not in a Git repo."
 
   (let ((default-directory upbo-project-root))
     (setq upbo-proc (apply 'start-process-shell-command
-                           (append (list "upboProcess" nil "npx" "karma" "start" upbo-karma-conf-path "--single-run")))))
+                           (append (list "upboProcess" nil "npx" "karma" "start" upbo-karma-conf-path "--single-run" "--reporters" "dots")))))
   ;; 프로세스 필터 설정
   (set-process-filter upbo-proc 'upbo-minor-process-filter))
 
 (defun upbo-minor-process-filter (process output)
-  ;;(setq upbo-last-result (current-time-string))
-  (message output)
-
-  (when (string-match "==> END: +" output)
-    (setq upbo-last-result (replace-match "" nil nil output)))
+  (when (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
+    (setq upbo-last-result (concat (match-string 1 output) "/" (match-string 2 output))))
   (force-mode-line-update))
 
 (defvar upbo-mode-map
@@ -173,16 +170,6 @@ NIL if the current directory is not in a Git repo."
 (defun upbo-mode-hook ()
   "Hook which enables `upbo-mode'"
   (upbo-mode 1))
-
-(defun update-mode-line ()
-  (interactive)
-  (setq mode-line-format
-        (list
-         "%m"
-         "upbo:fuck"
-         '(:eval (mode-line-mode-name))
-         ))
-  (force-mode-line-update))
 
 (defun project-test-result ()
   (or upbo-last-result " "))
