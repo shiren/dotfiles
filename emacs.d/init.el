@@ -35,6 +35,7 @@
 
 ;;; Paste setup
 (defun copy-from-osx ()
+  "Copy from osx."
   (shell-command-to-string "pbpaste"))
 
 (defun paste-to-osx (text &optional push)
@@ -74,7 +75,6 @@
 
 ;; split smart!
 (defun split-smart ()
-  "split smart!"
   (if (< (window-pixel-width) (window-pixel-height))
       (with-selected-window (selected-window)
         (split-window-vertically))
@@ -83,7 +83,7 @@
       )))
 
 (defcustom split-window-preferred-function 'split-smart
-  "split smart"
+  "Split smart."
   :type 'function
   :version "25.1"
   :group 'windows)
@@ -359,7 +359,6 @@
   (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
   (yas-reload-all))
 
-
 (use-package iedit
   :ensure t)
 
@@ -378,9 +377,22 @@
   (setq-default evil-escape-key-sequence "jk")
   (setq-default evil-escape-delay 0.2))
 
+(use-package paredit
+  :ensure t
+  :init
+  (define-key paredit-mode-map (kbd "C-j") nil)
+  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode))
+
+(use-package multiple-cursors
+  :ensure t)
+
 ;; File & Buffer
 (use-package recentf
-  :init
+ :init
   (setq recentf-max-saved-items 300
         recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
                           "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
@@ -466,10 +478,11 @@
   :ensure t
   :init
   (global-flycheck-mode)
+  (setq checkdoc-force-docstrings-flag nil)
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint typescript-tslint))
+  (setq flycheck-checkers '(javascript-eslint typescript-tslint emacs-lisp-checkdoc))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (add-hook 'js2-init-hook
@@ -481,6 +494,7 @@
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
 (defun shiren/use-eslint-from-node-modules ()
+  "Use eslint from node modules."
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
                 "node_modules"))
@@ -492,6 +506,10 @@
     eslint))
 
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
+
+;;;; Emacs-lisp
+(use-package suggest
+  :ensure t)
 
 ;;;; Web
 (use-package web-mode
@@ -965,4 +983,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
