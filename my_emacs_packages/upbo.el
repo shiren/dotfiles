@@ -182,14 +182,16 @@ NIL if the current directory is not in a Git repo."
   (upbo-mode 1))
 
 (defun project-test-result ()
-  (or upbo-last-result " "))
+  (if upbo-last-result
+      (concat "[" upbo-last-result "]")
+    ""))
 
 ;;;###autoload
 (define-minor-mode upbo-mode
   "Toggle upbo mode.
 Key bindings:
 \\{upbo-mode-map}"
-  :lighter (:eval (format " upbo[%s]" (project-test-result)))
+  :lighter (:eval (format " upbo%s" (project-test-result)))
   :group 'upbo
   :global nil
   :keymap 'upbo-mode-map
