@@ -118,7 +118,10 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(add-to-list 'load-path "~/dotfiles/my_emacs_packages")
+;;(add-to-list 'load-path "~/dotfiles/my_emacs_packages")
+
+(use-package upbo
+  :load-path "~/dotfiles/my_emacs_packages")
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -394,11 +397,11 @@
   (progn
     (setq parinfer-extensions
           '(defaults       ; should be included.
-            pretty-parens  ; different paren styles for different modes.
-            ;;lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
-            paredit        ; Introduce some paredit commands.
-            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-            smart-yank))   ; Yank behavior depend on mode.
+             pretty-parens  ; different paren styles for different modes.
+             ;;lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+             paredit        ; Introduce some paredit commands.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
     (add-hook 'clojure-mode-hook #'parinfer-mode)
     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
