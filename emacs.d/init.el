@@ -122,7 +122,7 @@
 
 (use-package upbo
   :load-path "~/dotfiles/my_emacs_packages"
-  :init
+  :config
   (add-to-list 'upbo-project-config '("~/masterpiece/tui.chart/" "~/masterpiece/tui.chart/karma.conf.js")))
 
 (unless (package-installed-p 'use-package)
