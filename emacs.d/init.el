@@ -387,7 +387,10 @@
   (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
   (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
   (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode))
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  :bind
+  (:map paredit-mode-map
+        ("C-M-f" . nil)))
 
 (use-package parinfer
   :ensure t
