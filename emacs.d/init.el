@@ -508,7 +508,16 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (setq flycheck-checkers '(javascript-eslint typescript-tslint tsx-tide typescript-tide emacs-lisp emacs-lisp-checkdoc css-csslint markdown-mdl sass sh-zsh))
+  (setq flycheck-checkers '(javascript-eslint
+                            typescript-tslint
+                            tsx-tide
+                            typescript-tide
+                            emacs-lisp
+                            emacs-lisp-checkdoc
+                            css-csslint
+                            markdown-mdl
+                            sass
+                            sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (add-hook 'js2-init-hook
