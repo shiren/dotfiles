@@ -1,4 +1,4 @@
-;;; upbo.el --- Karma Test Runner Emacs Integration
+;;; upbo.el --- Karma Test Runner Emacs Integration ;;; -*- lexical-binding: t; -*-
 ;;
 ;; Filename: upbo.el
 ;; Description: karma Test Runner Emacs Integration
@@ -72,6 +72,7 @@
 (define-key upbo-view-mode-map (kbd "r") 'karma-single-run)
 (define-key upbo-view-mode-map (kbd "k") 'kill-upbo-buffer)
 
+;;;###autoload
 (define-derived-mode upbo-view-mode special-mode "upbo-view"
   "Major mode for upbo"
   (use-local-map upbo-view-mode-map)
@@ -84,7 +85,6 @@
 
 ;;;;;;;; Minor
 (defun karma-start (args upbo-view-buffer-name)
-  (print upbo-view-buffer-name)
   (let (upbo-process (get-buffer-process upbo-view-buffer-name))
     (when (process-live-p upbo-process)
       (kill-process upbo-process)))
@@ -100,20 +100,25 @@
             args)))
 
   ;; 프로세스 필터 설정
-  (set-process-filter (get-buffer-process upbo-view-buffer-name) 'upbo-minor-process-filter))
+  (set-process-filter (get-buffer-process upbo-view-buffer-name)
+                      'upbo-minor-process-filter))
 
 (defun karma-single-run ()
   (interactive)
-  (karma-start '("--single-run") (get-upbo-view-buffer-name)))
+  (karma-start '("--single-run")
+               (get-upbo-view-buffer-name)))
 
 (defun karma-auto-watch ()
   (interactive)
-  (karma-start '("--auto-watch") (get-upbo-view-buffer-name)))
+  (karma-start '("--auto-watch")
+               (get-upbo-view-buffer-name)))
 
-(defun parse-output-for-mode-line (output)
+(defun parse-output-for-mode-line (buffer output)
   (setq upbo-last-result
         (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
-            (concat (match-string 1 output) "/" (match-string 2 output))
+            (concat (match-string 1 output)
+                    "/"
+                    (match-string 2 output))
           "~"))
   (force-mode-line-update))
 
@@ -125,7 +130,7 @@
     (ansi-color-apply-on-region (point-min) (point-max))))
 
 (defun upbo-minor-process-filter (process output)
-  (parse-output-for-mode-line output)
+  (parse-output-for-mode-line (process-buffer process) output)
   (update-upbo-view-buffer (process-buffer process) output))
 
 (defun get-upbo-view-buffer-name ()
@@ -148,12 +153,17 @@ NIL if the current directory is not in a Git repo."
     (define-key global-map (kbd "C-c u r") 'open-upbo-view)
     (define-key global-map (kbd "C-c u s") 'karma-single-run)
     (define-key global-map (kbd "C-c u w") 'karma-auto-watch)
+    (define-key global-map (kbd "C-c u t") 'testtest)
     map)
   "The keymap used when `upbo-mode' is active.")
 
 (defun upbo-mode-hook ()
   "Hook which enables `upbo-mode'"
   (upbo-mode 1))
+
+(defun testtest ()
+  (interactive)
+  (print (project-test-result)))
 
 (defun project-test-result ()
   (if upbo-last-result
