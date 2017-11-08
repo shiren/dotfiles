@@ -180,8 +180,9 @@
 
 (use-package spacemacs-theme
   :ensure t
-  :config
+  :init
   (load-theme 'spacemacs-dark t)
+  :config
   (setq spacemacs-theme-org-agenda-height nil)
   (setq spacemacs-theme-org-height nil))
 
