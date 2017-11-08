@@ -85,7 +85,7 @@
 
 ;;;;;;;; Minor
 (defun karma-start (args upbo-view-buffer-name)
-  (let (upbo-process (get-buffer-process upbo-view-buffer-name))
+  (let ((upbo-process (get-buffer-process upbo-view-buffer-name)))
     (when (process-live-p upbo-process)
       (kill-process upbo-process)))
 
@@ -160,10 +160,11 @@ NIL if the current directory is not in a Git repo."
   "The keymap used when `upbo-mode' is active.")
 
 (defun upbo-mode-hook ()
-  "Hook which enables `upbo-mode'"
+  "Hook which enables `upbo-mode'."
   (upbo-mode 1))
 
 (defun testtest ()
+  "JUST test."
   (interactive)
   (print (hash-table-keys project-result))
   (print (hash-table-values project-result)))

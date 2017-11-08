@@ -513,7 +513,7 @@
                             typescript-tslint
                             tsx-tide
                             typescript-tide
-                            ;; emacs-lisp
+                            emacs-lisp
                             emacs-lisp-checkdoc
                             css-csslint
                             markdown-mdl
@@ -521,6 +521,7 @@
                             sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
+  (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
             '(lambda ()
                (setq next-error-function 'flycheck-next-error)
