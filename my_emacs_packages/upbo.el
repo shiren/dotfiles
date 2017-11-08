@@ -42,7 +42,7 @@
 (defcustom upbo-project-config '()
   "Each element is a list of the form (KEY VALUE).")
 
-(defvar upbo-last-result)
+(defvar project-result (make-hash-table :test 'equal))
 
 ;;;;;;;;; upbo-view-mode
 (defun open-upbo-view ()
@@ -114,12 +114,14 @@
                (get-upbo-view-buffer-name)))
 
 (defun parse-output-for-mode-line (buffer output)
-  (setq upbo-last-result
-        (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
-            (concat (match-string 1 output)
-                    "/"
-                    (match-string 2 output))
-          "~"))
+  (set-buffer buffer)
+  (puthash (git-root-dir)
+           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
+               (concat (match-string 1 output)
+                       "/"
+                       (match-string 2 output))
+             "~")
+           project-result)
   (force-mode-line-update))
 
 (defun update-upbo-view-buffer (buffer output)
@@ -163,12 +165,14 @@ NIL if the current directory is not in a Git repo."
 
 (defun testtest ()
   (interactive)
-  (print (project-test-result)))
+  (print (hash-table-keys project-result))
+  (print (hash-table-values project-result)))
 
 (defun project-test-result ()
-  (if upbo-last-result
-      (concat "[" upbo-last-result "]")
-    ""))
+  (let ((result (gethash (git-root-dir) project-result)))
+    (if result
+        (concat "[" result "]")
+      "")))
 
 ;;;###autoload
 (define-minor-mode upbo-mode
@@ -178,10 +182,7 @@ Key bindings:
   :lighter (:eval (format " upbo%s" (project-test-result)))
   :group 'upbo
   :global nil
-  :keymap 'upbo-mode-map
-  (make-local-variable 'upbo-last-result)
-
-  (setq upbo-last-result nil))
+  :keymap 'upbo-mode-map)
 
 (add-hook 'js-mode-hook 'upbo-mode-hook)
 (add-hook 'js2-mode-hook 'upbo-mode-hook)
