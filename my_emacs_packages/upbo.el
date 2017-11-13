@@ -95,7 +95,7 @@
             (list "upboProcess"
                   upbo-view-buffer-name
                   "npx" "karma" "start"
-                  (get-karma-conf-setting)
+                  (get-karma-conf)
                   "--reporters" "dots")
             args)))
 
@@ -113,13 +113,16 @@
   (karma-start '("--auto-watch")
                (get-upbo-view-buffer-name)))
 
-(defun parse-output-for-mode-line (buffer output)
-  (set-buffer buffer)
+(defun parse-output-for-mode-line (_ output)
   (puthash (git-root-dir)
-           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\)" output)
+           ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
+           ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
+           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) (?\\([0-9]* ?[A-Z]+\\))?" output)
                (concat (match-string 1 output)
                        "/"
-                       (match-string 2 output))
+                       (match-string 2 output)
+                       (when (match-string 3 output)
+                         (concat "/" (match-string 3 output))))
              "~")
            project-result)
   (force-mode-line-update))
@@ -148,9 +151,19 @@ NIL if the current directory is not in a Git repo."
       (file-name-directory dir))))
 
 (defun get-karma-conf-setting ()
-  (car (cdr (car (seq-filter
-                  (lambda (el)
-                    (string= (car el) (git-root-dir))) upbo-project-config)))))
+  (car (cdr (car
+             (seq-filter
+              (lambda (el)
+                (string= (car el) (git-root-dir)))
+              upbo-project-config)))))
+
+(defun find-karma-conf ()
+  (let ((expected-karma-conf-path (concat (git-root-dir) "karma.conf.js")))
+    (when (file-exists-p expected-karma-conf-path)
+      expected-karma-conf-path)))
+
+(defun get-karma-conf ()
+  (or (get-karma-conf-setting) (find-karma-conf)))
 
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
@@ -169,7 +182,8 @@ NIL if the current directory is not in a Git repo."
   "JUST test."
   (interactive)
   (print (hash-table-keys project-result))
-  (print (hash-table-values project-result)))
+  (print (hash-table-values project-result))
+  (print (get-karma-conf)))
 
 (defun project-test-result ()
   (let ((result (gethash (git-root-dir) project-result)))
