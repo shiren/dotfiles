@@ -75,13 +75,13 @@
 ;;;###autoload
 (define-derived-mode upbo-view-mode special-mode "upbo-view"
   "Major mode for upbo"
-  (use-local-map upbo-view-mode-map)
+  (use-local-map upbo-view-mode-map))
 
   ;; (let ((inhibit-read-only t))
   ;;   (insert (concat "Project: " (git-root-dir) "\n"))
   ;;   (insert (concat "Karma conf: " (get-karma-conf-setting) "\n"))
   ;;   (insert "upbo started\nw: auto-watch, r: single-run, k: kill upbo"))
-  )
+
 
 ;;;;;;;; Minor
 (defun karma-start (args upbo-view-buffer-name)
@@ -127,7 +127,9 @@
 (defun update-upbo-view-buffer (buffer output)
   (let ((inhibit-read-only t))
     (set-buffer buffer)
+    (goto-char (point-max))
     (insert output)
+
     ;; ansi 코드있는 버퍼 렌더링하기
     (ansi-color-apply-on-region (point-min) (point-max))))
 
