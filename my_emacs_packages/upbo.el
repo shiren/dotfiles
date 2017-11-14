@@ -142,7 +142,8 @@
 
 (defun upbo-minor-process-filter (process output)
   (parse-output-for-mode-line (process-buffer process) output)
-  (update-upbo-view-buffer (process-buffer process) output))
+  (update-upbo-view-buffer (process-buffer process) output)
+  (force-mode-line-update))
 
 (defun get-upbo-view-buffer-name ()
   (concat "*upbo:" (git-root-dir) "*"))
