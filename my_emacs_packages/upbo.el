@@ -118,7 +118,9 @@
            ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
            ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
            ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
-           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) ?\\(([0-9]* ?[A-Z]+ ?[0-9]*)\\)? ?\\([A-Z]+\\)"
+           ;;
+           ;;
+           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) ?\\(([0-9]+ FAILED)\\)? ?\\([A-Z]+\\)?"
                              output)
                (concat (match-string 1 output)
                        "/"
