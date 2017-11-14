@@ -117,12 +117,16 @@
   (puthash (git-root-dir)
            ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
            ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
-           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) (?\\([0-9]* ?[A-Z]+\\))?" output)
+           ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
+           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) ?\\(([0-9]* ?[A-Z]+ ?[0-9]*)\\)? ?\\([A-Z]+\\)"
+                             output)
                (concat (match-string 1 output)
                        "/"
                        (match-string 2 output)
                        (when (match-string 3 output)
-                         (concat "/" (match-string 3 output))))
+                         (concat "/" (match-string 3 output)))
+                       (when (match-string 4 output)
+                         (concat "/" (match-string 4 output))))
              "~")
            project-result)
   (force-mode-line-update))
