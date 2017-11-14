@@ -110,7 +110,7 @@
 
 (defun karma-auto-watch ()
   (interactive)
-  (karma-start '("--auto-watch")
+  (karma-start '("--no-single-run" "--auto-watch")
                (get-upbo-view-buffer-name)))
 
 (defun parse-output-for-mode-line (_ output)
