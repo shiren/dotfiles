@@ -980,13 +980,23 @@
     :kill-process-buffer-on-stop t
     :tags '(gulp-watch))
 
+  (prodigy-define-service
+    :name "toast drive dev server"
+    :command "npm"
+    :cwd "~/masterpiece/toast-drive-web-service"
+    :args '("run" "dev")
+    :port 3000
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t
+    :tags '(webpack-server))
+
   (prodigy-define-tag
     :name 'webpack-server
     :ready-message "Http://0.0.0.0:[0-9]+/webpack-dev-server/")
 
   (prodigy-define-tag
     :name 'karma
-    :ready-message " Executed [0-9]+ of [0-9]+ SUCCESS")
+    :ready-message " Executed [0-9]+ of [0-9]+ .+")
 
   (prodigy-define-tag
     :name 'gulp-watch
