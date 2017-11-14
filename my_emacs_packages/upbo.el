@@ -57,7 +57,6 @@
       (switch-to-buffer upbo-view-buffer))))
 
 (defun kill-upbo-buffer ()
-  "HELLO"
   (interactive)
   (kill-buffer (get-upbo-view-buffer-name)))
 
@@ -113,25 +112,24 @@
   (karma-start '("--no-single-run" "--auto-watch")
                (get-upbo-view-buffer-name)))
 
-(defun parse-output-for-mode-line (_ output)
-  (puthash (git-root-dir)
-           ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
-           ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
-           ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
-           ;;
-           ;;
-           (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) ?\\(([0-9]+ FAILED)\\)? ?\\([A-Z]+\\)?"
-                             output)
-               (concat (match-string 1 output)
-                       "/"
-                       (match-string 2 output)
-                       (when (match-string 3 output)
-                         (concat "/" (match-string 3 output)))
-                       (when (match-string 4 output)
-                         (concat "/" (match-string 4 output))))
-             "~")
-           project-result)
-  (force-mode-line-update))
+(defun parse-output-for-mode-line (buffer output)
+  (with-current-buffer buffer
+    (puthash (git-root-dir)
+             ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
+             ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
+             ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
+             ;;
+             (if (string-match "Executed \\([0-9]+\\) of \\([0-9]+\\) ?(?\\(?3:[0-9]+ FAILED\\|skipped [0-9]+\\)?)? ?\\(?4:SUCCESS\\)?"
+                               output)
+                 (concat (match-string 1 output)
+                         "/"
+                         (match-string 2 output)
+                         (when (match-string 4 output)
+                           (concat "/" (match-string 4 output)))
+                         (when (match-string 3 output)
+                           (concat "/" (match-string 3 output))))
+               "~")
+             project-result)))
 
 (defun update-upbo-view-buffer (buffer output)
   (let ((inhibit-read-only t))
