@@ -31,7 +31,7 @@
 ;; 키입력시 에코창에 표시되는 딜레이 타임, 거이 없게 설정
 (setq echo-keystrokes 0.001)
 
-(setq tab-width 4)
+(setq tab-width 2)
 
 ;;; Paste setup
 (defun copy-from-osx ()
