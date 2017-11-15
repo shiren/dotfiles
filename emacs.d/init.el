@@ -79,8 +79,8 @@
       (with-selected-window (selected-window)
         (split-window-vertically))
     (with-selected-window (selected-window)
-      (split-window-horizontally)
-      )))
+      (split-window-horizontally))))
+
 
 (defcustom split-window-preferred-function 'split-smart
   "Split smart."
@@ -268,7 +268,7 @@
 (use-package ace-window
   :ensure t
   :config
- (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
+  (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
   :bind ("C-x o" . ace-window))
 
 ;; windmove
@@ -298,20 +298,20 @@
           (org-mode . outline-3)))
   :bind
   (("M-x". counsel-M-x)
-  ("C-x C-f". counsel-find-file)
-  ("C-c r". counsel-recentf)
-  ("C-c g". counsel-projectile-rg)
-  ("C-c e". ivy-switch-buffer)
-  ("C-c 4 e". ivy-switch-buffer-other-window)
-  ("C-c o". counsel-imenu)
-  ("C-c y" . counsel-yank-pop)
-  ("C-x r l" . counsel-bookmark)
-  ("C-j i". swiper)
-  ("C-j o". swiper-all)
-  :map ivy-mode-map
-  ("S-SPC" . toggle-input-method)
-  :map ivy-minibuffer-map
-  ("C-j" . ivy-alt-done)))
+   ("C-x C-f". counsel-find-file)
+   ("C-c r". counsel-recentf)
+   ("C-c g". counsel-projectile-rg)
+   ("C-c e". ivy-switch-buffer)
+   ("C-c 4 e". ivy-switch-buffer-other-window)
+   ("C-c o". counsel-imenu)
+   ("C-c y" . counsel-yank-pop)
+   ("C-x r l" . counsel-bookmark)
+   ("C-j i". swiper)
+   ("C-j o". swiper-all)
+   :map ivy-mode-map
+   ("S-SPC" . toggle-input-method)
+   :map ivy-minibuffer-map
+   ("C-j" . ivy-alt-done)))
 
 ;; Avy
 (use-package avy
@@ -524,9 +524,7 @@
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
             '(lambda ()
-               (setq next-error-function 'flycheck-next-error)
-               )
-            ))
+               (setq next-error-function 'flycheck-next-error))))
 
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
@@ -643,9 +641,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("tui-gate/components/.*.js\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("tui-gate/pages/.*.js\\'" . rjsx-mode))
-
+  (add-to-list 'auto-mode-alist '("toast-drive-web-service/src/\\(components\\|container\\)/.*.js\\'" . rjsx-mode))
   :config
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
@@ -786,9 +782,9 @@
   :ensure t
   :bind
   (("\C-cl" . org-store-link)
-  ("\C-ca" . org-agenda)
-  ("\C-cc" . org-capture)
-  ("\C-cb" . org-iswitchb))
+   ("\C-ca" . org-agenda)
+   ("\C-cc" . org-capture)
+   ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   ;;(setq org-agenda-files '("~/org/agenda"))
@@ -817,9 +813,9 @@
         '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
            ((agenda "")
             (org-agenda-files '("~/org/agenda")) ;; (5)
-            (org-agenda-sorting-strategy '(priority-up effort-down))))
-           )
-          )
+            (org-agenda-sorting-strategy '(priority-up effort-down))))))
+
+
 
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
@@ -831,8 +827,8 @@
      (plantuml . t)
      (swift . t)
      (sh . t)
-     (restclient . t)
-     ))
+     (restclient . t)))
+
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
@@ -883,7 +879,7 @@
 
 (defun auto-commit-files (list)
   (interactive
-    (list (list (buffer-file-name (current-buffer)))))
+   (list (list (buffer-file-name (current-buffer)))))
   "LIST to be auto commit"
   (while list
     (let* ((file (car list))
@@ -895,13 +891,8 @@
           (magit-call-git "commit" "-m" (concat file " update"))
           (magit-call-git "push" "origin")
           (magit-refresh)
-          (print (concat file " is pushed!!!"))
-          )
-        )
-      )
-    (setq list (cdr list))
-    )
-  )
+          (print (concat file " is pushed!!!")))))
+    (setq list (cdr list))))
 
 (use-package magit
   :commands magit-get-top-dir
