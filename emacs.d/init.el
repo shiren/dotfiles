@@ -271,6 +271,12 @@
   (setq aw-keys '(?1 ?2 ?3 ?4 ?5))
   :bind ("C-x o" . ace-window))
 
+(use-package writeroom-mode
+  :diminish writeroom-mode
+  :ensure t
+  :init
+  :config)
+
 ;; windmove
 (windmove-default-keybindings)
 ;; Make windmove work in org-mode:
@@ -351,7 +357,6 @@
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg)
   :ensure t)
-
 
 ;;;; Editing
 (use-package yasnippet
@@ -1021,4 +1026,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
