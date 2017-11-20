@@ -807,7 +807,7 @@
                                  "* %i%?")))
 
   (setq org-refile-targets '((org-agenda-files :level . 1)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
 
   (setq org-agenda-custom-commands
         '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
