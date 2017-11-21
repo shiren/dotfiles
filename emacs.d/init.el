@@ -134,6 +134,8 @@
 
 (use-package whitespace-cleanup-mode
   :ensure t
+  :diminish whitespace-cleanup-mode
+  :delight '(:eval "")
   :init
   (setq whitespace-cleanup-mode-only-if-initially-clean nil)
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
@@ -276,13 +278,6 @@
   :ensure t
   :init
   :config)
-
-(use-package exwm
-  :ensure t
-  :config
-  (require 'exwm)
-  (require 'exwm-config)
-  (exwm-config-default))
 
 ;; windmove
 (windmove-default-keybindings)
@@ -444,8 +439,12 @@
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (autoload 'ibuffer "ibuffer" "List buffers." t))
 
+(use-package delight
+  :ensure t)
+
 (use-package projectile
   :ensure t
+  :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :init
   (projectile-global-mode)
   :config
@@ -1033,4 +1032,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (exwm writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
