@@ -589,7 +589,11 @@
   (define-key js2-mode-map (kbd "C-c C-j") nil)
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
-  (add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t)))
+  (add-hook 'js2-mode-hook (lambda ()
+                             (add-hook 'after-save-hook 'eslint-fix nil t)
+                             (setq tab-width 2)
+                             (setq-default js2-basic-offset 2)
+                             (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
                 js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
