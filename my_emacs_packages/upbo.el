@@ -132,13 +132,23 @@
              project-result)))
 
 (defun update-upbo-view-buffer (buffer output)
-  (let ((inhibit-read-only t))
-    (set-buffer buffer)
-    (goto-char (point-max))
-    (insert output)
+  (with-current-buffer buffer
+    (let ((inhibit-read-only t)
+          (orig-point-max (point-max)))
+      (goto-char (point-max))
+      (insert output)
 
-    ;; ansi 코드있는 버퍼 렌더링하기
-    (ansi-color-apply-on-region (point-min) (point-max))))
+      (handle-buffer-scroll buffer orig-point-max)
+
+      ;; ansi 코드있는 버퍼 렌더링하기
+      (ansi-color-apply-on-region (point-min) (point-max)))))
+
+(defun handle-buffer-scroll (buffer buffer-point-max)
+  (with-current-buffer buffer
+    (let ((windows (get-buffer-window-list buffer)))
+      (dolist (window windows)
+        (when (= (window-point window) buffer-point-max)
+          (set-window-point window (point-max)))))))
 
 (defun upbo-minor-process-filter (process output)
   (parse-output-for-mode-line (process-buffer process) output)
