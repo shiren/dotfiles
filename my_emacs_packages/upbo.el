@@ -118,9 +118,9 @@
              ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
              ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
              ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
-             (if (string-match "Executed \\(?1:[0-9]+\\) of \\(?2:[0-9]+\\) ?\\(?3:ERROR\\)?(?\\(?4:[0-9]+ FAILED\\)?)? ?\\(?5:SUCCESS\\)?"
+             (if (string-match "Executed \\(?1:[0-9]+\\) of \\(?2:[0-9]+\\) ?\\(?3:ERROR\\)?(?\\(?4:[0-9]+ FAILED\\|skipped [0-9]+\\)?)? ?\\(?5:SUCCESS\\)?"
                                output)
-                 (concat (or (match-string 3 output) (match-string 4 output) (match-string 5 output))
+                 (concat (or (match-string 5 output) (match-string 3 output) (match-string 4 output))
                          "/"
                          (match-string 1 output)
                          "/"
