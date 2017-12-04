@@ -605,6 +605,7 @@
   :init
   (autoload 'tern-mode' "tern.el" nil t)
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+  (add-hook 'rjsx-mode-hook (lambda () (tern-mode t)))
   :config
   (define-key tern-mode-keymap (kbd "C-c C-r") nil)
   ;; (define-key tern-mode-keymap (kbd "M-.") nil)
