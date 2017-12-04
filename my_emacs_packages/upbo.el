@@ -142,7 +142,7 @@
 
 (defun handle-buffer-scroll (buffer buffer-point-max)
   (with-current-buffer buffer
-    (let ((windows (get-buffer-window-list buffer)))
+    (let ((windows (get-buffer-window-list buffer nil t)))
       (dolist (window windows)
         (when (= (window-point window) buffer-point-max)
           (set-window-point window (point-max)))))))
