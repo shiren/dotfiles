@@ -181,7 +181,7 @@
   (load-theme 'zenburn t))
 
 (use-package spacemacs-theme
-  :ensure t
+  :defer t
   :init
   (load-theme 'spacemacs-dark t)
   :config
@@ -491,7 +491,7 @@
 (use-package counsel-projectile
   :ensure t
   :init
-  (counsel-projectile-on))
+  (counsel-projectile-mode))
 
 (use-package wgrep
   :ensure t)
