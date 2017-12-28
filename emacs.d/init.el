@@ -831,8 +831,6 @@
             (org-agenda-files '("~/org/agenda")) ;; (5)
             (org-agenda-sorting-strategy '(priority-up effort-down))))))
 
-
-
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -845,6 +843,8 @@
      (sh . t)
      (restclient . t)))
 
+  (setq org-agenda-restore-windows-after-quit t)
+
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
@@ -852,6 +852,7 @@
   (setq org-log-done t)
   (setq org-edit-src-content-indentation 0)
   (setq org-adapt-indentation nil)
+
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
   (setq org-plantuml-jar-path
