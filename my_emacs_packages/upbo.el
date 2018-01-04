@@ -42,7 +42,19 @@
 (defcustom upbo-project-config '()
   "Each element is a list of the form (KEY VALUE).")
 
+(defvar upbo-test-configs nil)
+
 (defvar project-result (make-hash-table :test 'equal))
+
+(defun upbo-define-test (&rest args)
+  (let* ((project-name (plist-get args :name))
+         (fn
+          (lambda (config)
+            (string= (plist-get config :name) project-name)))
+         (config (-first fn upbo-test-configs)))
+    (when config
+      (setq upbo-test-configs (-reject fn upbo-test-configs)))
+    (push args upbo-test-configs)))
 
 ;;;;;;;;; upbo-view-mode
 (defun open-upbo-view ()
@@ -173,6 +185,9 @@ NIL if the current directory is not in a Git repo."
               (lambda (el)
                 (string= (car el) (git-root-dir)))
               upbo-project-config)))))
+
+(defun get-karma-conf-setting ()
+  )
 
 (defun find-karma-conf ()
   (let ((expected-karma-conf-path (concat (git-root-dir) "karma.conf.js")))
