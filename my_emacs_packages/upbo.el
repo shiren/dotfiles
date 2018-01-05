@@ -108,13 +108,17 @@
                        (upbo-get-karma-command)
                        (list "start" (upbo-get-karma-conf) "--reporters" "dots")
                        args)))
-    (condition-case err
-        (apply 'start-process-shell-command process-args)
+    (apply 'start-process-shell-command process-args))
 
-      ;; 프로세스 필터 설정
-      (set-process-filter (get-buffer-process upbo-view-buffer-name)
-                          'upbo-minor-process-filter)
-      (error (message "Can't run karma with %s" process-args)))))
+  (set-process-filter (get-buffer-process upbo-view-buffer-name) 'upbo-minor-process-filter))
+
+    ;; (condition-case err
+    ;;     (apply 'start-process-shell-command process-args)
+
+    ;;   ;; 프로세스 필터 설정
+    ;;   (set-process-filter (get-buffer-process upbo-view-buffer-name)
+    ;;                       'upbo-minor-process-filter)
+    ;;   (error (message "Can't run karma with %s" process-args)))))
 
 (defun upbo-karma-single-run ()
   (interactive)
