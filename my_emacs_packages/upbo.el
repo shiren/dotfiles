@@ -101,18 +101,20 @@
     (when (process-live-p upbo-process)
       (kill-process upbo-process)))
 
-  (let ((default-directory (upbo-git-root-dir)))
-    (apply 'start-process-shell-command
-           (append
-            (list "upboProcess"
-                  upbo-view-buffer-name)
-            (upbo-get-karma-command)
-            (list "start" (upbo-get-karma-conf) "--reporters" "dots")
-            args)))
+  (let ((default-directory (upbo-git-root-dir))
+        (process-args (append
+                       (list "upboProcess"
+                             upbo-view-buffer-name)
+                       (upbo-get-karma-command)
+                       (list "start" (upbo-get-karma-conf) "--reporters" "dots")
+                       args)))
+    (condition-case err
+        (apply 'start-process-shell-command process-args)
 
-  ;; 프로세스 필터 설정
-  (set-process-filter (get-buffer-process upbo-view-buffer-name)
-                      'upbo-minor-process-filter))
+      ;; 프로세스 필터 설정
+      (set-process-filter (get-buffer-process upbo-view-buffer-name)
+                          'upbo-minor-process-filter)
+      (error (message "Can't run karma with %s" process-args)))))
 
 (defun upbo-karma-single-run ()
   (interactive)
@@ -209,8 +211,8 @@ NIL if the current directory is not in a Git repo."
     (define-key global-map (kbd "C-c u r") 'upbo-open-upbo-view)
     (define-key global-map (kbd "C-c u s") 'upbo-karma-single-run)
     (define-key global-map (kbd "C-c u w") 'upbo-karma-auto-watch)
-    (define-key global-map (kbd "C-c u t") 'testtest)
-  map)
+    (define-key global-map (kbd "C-c u t") 'testtest))
+  map
   "The keymap used when `upbo-mode' is active.")
 
 (defun upbo-mode-hook ()
