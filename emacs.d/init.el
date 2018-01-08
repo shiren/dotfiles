@@ -118,7 +118,8 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-;;(add-to-list 'load-path "~/dotfiles/my_emacs_packages")
+;; (add-to-list 'load-path "~/dotfiles/my_emacs_packages")
+;; (require 'upbo)
 
 (use-package upbo
   :load-path "~/dotfiles/my_emacs_packages")

@@ -212,11 +212,11 @@ NIL if the current directory is not in a Git repo."
 
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key global-map (kbd "C-c u r") 'upbo-open-upbo-view)
-    (define-key global-map (kbd "C-c u s") 'upbo-karma-single-run)
-    (define-key global-map (kbd "C-c u w") 'upbo-karma-auto-watch)
-    (define-key global-map (kbd "C-c u t") 'testtest))
-  map
+    (define-key global-map (kbd "C-c u r") 'open-upbo-view)
+    (define-key global-map (kbd "C-c u s") 'karma-single-run)
+    (define-key global-map (kbd "C-c u w") 'karma-auto-watch)
+    (define-key global-map (kbd "C-c u t") 'testtest)
+    map)
   "The keymap used when `upbo-mode' is active.")
 
 (defun upbo-mode-hook ()
