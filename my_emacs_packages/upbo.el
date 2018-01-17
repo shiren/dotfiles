@@ -140,7 +140,7 @@
                                output)
                  (concat (or (match-string 5 output) (match-string 3 output) (match-string 4 output))
                          "/"
-                         (match-string 1 output)
+       p                  (match-string 1 output)
                          "/"
                          (match-string 2 output))
                "~")
