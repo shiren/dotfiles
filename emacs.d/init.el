@@ -125,6 +125,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package use-package-ensure-system-package
+  :ensure t)
+
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+
 (use-package upbo
   :load-path "~/dotfiles/my_emacs_packages")
 
@@ -135,9 +142,6 @@
 
 (eval-when-compile
   (require 'use-package))
-
-(use-package system-packages
-  :ensure t)
 
 (use-package whitespace-cleanup-mode
   :ensure t
@@ -198,7 +202,6 @@
 
 (use-package spaceline-config
   :ensure spaceline
-  :disabled
   :init
   (setq powerline-default-separator 'arrow-fade)
   :config
@@ -333,13 +336,16 @@
 ;; Avy
 (use-package avy
   :ensure t
+  :chords
+  ("jj" . avy-goto-word-1)
+  ("jk" . avy-goto-char-2)
+  ("jg" . avy-goto-line)
   :bind
   ("C-j j". avy-goto-word-1)
   ("C-j C-j". avy-goto-word-1)
   ("C-j k". avy-goto-char-2)
   ("C-j g". avy-goto-line)
   ("C-j C-g". avy-goto-line))
-
 
 ;;;; Move&History
 (use-package git-timemachine
@@ -612,7 +618,7 @@
 
 (use-package tern
   :ensure t
-  :ensure-system-package (tern . "npm i -g tern")  
+  :ensure-system-package (tern . "npm i -g tern")
   :diminish tern-mode
   :init
   (autoload 'tern-mode' "tern.el" nil t)
@@ -641,24 +647,6 @@
       js-doc-url "shiren.github.io"
       js-doc-license "MIT"))
 
-(defun setup-xref-js2-backend ()
-  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
-
-(use-package xref-js2
-  :ensure t
-  :disabled
-  :init
-  (add-hook 'js2-mode-hook 'setup-xref-js2-backend)
-  (add-hook 'rjsx-mode-hook 'setup-xref-js2-backend)
-  :config
-  (add-to-list 'xref-js2-ignored-dirs "dist")
-  (defun my/do-then-quit (&rest args)
-    (let ((win (selected-window)))
-      (apply (car args) (rest args))
-      (quit-window nil win)))
-
-  (advice-add #'xref-goto-xref :around #'my/do-then-quit))
-
 (use-package vue-mode
   :ensure t
   :init
@@ -674,21 +662,22 @@
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
-;; (use-package prettier-js
-;;   :ensure t
-;;   :init
-;;   :config
-;;   (setq prettier-js-args '(
-;;                            "--trailing-comma" "none"
-;;                            "--print-width" "120"
-;;                            "--single-quote"
-;;                            "--no-bracket-spacing"
-;;                            "--tab-width" "2"
-;;                            ))
-;;   (add-hook 'js2-mode-hook 'prettier-js-mode)
-;;   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-;;   (add-hook 'web-mode-hook 'prettier-js-mode)
-;;   (add-hook 'typescript-mode-hook 'prettier-js-mode))
+(use-package prettier-js
+  :ensure t
+  :disabled
+  :init
+  :config
+  (setq prettier-js-args '(
+                           "--trailing-comma" "none"
+                           "--print-width" "120"
+                           "--single-quote"
+                           "--no-bracket-spacing"
+                           "--tab-width" "2"))
+
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 ;;; typescript
 (defun my/use-tslint-from-node-modules ()
@@ -1067,4 +1056,4 @@
     ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
