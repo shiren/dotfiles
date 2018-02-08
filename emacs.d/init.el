@@ -136,6 +136,9 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package system-packages
+  :ensure t)
+
 (use-package whitespace-cleanup-mode
   :ensure t
   :diminish whitespace-cleanup-mode
@@ -360,6 +363,7 @@
 
 (use-package dumb-jump
   :ensure t
+  :ensure-system-package rg
   :bind (("C-j n" . dumb-jump-go-other-window)
          ("C-j m" . dumb-jump-go))
   :config
@@ -608,6 +612,7 @@
 
 (use-package tern
   :ensure t
+  :ensure-system-package (tern . "npm i -g tern")  
   :diminish tern-mode
   :init
   (autoload 'tern-mode' "tern.el" nil t)
@@ -1062,4 +1067,4 @@
     ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
