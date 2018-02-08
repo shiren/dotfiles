@@ -41,7 +41,7 @@
   :link '(url-link :tag "Github" "https://github.com/shiren")
   :link '(emacs-commentary-link :tag "Commentary" "karma"))
 
-(defvar upbo-test-configs nil)
+(defvar upbo-configs nil)
 
 (defvar upbo-project-result (make-hash-table :test 'equal))
 
@@ -53,10 +53,10 @@
          (equal-project-name
           (lambda (config)
             (string= (plist-get config :path) project-name)))
-         (config (-first equal-project-name upbo-test-configs)))
+         (config (-first equal-project-name upbo-configs)))
     (when config
-      (setq upbo-test-configs (-reject equal-project-name upbo-test-configs)))
-    (push args upbo-test-configs)))
+      (setq upbo-configs (-reject equal-project-name upbo-configs)))
+    (push args upbo-configs)))
 
 ;;;;;;;;; upbo-view-mode
 (defun upbo-open-upbo-view ()
@@ -106,8 +106,14 @@
                        (list "upboProcess"
                              upbo-view-buffer-name)
                        (upbo-get-karma-command)
-                       (list "start" (upbo-get-karma-conf) "--reporters" "dots")
+                       (list
+                        "start"
+                        (upbo-get-karma-conf-from-config)
+                        "--reporters" "dots")
+                       (when (upbo-get-browsers-from-config)
+                         (list "--browsers" (upbo-get-browsers-from-config)))
                        args)))
+    (print process-args)
     (apply 'start-process-shell-command process-args))
 
   (set-process-filter (get-buffer-process upbo-view-buffer-name) 'upbo-minor-process-filter))
@@ -179,7 +185,7 @@
   (concat "*upbo:" (upbo-git-root-dir) "*"))
 
 (defun upbo-git-root-dir ()
-  "Returns the current directory's root Git repo directory, or
+  "Returns the current directory's root Git repo directory, or)))))))
 NIL if the current directory is not in a Git repo."
   (let ((dir (locate-dominating-file default-directory ".git")))
     (when dir
@@ -188,7 +194,7 @@ NIL if the current directory is not in a Git repo."
 (defun upbo-get-project-config-by-path (path)
   (-first (lambda (config)
             (string= path (plist-get config :path)))
-          upbo-test-configs))
+          upbo-configs))
 
 (defun upbo-get-current-config ()
   (upbo-get-project-config-by-path (upbo-git-root-dir)))
@@ -206,9 +212,12 @@ NIL if the current directory is not in a Git repo."
     (when (file-exists-p expected-karma-conf-path)
       expected-karma-conf-path)))
 
-(defun upbo-get-karma-conf ()
+(defun upbo-get-karma-conf-from-config ()
   (or (plist-get (upbo-get-current-config) :conf-file)
       (upbo-find-karma-conf)))
+
+(defun upbo-get-browsers-from-config ()
+  (plist-get (upbo-get-current-config) :browsers))
 
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
@@ -228,7 +237,7 @@ NIL if the current directory is not in a Git repo."
   (interactive)
   (print (hash-table-keys upbo-project-result))
   (print (hash-table-values upbo-project-result))
-  (print (upbo-get-karma-conf)))
+  (print (upbo-get-karma-conf-from-config)))
 
 (defun upbo-project-test-result ()
   (let ((result (gethash (upbo-git-root-dir) upbo-project-result)))
@@ -238,7 +247,7 @@ NIL if the current directory is not in a Git repo."
 
 ;;;###autoload
 (define-minor-mode upbo-mode
-  "Toggle upbo mode.))))
+  "Toggle upbo mode.
 Key bindings:
 \\{upbo-mode-map}"
   :lighter (:eval (format " upbo%s" (upbo-project-test-result)))
