@@ -140,7 +140,7 @@
                                output)
                  (concat (or (match-string 5 output) (match-string 3 output) (match-string 4 output))
                          "/"
-       p                  (match-string 1 output)
+                         (match-string 1 output)
                          "/"
                          (match-string 2 output))
                "~")
@@ -212,10 +212,10 @@ NIL if the current directory is not in a Git repo."
 
 (defvar upbo-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key global-map (kbd "C-c u r") 'upbo-open-upbo-view)
-    (define-key global-map (kbd "C-c u s") 'upbo-karma-single-run)
-    (define-key global-map (kbd "C-c u w") 'upbo-karma-auto-watch)
-    (define-key global-map (kbd "C-c u t") 'upbo-testtest)
+    (define-key map (kbd "C-c u r") 'upbo-open-upbo-view)
+    (define-key map (kbd "C-c u s") 'upbo-karma-single-run)
+    (define-key map (kbd "C-c u w") 'upbo-karma-auto-watch)
+    (define-key map (kbd "C-c u t") 'upbo-testtest)
     map)
   "The keymap used when `upbo-mode' is active.")
 
