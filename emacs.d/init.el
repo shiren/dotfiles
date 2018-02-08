@@ -60,7 +60,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; no popup frame(새버퍼열때 현재 프레임에서 열기)
+;; No popup frame(새버퍼열때 현재 프레임에서 열기)
 (setq ns-pop-up-frames nil)
 (setq pop-up-frames nil)
 
@@ -266,11 +266,12 @@
   (setq eyebrowse-keymap-prefix (kbd "C-j <SPC>"))
   (eyebrowse-mode t)
   :bind
-  ("C-j ;" . eyebrowse-last-window-config)
-  ("C-j 0" . eyebrowse-close-window-config)
-  ("C-j 1" . eyebrowse-switch-to-window-config-1)
-  ("C-j 2" . eyebrowse-switch-to-window-config-2)
-  ("C-j 3" . eyebrowse-switch-to-window-config-3))
+  (:map eyebrowse-mode-map
+    ("C-j ;" . eyebrowse-last-window-config)
+    ("C-j 0" . eyebrowse-close-window-config)
+    ("C-j 1" . eyebrowse-switch-to-window-config-1)
+    ("C-j 2" . eyebrowse-switch-to-window-config-2)
+    ("C-j 3" . eyebrowse-switch-to-window-config-3)))
 
 (use-package ace-window
   :ensure t
@@ -358,12 +359,13 @@
   ("C-j l" . goto-last-change))
 
 (use-package dumb-jump
+  :ensure t
   :bind (("C-j n" . dumb-jump-go-other-window)
          ("C-j m" . dumb-jump-go))
   :config
   (setq dumb-jump-selector 'ivy)
-  (setq dumb-jump-force-searcher 'rg)
-  :ensure t)
+  (setq dumb-jump-force-searcher 'rg))
+
 
 ;;;; Editing
 (use-package yasnippet
@@ -451,7 +453,7 @@
   :ensure t
   :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :init
-  (projectile-global-mode)
+  (projectile-mode)
   :config
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching t)
