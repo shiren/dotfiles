@@ -36,6 +36,7 @@
 
 ;;; Code:
 (require 'dash)
+(require 'ansi-color)
 
 (defgroup upbo nil
   "Karma Emacs Integration"
@@ -82,13 +83,9 @@
 (defvar upbo-view-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "w") 'upbo-karma-auto-watch)
-    (define-key map (kbd "r") 'upbo-karma-single-run)
+    (define-key map (kbd "s") 'upbo-karma-single-run)
     (define-key map (kbd "k") 'upbo-kill-upbo-buffer)
     map))
-
-(define-key upbo-view-mode-map (kbd "w") 'upbo-karma-auto-watch)
-(define-key upbo-view-mode-map (kbd "r") 'upbo-karma-single-run)
-(define-key upbo-view-mode-map (kbd "k") 'upbo-kill-upbo-buffer)
 
 ;;;###autoload
 (define-derived-mode upbo-view-mode special-mode "upbo-view"
