@@ -7,7 +7,7 @@
 ;; URL: http://github.com/shiren
 ;; Version: 0.0.0
 ;; Package-Requires: ((pkg-info "0.4") (emacs "24"))
-;; Keywords: language, javascript, js, karma, testing
+;; Keywords: javascript, js, testing, karma
 
 ;; This file is not part of GNU Emacs.
 
@@ -29,13 +29,16 @@
 ;;  Karma Test Runner Emacs Integration
 
 ;;  Usage:
-;;  (add-to-list 'upbo-project-config '("~/masterpiece/tui.chart/" "~/masterpiece/tui.chart/karma.conf.js"))
+;; (upbo-define-test
+;;  :path "~/tui.chart/"
+;;  :browsers "ChromeHeadless"
+;;  :conf-file "~/tui.chart/karma.conf.js")
 
 ;;; Code:
 (require 'dash)
 
 (defgroup upbo nil
-  "Karma Test Runner Emacs Integration"
+  "Karma Emacs Integration"
   :prefix "upbo-"
   :group 'applications
   :link '(url-link :tag "Github" "https://github.com/shiren")
@@ -46,7 +49,7 @@
 (defvar upbo-project-result (make-hash-table :test 'equal))
 
 (defcustom upbo-karma-command nil
-  "upbo karma command")
+  "Upbo karma command.")
 
 (defun upbo-define-test (&rest args)
   (let* ((project-name (plist-get args :path))
@@ -60,6 +63,7 @@
 
 ;;;;;;;;; upbo-view-mode
 (defun upbo-open-upbo-view ()
+  "Open upbo view buffer of current buffer's project."
   (interactive)
   (let* ((buffer-name (upbo-get-view-buffer-name))
          (upbo-view-buffer (get-buffer buffer-name)))
@@ -71,6 +75,7 @@
       (switch-to-buffer upbo-view-buffer))))
 
 (defun upbo-kill-upbo-buffer ()
+  "Kill upbo buffer of current buffer's project."
   (interactive)
   (kill-buffer (upbo-get-view-buffer-name)))
 
@@ -89,11 +94,6 @@
 (define-derived-mode upbo-view-mode special-mode "upbo-view"
   "Major mode for upbo"
   (use-local-map upbo-view-mode-map))
-
-  ;; (let ((inhibit-read-only t))
-  ;;   (insert (concat "Project: " (upbo-git-root-dir) "\n"))
-  ;;   (insert (concat "Karma conf: " (get-karma-conf-setting) "\n"))
-  ;;   (insert "upbo started\nw: auto-watch, r: single-run, k: kill upbo"))
 
 ;;;;;;;; Minor
 (defun upbo-karma-start (args upbo-view-buffer-name)
@@ -118,30 +118,29 @@
 
   (set-process-filter (get-buffer-process upbo-view-buffer-name) 'upbo-minor-process-filter))
 
-    ;; (condition-case err
-    ;;     (apply 'start-process-shell-command process-args)
-
-    ;;   ;; 프로세스 필터 설정
-    ;;   (set-process-filter (get-buffer-process upbo-view-buffer-name)
-    ;;                       'upbo-minor-process-filter)
-    ;;   (error (message "Can't run karma with %s" process-args)))))
-
 (defun upbo-karma-single-run ()
+  "Karma single run."
   (interactive)
+  (upbo-print-to-mode-line "Loading")
   (upbo-karma-start '("--single-run")
                     (upbo-get-view-buffer-name)))
 
 (defun upbo-karma-auto-watch ()
+  "Karma run with auto-watch."
   (interactive)
+  (upbo-print-to-mode-line "Loading")
   (upbo-karma-start '("--no-single-run" "--auto-watch")
                     (upbo-get-view-buffer-name)))
 
+(defun upbo-print-to-mode-line (str)
+  (puthash (upbo-git-root-dir) str upbo-project-result))
+
 (defun upbo-parse-output-for-mode-line (buffer output)
   (with-current-buffer buffer
-    (puthash (upbo-git-root-dir)
-             ;; 숫자 of 숫자 (숫자 문자)  ===> 5 of 10 (5 FAILED)
-             ;; 숫자 of 숫자 문자 ===> 5 of 10 ERROR
-             ;; 숫자 of 숫자 (문자 숫자) 문자 5 of 10 (skipped 5) SUCCESS
+    (upbo-print-to-mode-line
+             ;; Num of Num (Num Char)  ===> 5 of 10 (5 FAILED)
+             ;; Num of Num Char ===> 5 of 10 ERROR
+             ;; Num of Num (Char Num) Char ===> 5 of 10 (skipped 5) SUCCESS
              (if (string-match "Executed \\(?1:[0-9]+\\) of \\(?2:[0-9]+\\) ?\\(?3:ERROR\\)?(?\\(?4:[0-9]+ FAILED\\|skipped [0-9]+\\)?)? ?\\(?5:SUCCESS\\)?"
                                output)
                  (concat (or (match-string 5 output) (match-string 3 output) (match-string 4 output))
@@ -149,8 +148,7 @@
                          (match-string 1 output)
                          "/"
                          (match-string 2 output))
-               "~")
-             upbo-project-result)))
+               "~"))))
 
 (defun upbo-update-upbo-view-buffer (buffer output)
   (with-current-buffer buffer
@@ -158,10 +156,7 @@
           (orig-point-max (point-max)))
       (goto-char (point-max))
       (insert output)
-
       (upbo-handle-buffer-scroll buffer orig-point-max)
-
-      ;; ansi 코드있는 버퍼 렌더링하기
       (ansi-color-apply-on-region (point-min) (point-max)))))
 
 (defun upbo-handle-buffer-scroll (buffer buffer-point-max)
@@ -185,7 +180,7 @@
   (concat "*upbo:" (upbo-git-root-dir) "*"))
 
 (defun upbo-git-root-dir ()
-  "Returns the current directory's root Git repo directory, or)))))))
+  "Return the current directory's root Git repo directory, or))
 NIL if the current directory is not in a Git repo."
   (let ((dir (locate-dominating-file default-directory ".git")))
     (when dir
@@ -233,7 +228,7 @@ NIL if the current directory is not in a Git repo."
   (upbo-mode 1))
 
 (defun upbo-testtest ()
-  "JUST test."
+  "Just for test."
   (interactive)
   (print (hash-table-keys upbo-project-result))
   (print (hash-table-values upbo-project-result))
