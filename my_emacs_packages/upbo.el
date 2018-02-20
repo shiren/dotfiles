@@ -80,6 +80,15 @@
   (interactive)
   (kill-buffer (upbo-get-view-buffer-name)))
 
+(defun upbo-update-upbo-view-buffer (buffer output)
+  (with-current-buffer buffer
+    (let ((inhibit-read-only t)
+          (orig-point-max (point-max)))
+      (goto-char (point-max))
+      (insert output)
+      (upbo-handle-buffer-scroll buffer orig-point-max)
+      (ansi-color-apply-on-region (point-min) (point-max)))))
+
 (defvar upbo-view-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "w") 'upbo-karma-auto-watch)
@@ -146,15 +155,6 @@
                          "/"
                          (match-string 2 output))
                "~"))))
-
-(defun upbo-update-upbo-view-buffer (buffer output)
-  (with-current-buffer buffer
-    (let ((inhibit-read-only t)
-          (orig-point-max (point-max)))
-      (goto-char (point-max))
-      (insert output)
-      (upbo-handle-buffer-scroll buffer orig-point-max)
-      (ansi-color-apply-on-region (point-min) (point-max)))))
 
 (defun upbo-handle-buffer-scroll (buffer buffer-point-max)
   (with-current-buffer buffer
