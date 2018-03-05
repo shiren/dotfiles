@@ -765,6 +765,39 @@
   :config
   (setq rust-indent-offset 2))
 
+;;; Go
+;; (setenv "GOPATH" "~/masterpeice/go")
+
+(add-to-list 'exec-path "~/masterpeice/go/bin")
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+(defun my-go-mode-hook ()
+  ;; Call Gofmt before saving
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ;; Customize compile command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet"))
+  ; Godef jump key binding
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark))
+
+(use-package go-mode
+  :ensure t
+  :ensure-system-package
+  ((godef . "go get github.com/rogpeppe/godef")
+   (gstool . "go get golang.org/x/tools/cmd/..."))
+  :config
+  (add-hook 'go-mode-hook 'my-go-mode-hook))
+
+(use-package company-go
+  :ensure t
+  :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
+  :init
+  (add-hook 'go-mode-hook (lambda ())
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+
 ;;; Utilities
 (use-package google-translate
   :ensure t
@@ -1068,4 +1101,4 @@
     ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
