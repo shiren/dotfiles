@@ -80,6 +80,10 @@ alias godot="~/dotfiles"
 
 export EDITOR="/usr/local/bin/vim"
 export PATH="/usr/local/bin:/usr/local/git/bin:$HOME/.cargo/bin:$PATH"
+export GOROOT="/usr/local/go"
+export GOPATH=$HOME/masterpeice/go
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
 if [ -z $EMACS ]; then
     # Base16 Shell
