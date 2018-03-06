@@ -32,6 +32,7 @@
 (setq echo-keystrokes 0.001)
 
 (setq tab-width 2)
+(setq default-tab-width 2)
 
 ;;; Paste setup
 (defun copy-from-osx ()
@@ -784,15 +785,15 @@
 
 (use-package go-mode
   :ensure t
-  :ensure-system-package
-  ((godef . "go get github.com/rogpeppe/godef")
-   (gstool . "go get golang.org/x/tools/cmd/..."))
+  ;; :ensure-system-package
+  ;; ((godef . "go get github.com/rogpeppe/godef")
+  ;;  (gstool . "go get golang.org/x/tools/cmd/..."))
   :config
   (add-hook 'go-mode-hook 'my-go-mode-hook))
 
 (use-package company-go
   :ensure t
-  :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
+  ;; :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
   :init
   (add-hook 'go-mode-hook (lambda ())
                           (set (make-local-variable 'company-backends) '(company-go))
@@ -824,6 +825,9 @@
   :ensure t)
 
 (use-package ob-typescript
+  :ensure t)
+
+(use-package ob-go
   :ensure t)
 
 (use-package ox-gfm
@@ -1101,4 +1105,4 @@
     ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
