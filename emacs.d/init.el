@@ -547,6 +547,9 @@
                             css-csslint
                             markdown-mdl
                             sass
+                            go-build
+                            go-fmt
+                            go-golint
                             sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
@@ -781,7 +784,9 @@
            "go build -v && go test -v && go vet"))
   ; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump)
-  (local-set-key (kbd "M-*") 'pop-tag-mark))
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+  (local-set-key (kbd "C-c C-c") 'compile)
+  (set (make-local-variable 'company-backends) '(company-go)))
 
 (use-package go-mode
   :ensure t
@@ -792,12 +797,9 @@
   (add-hook 'go-mode-hook 'my-go-mode-hook))
 
 (use-package company-go
-  :ensure t
+  :ensure t)
   ;; :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
-  :init
-  (add-hook 'go-mode-hook (lambda ())
-                          (set (make-local-variable 'company-backends) '(company-go))
-                          (company-mode)))
+
 
 ;;; Utilities
 (use-package google-translate
