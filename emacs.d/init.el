@@ -768,7 +768,8 @@
 (use-package rust-mode
   :ensure t
   :ensure-system-package
-  (rustfmt . "cargo install rustfmt")
+  ((rustfmt . "cargo install rustfmt")
+   (cargo-script . "cargo install cargo-script"))
   :init
   :config
   (setq rust-indent-offset 2)
