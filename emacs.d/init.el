@@ -521,6 +521,7 @@
   :init
   (add-hook 'prog-mode-hook 'company-mode)
   :config
+  (setq company-tooltip-align-annotations t)
   (setq company-idle-delay 0.1)
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
@@ -550,6 +551,7 @@
                             go-build
                             go-fmt
                             go-golint
+                            rust
                             sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
@@ -765,13 +767,36 @@
 
 (use-package rust-mode
   :ensure t
+  :ensure-system-package
+  (rustfmt . "cargo install rustfmt")
   :init
   :config
-  (setq rust-indent-offset 2))
+  (setq rust-indent-offset 2)
+  (add-hook 'before-save-hook 'rust-format-buffer))
 
-;;; Go
-;; (setenv "GOPATH" "~/masterpeice/go")
+(use-package cargo
+  :ensure t
+  :init
+  (add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
+(use-package racer
+  :ensure t
+  :ensure-system-package
+  (racer . "cargo install racer")
+  :init
+  (setq racer-cmd "~/.cargo/bin/racer") ;; Rustup binaries PATH
+;;  (setq racer-rust-src-path "/Users/julien/Code/rust/src") ;; Rust source code PATH
+  (add-hook 'rust-mode-hook #'racer-mode))
+
+(use-package flycheck-rust
+  :ensure t
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+;;; go
 (add-to-list 'exec-path "~/masterpeice/go/bin")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
@@ -782,7 +807,7 @@
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
            "go build -v && go test -v && go vet && ./go"))
-  ; Godef jump key binding
+                                        ; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-*") 'pop-tag-mark)
   (local-set-key (kbd "C-c C-c") 'compile)
@@ -830,6 +855,9 @@
   :ensure t)
 
 (use-package ob-go
+  :ensure t)
+
+(use-package ob-rust
   :ensure t)
 
 (use-package ox-gfm
@@ -894,6 +922,7 @@
      (plantuml . t)
      (swift . t)
      (sh . t)
+     (rust . t)
      (restclient . t)))
 
   (setq org-agenda-restore-windows-after-quit t)
@@ -1107,4 +1136,4 @@
     ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: rust codeblock
+# key: <r
+# --
+
+#+BEGIN_SRC rust
+$0
+#+END_SRC
