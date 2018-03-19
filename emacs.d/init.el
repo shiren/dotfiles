@@ -576,6 +576,22 @@
 
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
+(use-package lsp-mode
+  :ensure t
+  :config
+  (setq lsp-enable-flycheck t))
+
+(use-package lsp-ui
+  :disabled
+  :ensure t
+  :init
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+(use-package company-lsp
+  :ensure t
+  :config
+  (push 'company-lsp company-backends))
+
 ;;;; Emacs-lisp
 (use-package suggest
   :ensure t)
@@ -629,7 +645,17 @@
   (setq-default js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
 
+(use-package lsp-javascript-typescript
+  :ensure-system-package
+  (javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
+  :ensure t
+  :init
+  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'rjsx-mode-hook #'lsp-javascript-typescript-enable))
+
 (use-package tern
+  :disabled
   :ensure t
   :ensure-system-package (tern . "npm i -g tern")
   :diminish tern-mode
@@ -644,6 +670,7 @@
   (setq tern-command '("tern" "--no-port-file")))
 
 (use-package company-tern
+  :disabled
   :ensure t
   :init
   (add-to-list 'company-backends 'company-tern))
@@ -666,13 +693,14 @@
   :config
   (setq mmm-submode-decoration-level 0))
 
-(use-package lsp-mode
-  :ensure t)
-
 (use-package lsp-vue
+  ;; :ensure-system-package
+  ;; (vue-language-server . "npm install vue-language-server -g")
   :ensure t
   :init
-  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable))
+  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
+  :config
+  (setq vetur.validation.template t))
 
 (use-package rjsx-mode
   :ensure t
@@ -893,7 +921,7 @@
    ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  ;;(setq org-agenda-files '("~/org/agenda"))
+  (setq org-agenda-files '("~/org/agenda"))
   (setq org-agenda-files (find-lisp-find-files "~/org/agenda" "\.org$"))
   (setq org-default-notes-file "/agenda/index.org")
   (setq org-mobile-inbox-for-pull "/agenda/index.org")
@@ -1140,9 +1168,6 @@
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(org-agenda-files
-   (quote
-    ("/Users/shiren/org/agenda/toastDrive.org" "/Users/shiren/org/agenda/tui.org" "/Users/shiren/org/agenda/fedev.org" "/Users/shiren/org/agenda/index.org")))
  '(package-selected-packages
    (quote
-    (lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
