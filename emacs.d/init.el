@@ -544,6 +544,7 @@
                             tsx-tide
                             typescript-tide
                             emacs-lisp
+                            emacs-lisp-checkdoc
                             css-csslint
                             markdown-mdl
                             sass
