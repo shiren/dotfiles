@@ -136,10 +136,10 @@
 (use-package upbo
   :load-path "~/dotfiles/my_emacs_packages")
 
-(upbo-define-test
- :path "~/masterpiece/tui.chart/"
- :browsers "ChromeHeadless"
- :conf-file "~/masterpiece/tui.chart/karma.conf.js")
+;; (upbo-define-test
+;;  :path "~/masterpiece/tui.chart/"
+;;  :browsers "ChromeHeadless"
+;;  :conf-file "~/masterpiece/tui.chart/karma.conf.js")
 
 (eval-when-compile
   (require 'use-package))
