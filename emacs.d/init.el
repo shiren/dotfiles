@@ -691,7 +691,7 @@
   :ensure t
   :init
   :config
-  (setq mmm-submode-decoration-level 0))
+  (setq mmm-submode-decoration-level 2))
 
 (use-package lsp-vue
   ;; :ensure-system-package
