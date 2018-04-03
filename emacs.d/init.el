@@ -338,9 +338,9 @@
 (use-package avy
   :ensure t
   :chords
-  ("jj" . avy-goto-word-1)
-  ("jk" . avy-goto-char-2)
-  ("jg" . avy-goto-line)
+  ("ggw" . avy-goto-word-1)
+  ("ggc" . avy-goto-char-2)
+  ("ggg" . avy-goto-line)
   :bind
   ("C-j j". avy-goto-word-1)
   ("C-j C-j". avy-goto-word-1)
@@ -404,7 +404,7 @@
 (use-package evil-escape
   :ensure t
   :config
-  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-key-sequence "fd")
   (setq-default evil-escape-delay 0.2))
 
 (use-package paredit
