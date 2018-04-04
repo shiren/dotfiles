@@ -400,10 +400,7 @@
   ("C-c v" . er/expand-region))
 
 (use-package evil
-  :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'evil-mode)
-  (add-hook 'lsp-mode-hook 'evil-mode))
+  :ensure t)
 
 (use-package evil-escape
   :ensure t
