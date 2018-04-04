@@ -409,8 +409,7 @@
 (use-package evil-escape
   :ensure t
   :config
-  (setq-default evil-escape-delay 0.2)
-  (evil-escape-mode t))
+  (setq-default evil-escape-delay 0.2))
 
 (use-package paredit
   :ensure t
@@ -1046,10 +1045,11 @@
     (info-initialize)
     (add-to-list 'Info-directory-list
                  "~/.emacs.d/site-lisp/magit/Documentation/"))
-
   ;;; 이맥스가 기본적으로 제공하는 Git 백엔드를 켜두면 매우 느려진다. magit만 쓴다.
   (setq vc-handled-backends nil)
   :config
+  (setq vc-follow-symlinks t)
+  (setq find-file-visit-truename t)
   (setq magit-refresh-status-buffer 'switch-to-buffer)
   (setq magit-rewrite-inclusive 'ask)
   (setq magit-save-some-buffers t)
