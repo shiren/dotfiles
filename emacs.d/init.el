@@ -408,8 +408,7 @@
 (use-package evil-escape
   :ensure t
   :config
-  (setq-default evil-escape-delay 0.2)
-  (evil-escape-mode))
+  (setq-default evil-escape-delay 0.2))
 
 (use-package paredit
   :ensure t
