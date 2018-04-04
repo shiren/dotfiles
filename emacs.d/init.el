@@ -1048,7 +1048,7 @@
   ;;; 이맥스가 기본적으로 제공하는 Git 백엔드를 켜두면 매우 느려진다. magit만 쓴다.
   (setq vc-handled-backends nil)
   :config
-  (setq vc-follow-symlinks t)
+  (setq vc-follow-symlinks nil)
   (setq find-file-visit-truename t)
   (setq magit-refresh-status-buffer 'switch-to-buffer)
   (setq magit-rewrite-inclusive 'ask)
