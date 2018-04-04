@@ -134,7 +134,7 @@
   :config (key-chord-mode 1))
 
 (use-package upbo
-  :load-path "~/dotfiles/my_emacs_packages")
+  :load-path "~/masterpiece/upbo")
 
 ;; (upbo-define-test
 ;;  :path "~/masterpiece/tui.chart/"
