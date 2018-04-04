@@ -202,6 +202,7 @@
   (setq spacemacs-theme-org-height nil))
 
 (use-package spaceline-config
+  :disabled
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
@@ -399,13 +400,15 @@
   ("C-c v" . er/expand-region))
 
 (use-package evil
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'evil-mode))
 
 (use-package evil-escape
   :ensure t
   :config
-  (setq-default evil-escape-key-sequence "fd")
-  (setq-default evil-escape-delay 0.2))
+  (setq-default evil-escape-delay 0.2)
+  (evil-escape-mode))
 
 (use-package paredit
   :ensure t
