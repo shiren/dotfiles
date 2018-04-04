@@ -400,12 +400,17 @@
   ("C-c v" . er/expand-region))
 
 (use-package evil
-  :ensure t)
+  :ensure t
+  :bind
+  ("C-z" . evil-mode)
+  :init
+  (setq evil-toggle-key "C-`"))
 
 (use-package evil-escape
   :ensure t
   :config
-  (setq-default evil-escape-delay 0.2))
+  (setq-default evil-escape-delay 0.2)
+  (evil-escape-mode t))
 
 (use-package paredit
   :ensure t
