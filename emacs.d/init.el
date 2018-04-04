@@ -402,7 +402,8 @@
 (use-package evil
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'evil-mode))
+  (add-hook 'emacs-lisp-mode-hook 'evil-mode)
+  (add-hook 'lsp-mode-hook 'evil-mode))
 
 (use-package evil-escape
   :ensure t
