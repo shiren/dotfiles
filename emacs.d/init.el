@@ -32,7 +32,6 @@
 (setq echo-keystrokes 0.001)
 
 (setq tab-width 2)
-(setq default-tab-width 2)
 
 ;;; Paste setup
 (defun copy-from-osx ()
