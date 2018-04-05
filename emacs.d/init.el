@@ -6,6 +6,7 @@
 
 ;; 에러시 디버그모드
 ;; (setq debug-on-error t)
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -15,8 +16,7 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
-;; 함수 redefine으로 인한 경고 생략
-(setq ad-redefinition-action 'accept)
+(setq ad-redefinition-action 'accept) ;; 함수 redefine으로 인한 경고 생략
 
 (set-language-environment "Korean")
 (setq locale-coding-system 'utf-8)
@@ -28,10 +28,11 @@
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 
-;; 키입력시 에코창에 표시되는 딜레이 타임, 거이 없게 설정
-(setq echo-keystrokes 0.001)
+(setq echo-keystrokes 0.001) ;; 키입력시 에코창에 표시되는 딜레이 타임, 거이 없게 설정
 
 (setq tab-width 2)
+
+(set-variable 'cursor-type 'bar)
 
 ;;; Paste setup
 (defun copy-from-osx ()
@@ -43,6 +44,7 @@
     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
       (process-send-string proc text)
       (process-send-eof proc))))
+
 (unless window-system
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx))
@@ -398,15 +400,33 @@
   ("C-c C-v" . er/expand-region)
   ("C-c v" . er/expand-region))
 
+(defun toggle-evilmode ()
+  (interactive)
+  (if (bound-and-true-p evil-local-mode)
+    (progn
+      ; go emacs
+      (evil-local-mode (or -1 1))
+      (undo-tree-mode (or -1 1))
+      (evil-escape-mode -1)
+      (set-variable 'cursor-type 'bar))
+
+    (progn
+      ; go evil
+      (evil-local-mode (or 1 1))
+      (evil-escape-mode t)
+      (set-variable 'cursor-type 'box))))
+
 (use-package evil
   :ensure t
   :bind
-  ("C-z" . evil-mode)
+  ("C-z" . toggle-evilmode)
   :init
   (setq evil-toggle-key "C-`"))
 
 (use-package evil-escape
   :ensure t
+  :init
+  (add-hook 'evil-mode-hook #'evil-escape-mode)
   :config
   (setq-default evil-escape-delay 0.2))
 
