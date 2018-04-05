@@ -578,6 +578,7 @@
                             sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
+  (flycheck-add-mode 'javascript-eslint 'vue-mode)
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
             '(lambda ()
@@ -1113,23 +1114,14 @@
     :tags '(karma))
 
   (prodigy-define-service
-    :name "dooray drive dev server"
-    :command "mvn"
-    :cwd "~/masterpiece/dooray.task-tracker"
-    :args '("tomcat7:run")
-    :port 18080
+    :name "wysiwyg contents editor"
+    :command "npm"
+    :cwd "~/masterpiece/wce"
+    :args '("run" "dev")
+    :port 8080
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
-    :tags '(tomcat))
-
-  (prodigy-define-service
-    :name "dooray drive gulp watch"
-    :command "gulp"
-    :cwd "~/masterpiece/dooray.task-tracker/src/main/webapp/client"
-    :args '("watch")
-    :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t
-    :tags '(gulp-watch))
+    :tags '(webpack-server))
 
   (prodigy-define-service
     :name "toast drive dev server"
