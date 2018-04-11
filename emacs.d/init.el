@@ -343,9 +343,9 @@
 (use-package avy
   :ensure t
   :chords
-  ("ggw" . avy-goto-word-1)
-  ("ggc" . avy-goto-char-2)
-  ("ggg" . avy-goto-line)
+  ("fdw" . avy-goto-word-1)
+  ("fdd" . avy-goto-char-2)
+  ("fdl" . avy-goto-line)
   :bind
   ("C-j j". avy-goto-word-1)
   ("C-j C-j". avy-goto-word-1)
@@ -849,8 +849,9 @@
   :ensure t
   :init
   (add-hook 'rust-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+            (lambda ()
+              (cargo-minor-mode)
+              (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package racer
@@ -860,7 +861,11 @@
   :init
   (setq racer-cmd "~/.cargo/bin/racer") ;; Rustup binaries PATH
 ;;  (setq racer-rust-src-path "/Users/julien/Code/rust/src") ;; Rust source code PATH
-  (add-hook 'rust-mode-hook #'racer-mode))
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+
+(use-package rust-playground
+  :ensure t)
 
 (use-package flycheck-rust
   :ensure t
@@ -961,7 +966,7 @@
   (setq org-mobile-inbox-for-pull "/agenda/index.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
 
-  (setq org-capture-templates '(("g" "Task" entry
+  (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G")
                                 ("l" "Task with link" entry
@@ -970,6 +975,9 @@
                                 ("q" "Task with category" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
+                                ("o" "Task @office" entry
+                                 (file+headline "~/org/agenda/index.org" "Task")
+                                 "* TODO %i%? :@office:")
                                 ("n" "Note" entry
                                  (file+headline "~/org/agenda/index.org" "Note")
                                  "* %i%?")))
@@ -978,10 +986,10 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
 
   (setq org-agenda-custom-commands
-        '(("o" "Work at office" tags-todo "@office" ;; (1) (2) (3) (4)
+        '(("o" "Office View"
            ((agenda "")
-            (org-agenda-files '("~/org/agenda")) ;; (5)
-            (org-agenda-sorting-strategy '(priority-up effort-down))))))
+            (tags-todo "@office")
+            (todo "WAITING")))))
 
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
@@ -1196,4 +1204,4 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
