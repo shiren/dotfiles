@@ -950,7 +950,6 @@
 (use-package ob-restclient
   :ensure t)
 
-(load-library "find-lisp")
 (use-package org
   :ensure t
   :bind
@@ -960,12 +959,10 @@
    ("\C-cb" . org-iswitchb))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  (setq org-agenda-files '("~/org/agenda"))
-  (setq org-agenda-files (find-lisp-find-files "~/org/agenda" "\.org$"))
-  (setq org-default-notes-file "/agenda/index.org")
-  (setq org-mobile-inbox-for-pull "/agenda/index.org")
+  (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
+  (setq org-default-notes-file "~/org/agenda/index.org")
+  (setq org-mobile-inbox-for-pull "~/org/agenda/index.org")
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
-
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G")
@@ -989,7 +986,11 @@
         '(("o" "Office View"
            ((agenda "")
             (tags-todo "@office")
-            (todo "WAITING")))))
+            (todo "WAITING")))
+          ("sa" "Agenda search" search ""
+           ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
+          ("sd" "Document search" search ""
+           ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
 
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
@@ -1092,18 +1093,6 @@
   (setq magit-rewrite-inclusive 'ask)
   (setq magit-save-some-buffers t)
   (setq magit-set-upstream-on-push 'askifnotset)
-
-  (defun commit-and-push-myfiles ()
-    (interactive)
-    (auto-commit-files
-     (append
-      (list (expand-file-name "~/dotfiles/emacs.d/init.el"))
-      (find-lisp-find-files "~/org/agenda" "\.org_archive$")
-      org-agenda-files))
-    t)
-
-  (add-hook 'kill-emacs-hook #'commit-and-push-myfiles)
-  (add-hook 'kill-emacs-query-functions #'commit-and-push-myfiles)
   :bind
   ("C-c m" . magit-status))
 
