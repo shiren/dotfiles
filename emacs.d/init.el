@@ -811,6 +811,7 @@
 
 ;;; C# and Unity
 (use-package csharp-mode
+  :disabled
   :ensure t
   :init
   (add-hook 'csharp-mode-hook #'company-mode))
@@ -1001,7 +1002,6 @@
      (typescript . t)
      (plantuml . t)
      (swift . t)
-     (sh . t)
      (rust . t)
      (restclient . t)))
 
