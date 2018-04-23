@@ -840,9 +840,9 @@
 
 (use-package rust-mode
   :ensure t
-  :ensure-system-package
-  ((rustfmt . "cargo install rustfmt")
-   (cargo-script . "cargo install cargo-script"))
+  ;; :ensure-system-package
+  ;; ((rustfmt . "cargo install rustfmt")
+  ;;  (cargo-script . "cargo install cargo-script"))
   :init
   :config
   (setq rust-indent-offset 2)
@@ -859,8 +859,8 @@
 
 (use-package racer
   :ensure t
-  :ensure-system-package
-  (racer . "cargo install racer")
+  ;; :ensure-system-package
+  ;; (racer . "cargo install racer")
   :init
   (setq racer-cmd "~/.cargo/bin/racer") ;; Rustup binaries PATH
 ;;  (setq racer-rust-src-path "/Users/julien/Code/rust/src") ;; Rust source code PATH
@@ -1176,6 +1176,11 @@
 (use-package restclient
   :ensure t)
 
+(use-package nov
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
@@ -1195,4 +1200,4 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (nov rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
