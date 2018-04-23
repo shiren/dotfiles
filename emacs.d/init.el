@@ -155,6 +155,7 @@
   :init
   (setq whitespace-cleanup-mode-only-if-initially-clean nil)
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
+  (add-hook 'lsp-mode-hook 'whitespace-cleanup-mode)
   (add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
 ;;;; Emacs extend
@@ -624,6 +625,7 @@
 (use-package company-lsp
   :ensure t
   :config
+  (add-hook 'lsp-mode-hook 'company-mode)
   (push 'company-lsp company-backends))
 
 ;;;; Emacs-lisp
