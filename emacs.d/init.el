@@ -687,9 +687,20 @@
   (javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
   :ensure t
   :init
+  (defun my-company-transformer (candidates)
+    (let ((completion-ignore-case t))
+      (all-completions (company-grab-symbol) candidates)))
+
+  (defun my-js-hook nil
+    (make-local-variable 'company-transformers)
+    (push 'my-company-transformer company-transformers))
+
   (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'js-mode-hook 'my-js-hook)
   (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'rjsx-mode-hook #'lsp-javascript-typescript-enable))
+  (add-hook 'js2-mode-hook 'my-js-hook)
+  (add-hook 'rjsx-mode-hook #'lsp-javascript-typescript-enable)
+  (add-hook 'rjsx-mode-hook 'my-js-hook))
 
 (use-package tern
   :disabled
