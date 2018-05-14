@@ -739,6 +739,7 @@
   :ensure t
   :init
   :config
+  (setq css-indent-offset 2)
   (setq mmm-submode-decoration-level 2))
 
 (use-package lsp-vue
