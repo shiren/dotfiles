@@ -746,9 +746,11 @@
   ;; :ensure-system-package
   ;; (vue-language-server . "npm install vue-language-server -g")
   :ensure t
-  :init
-  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
   :config
+  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
+  (add-hook 'vue-mode-hook '(lambda ()
+                             (setq lsp-enable-eldoc nil)
+                             (setq lsp-enable-indentation nil)))
   (setq vetur.validation.template t))
 
 (use-package rjsx-mode
@@ -762,7 +764,6 @@
 
 (use-package prettier-js
   :ensure t
-  :disabled
   :init
   :config
   (setq prettier-js-args '(
@@ -773,6 +774,8 @@
                            "--tab-width" "2"))
 
   (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'vue-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
