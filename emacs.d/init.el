@@ -563,7 +563,6 @@
   :ensure t
   :init
   (global-flycheck-mode)
-  (setq checkdoc-force-docstrings-flag nil)
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
@@ -776,6 +775,8 @@
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'js-mode-hook 'prettier-js-mode)
   (add-hook 'vue-mode-hook 'prettier-js-mode)
+  (add-hook 'vue-html-mode-hook 'prettier-js-mode)
+  (add-hook 'css-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
@@ -994,9 +995,9 @@
                                 ("o" "Task @office" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? :@office:")
-                                ("n" "Note" entry
-                                 (file+headline "~/org/agenda/index.org" "Note")
-                                 "* %i%?")))
+                                ("e" "English" item
+                                 (file+headline "~/org/agenda/english.org" "Inbox")
+                                 "%i%?")))
 
   (setq org-refile-targets '((org-agenda-files :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
