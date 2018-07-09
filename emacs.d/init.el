@@ -744,6 +744,7 @@
   :init
   :config
   (setq css-indent-offset 2)
+  (setq lsp-ui-flycheck-enable nil)
   (setq mmm-submode-decoration-level 2))
 
 (use-package lsp-vue
@@ -1006,12 +1007,15 @@
 
   (setq org-refile-targets '((org-agenda-files :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
-
+  (setq org-tag-alist '((:startgroup . nil)
+                        ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
+                        (:startgroup . nil)
+                        ("IDEA" . ?I) ("WEEKGOAL". ?W)))
   (setq org-agenda-custom-commands
-        '(("o" "Office View"
+        '(("o" "Shiren View"
            ((agenda "")
-            (tags-todo "@office")
-            (todo "WAITING")))
+            (tags "WEEKGOAL")
+            (tags-todo "@office")))
           ("sa" "Agenda search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("sd" "Document search" search ""
@@ -1203,6 +1207,9 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
 
+(use-package pocket-reader
+  :ensure t)
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
@@ -1220,6 +1227,9 @@
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(org-agenda-files
+   (quote
+    ("~/org/agenda/english.org" "~/org/agenda/fedev.org" "~/org/agenda/index.org" "~/org/agenda/readyshop.org" "~/org/agenda/tui.org" "~/org/agenda/upbo.org")))
  '(package-selected-packages
    (quote
-    (zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
