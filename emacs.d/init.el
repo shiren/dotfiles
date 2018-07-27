@@ -1015,12 +1015,14 @@
         '(("o" "Shiren View"
            ((agenda "")
             (tags "WEEKGOAL")
-            (tags-todo "@office")))
+            (tags-todo "@office")
+            (todo "TODO"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche"))
+                   (org-agenda-overriding-header "Unscheduled tasks")))))
           ("sa" "Agenda search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("sd" "Document search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
-
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
