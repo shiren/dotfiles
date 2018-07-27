@@ -1012,7 +1012,7 @@
                         (:startgroup . nil)
                         ("IDEA" . ?I) ("WEEKGOAL". ?W)))
   (setq org-agenda-custom-commands
-        '(("o" "Shiren View"
+        '(("o" "Custom View"
            ((agenda "")
             (tags "WEEKGOAL")
             (tags-todo "@office")
