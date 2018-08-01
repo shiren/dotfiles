@@ -1132,25 +1132,6 @@
   ("C-c f" . prodigy)
   :init
   (prodigy-define-service
-    :name "tui.chart dev server"
-    :command "npm"
-    :cwd "~/masterpiece/tui.chart"
-    :args '("run" "dev")
-    :port 8080
-    :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t
-    :tags '(webpack-server))
-
-  (prodigy-define-service
-    :name "tui.chart test"
-    :command "npm"
-    :cwd "~/masterpiece/toast-beuaty"
-    :args '("run" "test")
-    :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t
-    :tags '(karma))
-
-  (prodigy-define-service
     :name "wysiwyg contents editor"
     :command "npm"
     :cwd "~/masterpiece/wce"
@@ -1161,24 +1142,22 @@
     :tags '(webpack-server))
 
   (prodigy-define-service
-    :name "toast drive dev server"
+    :name "wysiwyg contents editor: cypress"
     :command "npm"
-    :cwd "~/masterpiece/toast-drive-web-service"
-    :args '("run" "dev")
-    :port 3000
+    :cwd "~/masterpiece/wce"
+    :args '("run" "cyp")
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
-    :tags '(webpack-server))
+    :tags '(cypress))
 
   (prodigy-define-service
-    :name "toast drive alpha server"
+    :name "wysiwyg contents editor: cyp:headless"
     :command "npm"
-    :cwd "~/masterpiece/toast-drive-web-service"
-    :args '("run" "alpha")
-    :port 3000
+    :cwd "~/masterpiece/wce"
+    :args '("run" "cyp:headless")
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
-    :tags '(webpack-server))
+    :tags '(cypress))
 
   (prodigy-define-tag
     :name 'webpack-server
@@ -1191,6 +1170,10 @@
   (prodigy-define-tag
     :name 'gulp-watch
     :ready-message "Finished 'watch'")
+
+  (prodigy-define-tag
+    :name 'cypress
+    :ready-message "")
 
   (prodigy-define-tag
     :name 'tomcat
