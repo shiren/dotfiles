@@ -1006,9 +1006,11 @@
                                  "* TODO %i%? :@office:")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
-                                 "%i%?")))
-
-  (setq org-refile-targets '((org-agenda-files :level . 1)))
+                                 "%i%? %c")
+                                ("d" "dev note" entry
+                                 (file+headline "~/org/note/devnote.org" "Inbox")
+                                 "* %i%?")))
+  (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
                         ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
