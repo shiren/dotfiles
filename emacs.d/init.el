@@ -159,8 +159,8 @@
   :init
   (setq whitespace-cleanup-mode-only-if-initially-clean nil)
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
-  (add-hook 'lsp-mode-hook 'whitespace-cleanup-mode)
-  (add-hook 'org-mode-hook 'whitespace-cleanup-mode))
+  (add-hook 'lsp-mode-hook 'whitespace-cleanup-mode))
+  ;;(add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
 ;;;; Emacs extend
 (use-package which-key
@@ -1048,8 +1048,7 @@
   (setq org-src-strip-leading-and-trailing-blank-lines t)
   (setq org-log-done t)
   (setq org-edit-src-content-indentation 0)
-  (setq org-adapt-indentation nil)
-
+  (setq org-adapt-indentation t)
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
   (setq org-plantuml-jar-path
