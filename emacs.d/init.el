@@ -1015,11 +1015,11 @@
   (setq org-tag-alist '((:startgroup . nil)
                         ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
                         (:startgroup . nil)
-                        ("IDEA" . ?I) ("WEEKGOAL". ?W)))
+                        ("IDEA" . ?I) ("PIN". ?P)))
   (setq org-agenda-custom-commands
         '(("o" "Custom View"
            ((agenda "")
-            (tags "WEEKGOAL")
+            (tags "PIN")
             (tags-todo "@office")
             (todo "TODO"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche"))
@@ -1028,6 +1028,10 @@
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("sd" "Document search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
+
+  ;; (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-scheduled-delay-if-deadline t)
   (setq org-babel-clojure-backend 'cider)
   (org-babel-do-load-languages
    'org-babel-load-languages
