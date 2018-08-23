@@ -33,7 +33,7 @@
 (setq tab-width 2)
 
 ;; 이맥스르 투명하게..
-(set-frame-parameter nil 'alpha 0.9)
+(set-frame-parameter nil 'alpha 0.95)
 
 (set-variable 'cursor-type 'bar)
 
@@ -846,7 +846,9 @@
 
 ;;; Swift
 (use-package swift-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq swift-mode:basic-offset 2))
 
 ;; Sourcekittendaemon이 설치 되어 있어야함
 ;; https://github.com/terhechte/SourceKittenDaemon
@@ -854,6 +856,11 @@
   :ensure t
   :init
   (add-to-list 'company-backends 'company-sourcekit))
+
+(use-package flycheck-swift
+  :ensure t
+  :config
+  (flycheck-swift-setup))
 
 ;;; markdown mode
 (use-package markdown-mode
