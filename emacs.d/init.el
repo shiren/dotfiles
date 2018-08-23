@@ -995,10 +995,7 @@
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G")
-                                ("l" "Task with link" entry
-                                 (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %i%? %^G\n%a")
-                                ("q" "Task with category" entry
+                                ("c" "Task with category" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %i%? %^G\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
                                 ("o" "Task @office" entry
