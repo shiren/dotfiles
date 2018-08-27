@@ -1015,7 +1015,7 @@
                                  (file+headline "~/org/note/devnote.org" "Inbox")
                                  "* %i%?")))
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)" "MOVED(m@/!)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "|" "WAITING(w@/!)" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
                         ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
                         (:startgroup . nil)
@@ -1023,14 +1023,15 @@
   (setq org-agenda-custom-commands
         '(("o" "Custom View"
            ((agenda "")
-            (tags "PIN")
-            (tags-todo "@office")
-            (todo "TODO"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche"))
-                   (org-agenda-overriding-header "Unscheduled tasks")))))
-          ("sa" "Agenda search" search ""
+            (tags "PIN"
+              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
+            (todo "SOMEDAY")
+            (tags-todo "@office"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
+                   (org-agenda-overriding-header "Unscheduled @office tasks")))))
+          ("ja" "Agenda search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
-          ("sd" "Document search" search ""
+          ("jd" "Document search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
 
   ;; (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
