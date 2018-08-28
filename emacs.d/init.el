@@ -1001,19 +1001,19 @@
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %i%? %^G")
-                                ("c" "Task with category" entry
-                                 (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %i%? %^G\n:PROPERTIES:\n:CATEGORY: %^{PROMPT|MISC|PROJECT|SPROJECT|STUDY}\n:END:")
+                                 "* TODO %i%?")
                                 ("o" "Task @office" entry
-                                 (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %i%? :@office:")
+                                 (file+headline "~/org/agenda/fedev.org" "Task")
+                                 "* TODO %i%? :@office:\nSCHEDULED: %t")
+                                ("s" "Someday @office" entry
+                                 (file+headline "~/org/agenda/fedev.org" "Task")
+                                 "* SOMEDAY %i%? :@office:")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
-                                 "%i%? %c")
+                                 "%t %i%? %c")
                                 ("d" "dev note" entry
                                  (file+headline "~/org/note/devnote.org" "Inbox")
-                                 "* %i%?")))
+                                 "* %t %i%?")))
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "|" "WAITING(w@/!)" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
@@ -1028,7 +1028,10 @@
             (todo "SOMEDAY")
             (tags-todo "@office"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
-                   (org-agenda-overriding-header "Unscheduled @office tasks")))))
+                   (org-agenda-overriding-header "Unscheduled @office tasks")))
+            (todo "TODO"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
+                   (org-agenda-overriding-header "Unscheduled tasks")))))
           ("ja" "Agenda search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("jd" "Document search" search ""
