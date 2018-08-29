@@ -992,7 +992,10 @@
   (("\C-cl" . org-store-link)
    ("\C-ca" . org-agenda)
    ("\C-cc" . org-capture)
-   ("\C-cb" . org-iswitchb))
+   ("\C-cb" . org-iswitchb)
+   ("\C-c\C-xi". org-clock-in-last)
+   ("\C-c\C-xc". org-clock-cancel)
+   ("\C-c\C-xo". org-clock-out))
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
