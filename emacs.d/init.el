@@ -993,9 +993,7 @@
    ("\C-ca" . org-agenda)
    ("\C-cc" . org-capture)
    ("\C-cb" . org-iswitchb)
-   ("\C-c\C-xi". org-clock-in-last)
-   ("\C-c\C-xc". org-clock-cancel)
-   ("\C-c\C-xo". org-clock-out))
+   )
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
@@ -1027,11 +1025,11 @@
         '(("o" "Custom View"
            ((agenda "")
             (tags "PIN"
-              ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
             (todo "SOMEDAY")
             (tags-todo "@office"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
-                   (org-agenda-overriding-header "Unscheduled @office tasks")))
+                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
+                        (org-agenda-overriding-header "Unscheduled @office tasks")))
             (todo "TODO"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
                    (org-agenda-overriding-header "Unscheduled tasks")))))
@@ -1083,6 +1081,13 @@
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
   :config
+  (global-set-key (kbd "C-C C-x C-x") 'org-clock-in-last)
+  (global-set-key (kbd "C-C C-x C-o") 'org-clock-out)
+  (global-set-key (kbd "C-C C-x C-j") 'org-clock-goto)
+  (global-set-key (kbd "C-C C-x C-d") 'org-clock-display)
+  (global-set-key (kbd "C-C C-x C-q") 'org-clock-cancel)
+  (global-set-key (kbd "C-C C-x C-e") 'org-clock-modify-effort-estimate)
+  (global-set-key (kbd "C-C C-x C-z") 'org-resolve-clocks)
   (define-key org-mode-map (kbd "C-j") nil)
   (define-key org-mode-map (kbd "M-j") 'org-return-indent)
   (define-key org-mode-map (kbd "<return>") 'org-return-indent))
