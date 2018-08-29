@@ -1037,7 +1037,7 @@
           ("jd" "Document search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
 
-  ;; (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
   (setq org-babel-clojure-backend 'cider)
