@@ -992,8 +992,8 @@
   (("\C-cl" . org-store-link)
    ("\C-ca" . org-agenda)
    ("\C-cc" . org-capture)
-   ("\C-cb" . org-iswitchb)
-   )
+   ("\C-cb" . org-iswitchb))
+
   :init
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
@@ -1002,19 +1002,23 @@
   (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %i%?")
+                                 "* TODO %?")
                                 ("o" "Task @office" entry
                                  (file+headline "~/org/agenda/fedev.org" "Task")
-                                 "* TODO %i%? :@office:\nSCHEDULED: %t")
+                                 "* TODO %? :@office:\nSCHEDULED: %t")
                                 ("s" "Someday @office" entry
                                  (file+headline "~/org/agenda/fedev.org" "Task")
-                                 "* SOMEDAY %i%? :@office:")
+                                 "* SOMEDAY %? :@office:")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
-                                 "%t %i%? %c")
+                                 "%t %i%?")
+                                ("l" "LogTime" entry
+                                 (file+datetree "~/org/agenda/timelogs.org")
+                                 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Yoga|Meditation|Productivity|ETC} %? :@office:")
                                 ("d" "dev note" entry
-                                 (file+headline "~/org/note/devnote.org" "Inbox")
-                                 "* %t %i%?")))
+                                 (file+datetree "~/org/note/devnote.org")
+                                 "* %? %^g")))
+
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "|" "WAITING(w@/!)" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
