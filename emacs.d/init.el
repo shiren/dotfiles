@@ -1014,7 +1014,7 @@
                                  "%t %i%?")
                                 ("l" "LogTime" entry
                                  (file+datetree "~/org/agenda/timelogs.org")
-                                 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Yoga|Meditation|Productivity|ETC} %? :@office:")
+                                 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Yoga|Meditation|Productivity|Commute|etc} %? :@office:")
                                 ("d" "dev note" entry
                                  (file+datetree "~/org/note/devnote.org")
                                  "* %? %^g")))
