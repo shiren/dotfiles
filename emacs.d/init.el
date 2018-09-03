@@ -95,7 +95,8 @@
 
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
-  (set-fontset-font t 'hangul (font-spec :name "Apple SD Gothic Neo")))
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  (setq-default line-spacing 0))
 
 ;;(add-to-list 'face-font-rescale-alist `("NanumGothicCoding" . 1.2307692307692308))
 ;;(add-to-list 'face-font-rescale-alist `("Apple SD Gothic Neo" . 1.5))
@@ -1086,8 +1087,6 @@
               (setq yas-expand-from-trigger-key [tab])
               (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
               (define-key yas/keymap [tab] 'yas-next-field)))
-
-  (set-face-attribute 'org-table nil :family "NanumGothicCoding")
 
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
