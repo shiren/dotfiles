@@ -96,7 +96,10 @@
 (when (and window-system (eq system-type 'darwin))
   (set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
   ;;(set-face-attribute 'default nil :family "Hack" :height 130 :weight 'light)
-  (set-fontset-font t 'hangul (font-spec :name "나눔고딕코딩")))
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding" :weight `normal)))
+
+(add-to-list 'face-font-rescale-alist `("Nanum Gothic" . 1.2307692307692308))
+(add-to-list 'face-font-rescale-alist `("NanumGothicCoding" . 1.2307692307692308))
 
 ;;; default modes
 ;; unset some default keybinding for my custom key bindings
@@ -1015,6 +1018,9 @@
                                 ("l" "LogTime" entry
                                  (file+datetree "~/org/agenda/timelogs.org")
                                  "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} %?")
+                                ("f" "LogTime2" table-line
+                                 (file+datetree "~/org/agenda/timelogs.org")
+                                 "| %U | %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} | %? |")
                                 ("d" "dev note" entry
                                  (file+datetree "~/org/note/devnote.org")
                                  "* %? %^g")))
