@@ -1018,9 +1018,6 @@
                                 ("l" "LogTime" entry
                                  (file+datetree "~/org/agenda/timelogs.org")
                                  "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} %?")
-                                ("f" "LogTime2" table-line
-                                 (file+datetree "~/org/agenda/timelogs.org")
-                                 "| %U | %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} | %? |")
                                 ("d" "dev note" entry
                                  (file+datetree "~/org/note/devnote.org")
                                  "* %? %^g")))
@@ -1100,7 +1097,25 @@
   (global-set-key (kbd "C-C C-x C-z") 'org-resolve-clocks)
   (define-key org-mode-map (kbd "C-j") nil)
   (define-key org-mode-map (kbd "M-j") 'org-return-indent)
-  (define-key org-mode-map (kbd "<return>") 'org-return-indent))
+  (define-key org-mode-map (kbd "<return>") 'org-return-indent)
+
+  (add-hook 'org-clock-out-hook (lambda () (shiren-org-log-time-for-entry))))
+
+(defun shiren-org-get-formatted-time-stamp (time)
+ (let ((fmt "[%Y-%m-%d %a %H:%M]"))
+   (format-time-string fmt time)))
+
+(defun shiren-org-log-time-for-entry ()
+ (let ((start-ts (shiren-org-get-formatted-time-stamp org-clock-start-time))
+       (end-ts (shiren-org-get-formatted-time-stamp
+                (+ (* 60 (org-clock-get-clocked-time)) (float-time org-clock-start-time))))
+       (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
+   (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
+     (org-element-map (org-element-parse-buffer) 'headline
+       (lambda (h)
+         (when (string= (org-element-property :raw-value h) today-datetree)
+           (goto-char (org-element-property :contents-end h))
+           (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
 
 (use-package org-bullets
   :ensure t
