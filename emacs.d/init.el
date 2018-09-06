@@ -1106,8 +1106,7 @@
 
 (defun shiren-org-log-time-for-entry ()
  (let ((start-ts (shiren-org-get-formatted-time-stamp org-clock-start-time))
-       (end-ts (shiren-org-get-formatted-time-stamp
-                (+ (* 60 (org-clock-get-clocked-time)) (float-time org-clock-start-time))))
+       (end-ts (shiren-org-get-formatted-time-stamp (float-time)))
        (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
    (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
      (org-element-map (org-element-parse-buffer) 'headline
