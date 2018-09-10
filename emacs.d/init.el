@@ -404,8 +404,11 @@
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'org-mode-hook #'yas-minor-mode)
   :config
-  (setq yas-snippet-dirs '("~/dotfiles/yaSnippets"))
+  (add-to-list 'yas-snippet-dirs "~/dotfiles/yaSnippets")
   (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :ensure t)
 
 (use-package iedit
   :ensure t)
@@ -565,8 +568,20 @@
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-minimum-prefix-length 2)
+
+  (defvar company-mode/enable-yas t)
+  "Enable yasnippet for all backends."
+
+  (defun company-mode/backend-with-yas (backend)
+    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+        backend
+      (append (if (consp backend) backend (list backend))
+              '(:with company-yasnippet))))
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
+
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
@@ -1264,4 +1279,4 @@
     ("~/org/agenda/english.org" "~/org/agenda/fedev.org" "~/org/agenda/index.org" "~/org/agenda/readyshop.org" "~/org/agenda/tui.org" "~/org/agenda/upbo.org")))
  '(package-selected-packages
    (quote
-    (pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
