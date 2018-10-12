@@ -32,8 +32,8 @@
 
 (setq tab-width 2)
 
-;; 이맥스르 투명하게..
-(set-frame-parameter nil 'alpha 0.9)
+;; 이맥스르 투명하게 하려면 숫자 조절
+(set-frame-parameter nil 'alpha 1.0)
 
 (set-variable 'cursor-type 'bar)
 
