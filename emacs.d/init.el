@@ -269,6 +269,8 @@
   :ensure t
   :init
   :config
+  (add-hook 'vue-html-mode-hook 'highlight-indent-guides-mode)
+  (add-hook 'vue-mode-hook 'highlight-indent-guides-mode)
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 (use-package git-gutter
@@ -763,9 +765,13 @@
   :ensure t
   :init
   :config
+  (setq vue-html-extra-indent 2)
   (setq css-indent-offset 2)
   (setq lsp-ui-flycheck-enable nil)
-  (setq mmm-submode-decoration-level 2))
+  (add-hook 'mmm-mode-hook
+            (lambda ()
+              (setq mmm-submode-decoration-level 2)
+              (set-face-background 'mmm-default-submode-face nil))))
 
 (use-package lsp-vue
   ;; :ensure-system-package
