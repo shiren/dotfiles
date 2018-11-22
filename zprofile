@@ -1,5 +1,5 @@
 export EDITOR="/usr/local/bin/vim"
-export PATH="/usr/local/bin:/usr/local/git/bin:$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/git/bin:$HOME/.cargo/bin:/Users/shiren/Library/Python/2.7/bin:$PATH"
 export GOROOT="/usr/local/go"
 export GOPATH=$HOME/masterpeice/go
 export PATH=$PATH:$GOROOT/bin

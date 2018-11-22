@@ -1042,7 +1042,7 @@
                                  "* %? %^g")))
 
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
-  (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "|" "WAITING(w@/!)" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "|" "WAITING(w)" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
                         ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
                         (:startgroup . nil)
