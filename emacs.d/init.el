@@ -437,6 +437,7 @@
       (set-variable 'cursor-type 'box))))
 
 (use-package evil
+  :disabled
   :ensure t
   :bind
   ("C-z" . toggle-evilmode)
@@ -444,6 +445,7 @@
   (setq evil-toggle-key "C-`"))
 
 (use-package evil-escape
+  :disabled
   :ensure t
   :init
   (add-hook 'evil-mode-hook #'evil-escape-mode)
