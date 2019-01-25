@@ -594,9 +594,8 @@
   (global-flycheck-mode)
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
+                        '(javascript-jshint typescript-tslint)))
   (setq flycheck-checkers '(javascript-eslint
-                            typescript-tslint
                             tsx-tide
                             typescript-tide
                             emacs-lisp
@@ -773,7 +772,14 @@
   (add-hook 'mmm-mode-hook
             (lambda ()
               (setq mmm-submode-decoration-level 2)
-              (set-face-background 'mmm-default-submode-face nil))))
+              (set-face-background 'mmm-default-submode-face nil)))
+
+;; void: lsp-make-traverser 에러 문제로 추가함
+(require 'lsp)
+(require 'lsp-clients)
+(add-hook 'typescript-mode-hook 'lsp)
+(add-hook 'vue-mode-hook 'lsp))
+;;; end
 
 (use-package lsp-vue
   ;; :ensure-system-package
@@ -782,8 +788,8 @@
   :config
   (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
   (add-hook 'vue-mode-hook '(lambda ()
-                             (setq lsp-enable-eldoc nil)
-                             (setq lsp-enable-indentation nil)))
+                              (setq lsp-enable-eldoc nil)
+                              (setq lsp-enable-indentation nil)))
   (setq vetur.validation.template t))
 
 (use-package rjsx-mode
@@ -842,6 +848,7 @@
   (setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions nil :placeOpenBraceOnNewLineForFunctions nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis nil :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil :insertSpaceBeforeFunctionParenthesis nil))
   (add-hook 'before-save-hook 'tide-format-before-save)
   (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  (add-hook 'vue-mode-hook #'setup-tide-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
             (lambda ()
@@ -1204,7 +1211,7 @@
     :name "wysiwyg contents editor"
     :command "npm"
     :cwd "~/masterpiece/wce"
-    :args '("run" "dev")
+    :args '("run" "serve")
     :port 8080
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
@@ -1214,16 +1221,7 @@
     :name "wysiwyg contents editor: cypress"
     :command "npm"
     :cwd "~/masterpiece/wce"
-    :args '("run" "cyp")
-    :stop-signal 'sigkill
-    :kill-process-buffer-on-stop t
-    :tags '(cypress))
-
-  (prodigy-define-service
-    :name "wysiwyg contents editor: cyp:headless"
-    :command "npm"
-    :cwd "~/masterpiece/wce"
-    :args '("run" "cyp:headless")
+    :args '("run" "test:e2e")
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
     :tags '(cypress))
@@ -1286,5 +1284,5 @@
     ("~/org/agenda/english.org" "~/org/agenda/fedev.org" "~/org/agenda/index.org" "~/org/agenda/readyshop.org" "~/org/agenda/tui.org" "~/org/agenda/upbo.org")))
  '(package-selected-packages
    (quote
-    (highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 (put 'set-goal-column 'disabled nil)
