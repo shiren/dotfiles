@@ -772,19 +772,13 @@
   (add-hook 'mmm-mode-hook
             (lambda ()
               (setq mmm-submode-decoration-level 2)
-              (set-face-background 'mmm-default-submode-face nil)))
-
-;; void: lsp-make-traverser 에러 문제로 추가함
-(require 'lsp)
-(require 'lsp-clients)
-(add-hook 'typescript-mode-hook 'lsp)
-(add-hook 'vue-mode-hook 'lsp))
-;;; end
+              (set-face-background 'mmm-default-submode-face nil))))
 
 (use-package lsp-vue
   ;; :ensure-system-package
   ;; (vue-language-server . "npm install vue-language-server -g")
   :ensure t
+  :disabled
   :config
   (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
   (add-hook 'vue-mode-hook '(lambda ()
