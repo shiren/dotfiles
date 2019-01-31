@@ -640,12 +640,21 @@
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
 (use-package lsp-mode
+  :ensure-system-package
+  (javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
+  (vue-language-server . "npm install vue-language-server -g")
   :ensure t
+  :init
+  (add-hook 'js2-mode-hook #'lsp)
+  (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'vue-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'swift-mode-hook #'lsp)
   :config
+  (setq lsp-prefer-flymake nil)
   (setq lsp-enable-flycheck t))
 
 (use-package lsp-ui
-  :disabled
   :ensure t
   :init
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
@@ -709,47 +718,6 @@
   (setq-default js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
 
-(use-package lsp-javascript-typescript
-  :ensure-system-package
-  (javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
-  :ensure t
-  :init
-  (defun my-company-transformer (candidates)
-    (let ((completion-ignore-case t))
-      (all-completions (company-grab-symbol) candidates)))
-
-  (defun my-js-hook nil
-    (make-local-variable 'company-transformers)
-    (push 'my-company-transformer company-transformers))
-
-  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'js-mode-hook 'my-js-hook)
-  (add-hook 'js2-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'js2-mode-hook 'my-js-hook)
-  (add-hook 'rjsx-mode-hook #'lsp-javascript-typescript-enable)
-  (add-hook 'rjsx-mode-hook 'my-js-hook))
-
-(use-package tern
-  :disabled
-  :ensure t
-  :ensure-system-package (tern . "npm i -g tern")
-  :diminish tern-mode
-  :init
-  (autoload 'tern-mode' "tern.el" nil t)
-  (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-  (add-hook 'rjsx-mode-hook (lambda () (tern-mode t)))
-  :config
-  (define-key tern-mode-keymap (kbd "C-c C-r") nil)
-  ;; (define-key tern-mode-keymap (kbd "M-.") nil)
-  ;; (define-key tern-mode-keymap (kbd "M-,") nil)
-  (setq tern-command '("tern" "--no-port-file")))
-
-(use-package company-tern
-  :disabled
-  :ensure t
-  :init
-  (add-to-list 'company-backends 'company-tern))
-
 (use-package js-doc
   :ensure t
   :bind
@@ -773,18 +741,6 @@
             (lambda ()
               (setq mmm-submode-decoration-level 2)
               (set-face-background 'mmm-default-submode-face nil))))
-
-(use-package lsp-vue
-  ;; :ensure-system-package
-  ;; (vue-language-server . "npm install vue-language-server -g")
-  :ensure t
-  :disabled
-  :config
-  (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
-  (add-hook 'vue-mode-hook '(lambda ()
-                              (setq lsp-enable-eldoc nil)
-                              (setq lsp-enable-indentation nil)))
-  (setq vetur.validation.template t))
 
 (use-package rjsx-mode
   :ensure t
@@ -837,6 +793,7 @@
 
 (use-package tide
   :ensure t
+  :disabled
   :init
   (setq typescript-indent-level 2)
   (setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions nil :placeOpenBraceOnNewLineForFunctions nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis nil :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil :insertSpaceBeforeFunctionParenthesis nil))
@@ -1278,5 +1235,5 @@
     ("~/org/agenda/english.org" "~/org/agenda/fedev.org" "~/org/agenda/index.org" "~/org/agenda/readyshop.org" "~/org/agenda/tui.org" "~/org/agenda/upbo.org")))
  '(package-selected-packages
    (quote
-    (lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (lsp-ui-flycheck lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 (put 'set-goal-column 'disabled nil)
