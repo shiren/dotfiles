@@ -267,6 +267,7 @@
 
 (use-package highlight-indent-guides
   :ensure t
+  :disabled
   :init
   :config
   (add-hook 'vue-html-mode-hook 'highlight-indent-guides-mode)
