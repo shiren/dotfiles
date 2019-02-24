@@ -774,6 +774,11 @@
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 ;;; typescript
+(use-package typescript-mode
+  :ensure t
+  :config
+  (setq typescript-indent-level 2))
+
 (defun my/use-tslint-from-node-modules ()
   (let* ((root (locate-dominating-file
                 (or (buffer-file-name) default-directory)
