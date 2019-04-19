@@ -654,12 +654,12 @@
   (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-enable-flycheck t))
+  (setq lsp-prefer-flymake nil)) ;; 버그로 flymake 를 켜야 flycheck도 켜짐
 
 (use-package lsp-ui
   :ensure t
-  :init
+  :config
+  (lsp-ui-flycheck-enable t)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (use-package company-lsp
@@ -1160,6 +1160,9 @@
   :bind
   ("C-c m" . magit-status))
 
+(use-package forge
+  :ensure t)
+
 (use-package prodigy
   :ensure t
   :bind
@@ -1237,10 +1240,7 @@
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(org-agenda-files
-   (quote
-    ("~/org/agenda/english.org" "~/org/agenda/fedev.org" "~/org/agenda/index.org" "~/org/agenda/readyshop.org" "~/org/agenda/tui.org" "~/org/agenda/upbo.org")))
  '(package-selected-packages
    (quote
-    (typescript lsp-ui-flycheck lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (forge typescript lsp-ui-flycheck lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 (put 'set-goal-column 'disabled nil)
