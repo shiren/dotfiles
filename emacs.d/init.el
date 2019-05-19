@@ -516,11 +516,12 @@
   (setq projectile-enable-caching t)
   ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
   ;; (setq projectile-require-project-root nil)
-  (setq projectile-indexing-method 'alien)
+  ;;(setq projectile-indexing-method 'alien)
+  (setq projectile-indexing-method 'native)
   (setq projectile-globally-ignored-directories
         (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs" "deploy")
                 projectile-globally-ignored-directories))
-  (setq projectile-globally-ignored-files
+  (setq projectile-globally-ignored-file-suffixes
         (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
                 projectile-globally-ignored-files))
   (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))
