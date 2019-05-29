@@ -523,7 +523,7 @@
                 projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-file-suffixes
         (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
-                projectile-globally-file-suffixes))
+                projectile-globally-ignored-file-suffixes))
   (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))
   :bind
   ;; 오타방지용 바인드들
