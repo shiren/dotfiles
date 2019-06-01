@@ -356,10 +356,6 @@
 ;; Avy
 (use-package avy
   :ensure t
-  :chords
-  ("fdw" . avy-goto-word-1)
-  ("fdd" . avy-goto-char-2)
-  ("fdl" . avy-goto-line)
   :bind
   ("C-j j". avy-goto-word-1)
   ("C-j C-j". avy-goto-word-1)
@@ -704,7 +700,6 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
   (add-hook 'js2-mode-hook
           '(lambda ()
              (js2-imenu-extras-mode)))
