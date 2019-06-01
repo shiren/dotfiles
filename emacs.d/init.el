@@ -129,17 +129,6 @@
 ;; (add-to-list 'load-path "~/dotfiles/my_emacs_packages")
 ;; (require 'upbo)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(use-package use-package-ensure-system-package
-  :ensure t)
-
-(use-package use-package-chords
-  :ensure t
-  :config (key-chord-mode 1))
-
 ;; (use-package upbo
 ;;   ;;:ensure t
 ;;   :load-path "~/masterpiece/upbo")
@@ -149,8 +138,20 @@
 ;;  :browsers "ChromeHeadless"
 ;;  :conf-file "~/masterpiece/tui.chart/karma.conf.js")
 
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (eval-when-compile
   (require 'use-package))
+
+(use-package use-package-ensure-system-package
+  :ensure t)
+
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
 
 (use-package diminish
   :ensure t)
@@ -214,7 +215,6 @@
   (setq spacemacs-theme-org-height nil))
 
 (use-package spaceline-config
-  :disabled
   :ensure spaceline
   :init
   (setq powerline-default-separator 'arrow-fade)
