@@ -79,7 +79,7 @@
 (define-key global-map (kbd "M-s") 'save-buffer)
 
 ;; split smart!
-(defun split-smart ()
+(defun shiren/split-smart ()
   (if (< (window-pixel-width) (window-pixel-height))
       (with-selected-window (selected-window)
         (split-window-vertically))
@@ -87,7 +87,7 @@
       (split-window-horizontally))))
 
 
-(defcustom split-window-preferred-function 'split-smart
+(defcustom split-window-preferred-function 'shiren/split-smart
   "Split smart."
   :type 'function
   :version "25.1"
@@ -126,6 +126,10 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 ;; (add-to-list 'load-path "~/dotfiles/my_emacs_packages")
 ;; (require 'upbo)
 
@@ -137,11 +141,6 @@
 ;;  :path "~/masterpiece/tui.chart/"
 ;;  :browsers "ChromeHeadless"
 ;;  :conf-file "~/masterpiece/tui.chart/karma.conf.js")
-
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package))
