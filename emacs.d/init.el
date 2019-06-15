@@ -564,7 +564,7 @@
   (add-hook 'prog-mode-hook 'company-mode)
   :config
   (setq company-tooltip-align-annotations t)
-  (setq company-idle-delay 0.1)
+  (setq company-idle-delay 0.5)
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-minimum-prefix-length 2)
