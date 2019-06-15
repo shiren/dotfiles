@@ -656,7 +656,7 @@
   :ensure t
   :config
   (lsp-ui-flycheck-enable t)
-  ;;(setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 고려
+  (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
