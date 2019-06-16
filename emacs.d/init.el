@@ -757,7 +757,7 @@
   :config
   (setq prettier-js-args '(
                            "--trailing-comma" "none"
-                           "--print-width" "120"
+                           "--print-width" "80"
                            "--single-quote"
                            "--no-bracket-spacing"
                            "--tab-width" "2"))
