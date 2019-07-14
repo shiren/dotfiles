@@ -991,6 +991,7 @@
   :ensure t)
 
 (use-package hyperbole
+  :disabled
   :ensure t
   :init
   :config)
