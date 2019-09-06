@@ -86,7 +86,6 @@
     (with-selected-window (selected-window)
       (split-window-horizontally))))
 
-
 (defcustom split-window-preferred-function 'shiren/split-smart
   "Split smart."
   :type 'function
@@ -1013,10 +1012,10 @@
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %?")
                                 ("o" "Task @office" entry
-                                 (file+headline "~/org/agenda/fedev.org" "Task")
+                                 (file+headline "~/org/agenda/nhn.org" "Task")
                                  "* TODO %? :@office:\nSCHEDULED: %t")
                                 ("s" "Someday @office" entry
-                                 (file+headline "~/org/agenda/fedev.org" "Task")
+                                 (file+headline "~/org/agenda/nhn.org" "Task")
                                  "* SOMEDAY %? :@office:")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
