@@ -119,7 +119,7 @@
 ;;; Set up package
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+                                        ; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -162,7 +162,7 @@
   (setq whitespace-cleanup-mode-only-if-initially-clean nil)
   (add-hook 'prog-mode-hook 'whitespace-cleanup-mode)
   (add-hook 'lsp-mode-hook 'whitespace-cleanup-mode))
-  ;;(add-hook 'org-mode-hook 'whitespace-cleanup-mode))
+;;(add-hook 'org-mode-hook 'whitespace-cleanup-mode))
 
 ;;;; Emacs extend
 (use-package which-key
@@ -287,11 +287,11 @@
   (eyebrowse-mode t)
   :bind
   (:map eyebrowse-mode-map
-    ("C-j ;" . eyebrowse-last-window-config)
-    ("C-j 0" . eyebrowse-close-window-config)
-    ("C-j 1" . eyebrowse-switch-to-window-config-1)
-    ("C-j 2" . eyebrowse-switch-to-window-config-2)
-    ("C-j 3" . eyebrowse-switch-to-window-config-3)))
+        ("C-j ;" . eyebrowse-last-window-config)
+        ("C-j 0" . eyebrowse-close-window-config)
+        ("C-j 1" . eyebrowse-switch-to-window-config-1)
+        ("C-j 2" . eyebrowse-switch-to-window-config-2)
+        ("C-j 3" . eyebrowse-switch-to-window-config-3)))
 
 (use-package ace-window
   :ensure t
@@ -418,15 +418,15 @@
 (defun toggle-evilmode ()
   (interactive)
   (if (bound-and-true-p evil-local-mode)
-    (progn
-      ; go emacs
-      (evil-local-mode (or -1 1))
-      (undo-tree-mode (or -1 1))
-      (evil-escape-mode -1)
-      (set-variable 'cursor-type 'bar))
+      (progn
+                                        ; go emacs
+        (evil-local-mode (or -1 1))
+        (undo-tree-mode (or -1 1))
+        (evil-escape-mode -1)
+        (set-variable 'cursor-type 'bar))
 
     (progn
-      ; go evil
+                                        ; go evil
       (evil-local-mode (or 1 1))
       (evil-escape-mode t)
       (set-variable 'cursor-type 'box))))
@@ -484,7 +484,7 @@
 
 ;; File & Buffer
 (use-package recentf
- :init
+  :init
   (setq recentf-max-saved-items 300
         recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
                           "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
@@ -539,10 +539,10 @@
   :ensure t
   :init
   (add-hook 'ibuffer-hook
-    (lambda ()
-      (ibuffer-projectile-set-filter-groups)
-      (unless (eq ibuffer-sorting-mode 'alphabetic)
-        (ibuffer-do-sort-by-alphabetic)))))
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package counsel
   :ensure t)
@@ -613,6 +613,7 @@
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
             '(lambda ()
+               (flycheck-select-checker javascript-eslint)
                (setq next-error-function 'flycheck-next-error))))
 
 (use-package flycheck-package
@@ -654,9 +655,9 @@
 (use-package lsp-ui
   :ensure t
   :config
-  (lsp-ui-flycheck-enable t)
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
+  (lsp-ui-flycheck-enable t)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (use-package company-lsp
@@ -700,8 +701,8 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-hook 'js2-mode-hook
-          '(lambda ()
-             (js2-imenu-extras-mode)))
+            '(lambda ()
+               (js2-imenu-extras-mode)))
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   (define-key js2-mode-map (kbd "C-c C-j") nil)
@@ -725,9 +726,9 @@
         ("@" . js-doc-insert-tag))
   :config
   (setq js-doc-mail-address "shirenbeat@gmail.com"
-      js-doc-author (format "Sungho Kim <%s>" js-doc-mail-address)
-      js-doc-url "shiren.github.io"
-      js-doc-license "MIT"))
+        js-doc-author (format "Sungho Kim <%s>" js-doc-mail-address)
+        js-doc-url "shiren.github.io"
+        js-doc-license "MIT"))
 
 (use-package vue-mode
   :ensure t
@@ -756,7 +757,7 @@
   :config
   (setq prettier-js-args '(
                            "--trailing-comma" "none"
-                           "--print-width" "80"
+                           "--print-width" "120"
                            "--single-quote"
                            "--no-bracket-spacing"
                            "--tab-width" "2"))
@@ -899,7 +900,7 @@
   ;; (racer . "cargo install racer")
   :init
   (setq racer-cmd "~/.cargo/bin/racer") ;; Rustup binaries PATH
-;;  (setq racer-rust-src-path "/Users/julien/Code/rust/src") ;; Rust source code PATH
+  ;;  (setq racer-rust-src-path "/Users/julien/Code/rust/src") ;; Rust source code PATH
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
 
@@ -938,7 +939,7 @@
 
 (use-package company-go
   :ensure t)
-  ;; :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
+;; :ensure-system-package (gscode . "go get -u github.com/nsf/gocode")
 
 
 ;;; Utilities
@@ -1108,19 +1109,19 @@
   (add-hook 'org-clock-out-hook (lambda () (shiren-org-log-time-for-entry))))
 
 (defun shiren-org-get-formatted-time-stamp (time)
- (let ((fmt "[%Y-%m-%d %a %H:%M]"))
-   (format-time-string fmt time)))
+  (let ((fmt "[%Y-%m-%d %a %H:%M]"))
+    (format-time-string fmt time)))
 
 (defun shiren-org-log-time-for-entry ()
- (let ((start-ts (shiren-org-get-formatted-time-stamp org-clock-start-time))
-       (end-ts (shiren-org-get-formatted-time-stamp (float-time)))
-       (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
-   (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
-     (org-element-map (org-element-parse-buffer) 'headline
-       (lambda (h)
-         (when (string= (org-element-property :raw-value h) today-datetree)
-           (goto-char (org-element-property :contents-end h))
-           (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
+  (let ((start-ts (shiren-org-get-formatted-time-stamp org-clock-start-time))
+        (end-ts (shiren-org-get-formatted-time-stamp (float-time)))
+        (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
+    (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
+      (org-element-map (org-element-parse-buffer) 'headline
+        (lambda (h)
+          (when (string= (org-element-property :raw-value h) today-datetree)
+            (goto-char (org-element-property :contents-end h))
+            (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
 
 (use-package org-bullets
   :ensure t
@@ -1138,7 +1139,7 @@
 (add-hook 'term-mode-hook
           (lambda ()
             (define-key term-raw-map (kbd "C-j")
-               (lookup-key (current-global-map) (kbd "C-j")))))
+              (lookup-key (current-global-map) (kbd "C-j")))))
 
 (defun auto-commit-files (list)
   (interactive
