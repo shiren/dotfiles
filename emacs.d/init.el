@@ -696,8 +696,6 @@
                (revert-buffer t t t))
       (message "ESLint not found."))))
 
-(add-hook 'prog-mode-hook (lambda ()
-                            (electric-indent-mode -1)))
 
 (use-package js2-mode
   :ensure t
@@ -709,12 +707,16 @@
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   (define-key js2-mode-map (kbd "C-c C-j") nil)
+  (define-key js2-mode-map [(return)] 'newline-and-indent)
+  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
   (add-hook 'js2-mode-hook (lambda ()
                              ;;(add-hook 'after-save-hook 'eslint-fix nil t)
                              (setq tab-width 2)
                              (setq-default js2-basic-offset 2)
+                             (electric-indent-mode -1)
                              (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
                 js1-bounce-indent-p nil)
