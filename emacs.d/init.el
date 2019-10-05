@@ -696,6 +696,9 @@
                (revert-buffer t t t))
       (message "ESLint not found."))))
 
+(add-hook 'prog-mode-hook (lambda ()
+                            (electric-indent-mode -1)))
+
 (use-package js2-mode
   :ensure t
   :init
