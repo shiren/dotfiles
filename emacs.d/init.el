@@ -609,11 +609,9 @@
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (flycheck-add-mode 'javascript-eslint 'vue-mode)
-  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
             '(lambda ()
-               (flycheck-select-checker javascript-eslint)
                (setq next-error-function 'flycheck-next-error))))
 
 (use-package flycheck-package
@@ -658,6 +656,7 @@
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
+  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 (use-package company-lsp
@@ -816,7 +815,8 @@
                 (setup-tide-mode))))
   :config
   (flycheck-add-mode 'javascript-eslint 'typescript-mode)
-  (flycheck-add-mode 'typescript-tide 'typescript-mode))
+  (flycheck-add-mode 'typescript-tide 'typescript-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
 
 ;;; Clojure setup
 (use-package cider
