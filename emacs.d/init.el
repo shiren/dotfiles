@@ -648,7 +648,7 @@
   (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
-  (setq lsp-prefer-flymake nil)) ;; 버그로 flymake 를 켜야 flycheck도 켜짐
+  (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :ensure t
