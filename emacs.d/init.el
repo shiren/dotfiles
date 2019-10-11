@@ -33,9 +33,19 @@
 (setq tab-width 2)
 
 ;; Adjust garbage collection thresholds during startup, and thereafter
-(setq gc-cons-threshold (* 128 1024 1024))
-(add-hook 'emacs-startup-hook
-  (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+;; (setq gc-cons-threshold (* 128 1024 1024))
+;; (add-hook 'emacs-startup-hook
+;;           (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
+
+(defun my-minibuffer-setup-hook ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun my-minibuffer-exit-hook ()
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+(add-hook 'focus-out-hook 'garbage-collect)
 
 ;; 이맥스르 투명하게 하려면 숫자 조절
 (set-frame-parameter nil 'alpha 1.0)
