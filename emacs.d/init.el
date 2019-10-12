@@ -730,6 +730,7 @@
                              ;;(add-hook 'after-save-hook 'eslint-fix nil t)
                              (setq tab-width 2)
                              (setq-default js2-basic-offset 2)
+                             (setq js-switch-indent-offset 2)
                              (electric-indent-mode -1)
                              (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
