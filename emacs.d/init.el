@@ -669,7 +669,7 @@
   :ensure t
   :config
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
-  (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
+  ;; (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
   (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
@@ -777,7 +777,7 @@
   :config
   (setq prettier-js-args '(
                            "--trailing-comma" "none"
-                           "--print-width" "120"
+                           "--print-width" "80"
                            "--single-quote"
                            "--no-bracket-spacing"
                            "--tab-width" "2"))
@@ -830,6 +830,7 @@
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (setup-tide-mode))))
   :config
+  (define-key tide-mode-map [(return)] 'newline-and-indent)
   (flycheck-add-mode 'javascript-eslint 'typescript-mode)
   (flycheck-add-mode 'typescript-tide 'typescript-mode)
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
