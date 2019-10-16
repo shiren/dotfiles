@@ -766,7 +766,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("toast-drive-web-service/src/\\(components\\|container\\)/.*.js\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
