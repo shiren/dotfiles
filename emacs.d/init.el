@@ -653,7 +653,7 @@
 
 (use-package lsp-mode
   ;; :ensure-system-package
-  ;; (javascript-typescript-langserver . "npm i -g javascript-typescript-langserver")
+  ;; (typescript-language-server . "npm i -g typescript-language-server")
   ;; (vue-language-server . "npm install vue-language-server -g")
   :ensure t
   :init
@@ -663,6 +663,8 @@
   (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
+  (setq lsp-auto-guess-root t)
+  (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
@@ -671,8 +673,7 @@
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   ;; (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
-  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append))
 
 (use-package company-lsp
   :ensure t
