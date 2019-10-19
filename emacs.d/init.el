@@ -263,6 +263,7 @@
   (global-hl-line-mode +1))
 
 (use-package highlight-thing
+  :disabled
   :ensure t
   :diminish highlight-thing-mode
   :init
