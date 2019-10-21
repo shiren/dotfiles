@@ -665,14 +665,14 @@
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root t)
-  (setq lsp-auto-configure t)
+  ;; (setq lsp-auto-configure t)
   (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :ensure t
   :config
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
-  ;; (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
+  (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
   (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append))
 
