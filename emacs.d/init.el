@@ -673,6 +673,8 @@
   :config
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-enable-symbol-highlighting nil)
   (lsp-ui-flycheck-enable t)
   (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append))
 
