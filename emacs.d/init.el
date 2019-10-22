@@ -262,7 +262,7 @@
   (setq show-paren-delay 0))
 
 (use-package hl-line
-  :disable
+  :disabled
   :init
   (global-hl-line-mode +1))
 
