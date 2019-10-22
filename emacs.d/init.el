@@ -257,6 +257,7 @@
 
 ;; ;;;; Highlighting
 (use-package paren
+  :disabled
   :init
   (show-paren-mode 1)
   (setq show-paren-delay 0))
@@ -281,7 +282,7 @@
 (use-package rainbow-delimiters
   :ensure t
   :init
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 (use-package highlight-indent-guides
   :ensure t
@@ -297,7 +298,6 @@
   :diminish git-gutter-mode
   :init
   (global-git-gutter-mode +1))
-
 
 ;; ;;;; Window
 (use-package eyebrowse
