@@ -108,7 +108,7 @@
   :group 'windows)
 
 (when (and window-system (eq system-type 'darwin))
-  (set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'ultra-light)
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 135 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
   (setq-default line-spacing 0))
 
@@ -211,54 +211,58 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
-;;;; Themes
-(use-package zenburn-theme
-  :disabled
-  :ensure t
-  :init
-  (load-theme 'zenburn t))
+;; ;;;; Themes
+;; (use-package zenburn-theme
+;;   :disabled
+;;   :ensure t
+;;   :init
+;;   (load-theme 'zenburn t))
 
-(use-package spacemacs-theme
-  :ensure t
-  :defer t
-  :init
-  (load-theme 'spacemacs-dark t)
-  :config
-  (setq spacemacs-theme-org-agenda-height nil)
-  (setq spacemacs-theme-org-height nil))
+;; (use-package spacemacs-theme
+;;   :ensure t
+;;   :defer t
+;;   :init
+;;   (load-theme 'spacemacs-dark t)
+;;   :config
+;;   (setq spacemacs-theme-org-agenda-height nil)
+;;   (setq spacemacs-theme-org-height nil))
 
-(use-package spaceline-config
-  :ensure spaceline
-  :init
-  (setq powerline-default-separator 'arrow-fade)
-  :config
-  (spaceline-emacs-theme)
-  (spaceline-toggle-buffer-id-on)
-  (spaceline-toggle-input-method-on)
-  (spaceline-toggle-buffer-modified-on)
-  (spaceline-toggle-buffer-encoding-on)
-  (spaceline-toggle-buffer-encoding-abbrev-off)
-  (spaceline-toggle-process-on)
-  (spaceline-toggle-projectile-root-on)
-  (spaceline-toggle-version-control-on)
-  (spaceline-toggle-flycheck-error-on)
-  (spaceline-toggle-flycheck-info-on)
-  (spaceline-toggle-flycheck-warning-on)
-  (spaceline-toggle-battery-on)
-  (spaceline-toggle-major-mode-off)
-  (spaceline-toggle-minor-modes-on)
-  (spaceline-toggle-line-column-on)
-  (spaceline-toggle-org-clock-on)
-  (spaceline-toggle-window-number-on)
-  (spaceline-info-mode))
+;; (use-package spaceline-config
+;;   :ensure spaceline
+;;   :init
+;;   (setq powerline-default-separator 'arrow-fade)
+;;   :config
+;;   (spaceline-emacs-theme)
+;;   (spaceline-toggle-buffer-id-on)
+;;   (spaceline-toggle-input-method-on)
+;;   (spaceline-toggle-buffer-modified-on)
+;;   (spaceline-toggle-buffer-encoding-on)
+;;   (spaceline-toggle-buffer-encoding-abbrev-off)
+;;   (spaceline-toggle-process-on)
+;;   (spaceline-toggle-projectile-root-on)
+;;   (spaceline-toggle-version-control-on)
+;;   (spaceline-toggle-flycheck-error-on)
+;;   (spaceline-toggle-flycheck-info-on)
+;;   (spaceline-toggle-flycheck-warning-on)
+;;   (spaceline-toggle-battery-on)
+;;   (spaceline-toggle-major-mode-off)
+;;   (spaceline-toggle-minor-modes-on)
+;;   (spaceline-toggle-line-column-on)
+;;   (spaceline-toggle-org-clock-on)
+;;   (spaceline-toggle-window-number-on)
+;;   (spaceline-info-mode))
 
-;;;; Highlighting
+(use-package nimbus-theme
+  :ensure t)
+
+;; ;;;; Highlighting
 (use-package paren
   :init
   (show-paren-mode 1)
   (setq show-paren-delay 0))
 
 (use-package hl-line
+  :disable-caption
   :init
   (global-hl-line-mode +1))
 
@@ -295,7 +299,7 @@
   (global-git-gutter-mode +1))
 
 
-;;;; Window
+;; ;;;; Window
 (use-package eyebrowse
   :ensure t
   :init
@@ -408,7 +412,7 @@
   (setq dumb-jump-force-searcher 'rg))
 
 
-;;;; Editing
+;; ;;;; Editing
 (use-package yasnippet
   :ensure t
   :diminish yas-minor-mode
@@ -498,7 +502,7 @@
 (use-package multiple-cursors
   :ensure t)
 
-;; File & Buffer
+;; ;; File & Buffer
 (use-package recentf
   :init
   (setq recentf-max-saved-items 300
@@ -687,11 +691,11 @@
   (add-hook 'lsp-mode-hook 'company-mode)
   (push 'company-lsp company-backends))
 
-;;;; Emacs-lisp
+;; ;;;; Emacs-lisp
 (use-package suggest
   :ensure t)
 
-;;;; Web
+;; ;;;; Web
 (use-package web-mode
   :ensure t
   :init
@@ -707,16 +711,6 @@
 
 ;;;; javascript
 (setq js-indent-level 2)
-
-(defun eslint-fix ()
-  "Format the current file with ESLint."
-  (interactive)
-  (let ((eslint (or (shiren/use-eslint-from-node-modules) (executable-find "eslint"))))
-    (if (file-executable-p eslint)
-        (progn (call-process eslint nil "*ESLint Errors*" nil "--rule" "no-debugger:0" "--fix" buffer-file-name)
-               (revert-buffer t t t))
-      (message "ESLint not found."))))
-
 
 (use-package js2-mode
   :ensure t
@@ -798,7 +792,7 @@
   (add-hook 'tide-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
-;;; typescript
+;; ;;; typescript
 (use-package typescript-mode
   :ensure t
   :config
@@ -860,7 +854,7 @@
   :init
   (add-hook 'csharp-mode-hook #'company-mode))
 
-;;; Swift
+;; ;;; Swift
 (use-package swift-mode
   :ensure t
   :config
@@ -1258,20 +1252,7 @@
     :name 'tomcat
     :ready-message "Running war on http://localhost:[0-9]+/"))
 
-(use-package wttrin
-  :ensure t
-  :init
-  (setq wttrin-default-accept-language '("Accept-Language" . "ko-KR")))
-
 (use-package restclient
-  :ensure t)
-
-(use-package nov
-  :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
-
-(use-package pocket-reader
   :ensure t)
 
 (provide 'init)
@@ -1293,5 +1274,5 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (hyperbole flycheck-swiftlint typescript lsp-ui-flycheck lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
+    (nimbus-theme hyperbole flycheck-swiftlint typescript lsp-ui-flycheck lsp-javascript highlight-indent-guides yasnippet-snippets pocket-reader zoom upbo rust-playground diminish flycheck-package company-lsp lsp-javascript-typescript lsp-mode flycheck-rust racer cargo ob-go company-go go-mode use-package-chords system-packages writeroom-mode parinfer suggest spaceline-config evil-escape evil spaceline spacemacs-theme prettier-js helpful org-gcal org-bullets beacon ob-restclient vue-mode indent-guide buffer-move company-sourcekit flycheck-swift swift-mode google-translate company-tern company dash-at-point undo-tree dumb-jump highlight-thing highlight-parentheses omnisharp csharp-mode yasnippet smooth-scroll org-tree-slide counsel projectile hydra prodigy autopair paredit iedit ace-window multi-term markdown-mode magit ox-reveal ox-gfm counsel-projectile swiper eyebrowse zenburn-theme cyberpunk-theme base16-theme tern-auto-complete tern auto-complete flycheck cider js-doc js2-mode web-mode goto-last-change git-timemachine git-gutter rainbow-delimiters expand-region use-package))))
 (put 'set-goal-column 'disabled nil)
