@@ -108,7 +108,7 @@
   :group 'windows)
 
 (when (and window-system (eq system-type 'darwin))
-  (set-face-attribute 'default nil :family "Source Code Pro" :height 135 :weight 'normal)
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
   (setq-default line-spacing 0))
 
