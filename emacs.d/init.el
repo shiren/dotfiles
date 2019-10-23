@@ -256,7 +256,7 @@
   :ensure t
   :init
   :config
-  (load-theme 'material))
+  (load-theme 'material t))
 
 ;; ;;;; Highlighting
 (use-package paren
@@ -668,7 +668,7 @@
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp)
+  ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -819,7 +819,8 @@
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
-  (tide-hl-identifier-mode +1))
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
 
 (use-package tide
   :ensure t
