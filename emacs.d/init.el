@@ -668,7 +668,7 @@
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp)
+  ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -792,7 +792,6 @@
   (add-hook 'vue-html-mode-hook 'prettier-js-mode)
   (add-hook 'css-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-  (add-hook 'tide-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 ;; ;;; typescript
@@ -816,7 +815,7 @@
   (setq typescript-indent-level 2)
   (setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions nil :placeOpenBraceOnNewLineForFunctions nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis nil :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil :insertSpaceBeforeFunctionParenthesis nil))
   ;;(add-hook 'before-save-hook 'tide-format-before-save) ;; 포맷은 프리티어에게 맡긴다.
-  ;;(add-hook 'typescript-mode-hook #'setup-tide-mode)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
   ;;(add-hook 'vue-mode-hook #'setup-tide-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
