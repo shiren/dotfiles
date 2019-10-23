@@ -668,7 +668,7 @@
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
-  ;; (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -801,18 +801,6 @@
   :config
   (setq typescript-indent-level 2))
 
-(defun my/use-tslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (tslint (and root
-                      (expand-file-name "node_modules/tslint/bin/tslint"
-                                        root))))
-    (when (and tslint (file-executable-p tslint))
-      (setq-local flycheck-typescript-tslint-executable tslint))))
-
-(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
-
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -828,7 +816,7 @@
   (setq typescript-indent-level 2)
   (setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions nil :placeOpenBraceOnNewLineForFunctions nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis nil :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil :insertSpaceBeforeFunctionParenthesis nil))
   ;;(add-hook 'before-save-hook 'tide-format-before-save) ;; 포맷은 프리티어에게 맡긴다.
-  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  ;;(add-hook 'typescript-mode-hook #'setup-tide-mode)
   ;;(add-hook 'vue-mode-hook #'setup-tide-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
