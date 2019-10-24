@@ -613,11 +613,10 @@
   (global-flycheck-mode)
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
+                        '(javascript-jshint typescript-tslint)))
   (setq flycheck-checkers '(javascript-eslint
                             tsx-tide
                             typescript-tide
-                            typescript-tslint
                             emacs-lisp
                             emacs-lisp-checkdoc
                             css-csslint
@@ -805,6 +804,8 @@
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+  (flycheck-select-checker 'typescript-tide)
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   (company-mode +1))
@@ -824,9 +825,9 @@
                 (setup-tide-mode))))
   :config
   (define-key tide-mode-map [(return)] 'newline-and-indent)
-  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
-  (flycheck-add-mode 'typescript-tide 'typescript-mode)
-  (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append))
+  ;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  ;; (flycheck-add-mode 'typescript-tide 'typescript-mode)
+  (flycheck-add-mode 'tsx-tide 'web-mode))
 
 ;;; Clojure setup
 (use-package cider
