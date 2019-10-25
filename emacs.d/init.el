@@ -804,11 +804,10 @@
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-  (flycheck-select-checker 'typescript-tide)
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (company-mode +1))
+  (company-mode +1)
+  (flycheck-select-checker 'typescript-tide))
 
 (use-package tide
   :ensure t
@@ -822,13 +821,16 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode))))
+                (flycheck-add-mode 'typescript-tide 'web-mode)
+                (flycheck-add-mode 'tsx-tide 'web-mode)
+                (setup-tide-mode)
+                (flycheck-select-checker 'tsx-tide))))
   :config
   (define-key tide-mode-map [(return)] 'newline-and-indent)
   ;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
   ;; (flycheck-add-mode 'typescript-tide 'typescript-mode)
-  (flycheck-add-mode 'tsx-tide 'web-mode))
-
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
 ;;; Clojure setup
 (use-package cider
   :ensure t
