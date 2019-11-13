@@ -414,7 +414,6 @@
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg))
 
-
 ;; ;;;; Editing
 (use-package yasnippet
   :ensure t
@@ -691,6 +690,7 @@
   :ensure t
   :config
   (add-hook 'lsp-mode-hook 'company-mode)
+  (setq company-lsp-cache-candidates t)
   (push 'company-lsp company-backends))
 
 ;; ;;;; Emacs-lisp
@@ -760,6 +760,8 @@
   (setq vue-html-extra-indent 2)
   (setq css-indent-offset 2)
   (setq lsp-ui-flycheck-enable nil)
+  (setq mmm-js-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
+  (setq mmm-typescript-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
   (add-hook 'mmm-mode-hook
             (lambda ()
               (setq mmm-submode-decoration-level 2)
@@ -798,6 +800,7 @@
 (use-package typescript-mode
   :ensure t
   :config
+  ;; (add-to-list 'auto-mode-alist '("\.tsx\'" . typescript-mode))
   (setq typescript-indent-level 2))
 
 (defun setup-tide-mode ()
