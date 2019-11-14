@@ -1154,8 +1154,8 @@
   :ensure t
   :init
   (setq multi-term-program "/bin/zsh")
-  :bind
-  ("C-c i" . multi-term))
+  :bind)
+  ;;("C-c i" . multi-term))
 
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록 훅
 (add-hook 'term-mode-hook
@@ -1164,12 +1164,9 @@
               (lookup-key (current-global-map) (kbd "C-j")))))
 
 (use-package vterm
-  :ensure t)
-
-(use-package multi-libvterm
   :ensure t
-  :init
-  :config)
+  :bind
+  ("C-c i" . vterm))
 
 (defun auto-commit-files (list)
   (interactive
