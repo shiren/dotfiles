@@ -7,6 +7,7 @@
 
 ;; 에러시 디버그모드
 ;; (setq debug-on-error t)
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -610,6 +611,7 @@
   :ensure t
   :init
   (global-flycheck-mode)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint typescript-tslint)))
@@ -807,7 +809,7 @@
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   (company-mode +1)
