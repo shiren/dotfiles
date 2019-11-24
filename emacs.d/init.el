@@ -1032,17 +1032,12 @@
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
   (setq org-default-notes-file "~/org/agenda/index.org")
-  (setq org-mobile-inbox-for-pull "~/org/agenda/index.org")
-  (setq org-mobile-directory "~/Dropbox/앱/MobileOrg")
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %?")
                                 ("o" "Task @office" entry
                                  (file+headline "~/org/agenda/nhn.org" "Task")
-                                 "* TODO %? :@office:\nSCHEDULED: %t")
-                                ("s" "Someday @office" entry
-                                 (file+headline "~/org/agenda/nhn.org" "Task")
-                                 "* SOMEDAY %? :@office:")
+                                 "* TODO %?\nSCHEDULED: %t")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
                                  "%i%?")
@@ -1056,7 +1051,7 @@
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
   (setq org-todo-keywords '((sequence "TODO(t)" "SOMEDAY(s)" "WAITING(w)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
-                        ("@office" . ?o) ("@home" . ?h) ("@anywhere" .  ?a) ("@work" . ?w)
+                        ("@coding" . ?c) ("@writing" . ?w) ("@music" .  ?m) ("@work" . ?w)
                         (:startgroup . nil)
                         ("IDEA" . ?I) ("PIN". ?P)))
   (setq org-agenda-custom-commands
@@ -1064,13 +1059,10 @@
            ((agenda "")
             (tags "PIN"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
-            (todo "SOMEDAY")
-            (tags-todo "@office"
-                       ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
-                        (org-agenda-overriding-header "Unscheduled @office tasks")))
             (todo "TODO"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
-                   (org-agenda-overriding-header "Unscheduled tasks")))))
+                   (org-agenda-overriding-header "Unscheduled tasks")))
+            (todo "SOMEDAY")))
           ("ja" "Agenda search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("jd" "Document search" search ""
@@ -1128,26 +1120,27 @@
   (global-set-key (kbd "C-C C-x C-z") 'org-resolve-clocks)
   (define-key org-mode-map (kbd "C-j") nil)
   (define-key org-mode-map (kbd "M-j") 'org-return-indent)
-  (define-key org-mode-map (kbd "<return>") 'org-return-indent)
+  (define-key org-mode-map (kbd "<return>") 'org-return-indent))
 
-  (add-hook 'org-clock-out-hook (lambda () (shiren-org-log-time-for-entry))))
+;;(add-hook 'org-clock-out-hook (lambda () (shiren-org-log-time-for-entry))))
 
-(defun shiren-org-get-formatted-time-stamp (time)
-  (let ((fmt "[%Y-%m-%d %a %H:%M]"))
-    (format-time-string fmt time)))
+;; (defun shiren-org-get-formatted-time-stamp (time)
+;;   (let ((fmt "[%Y-%m-%d %a %H:%M]"))
+;;     (format-time-string fmt time)))
 
-(defun shiren-org-log-time-for-entry ()
-  (let ((start-ts (shiren-org-get-feormatted-time-stamp org-clock-start-time))
-        (end-ts (shiren-org-get-formatted-time-stamp (float-time)))
-        (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
-    (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
-      (org-element-map (org-element-parse-buffer) 'headline
-        (lambda (h)
-          (when (string= (org-element-property :raw-value h) today-datetree)
-            (goto-char (org-element-property :contents-end h))
-            (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
+;; (defun shiren-org-log-time-for-entry ()
+;;   (let ((start-ts (shiren-org-get-feormatted-time-stamp org-clock-start-time))
+;;         (end-ts (shiren-org-get-formatted-time-stamp (float-time)))
+;;         (today-datetree (format-time-string "%Y-%m-%d %A" (float-time))))
+;;     (with-current-buffer (find-file-noselect "~/org/agenda/timelogs.org")
+;;       (org-element-map (org-element-parse-buffer) 'headline
+;;         (lambda (h)
+;;           (when (string= (org-element-property :raw-value h) today-datetree)
+;;             (goto-char (org-element-property :contents-end h))
+;;             (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
 
 (use-package org-bullets
+  :after org
   :ensure t
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
@@ -1156,36 +1149,37 @@
   :ensure t
   :init
   (setq multi-term-program "/bin/zsh")
-  :bind)
+  :bind
   ;;("C-c i" . multi-term))
+  :config
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (define-key term-raw-map (kbd "C-j")
+                (lookup-key (current-global-map) (kbd "C-j"))))))
 
-;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록 훅
-(add-hook 'term-mode-hook
-          (lambda ()
-            (define-key term-raw-map (kbd "C-j")
-              (lookup-key (current-global-map) (kbd "C-j")))))
+;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
 (use-package vterm
   :ensure t
   :bind
   ("C-c i" . vterm))
 
-(defun auto-commit-files (list)
-  (interactive
-   (list (list (buffer-file-name (current-buffer)))))
-  "LIST to be auto commit"
-  (while list
-    (let* ((file (car list))
-           (file-buffer (get-file-buffer file)))
-      (when file-buffer
-        (set-buffer file-buffer)
-        (when (magit-anything-modified-p nil file)
-          (magit-call-git "add" file)
-          (magit-call-git "commit" "-m" (concat file " update"))
-          (magit-call-git "push" "origin")
-          (magit-refresh)
-          (print (concat file " is pushed!!!")))))
-    (setq list (cdr list))))
+;; (defun auto-commit-files (list)
+;;   (interactive
+;;    (list (list (buffer-file-name (current-buffer)))))
+;;   "LIST to be auto commit"
+;;   (while list
+;;     (let* ((file (car list))
+;;            (file-buffer (get-file-buffer file)))
+;;       (when file-buffer
+;;         (set-buffer file-buffer)
+;;         (when (magit-anything-modified-p nil file)
+;;           (magit-call-git "add" file)
+;;           (magit-call-git "commit" "-m" (concat file " update"))
+;;           (magit-call-git "push" "origin")
+;;           (magit-refresh)
+;;           (print (concat file " is pushed!!!")))))
+;;     (setq list (cdr list))))
 
 (use-package magit
   :commands magit-get-top-dir
@@ -1277,6 +1271,9 @@
  '(custom-safe-themes
    (quote
     ("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+ '(org-agenda-files
+   (quote
+    ("~/org/agenda/english.org" "~/org/agenda/index.org" "~/org/agenda/nhn.org" "~/org/agenda/timelogs.org")))
  '(package-selected-packages
    (quote
     (multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))))
