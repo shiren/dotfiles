@@ -33,21 +33,6 @@
 
 (setq tab-width 2)
 
-;; Adjust garbage collection thresholds during startup, and thereafter
-;; (setq gc-cons-threshold (* 128 1024 1024))
-;; (add-hook 'emacs-startup-hook
-;;           (lambda () (setq gc-cons-threshold (* 20 1024 1024))))
-
-;; (defun my-minibuffer-setup-hook ()
-;;   (setq gc-cons-threshold most-positive-fixnum))
-
-;; (defun my-minibuffer-exit-hook ()
-;;   (setq gc-cons-threshold 800000))
-
-;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-(add-hook 'focus-out-hook 'garbage-collect)
-
 ;; 이맥스르 투명하게 하려면 숫자 조절
 (set-frame-parameter nil 'alpha 1.0)
 
@@ -131,6 +116,8 @@
 
 ;; 탭인덴트 생략
 (setq-default indent-tabs-mode nil)
+
+(add-hook 'focus-out-hook 'garbage-collect)
 
 ;;; Set up package
 (require 'package)
@@ -668,7 +655,7 @@
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
-  ;; (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -686,7 +673,8 @@
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
-  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append))
+  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
+  (setq lsp-ui-flycheck-live-reporting nil))
 
 (use-package company-lsp
   :ensure t
@@ -816,6 +804,7 @@
   (flycheck-select-checker 'typescript-tide))
 
 (use-package tide
+  :disabled
   :ensure t
   :init
   (setq typescript-indent-level 2)
