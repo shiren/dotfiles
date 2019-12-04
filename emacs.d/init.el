@@ -659,7 +659,11 @@
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
+  (setq lsp-ui-peek-enable t)
+  (setq lsp-ui-sideline-enable t)
+  (setq ls-ui-imenu-enable t)
   (setq lsp-auto-configure t)
+  (setq lsp-ui-flycheck-enable t)
   (setq lsp-eldoc-render-all nil)
   (setq lsp-signature-render-all nil)
   (setq lsp-enable-indentation nil)
@@ -791,6 +795,7 @@
   :ensure t
   :config
   ;; (add-to-list 'auto-mode-alist '("\.tsx\'" . typescript-mode))
+  (define-key typescript-mode-map [(return)] 'newline-and-indent)
   (setq typescript-indent-level 2))
 
 (defun setup-tide-mode ()
