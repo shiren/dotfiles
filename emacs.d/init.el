@@ -144,6 +144,8 @@
 ;;  :browsers "ChromeHeadless"
 ;;  :conf-file "~/masterpiece/tui.chart/karma.conf.js")
 
+(define-key prog-mode-map [(return)] 'newline-and-indent)
+
 (eval-when-compile
   (require 'use-package))
 
@@ -669,7 +671,9 @@
   (setq lsp-enable-indentation nil)
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-enable-symbol-highlighting nil))
+  (setq lsp-enable-symbol-highlighting nil)
+
+  (setq lsp-javascript-implicit-project-config-experimental-decorators t))
 
 (use-package lsp-ui
   :ensure t
@@ -679,6 +683,11 @@
   (lsp-ui-flycheck-enable t)
   (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
   (setq lsp-ui-flycheck-live-reporting nil))
+
+(use-package lsp-ivy
+  :ensure t
+  :init
+  :config)
 
 (use-package company-lsp
   :ensure t
@@ -789,6 +798,9 @@
   (add-hook 'css-mode-hook 'prettier-js-mode)
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
+
+(use-package json-mode
+  :ensure t)
 
 ;; ;;; typescript
 (use-package typescript-mode
@@ -981,6 +993,13 @@
   (beacon-mode 1))
 
 ;;; Tools
+(use-package treemacs
+  :ensure t
+  :init
+  :config
+  :bind
+  ("M-0" . treemacs-select-window))
+
 ;;; org
 (use-package ob-swift
   :ensure t)
@@ -1052,7 +1071,7 @@
         '(("o" "Custom View"
            ((agenda "")
             (tags "PIN"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE") 'notscheduled))))
             (todo "TODO"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
                    (org-agenda-overriding-header "Unscheduled tasks")))
@@ -1270,5 +1289,5 @@
     ("~/org/agenda/english.org" "~/org/agenda/index.org" "~/org/agenda/nhn.org" "~/org/agenda/timelogs.org")))
  '(package-selected-packages
    (quote
-    (multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))))
+    (json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))))
 (put 'set-goal-column 'disabled nil)
