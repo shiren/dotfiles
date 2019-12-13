@@ -36,6 +36,9 @@
 ;; 이맥스르 투명하게 하려면 숫자 조절
 (set-frame-parameter nil 'alpha 1.0)
 
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
 (set-variable 'cursor-type 'bar)
 
 ;;; Paste setup
