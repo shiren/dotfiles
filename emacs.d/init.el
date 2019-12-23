@@ -661,7 +661,7 @@
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp)
+  ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -778,7 +778,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
@@ -825,7 +825,6 @@
   (flycheck-select-checker 'typescript-tide))
 
 (use-package tide
-  :disabled
   :ensure t
   :init
   (setq typescript-indent-level 2)
