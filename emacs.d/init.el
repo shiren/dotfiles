@@ -818,7 +818,7 @@
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change))
+  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   (company-mode +1)
