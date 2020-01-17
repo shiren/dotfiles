@@ -1122,6 +1122,7 @@
   (setq org-src-tab-acts-natively t)
   (setq org-src-strip-leading-and-trailing-blank-lines t)
   (setq org-log-done t)
+  (setq org-src-preserve-indentation nil)
   (setq org-edit-src-content-indentation 0)
   (setq org-adapt-indentation t)
   (eval-after-load "org"
