@@ -1255,6 +1255,16 @@
     :tags '(webpack-server))
 
   (prodigy-define-service
+    :name "RDF: server api mock"
+    :command "npm"
+    :cwd "~/masterpiece/rdf"
+    :args '("run" "serve:apimock")
+    :port 8080
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t
+    :tags '(webpack-server))
+
+  (prodigy-define-service
     :name "RDF: storybook"
     :command "npm"
     :cwd "~/masterpiece/rdf"
