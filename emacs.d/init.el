@@ -686,7 +686,6 @@
   (setq lsp-ui-doc-enable nil) ;; lsp로 커서 속도가 너무 느릴경우 nil
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (lsp-ui-flycheck-enable t)
-  (flycheck-add-next-checker 'lsp-ui 'javascript-eslint 'append)
   (setq lsp-ui-flycheck-live-reporting nil))
 
 (use-package lsp-ivy
@@ -781,6 +780,9 @@
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
+  (add-hook 'rjsx-mode-hook
+            ((lambda ()
+                (flycheck-add-next-checker 'lsp 'javascript-eslint))))
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
@@ -811,7 +813,7 @@
 (use-package typescript-mode
   :ensure t
   :config
-  ;; (add-to-list 'auto-mode-alist '("\.tsx\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\.tsx\'" . typescript-mode))
   (define-key typescript-mode-map [(return)] 'newline-and-indent)
   (setq typescript-indent-level 2))
 
@@ -822,8 +824,8 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (company-mode +1)
-  (flycheck-select-checker 'typescript-tide))
+  (company-mode +1))
+
 
 (use-package tide
   :ensure t
@@ -837,16 +839,16 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (flycheck-add-mode 'typescript-tide 'web-mode)
-                (flycheck-add-mode 'tsx-tide 'web-mode)
-                (setup-tide-mode)
-                (flycheck-select-checker 'tsx-tide))))
+                ;; (flycheck-add-mode 'tsx-tide 'web-mode)
+                (flycheck-add-mode 'javascript-eslint 'web-mode)
+                (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)
+                (setup-tide-mode))))
+
   :config
   (define-key tide-mode-map [(return)] 'newline-and-indent)
-  ;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
-  ;; (flycheck-add-mode 'typescript-tide 'typescript-mode)
-  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
+  (flycheck-add-mode 'typescript-tide 'typescript-mode)
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
+
 
 ;;; Clojure setup
 (use-package cider
