@@ -17,6 +17,9 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
+(setq user-full-name "Sungho Kim(shiren)"
+      user-mail-address "shirenbeat@gmail.com")
+
 (setq ad-redefinition-action 'accept) ;; 함수 redefine으로 인한 경고 생략
 
 (set-language-environment "Korean")
@@ -40,6 +43,13 @@
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 (set-variable 'cursor-type 'bar)
+
+(setq gc-cons-threshold 50000000)
+(setq large-file-warning-threshold 100000000)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(global-auto-revert-mode t)
 
 ;;; Paste setup
 (defun copy-from-osx ()
@@ -662,7 +672,8 @@
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
-  ;; (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'cc-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -778,7 +789,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
   (add-hook 'rjsx-mode-hook
             ((lambda ()
@@ -828,6 +839,7 @@
 
 
 (use-package tide
+  :disabled
   :ensure t
   :init
   (setq typescript-indent-level 2)
@@ -879,6 +891,18 @@
   :ensure t
   :init
   (add-hook 'csharp-mode-hook #'company-mode))
+
+;;; C++
+(use-package ccls
+  :ensure t
+  :init
+  :config)(use-package ccls)
+  :ensure t
+  :config
+  (setq ccls-executable "ccls")
+  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+  ;; :hook ((c-mode c++-mode objc-mode) .
+  ;;        (lambda () (require 'ccls) (lsp)))
 
 ;; ;;; Swift
 (use-package swift-mode
@@ -1323,5 +1347,5 @@
     ("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))))
+    (ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))))
 (put 'set-goal-column 'disabled nil)
