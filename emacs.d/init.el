@@ -789,7 +789,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
   (add-hook 'rjsx-mode-hook
             ((lambda ()
@@ -824,7 +824,7 @@
 (use-package typescript-mode
   :ensure t
   :config
-  (add-to-list 'auto-mode-alist '("\.tsx\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (define-key typescript-mode-map [(return)] 'newline-and-indent)
   (setq typescript-indent-level 2))
 
