@@ -896,11 +896,11 @@
 (use-package ccls
   :ensure t
   :init
-  :config)(use-package ccls)
+  :config
   :ensure t
   :config
   (setq ccls-executable "ccls")
-  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)))
   ;; :hook ((c-mode c++-mode objc-mode) .
   ;;        (lambda () (require 'ccls) (lsp)))
 
