@@ -673,7 +673,7 @@
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp)
+  ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
   (setq lsp-auto-guess-root nil)
@@ -839,7 +839,6 @@
 
 
 (use-package tide
-  :disabled
   :ensure t
   :init
   (setq typescript-indent-level 2)
@@ -851,7 +850,7 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                ;; (flycheck-add-mode 'tsx-tide 'web-mode)
+                (flycheck-add-mode 'tsx-tide 'web-mode)
                 (flycheck-add-mode 'javascript-eslint 'web-mode)
                 (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)
                 (setup-tide-mode))))
@@ -903,7 +902,7 @@
   (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   :hook ((c-mode c++-mode objc-mode) .
          (lambda () (require 'ccls) (lsp))))
-  
+
 
 ;; ;;; Swift
 (use-package swift-mode
