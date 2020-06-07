@@ -835,6 +835,7 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  (flycheck-select-checker `typescript-tide)
   (company-mode +1))
 
 
@@ -852,6 +853,7 @@
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
                 (flycheck-add-mode 'tsx-tide 'web-mode)
                 (flycheck-add-mode 'javascript-eslint 'web-mode)
+                (flycheck-add-next-checker 'javascript-eslint 'typescript-tide)
                 (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)
                 (setup-tide-mode))))
 

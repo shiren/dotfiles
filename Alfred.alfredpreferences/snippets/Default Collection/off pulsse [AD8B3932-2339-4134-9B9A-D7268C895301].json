@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "sudo rm -f \/Library\/LaunchAgents\/net.pulsesecure.pulsetray.plist",
+    "uid" : "AD8B3932-2339-4134-9B9A-D7268C895301",
+    "name" : "off pulsse",
+    "keyword" : "!offpulse"
+  }
+}

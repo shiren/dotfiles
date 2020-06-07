@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>blacklist</key>
+	<array>
+		<string>Keychain Access</string>
+		<string>SecurityAgent</string>
+		<string>1Password</string>
+		<string>Wallet</string>
+		<string>Keyboard Maestro</string>
+	</array>
+	<key>hotkey</key>
+	<dict>
+		<key>key</key>
+		<integer>9</integer>
+		<key>mod</key>
+		<integer>1179648</integer>
+		<key>string</key>
+		<string>ㅍ</string>
+	</dict>
+</dict>
+</plist>

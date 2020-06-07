@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>710E46D6-6D22-46C5-9BB7-38058C5FF775</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>tor</string>
+			<key>text</key>
+			<string>Search Torlook for `{query}`</string>
+			<key>url</key>
+			<string>https://torlook.info/{query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>A43EBC33-D272-47FF-993C-D15D003BFC86</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>mdn</string>
+			<key>text</key>
+			<string>Search mdn for '{query}'</string>
+			<key>url</key>
+			<string>https://developer.mozilla.org/en-US/search?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
