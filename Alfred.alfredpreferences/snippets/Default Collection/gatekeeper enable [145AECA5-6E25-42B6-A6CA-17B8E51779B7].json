@@ -1,8 +1,0 @@
-{
-  "alfredsnippet" : {
-    "snippet" : "sudo spctl --master-enable\n",
-    "uid" : "145AECA5-6E25-42B6-A6CA-17B8E51779B7",
-    "name" : "gatekeeper enable",
-    "keyword" : "!gateen"
-  }
-}

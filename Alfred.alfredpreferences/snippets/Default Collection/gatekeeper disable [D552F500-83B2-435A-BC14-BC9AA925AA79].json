@@ -1,8 +1,0 @@
-{
-  "alfredsnippet" : {
-    "snippet" : "sudo spctl --master-disable",
-    "uid" : "D552F500-83B2-435A-BC14-BC9AA925AA79",
-    "name" : "gatekeeper disable",
-    "keyword" : "!gatedi"
-  }
-}
