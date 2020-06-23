@@ -729,6 +729,7 @@
     (setq web-mode-css-indent-offset 2))
 
   (add-hook 'web-mode-hook  'my-web-mode-hook)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
 
@@ -845,11 +846,24 @@
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
+  (flycheck-add-next-checker 'javascript-eslint 'typescript-tide)
   (flycheck-mode +1)
+  ;; (flycheck-select-checker `typescript-tide)
   (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (flycheck-select-checker `typescript-tide)
+  (company-mode +1))
+
+(defun setup-tide-tsx-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-add-mode 'tsx-tide 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)
+  (flycheck-mode +1)
+  ;; (flycheck-select-checker `tsx-tide)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
   (company-mode +1))
 
 
@@ -865,11 +879,8 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (flycheck-add-mode 'tsx-tide 'web-mode)
-                (flycheck-add-mode 'javascript-eslint 'web-mode)
-                (flycheck-add-next-checker 'javascript-eslint 'typescript-tide)
-                (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)
-                (setup-tide-mode))))
+                (setup-tide-tsx-mode))))
+
 
   :config
   (define-key tide-mode-map [(return)] 'newline-and-indent)
