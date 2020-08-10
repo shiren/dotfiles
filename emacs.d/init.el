@@ -795,9 +795,9 @@
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
-  (add-hook 'rjsx-mode-hook
-            ((lambda ()
-                (flycheck-add-next-checker 'lsp 'javascript-eslint))))
+  ;; (add-hook 'rjsx-mode-hook
+  ;;           ((lambda ()
+  ;;               (flycheck-add-next-checker 'lsp 'javascript-eslint))))
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
