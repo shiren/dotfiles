@@ -1246,6 +1246,8 @@
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
 (use-package vterm
+  ;; :ensure-system-package
+  ;; ((libvterm . "brew install libvterm"))
   :ensure t
   :bind
   ("C-c i" . vterm))
