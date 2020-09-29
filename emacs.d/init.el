@@ -109,7 +109,7 @@
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
   (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
   (setq-default line-spacing 0))
 
 
