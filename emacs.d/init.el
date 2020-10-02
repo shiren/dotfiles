@@ -259,6 +259,10 @@
 ;;   (spaceline-toggle-window-number-on)
 ;;   (spaceline-info-mode))
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 (use-package material-theme
   :ensure t
   :init
