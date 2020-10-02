@@ -259,6 +259,8 @@
 ;;   (spaceline-toggle-window-number-on)
 ;;   (spaceline-info-mode))
 
+(use-package all-the-icons)
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1))
