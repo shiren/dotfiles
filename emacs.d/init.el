@@ -600,7 +600,7 @@
   (add-hook 'prog-mode-hook 'company-mode)
   :config
   (setq company-tooltip-align-annotations t)
-  (setq company-idle-delay 0.5)
+  (setq company-idle-delay 0)
   (setq company-show-numbers t)
   (setq company-dabbrev-downcase nil)
   (setq company-minimum-prefix-length 2)
@@ -620,6 +620,10 @@
 
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+(use-package company-tabnine :ensure t
+  :config
+  (add-to-list 'company-backends #'company-tabnine))
 
 (use-package flycheck
   :ensure t
