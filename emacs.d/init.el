@@ -259,7 +259,9 @@
 ;;   (spaceline-toggle-window-number-on)
 ;;   (spaceline-info-mode))
 
-(use-package all-the-icons)
+;; 설치하고 all-the-icons-install-fonts 실행해야함
+(use-package all-the-icons
+  :ensure t)
 
 (use-package doom-modeline
   :ensure t
