@@ -690,6 +690,10 @@
   (add-hook 'cc-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'cpp-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
   :config
   (setq lsp-auto-guess-root nil)
   (setq lsp-ui-peek-enable t)
@@ -930,9 +934,9 @@
   :init
   (add-hook 'csharp-mode-hook #'company-mode))
 
-;;; C++
+;;; Cpp
 (use-package ccls
-  :ensure t
+  :disabled
   :init
   :config
   :ensure t
