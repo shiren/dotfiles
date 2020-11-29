@@ -663,17 +663,19 @@
 
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun shiren/use-eslint-from-node-modules ()
-  "Use eslint from node modules."
+(defun shiren/use-eslint-from-node-modules (&optional path)
+  "Use eslint from node modules. PATH is path"
   (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
+                (or path (buffer-file-name) default-directory)
                 "node_modules"))
          (eslint (and root
                       (expand-file-name "node_modules/eslint/bin/eslint.js"
                                         root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))
-    eslint))
+    (if (and eslint (file-executable-p eslint))
+        (progn
+          (setq-local flycheck-javascript-eslint-executable eslint)
+          eslint)
+      (shiren/use-eslint-from-node-modules (string-join (reverse (nthcdr 2 (reverse (s-split "\\/" root)))) "/")))))
 
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
@@ -817,36 +819,11 @@
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
-(use-package prettier-js
+(use-package prettier
   :ensure t
   :init
   :config
-  (setq prettier-js-args '(
-                           "--singleQuote" "true"
-                           "--printWidth" "100"
-                           "--tabWidth" "2"
-                           "--useTabs" "false"
-                           "--semi" "true"
-                           "--quoteProps" "as-needed"
-                           "--jsxSingleQuote" "false"
-                           "--trailingComma" "es5"
-                           "--arrowParens" "always"
-                           "--endOfLine" "lf"
-                           "--bracketSpacing" "true"
-                           "--jsxBracketSameLine" "false"
-                           "--requirePragma" "false"
-                           "--insertPragma" "false"
-                           "--proseWrap" "preserve"
-                           "--vueIndentScriptAndStyle" "false"))
-
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'js-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'vue-mode-hook 'prettier-js-mode)
-  (add-hook 'vue-html-mode-hook 'prettier-js-mode)
-  (add-hook 'css-mode-hook 'prettier-js-mode)
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-  (add-hook 'typescript-mode-hook 'prettier-js-mode))
+  (add-hook 'after-init-hook #'global-prettier-mode))
 
 (use-package json-mode
   :ensure t)
@@ -1394,5 +1371,5 @@
  '(custom-safe-themes
    '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
+   '(prettier-mode prettier c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
 (put 'set-goal-column 'disabled nil)
