@@ -687,6 +687,9 @@
   :init
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'lsp-after-initialize-hook (lambda ()
+                                         (when (eq major-mode `js2-mode)
+                                           (flycheck-add-next-checker 'lsp 'javascript-eslint))))
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
@@ -758,9 +761,14 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-hook 'js2-mode-hook
-            '(lambda ()
-               (js2-imenu-extras-mode)))
+  (add-hook 'js2-mode-hook (lambda ()
+                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
+                             (setq tab-width 2)
+                             (setq-default js2-basic-offset 2)
+                             (setq js-switch-indent-offset 2)
+                             (electric-indent-mode -1)
+                             (js2-imenu-extras-mode)))
+
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   (define-key js2-mode-map (kbd "C-c C-j") nil)
@@ -769,13 +777,6 @@
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
-  (add-hook 'js2-mode-hook (lambda ()
-                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
-                             (setq tab-width 2)
-                             (setq-default js2-basic-offset 2)
-                             (setq js-switch-indent-offset 2)
-                             (electric-indent-mode -1)
-                             (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
                 js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
