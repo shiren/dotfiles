@@ -133,14 +133,14 @@
 ;; 탭인덴트 생략
 (setq-default indent-tabs-mode nil)
 
-(add-hook 'focus-out-hook 'garbage-collect)
+;; (add-hook 'after-focus-change-function 'garbage-collect)
 
 ;;; Set up package
 (require 'package)
 
 (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
-                         ("melpa"        . "http://melpa.org/packages/")
+;;                         ("melpa"        . "http://melpa.org/packages/")
                          ("org"          . "http://orgmode.org/elpa/")))
 
 (package-initialize)
