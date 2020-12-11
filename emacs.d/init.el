@@ -8,6 +8,9 @@
 ;; 에러시 디버그모드
 ;; (setq debug-on-error t)
 
+;; 불필요한 Package cl is deprecated 경고 숨기
+(setq byte-compile-warnings '(not cl-functions))
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -113,7 +116,6 @@
   (setq-default line-spacing 0))
 
 
-
 ;;(add-to-list 'face-font-rescale-alist `("NanumGothicCoding" . 1.2307692307692308))
 ;;(add-to-list 'face-font-rescale-alist `("Apple SD Gothic Neo" . 1.5))
 
@@ -140,7 +142,7 @@
 
 (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
-;;                         ("melpa"        . "http://melpa.org/packages/")
+                         ("melpa"        . "http://melpa.org/packages/")
                          ("org"          . "http://orgmode.org/elpa/")))
 
 (package-initialize)
@@ -675,7 +677,7 @@
         (progn
           (setq-local flycheck-javascript-eslint-executable eslint)
           eslint)
-      (shiren/use-eslint-from-node-modules (string-join (reverse (nthcdr 2 (reverse (s-split "\\/" root)))) "/")))))
+      (and root (shiren/use-eslint-from-node-modules (string-join (reverse (nthcdr 2 (reverse (s-split "\\/" root)))) "/"))))))
 
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
@@ -783,6 +785,7 @@
                 js2-mode-show-strict-warnings nil))
 
 (use-package js-doc
+  :disabled
   :ensure t
   :bind
   (:map js2-mode-map
@@ -902,8 +905,6 @@
   :ensure t
   :init
   :config)
-
-
 
 ;;; C# and Unity
 (use-package csharp-mode
@@ -1230,6 +1231,7 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (use-package multi-term
+  :disabled
   :ensure t
   :init
   (setq multi-term-program "/bin/zsh")
@@ -1243,6 +1245,7 @@
 
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
+;; vterm은 magit이 설치된 다음 설치해야함. 정확하게는 with-editor 이유는 아직 모르겠다.
 (use-package vterm
   ;; :ensure-system-package
   ;; ((libvterm . "brew install libvterm"))
