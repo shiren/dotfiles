@@ -1302,9 +1302,9 @@
   ("C-c f" . prodigy)
   :init
   (prodigy-define-service
-    :name "RDF: server"
+    :name "Deldupim: server"
     :command "npm"
-    :cwd "~/masterpiece/rdf"
+    :cwd "~/ws_dev/deldupim"
     :args '("run" "serve")
     :port 8080
     :stop-signal 'sigkill
@@ -1312,14 +1312,13 @@
     :tags '(webpack-server))
 
   (prodigy-define-service
-    :name "RDF: server api mock"
+    :name "Deldupim: dev"
     :command "npm"
-    :cwd "~/masterpiece/rdf"
-    :args '("run" "serve:apimock")
-    :port 8080
+    :cwd "~/ws_dev/deldupim"
+    :args '("run" "dev")
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
-    :tags '(webpack-server))
+    :tags '(electron-dev))
 
   (prodigy-define-service
     :name "RDF: storybook"
@@ -1353,7 +1352,11 @@
 
   (prodigy-define-tag
     :name 'tomcat
-    :ready-message "Running war on http://localhost:[0-9]+/"))
+    :ready-message "Running war on http://localhost:[0-9]+/")
+
+  (prodigy-define-tag
+    :name 'electron-dev
+    :ready-message "electron ."))
 
 (use-package restclient
   :ensure t)
