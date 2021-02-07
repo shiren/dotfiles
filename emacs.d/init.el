@@ -1087,6 +1087,7 @@
   :ensure t)
 
 (use-package ob-rust
+  :disabled
   :ensure t)
 
 (use-package ox-gfm
