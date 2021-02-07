@@ -969,6 +969,11 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+
+;;; Rust
+(use-package rustic
+  :ensure t)
+
 (use-package rust-mode
   :disabled
   :ensure t
@@ -982,10 +987,8 @@
             (lambda ()
               (add-hook 'before-save-hook 'rust-format-buffer))))
 
-(use-package rustic
-  :ensure t)
-
 (use-package cargo
+  :disabled
   :ensure t
   :init
   (add-hook 'rust-mode-hook
@@ -995,6 +998,7 @@
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package racer
+  :disabled
   :ensure t
   ;; :ensure-system-package
   ;; (racer . "cargo install racer")
@@ -1005,9 +1009,11 @@
   (add-hook 'racer-mode-hook #'eldoc-mode))
 
 (use-package rust-playground
+  :disabled
   :ensure t)
 
 (use-package flycheck-rust
+  :disabled
   :ensure t
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
