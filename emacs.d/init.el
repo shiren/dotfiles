@@ -749,7 +749,8 @@
     "Hooks for Web mode."
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-code-indent-offset 2)
-    (setq web-mode-css-indent-offset 2))
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-enable-auto-quoting nil))
 
   (add-hook 'web-mode-hook  'my-web-mode-hook)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
