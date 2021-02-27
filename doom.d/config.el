@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Sungho Kim (shiren)"
+      user-mail-address "shirenbeat@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -35,7 +35,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -53,3 +52,22 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+(set-language-environment "Korean")
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(setq echo-keystrokes 0.001)
+(setq tab-width 2)
+(set-variable 'cursor-type 'bar)
+
+
+(when (and window-system (eq system-type 'darwin))
+  ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+  (setq-default line-spacing 0))
