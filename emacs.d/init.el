@@ -8,6 +8,9 @@
 ;; 에러시 디버그모드
 ;; (setq debug-on-error t)
 
+;; 불필요한 Package cl is deprecated 경고 숨기
+(setq byte-compile-warnings '(not cl-functions))
+
 (when window-system
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -113,7 +116,6 @@
   (setq-default line-spacing 0))
 
 
-
 ;;(add-to-list 'face-font-rescale-alist `("NanumGothicCoding" . 1.2307692307692308))
 ;;(add-to-list 'face-font-rescale-alist `("Apple SD Gothic Neo" . 1.5))
 
@@ -133,13 +135,13 @@
 ;; 탭인덴트 생략
 (setq-default indent-tabs-mode nil)
 
-(add-hook 'focus-out-hook 'garbage-collect)
+;; (add-hook 'after-focus-change-function 'garbage-collect)
 
 ;;; Set up package
 (require 'package)
 
 (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")
+;;                         ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("melpa"        . "http://melpa.org/packages/")
                          ("org"          . "http://orgmode.org/elpa/")))
 
@@ -663,17 +665,19 @@
 
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun shiren/use-eslint-from-node-modules ()
-  "Use eslint from node modules."
+(defun shiren/use-eslint-from-node-modules (&optional path)
+  "Use eslint from node modules. PATH is path"
   (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
+                (or path (buffer-file-name) default-directory)
                 "node_modules"))
          (eslint (and root
                       (expand-file-name "node_modules/eslint/bin/eslint.js"
                                         root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))
-    eslint))
+    (if (and eslint (file-executable-p eslint))
+        (progn
+          (setq-local flycheck-javascript-eslint-executable eslint)
+          eslint)
+      (and root (shiren/use-eslint-from-node-modules (string-join (reverse (nthcdr 2 (reverse (s-split "\\/" root)))) "/"))))))
 
 (add-hook 'flycheck-mode-hook #'shiren/use-eslint-from-node-modules)
 
@@ -685,6 +689,9 @@
   :init
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
+  (add-hook 'lsp-after-initialize-hook (lambda ()
+                                         (when (eq major-mode `js2-mode)
+                                           (flycheck-add-next-checker 'lsp 'javascript-eslint))))
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
@@ -742,7 +749,8 @@
     "Hooks for Web mode."
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-code-indent-offset 2)
-    (setq web-mode-css-indent-offset 2))
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-enable-auto-quoting nil))
 
   (add-hook 'web-mode-hook  'my-web-mode-hook)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
@@ -756,9 +764,14 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-hook 'js2-mode-hook
-            '(lambda ()
-               (js2-imenu-extras-mode)))
+  (add-hook 'js2-mode-hook (lambda ()
+                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
+                             (setq tab-width 2)
+                             (setq-default js2-basic-offset 2)
+                             (setq js-switch-indent-offset 2)
+                             (electric-indent-mode -1)
+                             (js2-imenu-extras-mode)))
+
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   (define-key js2-mode-map (kbd "C-c C-j") nil)
@@ -767,19 +780,13 @@
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
-  (add-hook 'js2-mode-hook (lambda ()
-                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
-                             (setq tab-width 2)
-                             (setq-default js2-basic-offset 2)
-                             (setq js-switch-indent-offset 2)
-                             (electric-indent-mode -1)
-                             (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
                 js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
                 js2-mode-show-strict-warnings nil))
 
 (use-package js-doc
+  :disabled
   :ensure t
   :bind
   (:map js2-mode-map
@@ -817,36 +824,11 @@
   (define-key rjsx-mode-map "<" nil)
   (define-key rjsx-mode-map (kbd "C-d") nil))
 
-(use-package prettier-js
+(use-package prettier
   :ensure t
   :init
   :config
-  (setq prettier-js-args '(
-                           "--singleQuote" "true"
-                           "--printWidth" "100"
-                           "--tabWidth" "2"
-                           "--useTabs" "false"
-                           "--semi" "true"
-                           "--quoteProps" "as-needed"
-                           "--jsxSingleQuote" "false"
-                           "--trailingComma" "es5"
-                           "--arrowParens" "always"
-                           "--endOfLine" "lf"
-                           "--bracketSpacing" "true"
-                           "--jsxBracketSameLine" "false"
-                           "--requirePragma" "false"
-                           "--insertPragma" "false"
-                           "--proseWrap" "preserve"
-                           "--vueIndentScriptAndStyle" "false"))
-
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'js-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'vue-mode-hook 'prettier-js-mode)
-  (add-hook 'vue-html-mode-hook 'prettier-js-mode)
-  (add-hook 'css-mode-hook 'prettier-js-mode)
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-  (add-hook 'typescript-mode-hook 'prettier-js-mode))
+  (add-hook 'after-init-hook #'global-prettier-mode))
 
 (use-package json-mode
   :ensure t)
@@ -925,8 +907,6 @@
   :init
   :config)
 
-
-
 ;;; C# and Unity
 (use-package csharp-mode
   :disabled
@@ -990,7 +970,13 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+
+;;; Rust
+(use-package rustic
+  :ensure t)
+
 (use-package rust-mode
+  :disabled
   :ensure t
   ;; :ensure-system-package
   ;; ((rustfmt . "cargo install rustfmt")
@@ -1003,6 +989,7 @@
               (add-hook 'before-save-hook 'rust-format-buffer))))
 
 (use-package cargo
+  :disabled
   :ensure t
   :init
   (add-hook 'rust-mode-hook
@@ -1012,6 +999,7 @@
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package racer
+  :disabled
   :ensure t
   ;; :ensure-system-package
   ;; (racer . "cargo install racer")
@@ -1022,9 +1010,11 @@
   (add-hook 'racer-mode-hook #'eldoc-mode))
 
 (use-package rust-playground
+  :disabled
   :ensure t)
 
 (use-package flycheck-rust
+  :disabled
   :ensure t
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
@@ -1098,6 +1088,7 @@
   :ensure t)
 
 (use-package ob-rust
+  :disabled
   :ensure t)
 
 (use-package ox-gfm
@@ -1252,6 +1243,7 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (use-package multi-term
+  :disabled
   :ensure t
   :init
   (setq multi-term-program "/bin/zsh")
@@ -1265,6 +1257,7 @@
 
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
+;; vterm은 magit이 설치된 다음 설치해야함. 정확하게는 with-editor 이유는 아직 모르겠다.
 (use-package vterm
   ;; :ensure-system-package
   ;; ((libvterm . "brew install libvterm"))
@@ -1321,9 +1314,9 @@
   ("C-c f" . prodigy)
   :init
   (prodigy-define-service
-    :name "RDF: server"
+    :name "Deldupim: server"
     :command "npm"
-    :cwd "~/masterpiece/rdf"
+    :cwd "~/ws_dev/deldupim"
     :args '("run" "serve")
     :port 8080
     :stop-signal 'sigkill
@@ -1331,14 +1324,13 @@
     :tags '(webpack-server))
 
   (prodigy-define-service
-    :name "RDF: server api mock"
+    :name "Deldupim: dev"
     :command "npm"
-    :cwd "~/masterpiece/rdf"
-    :args '("run" "serve:apimock")
-    :port 8080
+    :cwd "~/ws_dev/deldupim"
+    :args '("run" "dev")
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t
-    :tags '(webpack-server))
+    :tags '(electron-dev))
 
   (prodigy-define-service
     :name "RDF: storybook"
@@ -1372,7 +1364,11 @@
 
   (prodigy-define-tag
     :name 'tomcat
-    :ready-message "Running war on http://localhost:[0-9]+/"))
+    :ready-message "Running war on http://localhost:[0-9]+/")
+
+  (prodigy-define-tag
+    :name 'electron-dev
+    :ready-message "electron ."))
 
 (use-package restclient
   :ensure t)
@@ -1394,5 +1390,5 @@
  '(custom-safe-themes
    '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
+   '(rustic prettier-mode prettier c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
 (put 'set-goal-column 'disabled nil)
