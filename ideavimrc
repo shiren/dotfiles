@@ -1,1 +1,45 @@
-source ~/.vimrc
+#source ~/.vimrc
+
+set visualbell
+set noerrorbells
+let mapleader = " "
+
+set ignorecase
+set smartcase
+set scrolloff=5
+set incsearch
+
+" Emulated Plugins
+set surround
+set NERDTree
+
+" Copy to system clipboard as well
+set clipboard+=unnamed
+
+" Use Idea to join lines smartly
+set ideajoin
+
+" Multiple cursors support
+set multiple-cursors
+
+" These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
+
+" let mapleader = ","
+let mapleader = " "
+" let maplocalleader = ","
+
+" Use Q for formatting the current paragraph (or visual selection)
+vmap Q gq
+nmap Q gqap
+
+" These create newlines like o and O but stay in normal mode
+nmap zj o<Esc>k
+nmap zk O<Esc>j
+
+imap jk <Esc>
+imap ㅓㅏ <Esc>
+
+" Terminal
+nmap <leader>ot :action ActivateTerminalToolWindow<cr>
+nmap <leader>sp :action FindInPath<cr>
+nmap <leader><leader> :action SearchEverywhere<cr>
