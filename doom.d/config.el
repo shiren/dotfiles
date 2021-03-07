@@ -70,24 +70,22 @@
 
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 100 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
   (setq-default line-spacing 0))
 
-
 ;; Org
 ;;
-(require 'org)
-(setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
-
-(setq org-src-fontify-natively t)
-(setq org-src-tab-acts-natively t)
-(setq org-src-strip-leading-and-trailing-blank-lines t)
-(setq org-log-done t)
-(setq org-src-preserve-indentation nil)
-(setq org-edit-src-content-indentation 0)
-(setq org-adapt-indentation t)
-(setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
-(setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
-(setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
-(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+(after! 'org
+  (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-src-strip-leading-and-trailing-blank-lines t)
+  (setq org-log-done t)
+  (setq org-src-preserve-indentation nil)
+  (setq org-edit-src-content-indentation 0)
+  (setq org-adapt-indentation t)
+  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
+  (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
+  (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
