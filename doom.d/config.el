@@ -79,7 +79,7 @@
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
   (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
-  (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+  (set-fontset-font t 'hangul (font-spec :height 140 :name "D2Coding ligature"))
   (setq-default line-spacing 0))
 
 ;;; Scroll setup
@@ -90,8 +90,9 @@
 (setq scroll-conservatively 200) ;; 스크롤 도중에 센터로 커서 이동하지 않도록
 (setq scroll-margin 3) ;; 스크롤시 남기는 여백
 
+(setq visible-bell t)
+
 ;; Org
-;;
 (after! org
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
   (setq org-src-fontify-natively t)
