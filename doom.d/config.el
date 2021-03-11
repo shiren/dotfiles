@@ -70,13 +70,13 @@
 
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 100 :weight 'normal)
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
   (setq-default line-spacing 0))
 
 ;; Org
 ;;
-(after! 'org
+(after! org
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
@@ -89,3 +89,15 @@
   (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
+
+;; javascript
+(setq js-indent-level 2)
+
+(after! js2-mode
+  (add-hook 'js2-mode-hook (lambda ()
+                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
+                             (setq tab-width 2)
+                             (setq-default js2-basic-offset 2)
+                             (setq js-switch-indent-offset 2)
+                             (electric-indent-mode -1)
+                             (js2-imenu-extras-mode))))
