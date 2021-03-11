@@ -63,8 +63,16 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+
 (setq echo-keystrokes 0.001)
 (setq tab-width 2)
+
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+
 (set-variable 'cursor-type 'bar)
 
 
@@ -73,6 +81,14 @@
   (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
   (setq-default line-spacing 0))
+
+;;; Scroll setup
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+(setq scroll-conservatively 200) ;; 스크롤 도중에 센터로 커서 이동하지 않도록
+(setq scroll-margin 3) ;; 스크롤시 남기는 여백
 
 ;; Org
 ;;
@@ -101,3 +117,9 @@
                              (setq js-switch-indent-offset 2)
                              (electric-indent-mode -1)
                              (js2-imenu-extras-mode))))
+
+;; Web
+(after! web-mod
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-enable-auto-quoting nil))
