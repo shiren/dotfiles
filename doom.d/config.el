@@ -68,6 +68,7 @@
 
 (setq echo-keystrokes 0.001)
 (setq tab-width 2)
+(setq doom-modeline-enable-word-count nil)
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
@@ -93,6 +94,10 @@
 (setq visible-bell t)
 
 (setq gc-cons-threshold 100000000)
+
+(setq doom-modeline-buffer-state-icon nil)
+(setq doom-modeline-buffer-modification-icon nil)
+
 ;; Org
 (after! org
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
