@@ -92,6 +92,7 @@
 
 (setq visible-bell t)
 
+(setq gc-cons-threshold 100000000)
 ;; Org
 (after! org
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
@@ -120,7 +121,7 @@
                              (js2-imenu-extras-mode))))
 
 ;; Web
-(after! web-mod
+(after! web-mode
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-enable-auto-quoting nil))
