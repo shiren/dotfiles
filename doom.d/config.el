@@ -128,3 +128,6 @@
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-enable-auto-quoting nil))
+
+;; prettier
+(add-hook 'after-init-hook #'global-prettier-mode)

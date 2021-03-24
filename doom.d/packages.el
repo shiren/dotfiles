@@ -51,3 +51,5 @@
 
 
 (package! material-theme)
+
+(package! prettier)
