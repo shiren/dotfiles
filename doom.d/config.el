@@ -68,6 +68,7 @@
 
 (setq echo-keystrokes 0.001)
 (setq tab-width 2)
+(setq standard-indent 2)
 (setq doom-modeline-enable-word-count nil)
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
