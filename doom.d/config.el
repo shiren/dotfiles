@@ -66,7 +66,7 @@
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 
-(setq echo-keystrokes 0.001)
+;;(setq echo-keystrokes 0.001)
 (setq tab-width 2)
 (setq doom-modeline-enable-word-count nil)
 
@@ -120,8 +120,9 @@
                              (setq tab-width 2)
                              (setq-default js2-basic-offset 2)
                              (setq js-switch-indent-offset 2)
-                             (electric-indent-mode -1)
-                             (js2-imenu-extras-mode))))
+                             ;; (electric-indent-mode -1)
+                             ;;(js2-imenu-extras-mode)
+                             )))
 
 ;; Web
 (after! web-mode
