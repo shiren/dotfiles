@@ -41,5 +41,9 @@ imap ㅓㅏ <Esc>
 
 " Terminal
 nmap <leader>ot :action ActivateTerminalToolWindow<cr>
+
+" Normal
+
 nmap <leader>sp :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
+nmap <leader>fr :action RecentFiles<cr>
