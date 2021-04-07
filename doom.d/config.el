@@ -133,3 +133,11 @@
 
 ;; prettier
 (add-hook 'after-init-hook #'global-prettier-mode)
+
+;; lsp
+;; lsp 체커를 항상 넥스트 체커로 두자, 제대로 체크가 안된다.
+(add-hook 'lsp-after-initialize-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'lsp)))
+
+(setq-hook! 'js2-mode-hook flycheck-checker 'javascript-eslint)
+(setq-hook! 'typescript-mode-hook flycheck-checker 'javascript-eslint)
+(setq-hook! 'typescript-tsx-mode-hook flycheck-checker 'javascript-eslint)
