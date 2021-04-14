@@ -78,8 +78,8 @@
 
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 150 :weight 'normal)
-  (set-fontset-font t 'hangul (font-spec :height 150 :name "D2Coding ligature"))
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+  (set-fontset-font t 'hangul (font-spec :height 140 :name "D2Coding ligature"))
   (setq-default line-spacing 0))
 
 ;;; Scroll setup
