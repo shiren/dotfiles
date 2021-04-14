@@ -47,3 +47,4 @@ nmap <leader>ot :action ActivateTerminalToolWindow<cr>
 nmap <leader>sp :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>fr :action RecentFiles<cr>
+nmap <leader>gg :action ActivateCommitToolWindow<cr>
