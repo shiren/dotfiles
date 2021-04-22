@@ -73,6 +73,7 @@
 
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 (set-variable 'cursor-type 'bar)
 
@@ -96,6 +97,7 @@
 
 (setq doom-modeline-buffer-state-icon nil)
 (setq doom-modeline-buffer-modification-icon nil)
+(setq display-line-numbers-type nil)
 
 ;; Org
 (after! org
@@ -111,6 +113,8 @@
   (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
+
+(setq org-roam-directory "~/org/roam")
 
 ;; javascript
 (setq js-indent-level 2)
