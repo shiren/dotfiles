@@ -43,8 +43,7 @@ imap ㅓㅏ <Esc>
 nmap <leader>ot :action ActivateTerminalToolWindow<cr>
 
 " Normal
-
-nmap <leader>sp :action FindInPath<cr>
-nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>fr :action RecentFiles<cr>
 nmap <leader>gg :action ActivateCommitToolWindow<cr>
+nmap <leader>ji :action FindInPath<cr>
+nmap <leader><leader> :action SearchEverywhere<cr>
