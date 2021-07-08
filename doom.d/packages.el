@@ -53,3 +53,5 @@
 (package! material-theme)
 
 (package! prettier)
+
+(package! company-tabnine)

@@ -145,3 +145,14 @@
 (setq-hook! 'js2-mode-hook flycheck-checker 'javascript-eslint)
 (setq-hook! 'typescript-mode-hook flycheck-checker 'javascript-eslint)
 (setq-hook! 'typescript-tsx-mode-hook flycheck-checker 'javascript-eslint)
+
+(after! company-tabnine
+  (setq company-show-numbers t)
+  (add-to-list 'company-backends #'company-tabnine))
+
+
+(map! :leader
+      "j i" #'swiper)
+
+(map! :leader
+      "j I" #'swiper-all)
