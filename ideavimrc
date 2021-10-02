@@ -13,6 +13,9 @@ set incsearch
 set surround
 set NERDTree
 
+set which-key
+set notimeout
+
 " Copy to system clipboard as well
 set clipboard+=unnamed
 

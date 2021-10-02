@@ -1,0 +1,1 @@
+/Users/shiren/dotfiles/doom.d
