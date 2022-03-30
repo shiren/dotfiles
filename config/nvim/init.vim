@@ -56,8 +56,7 @@ set smarttab
 
 set mouse=a
 
-set completeopt-=preview
-set complete-=i
+set completeopt-=menuone,noselect
 
 set ttimeout
 set ttimeoutlen=100
@@ -109,7 +108,6 @@ Plug 'junegunn/fzf.vim'
 
 " Language Server Protocol
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'MunifTanjim/eslint.nvim'
@@ -125,6 +123,11 @@ Plug 'github/copilot.vim'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" Code/Edit
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'hrsh7th/nvim-compe'
+
+
 " Git
 Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
@@ -138,6 +141,7 @@ noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 "LSP Setup"
+"npm install -g typescript-language-server
 lua << EOF
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -213,9 +217,41 @@ inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
 "=== Plugin Setup ==="
-"gitsign
 lua << EOF
+--gitsign
 require('gitsigns').setup()
+
+--treesitter
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {},
+  },
+  indent = {
+    enable = false,
+    disable = {},
+  },
+  ensure_installed = {
+    "tsx",
+    "json",
+    "swift",
+    "html",
+    "css",
+    "javascript",
+  }
+}
+EOF
+
+"nvim-compe
+lua <<EOF
+require'compe'.setup({
+  enabled = true,
+  source = {
+    path = true,
+    buffer = true,
+    nvim_lsp = true,
+  },
+})
 EOF
 
 "Swoop
