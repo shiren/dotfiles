@@ -108,9 +108,9 @@ Plug 'junegunn/fzf.vim'
 
 " Language Server Protocol
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'MunifTanjim/eslint.nvim'
 
 " File Management
 Plug 'nvim-lua/plenary.nvim'
@@ -126,7 +126,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Code/Edit
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/nvim-compe'
-
 
 " Git
 Plug 'lewis6991/gitsigns.nvim'
@@ -170,42 +169,31 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
--- local servers = { 'tsserver' }
--- for _, lsp in pairs(servers) do
---  require('lspconfig')[lsp].setup {
---    on_attach = on_attach,
---    flags = {
---      -- This will be the default in neovim 0.7+
---      debounce_text_changes = 150,
---    }
---  }
---end
-
 require("lspconfig").tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "typescript.tsx" },
 }
 
-require("null-ls").setup()
+local nls = require("null-ls")
+nls.setup({
+  on_attach = function(client, bufnr)
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
+      -- format on save
+      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+    end
 
-require("eslint").setup({
-  bin = 'eslint', -- or `eslint_d`
-  code_actions = {
-    enable = true,
-    apply_on_save = {
-      enable = true,
-      types = { "problem" }, -- "directive", "problem", "suggestion", "layout"
-    },
-    disable_rule_comment = {
-      enable = true,
-      location = "separate_line", -- or `same_line`
-    },
-  },
-  diagnostics = {
-    enable = true,
-    report_unused_disable_directives = false,
-    run_on = "type", -- or `save`
-  },
+    if client.resolved_capabilities.document_range_formatting then
+      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+    end
+  end,
+  sources = {
+    nls.builtins.formatting.prettier,
+    nls.builtins.formatting.eslint_d,
+    nls.builtins.diagnostics.eslint_d,
+    nls.builtins.code_actions.eslint_d,
+    nls.builtins.formatting.stylua
+  }
 })
 
 require("lspsaga").init_lsp_saga()
