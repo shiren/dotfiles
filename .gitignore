@@ -53,5 +53,4 @@ report
 karma.conf.local.js
 .tern-project
 .tern-port
-*.vim
 flychek_init.el
