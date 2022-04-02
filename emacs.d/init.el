@@ -518,6 +518,11 @@
 ;;     (add-hook 'scheme-mode-hook #'parinfer-mode)
 ;;     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
+(use-package parinfer-rust-mode
+  :hook emacs-lisp-mode
+  :init
+  (setq parinfer-rust-auto-download t))
+
 (use-package multiple-cursors
   :ensure t)
 
@@ -623,9 +628,10 @@
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
-(use-package company-tabnine :ensure t
-  :config
-  (add-to-list 'company-backends #'company-tabnine))
+;; (use-package company-tabnine
+;;   :ensure t
+;;   :config
+;;   (add-to-list 'company-backends #'company-tabnine))
 
 (use-package flycheck
   :ensure t
