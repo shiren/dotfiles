@@ -120,6 +120,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'ahmedkhalf/project.nvim'
 
 Plug 'github/copilot.vim'
+Plug 'folke/trouble.nvim'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -129,6 +130,9 @@ Plug 'hrsh7th/nvim-compe'
 
 " Git
 Plug 'lewis6991/gitsigns.nvim'
+
+" UI
+Plug 'kyazdani42/nvim-web-devicons'
 call plug#end()
 
 "=== KEYMAP ==="
@@ -189,7 +193,6 @@ nls.setup({
   end,
   sources = {
     nls.builtins.formatting.prettier,
-    nls.builtins.formatting.eslint_d,
     nls.builtins.diagnostics.eslint_d,
     nls.builtins.code_actions.eslint_d,
     nls.builtins.formatting.stylua
