@@ -108,14 +108,15 @@ Plug 'junegunn/fzf.vim'
 
 " Language Server Protocol
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'onsails/lspkind-nvim'
 
 " File Management
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'ahmedkhalf/project.nvim'
 
@@ -126,7 +127,9 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Code/Edit
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
 
 " Git
 Plug 'lewis6991/gitsigns.nvim'
@@ -143,9 +146,42 @@ imap ㅓㅏ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
+lua <<EOF
+  local cmp = require'cmp'
+  local lspkind = require'lspkind'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true
+      }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+    }, {
+      { name = 'buffer' },
+    }),
+    formatting = {
+      format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+    }
+  })
+
+  vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
+EOF
 "LSP Setup"
 "npm install -g typescript-language-server
 lua << EOF
+
 local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -171,37 +207,103 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+ if client.name == 'tsserver' then
+   client.resolved_capabilities.document_formatting = false
+   client.resolved_capabilities.document_range_formatting = false
+ end
+
+ if client.resolved_capabilities.document_formatting then
+   vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
+   vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+ end
+
+ if client.resolved_capabilities.document_range_formatting then
+   vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+ end
 end
 
-require("lspconfig").tsserver.setup {
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    on_attach(client)
-  end,
-  filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "typescript.tsx" },
+local capabilities = require('cmp_nvim_lsp').update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
+local diagnosticls_config = {
+  on_attach = on_attach,
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', "typescript.tsx", 'css', 'less', 'scss', 'pandoc' },
+  init_options = {
+    linters = {
+      eslint = {
+        command = 'eslint_d',
+        rootPatterns = { '.git' },
+        debounce = 100,
+        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+        sourceName = 'eslint_d',
+        parseJson = {
+          errorsRoot = '[0].messages',
+          line = 'line',
+          column = 'column',
+          endLine = 'endLine',
+          endColumn = 'endColumn',
+          message = '[eslint] ${message} [${ruleId}]',
+          security = 'severity'
+        },
+        securities = {
+          [2] = 'error',
+          [1] = 'warning'
+        }
+      },
+    },
+    filetypes = {
+      javascript = 'eslint',
+      javascriptreact = 'eslint',
+      typescript = 'eslint',
+      typescriptreact = 'eslint',
+    },
+    formatters = {
+      eslint_d = {
+        command = 'eslint_d',
+        rootPatterns = { '.git' },
+        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+        rootPatterns = { '.git' },
+      },
+      prettier = {
+        command = 'prettier_d_slim',
+        rootPatterns = { '.git' },
+        -- requiredFiles: { 'prettier.config.js' },
+        args = { '--stdin', '--stdin-filepath', '%filename' }
+      }
+    },
+    formatFiletypes = {
+      css = 'prettier',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
+      json = 'prettier',
+      scss = 'prettier',
+      less = 'prettier',
+      typescript = 'prettier',
+      typescriptreact = 'prettier',
+      json = 'prettier',
+    }
+  }
 }
 
-local nls = require("null-ls")
-nls.setup({
-  on_attach = function(client, bufnr)
-    if client.resolved_capabilities.document_formatting then
-      vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
-      -- format on save
-      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-    end
-
-    if client.resolved_capabilities.document_range_formatting then
-      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-    end
-  end,
-  sources = {
-    nls.builtins.formatting.prettier,
-    nls.builtins.diagnostics.eslint_d,
-    nls.builtins.code_actions.eslint_d,
-    nls.builtins.formatting.stylua
+local lsp_installer = pcall(require, "nvim-lsp-installer")
+require("nvim-lsp-installer").on_server_ready(function(server)
+  local opts = {
+    capabilities = capabilities,
+    on_attach = on_attach,
   }
-})
+
+  if server.name == 'tsserver' then
+    opts.filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "typescript.tsx" }
+  end
+
+  if server.name == 'diagnosticls' then
+    opts = diagnosticls_config
+  end
+
+  server:setup(opts)
+end)
 
 require("lspsaga").init_lsp_saga()
 EOF
@@ -237,21 +339,9 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-"nvim-compe
-lua <<EOF
-require'compe'.setup({
-  enabled = true,
-  source = {
-    path = true,
-    buffer = true,
-    nvim_lsp = true,
-  },
-})
-EOF
-
 "Swoop
 let g:swoopIgnoreCase = 1
-let g:swoopAutoInsertMode = 0
+let g:swoopAutoInsertMode = 1
 nmap <Leader>ji :call Swoop()<CR>
 vmap <Leader>ji :call SwoopSelection()<CR>
 nmap <Leader>jI :call SwoopMulti()<CR>
@@ -270,7 +360,7 @@ nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>pp <cmd>Telescope projects<cr>
+
 lua << EOF
   require("project_nvim").setup {
   -- Manual mode doesn't automatically change your root directory, so you have
@@ -303,7 +393,7 @@ lua << EOF
   silent_chdir = true,
 
   -- Path where project.nvim will store the project history for use in
-  -- telescope
+
   datapath = vim.fn.stdpath("data"),  }
 EOF
 
