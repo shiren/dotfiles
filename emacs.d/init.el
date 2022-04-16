@@ -701,7 +701,7 @@
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
-  ;; (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (add-hook 'c-mode-hook 'lsp)
@@ -720,6 +720,7 @@
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-completion-enable t)
 
   (setq lsp-javascript-implicit-project-config-experimental-decorators t))
 
@@ -839,6 +840,9 @@
 (use-package json-mode
   :ensure t)
 
+(use-package lsp-tailwindcss
+  :ensure t)
+
 ;; ;;; typescript
 (use-package typescript-mode
   :ensure t
@@ -872,7 +876,7 @@
 
 
 (use-package tide
-  :ensure t
+  :disabled
   :init
   (setq typescript-indent-level 2)
   (setq tide-format-options '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions nil :placeOpenBraceOnNewLineForFunctions nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets nil :insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis nil :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil :insertSpaceBeforeFunctionParenthesis nil))
