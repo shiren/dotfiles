@@ -1252,29 +1252,20 @@
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
 ;; vterm은 magit이 설치된 다음 설치해야함. 정확하게는 with-editor 이유는 아직 모르겠다.
-(use-package vterm
+(use-package multi-vterm
   ;; :ensure-system-package
   ;; ((libvterm . "brew install libvterm"))
   :ensure t
   :bind
-  ("C-c i" . vterm))
+  ("C-c t" . multi-vterm))
 
-;; (defun auto-commit-files (list)
-;;   (interactive
-;;    (list (list (buffer-file-name (current-buffer)))))
-;;   "LIST to be auto commit"
-;;   (while list
-;;     (let* ((file (car list))
-;;            (file-buffer (get-file-buffer file)))
-;;       (when file-buffer
-;;         (set-buffer file-buffer)
-;;         (when (magit-anything-modified-p nil file)
-;;           (magit-call-git "add" file)
-;;           (magit-call-git "commit" "-m" (concat file " update"))
-;;           (magit-call-git "push" "origin")
-;;           (magit-refresh)
-;;           (print (concat file " is pushed!!!")))))
-;;     (setq list (cdr list))))
+;; (use-package vterm
+;;   ;; :ensure-system-package
+;;   ;; ((libvterm . "brew install libvterm"))
+;;   :disabled
+;;   :ensure t
+;;   :bind
+;;   ("C-c t" . vterm))
 
 (use-package magit
   :commands magit-get-top-dir

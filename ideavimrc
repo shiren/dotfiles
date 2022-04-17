@@ -22,8 +22,8 @@ set clipboard+=unnamed
 " Use Idea to join lines smartly
 set ideajoin
 
-" Multiple cursors support
-set multiple-cursors
+" Multiple cursors supporj
+set multiple-cursorj
 
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
@@ -43,10 +43,10 @@ imap jk <Esc>
 imap ㅓㅏ <Esc>
 
 " Terminal
-nmap <leader>ot :action ActivateTerminalToolWindow<cr>
+nmap <leader>t :action ActivateTerminalToolWindow<cr>
 
 " Normal
-nmap <leader>fr :action RecentFiles<cr>
-nmap <leader>gg :action ActivateCommitToolWindow<cr>
+nmap <leader>r :action RecentFiles<cr>
+nmap <leader>m :action ActivateCommitToolWindow<cr>
 nmap <leader>ji :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
