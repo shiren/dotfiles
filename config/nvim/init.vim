@@ -96,6 +96,7 @@ autocmd VimResized * wincmd =
 command! -nargs=* -complete=help Help vertical belowright help <args>
 autocmd FileType help wincmd L
 
+set rtp+=/usr/local/opt/fzf
 
 "=== Plugin ==="
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
@@ -116,7 +117,7 @@ Plug 'onsails/lspkind-nvim'
 " File Management
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'ahmedkhalf/project.nvim'
 
@@ -360,6 +361,7 @@ nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>pp <cmd>Telescope projects<cr>
 
 lua << EOF
   require("project_nvim").setup {
