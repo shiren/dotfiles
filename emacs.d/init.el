@@ -643,8 +643,8 @@
   (flycheck-add-mode 'javascript-eslint 'vue-mode)
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
-            '(lambda ()
-               (setq next-error-function 'flycheck-next-error))))
+            (lambda ()
+              (setq next-error-function 'flycheck-next-error))))
 
 (use-package flycheck-package
   :ensure t
