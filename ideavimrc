@@ -50,3 +50,5 @@ nmap <leader>r :action RecentFiles<cr>
 nmap <leader>m :action ActivateCommitToolWindow<cr>
 nmap <leader>ji :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
+nmap <leader>jj :action AceAction<cr>
+nmap <leader>jl :action AceLineAction<cr>

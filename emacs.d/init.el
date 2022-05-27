@@ -509,7 +509,13 @@
 (use-package multiple-cursors
   :ensure t)
 
-;; ;; File & Buffer
+(use-package smartparens
+  :ensure t
+  :init
+  (add-hook 'js-mode-hook #'smartparens-mode)
+  (add-hook 'typescript-mode-hook #'smartparens-mode))
+
+;; ;; hook & Buffer
 (use-package recentf
   :init
   (setq recentf-max-saved-items 300
@@ -942,6 +948,7 @@
   (flycheck-swift-setup))
 
 (use-package flycheck-swiftlint
+  :disabled
   :ensure t
   :ensure-system-package
   ((swiftLint . "brew install swiftlint"))
