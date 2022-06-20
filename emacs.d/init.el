@@ -342,7 +342,7 @@
 (use-package rotate
   :ensure t
   :bind ("C-x j" . rotate-window))
-  
+
 (use-package writeroom-mode
   :diminish writeroom-mode
   :ensure t
@@ -695,6 +695,8 @@
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
   (add-hook 'typescript-mode-hook #'lsp)
+  (add-hook 'web-mode-hook #'lsp)
+  (add-hook 'web-mode-hook #'lsp-deferred)
   (add-hook 'swift-mode-hook #'lsp)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (add-hook 'c-mode-hook 'lsp)
@@ -755,7 +757,8 @@
   (add-hook 'web-mode-hook  'my-web-mode-hook)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . web-mode)))
 
 ;;;; javascript
 (setq js-indent-level 2)
@@ -816,7 +819,7 @@
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+  ; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
   :config
   ;; (add-hook 'rjsx-mode-hook
   ;;           ((lambda ()
@@ -842,7 +845,7 @@
 (use-package typescript-mode
   :ensure t
   :config
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  ;(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (define-key typescript-mode-map [(return)] 'newline-and-indent)
   (setq typescript-indent-level 2))
 
