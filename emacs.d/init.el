@@ -532,7 +532,9 @@
   :ensure t
   :init
   (autoload 'ibuffer "ibuffer" "List buffers." t)
-  :bind ("C-x b" . ibuffer))
+  :bind
+  ("C-x b" . ibuffer)
+  ("C-x C-b" . ibuffer))
 
 (use-package delight
   :ensure t)
