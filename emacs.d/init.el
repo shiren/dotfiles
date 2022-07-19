@@ -147,6 +147,19 @@
 
 (package-initialize)
 
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -519,6 +532,12 @@
   (add-hook 'js-mode-hook #'smartparens-mode)
   (add-hook 'typescript-mode-hook #'smartparens-mode))
 
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'copilot-mode))
+
 ;; ;; hook & Buffer
 (use-package recentf
   :init
@@ -621,7 +640,22 @@
   (define-key company-active-map (kbd "M-p") nil)
 
   (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous))
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+
+  (defun my-tab ()
+   (interactive)
+   (or (copilot-accept-completion)
+       (company-indent-or-complete-common nil)))
+
+  ; modify company-mode behaviors
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends)
+
+    (define-key company-mode-map (kbd "<tab>") 'my-tab)
+    (define-key company-mode-map (kbd "TAB") 'my-tab)
+    (define-key company-active-map (kbd "<tab>") 'my-tab)
+    (define-key company-active-map (kbd "TAB") 'my-tab)))
 
 ;; (use-package company-tabnine
 ;;   :ensure t
