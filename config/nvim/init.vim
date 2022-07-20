@@ -132,6 +132,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 
+Plug 'sbdchd/neoformat'
 " Git
 Plug 'lewis6991/gitsigns.nvim'
 
@@ -398,6 +399,19 @@ lua << EOF
 
   datapath = vim.fn.stdpath("data"),  }
 EOF
+
+"neoformat
+let g:neoformat_try_node_exe = 1
+
+lua << EOF
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+  command = "Neoformat prettier",
+})
+EOF
+
+
+
 
 " Colors {{{
 "if (has("termguicolors"))
