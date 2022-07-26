@@ -8,8 +8,9 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-#files="vimrc zshrc tmux.conf ideavimrc zprofile config/nvim emacs.d/init.el"    # list of files/folders to symlink in homedir
-files="vimrc zshrc tmux.conf ideavimrc zprofile config/nvim doom.d" # 둠으로 교체
+
+# 둠 설치시 어차피 emacs.d/init을 덮어쓴다. 그래서 순정으로 돌릴때만 init.el의 링크하면된다.
+files="vimrc zshrc tmux.conf ideavimrc zprofile config/nvim doom.d emacs.d/init.el"
 
 ##########
 
