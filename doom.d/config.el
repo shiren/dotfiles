@@ -147,7 +147,9 @@
 
 
 (after! ivy
+  (map! :map ivy-minibuffer-map
+        "S-SPC" nil
+        "M-s" 'ivy-restrict-to-matches)
   (map! :leader
-        "j i" #'swiper)
-  (map! :leader
-        "j I" #'swiper-all))
+        :g "j i" #'swiper
+        :g "j I" #'swiper-all))
