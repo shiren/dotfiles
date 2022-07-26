@@ -97,6 +97,7 @@
 ;; Org
 (after! org
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
+  (setq org-default-notes-file "~/org/agenda/index.org")
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-src-strip-leading-and-trailing-blank-lines t)
@@ -107,9 +108,56 @@
   (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
   (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
-(setq org-roam-directory "~/org/roam")
+  (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
+
+  (setq org-capture-templates '(("t" "Task" entry
+                                 (file+headline "~/org/agenda/index.org" "Task")
+                                 "* TODO %?")
+                                ("o" "Task @office" entry
+                                 (file+headline "~/org/agenda/nhn.org" "Task")
+                                 "* TODO %?\nSCHEDULED: %t")
+                                ("e" "English" item
+                                 (file+headline "~/org/agenda/english.org" "Inbox")
+                                 "%i%?")
+                                ("l" "LogTime" entry
+                                 (file+datetree "~/org/agenda/timelogs.org")
+                                 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} %?")
+                                ("d" "dev note" entry
+                                 (file+datetree "~/org/note/devnote.org")
+                                 "* %? %^g")))
+  (setq org-agenda-custom-commands
+        '(("o" "Custom View"
+           ((agenda "")
+            (tags "PIN"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE") 'notscheduled))))
+            (todo "TODO"
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
+                   (org-agenda-overriding-header "Unscheduled tasks")))
+            (todo "SOMEDAY")))
+          ("ja" "Agenda search" search ""
+           ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
+          ("jd" "Document search" search ""
+           ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
+
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-scheduled-delay-if-deadline t)
+
+  (setq org-agenda-restore-windows-after-quit t)
+
+  ;;yasnippet 하고 tab 충돌 해결
+  (defun yas/org-very-safe-expand ()
+    (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (make-variable-buffer-local 'yas-expand-from-trigger-key)
+              (setq yas-expand-from-trigger-key [tab])
+              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+              (define-key yas/keymap [tab] 'yas-next-field))))
+
 
 ;; javascript
 (setq js-indent-level 2)
