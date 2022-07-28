@@ -52,6 +52,10 @@
 
 (package! material-theme)
 
-(package! prettier)
+;; (package! prettier)
 
-(package! company-tabnine)
+;; (package! company-tabnine)
+
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))

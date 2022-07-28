@@ -179,7 +179,7 @@
   (setq web-mode-enable-auto-quoting nil))
 
 ;; prettier
-(add-hook 'after-init-hook #'global-prettier-mode)
+;; (add-hook 'after-init-hook #'global-prettier-mode)
 
 ;; lsp
 ;; lsp 체커를 항상 넥스트 체커로 두자, 제대로 체크가 안된다.
@@ -189,9 +189,10 @@
 (setq-hook! 'typescript-mode-hook flycheck-checker 'javascript-eslint)
 (setq-hook! 'typescript-tsx-mode-hook flycheck-checker 'javascript-eslint)
 
-(after! company-tabnine
-  (setq company-show-numbers t)
-  (add-to-list 'company-backends #'company-tabnine))
+;; (after! company-tabnine
+;;   (setq company-show-numbers t)
+;;   (add-to-list 'company-backends #'company-tabnine))
+
 
 
 (after! ivy
@@ -201,3 +202,19 @@
   (map! :leader
         :g "j i" #'swiper
         :g "j I" #'swiper-all))
+
+(defun my-tab ()
+  (interactive)
+  (or (copilot-accept-completion)
+      (company-indent-or-complete-common nil)))
+
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         :map company-active-map
+         ("<tab>" . 'my-tab)
+         ("TAB" . 'my-tab)
+         :map company-mode-map
+         ("<tab>" . 'my-tab)
+         ("TAB" . 'my-tab)))
