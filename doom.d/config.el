@@ -116,7 +116,7 @@
                                  (file+headline "~/org/agenda/index.org" "Task")
                                  "* TODO %?")
                                 ("o" "Task @office" entry
-                                 (file+headline "~/org/agenda/kakaoent.org" "Task")
+                                 (file+headline "~/org/agenda/nhn.org" "Task")
                                  "* TODO %?\nSCHEDULED: %t")
                                 ("e" "English" item
                                  (file+headline "~/org/agenda/english.org" "Inbox")
@@ -140,11 +140,6 @@
            ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
           ("jd" "Document search" search ""
            ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
-  (setq org-todo-keywords '((sequence "MEET(m)" "TODO(t)" "SOMEDAY(s)" "WAITING(w)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
-  (setq org-tag-alist '((:startgroup . nil)
-                        ("@coding" . ?c) ("@writing" . ?w) ("@music" .  ?m) ("@work" . ?w)
-                        (:startgroup . nil)
-                        ("IDEA" . ?I) ("PIN". ?P)))
 
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
@@ -197,7 +192,6 @@
 ;; (after! company-tabnine
 ;;   (setq company-show-numbers t)
 ;;   (add-to-list 'company-backends #'company-tabnine))
-
 
 
 (after! ivy
