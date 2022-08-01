@@ -156,12 +156,17 @@
               (make-variable-buffer-local 'yas-expand-from-trigger-key)
               (setq yas-expand-from-trigger-key [tab])
               (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas/keymap [tab] 'yas-next-field))))
+              (define-key yas/keymap [tab] 'yas-next-field)))
 
+  (setq org-roam-directory (file-truename "~/org/roam"))
+  (org-roam-db-autosync-mode)
+  (setq org-journal-dir "~/org/journals")
+  (setq org-journal-file-format "%Y_%m_%d.org")
+  (setq org-journal-enable-agenda-integration t)
+  (setq org-journal-file-type 'weekly))
 
 ;; javascript
 (setq js-indent-level 2)
-
 (after! js2-mode
   (add-hook 'js2-mode-hook (lambda ()
                              ;;(add-hook 'after-save-hook 'eslint-fix nil t)
