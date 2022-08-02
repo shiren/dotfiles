@@ -163,8 +163,9 @@
   (setq org-journal-dir "~/org/journals")
   (setq org-journal-file-format "%Y_%m_%d.org")
   (setq org-journal-enable-agenda-integration t)
-  (setq org-journal-file-type 'weekly))
-
+  (setq org-journal-file-type 'weekly)
+  (map! :leader
+        :g "n j k" #'org-journal-open-current-journal-file))
 ;; javascript
 (setq js-indent-level 2)
 (after! js2-mode
