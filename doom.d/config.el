@@ -149,10 +149,12 @@
 
   (setq org-roam-directory (file-truename "~/org/roam"))
   (org-roam-db-autosync-mode)
+
   (setq org-journal-dir "~/org/journals")
   (setq org-journal-file-format "%Y_%m_%d.org")
   (setq org-journal-enable-agenda-integration t)
   (setq org-journal-file-type 'weekly)
+  (setq org-journal-tag-alist '(("meet" . ?m) ("dev" . ?d) ("idea" . ?i) ("emacs" . ?e) ("discuss" . ?c) ("1on1" . ?o)))
   (map! :leader
         :g "n j k" #'org-journal-open-current-journal-file))
 
