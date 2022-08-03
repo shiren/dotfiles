@@ -147,17 +147,6 @@
 
   (setq org-agenda-restore-windows-after-quit t)
 
-  ;;yasnippet 하고 tab 충돌 해결
-  (defun yas/org-very-safe-expand ()
-    (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
-
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (make-variable-buffer-local 'yas-expand-from-trigger-key)
-              (setq yas-expand-from-trigger-key [tab])
-              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas/keymap [tab] 'yas-next-field)))
-
   (setq org-roam-directory (file-truename "~/org/roam"))
   (org-roam-db-autosync-mode)
   (setq org-journal-dir "~/org/journals")
@@ -166,6 +155,7 @@
   (setq org-journal-file-type 'weekly)
   (map! :leader
         :g "n j k" #'org-journal-open-current-journal-file))
+
 ;; javascript
 (setq js-indent-level 2)
 (after! js2-mode
