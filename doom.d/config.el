@@ -149,6 +149,7 @@
 
   (setq org-roam-directory (file-truename "~/org/roam"))
   (org-roam-db-autosync-mode)
+  (setq org-roam-completion-everywhere t)
 
   (setq org-journal-dir "~/org/journals")
   (setq org-journal-file-format "%Y_%m_%d.org")
