@@ -88,6 +88,8 @@
 
 (setq visible-bell t)
 
+(define-key global-map (kbd "C-M-f") 'toggle-frame-fullscreen)
+
 (setq gc-cons-threshold 100000000)
 
 (setq doom-modeline-buffer-state-icon nil)
@@ -149,9 +151,11 @@
 
   (setq org-roam-directory (file-truename "~/org/roam"))
   (org-roam-db-autosync-mode)
+  (setq org-roam-completion-everywhere t)
+  (setq org-roam-extract-new-file-path "${slug}.org")
 
   (setq org-journal-dir "~/org/journals")
-  (setq org-journal-file-format "%Y_%m_%d.org")
+  (setq org-journal-file-format "%Y-%m-%d.org")
   (setq org-journal-enable-agenda-integration t)
   (setq org-journal-file-type 'weekly)
   (setq org-journal-tag-alist '(("meet" . ?m) ("dev" . ?d) ("idea" . ?i) ("emacs" . ?e) ("discuss" . ?c) ("1on1" . ?o)))
@@ -181,24 +185,21 @@
 
 ;; lsp
 ;; lsp 체커를 항상 넥스트 체커로 두자, 제대로 체크가 안된다.
-(add-hook 'lsp-after-initialize-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'lsp)))
+;; (add-hook 'lsp-after-initialize-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'lsp)))
 
-(setq-hook! 'js2-mode-hook flycheck-checker 'javascript-eslint)
-(setq-hook! 'typescript-mode-hook flycheck-checker 'javascript-eslint)
-(setq-hook! 'typescript-tsx-mode-hook flycheck-checker 'javascript-eslint)
+;; (setq-hook! 'js2-mode-hook flycheck-checker 'javascript-eslint)
+;; (setq-hook! 'typescript-mode-hook flycheck-checker 'javascript-eslint)
+;; (setq-hook! 'typescript-tsx-mode-hook flycheck-checker 'javascript-eslint)
 
 ;; (after! company-tabnine
 ;;   (setq company-show-numbers t)
 ;;   (add-to-list 'company-backends #'company-tabnine))
 
 
-(after! ivy
-  (map! :map ivy-minibuffer-map
-        "S-SPC" nil
-        "M-s" 'ivy-restrict-to-matches)
+(after! vertico
   (map! :leader
-        :g "j i" #'swiper
-        :g "j I" #'swiper-all))
+        :g "j i" #'consult-line
+        :g "j I" #'consult-buffer))
 
 (defun my-tab ()
   (interactive)
