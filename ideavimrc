@@ -23,11 +23,10 @@ set clipboard+=unnamed
 set ideajoin
 
 " Multiple cursors supporj
-set multiple-cursorj
+set multiple-cursor
 
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
-" let mapleader = ","
 let mapleader = " "
 " let maplocalleader = ","
 
@@ -43,11 +42,11 @@ imap jk <Esc>
 imap ㅓㅏ <Esc>
 
 " Terminal
-nmap <leader>t :action ActivateTerminalToolWindow<cr>
+nmap <leader>ot :action ActivateTerminalToolWindow<cr>
 
 " Normal
-nmap <leader>r :action RecentFiles<cr>
-nmap <leader>m :action ActivateCommitToolWindow<cr>
+nmap <leader>fr :action RecentFiles<cr>
+nmap <leader>g :action ActivateCommitToolWindow<cr>
 nmap <leader>ji :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>jj :action AceAction<cr>
