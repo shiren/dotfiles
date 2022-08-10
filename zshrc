@@ -65,7 +65,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node npm nvm macos github cargo colored-man-pages pod react-native rust vscode xcode)
+plugins=(git node npm macos github colored-man-pages pod react-native rust vscode xcode)
 
 source $ZSH/oh-my-zsh.sh
 
