@@ -61,3 +61,5 @@
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 
 (unpin! org-roam company-org-roam)
+
+(package! doom-snippets :ignore t)

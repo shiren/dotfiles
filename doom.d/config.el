@@ -98,7 +98,7 @@
 
 ;; Org
 (after! org
-  (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
+  (setq org-agenda-files (append (file-expand-wildcards "~/org/agenda/*.org") (file-expand-wildcards "~/org/roam/*.org")))
   (setq org-default-notes-file "~/org/agenda/index.org")
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
@@ -106,8 +106,8 @@
   (setq org-log-done t)
   (setq org-src-preserve-indentation nil)
   (setq org-edit-src-content-indentation 0)
-;;  (setq org-adapt-indentation t)
-;;  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
+  ;;  (setq org-adapt-indentation t)
+  ;;  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
   (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
@@ -147,13 +147,37 @@
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
 
-  (setq org-agenda-restore-windows-after-quit t)
+  (setq org-agenda-restore-windows-after-quit t))
 
+(after! org-roam
   (setq org-roam-directory (file-truename "~/org/roam"))
   (org-roam-db-autosync-mode)
   (setq org-roam-completion-everywhere t)
   (setq org-roam-extract-new-file-path "${slug}.org")
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %<%H:%M> %?"
+           :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain (function org-roam-capture--get-point) "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags:${tag}\n\n")
+           :unnarrowed t
+           :immediate-finish t
+           )
+          ("m" "people" plain (function org-roam-capture--get-point) "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags: :kkoent:people:\n\n")
+           :unnarrowed t
+           :immediate-finish t
+           )
+          ("p" "project" plain (function org-roam-capture--get-point) "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags: :kkoent:project:\n\n")
+           :unnarrowed t
+           :immediate-finish t
+           )
+          ))
+  )
 
+(after! org-journal
   (setq org-journal-dir "~/org/journals")
   (setq org-journal-file-format "%Y-%m-%d.org")
   (setq org-journal-enable-agenda-integration t)
@@ -170,9 +194,12 @@
                              (setq tab-width 2)
                              (setq-default js2-basic-offset 2)
                              (setq js-switch-indent-offset 2))))
-                             ;; (electric-indent-mode -1)
-                             ;;(js2-imenu-extras-mode)
-                             
+;; (electric-indent-mode -1)
+;;(js2-imenu-extras-mode)
+;;
+(after! typescript-mode
+  (setq typescript-indent-level 2))
+
 
 ;; Web
 (after! web-mode
