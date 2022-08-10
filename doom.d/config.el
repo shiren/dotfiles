@@ -146,7 +146,6 @@
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
-
   (setq org-agenda-restore-windows-after-quit t))
 
 (after! org-roam
@@ -159,18 +158,18 @@
            :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
   (setq org-roam-capture-templates
         '(
-          ("d" "default" plain (function org-roam-capture--get-point) "%?"
-           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags:${tag}\n\n")
+          ("d" "default" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags:${tag}\n\n")
            :unnarrowed t
            :immediate-finish t
            )
-          ("m" "people" plain (function org-roam-capture--get-point) "%?"
-           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags: :kkoent:people:\n\n")
+          ("m" "people" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags: :kkoent:people:\n\n")
            :unnarrowed t
            :immediate-finish t
            )
-          ("p" "project" plain (function org-roam-capture--get-point) "%?"
-           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+roam_tags: :kkoent:project:\n\n")
+          ("p" "project" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags: :kkoent:project:\n\n")
            :unnarrowed t
            :immediate-finish t
            )
