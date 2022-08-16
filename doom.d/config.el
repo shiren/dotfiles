@@ -112,7 +112,7 @@
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
-  (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
+  (setq org-refile-targets '((org-agenda-files :level . 2) (("~/org/note/devnote.org") :level . 1)))
 
   (setq org-capture-templates '(("t" "Task" entry
                                  (file+headline "~/org/agenda/index.org" "Task")
