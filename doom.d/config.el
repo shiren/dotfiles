@@ -146,7 +146,9 @@
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
-  (setq org-agenda-restore-windows-after-quit t))
+  (setq org-agenda-restore-windows-after-quit t)
+  (add-hook! 'org-mode-hook (set-fill-column 120))
+  (add-hook! 'org-mode-hook 'turn-on-auto-fill))
 
 (after! org-roam
   (setq org-roam-directory (file-truename "~/org/roam"))
