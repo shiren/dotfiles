@@ -209,7 +209,7 @@
   (setq web-mode-enable-auto-quoting nil))
 
 ;; prettier
-;; (add-hook 'after-init-hook #'global-prettier-mode)
+(add-hook 'after-init-hook #'global-prettier-mode)
 
 ;; lsp
 ;; lsp 체커를 항상 넥스트 체커로 두자, 제대로 체크가 안된다.

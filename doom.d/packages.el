@@ -52,8 +52,6 @@
 
 (package! material-theme)
 
-;; (package! prettier)
-
 ;; (package! company-tabnine)
 
 
@@ -63,3 +61,5 @@
 (unpin! org-roam company-org-roam)
 
 (package! doom-snippets :ignore t)
+
+(package! prettier)
