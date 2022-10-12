@@ -63,3 +63,5 @@
 (package! doom-snippets :ignore t)
 
 (package! prettier)
+
+(package! ox-gfm)

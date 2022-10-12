@@ -375,49 +375,27 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-;;;; swiper and ivy
-(use-package swiper
+(use-package consult
   :ensure t
-  :diminish ivy-mode
-  :init
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers nil)
-  ;; number of result lines to display
-  (setq ivy-height 12)
-  ;; does not count candidates
-  (setq ivy-count-format "")
-  (setq ivy-switch-buffer-faces-alist
-        '((emacs-lisp-mode . outline-1)
-          (dired-mode . outline-2)
-          (js2-mode . outline-4)
-          (clojure-mode . outline-5)
-          (org-mode . outline-3)))
   :bind
-  (("M-x". counsel-M-x)
-   ("C-x C-f". counsel-find-file)
-   ("C-c r". counsel-recentf)
-   ("C-c g". counsel-projectile-rg)
-   ("C-c e". ivy-switch-buffer)
-   ("C-c 4 e". ivy-switch-buffer-other-window)
-   ("C-c o". counsel-imenu)
-   ("C-c y" . counsel-yank-pop)
-   ("C-x r l" . counsel-bookmark)
-   ("C-j i". swiper)
-   ("C-j o". swiper-all)
-   :map ivy-mode-map
-   ("S-SPC" . toggle-input-method)
-   :map ivy-minibuffer-map
-   ("C-j" . ivy-alt-done)))
+  ("C-c r". consult-recent-file)
+  ("C-c g". consult-ripgrep)
+  ("C-c e". consult-buffer)
+  ("C-c 4 e". consult-buffer-other-window)
+  ("C-c o". consult-outline)
+  ("C-c y" . consult-yank-pop)
+  ("C-x r l" . consult-bookmark)
+  ("C-j i". consult-line)
+  ("C-j I". consult-buffer)
+  ("C-j C-i". consult-line)
+  ("C-j C-I". consult-buffer))
 
-;; Avy
-(use-package avy
+(use-package vertico
   :ensure t
-  :bind
-  ("C-j j". avy-goto-word-1)
-  ("C-j C-j". avy-goto-word-1)
-  ("C-j k". avy-goto-char-2)
-  ("C-j g". avy-goto-line)
-  ("C-j C-g". avy-goto-line))
+  :init
+  (vertico-mode)
+  :config
+  (setq completion-styles '(substring basic)))
 
 ;;;; Move&History
 (use-package git-timemachine
@@ -442,10 +420,9 @@
 (use-package dumb-jump
   :ensure t
   :ensure-system-package rg
-  :bind (("C-j n" . dumb-jump-go-other-window)
-         ("C-j m" . dumb-jump-go))
   :config
-  (setq dumb-jump-selector 'ivy)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq dumb-jump-selector 'completing-read)
   (setq dumb-jump-force-searcher 'rg))
 
 ;; ;;;; Editing
@@ -564,7 +541,6 @@
   :init
   (projectile-mode)
   :config
-  (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching t)
   ;;; 아무데서나 프로젝타일을 사용하게하려면 주석해제
   ;; (setq projectile-require-project-root nil)
@@ -579,19 +555,19 @@
   (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))
   :bind
   ;; 오타방지용 바인드들
-  ("C-c p f" . projectile-find-file)
+  ("C-c p f" . consult-projectile-find-file)
   ("C-c p 4 f" . projectile-find-file-other-window)
-  ("C-c p b" . projectile-switch-to-buffer)
+  ("C-c p b" . consult-projectile-switch-to-buffer)
   ("C-c p 4 b" . projectile-switch-to-buffer-other-window)
   ("C-c p D" . projectile-dired)
-  ("C-c p d" . projectile-find-dir)
+  ("C-c p d" . consult-projectile-find-dir)
   ("C-c p j" . projectile-find-tag)
-  ("C-c p r" . projectile-replace)
+  ("C-c p R" . projectile-replace)
   ("C-c p o" . projectile-multi-occur)
-  ("C-c p s s" . counsel-projectile-ag)
-  ("C-c C-g" . counsel-projectile-rg)
+  ("C-c C-g" . projectile-ripgrep)
   ("C-c p I" . projectile-ibuffer)
-  ("C-c p p" . projectile-switch-project))
+  ("C-c p p" . consult-projectile-switch-project)
+  ("C-c p r" . conslut-projectile-recentf))
 
 (use-package ibuffer-projectile
   :ensure t
@@ -602,13 +578,8 @@
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
 
-(use-package counsel
-  :ensure t)
-
-(use-package counsel-projectile
-  :ensure t
-  :init
-  (counsel-projectile-mode))
+(use-package consult-projectile
+  :straight (consult-projectile :type git :host gitlab :repo "OlMon/consult-projectile" :branch "master"))
 
 (use-package wgrep
   :ensure t)
@@ -1106,7 +1077,7 @@
   (setq google-translate-output-destination 'echo-area)
   (setq max-mini-window-height 0.5)
   :bind
-  ("C-c n" . google-translate-smooth-translate))
+  ("C-c x t" . google-translate-smooth-translate))
 
 (use-package beacon
   :ensure t
@@ -1251,6 +1222,8 @@
 
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
+  (setq org-startup-folded t)
   :config
   (global-set-key (kbd "C-C C-x C-x") 'org-clock-in-last)
   (global-set-key (kbd "C-C C-x C-o") 'org-clock-out)
@@ -1285,6 +1258,62 @@
   :ensure t
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(use-package org-roam
+  :after org
+  :ensure t
+  :config
+  (setq org-roam-directory (file-truename "~/org/roam"))
+  (setq org-roam-completion-everywhere t)
+  (setq org-roam-extract-new-file-path "${slug}.org")
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %<%H:%M> %?"
+           :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags:${tag}\n\n")
+           :unnarrowed t
+           :immediate-finish t)
+
+          ("m" "people" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags: :kkoent:people:\n\n")
+           :unnarrowed t
+           :immediate-finish t)
+
+          ("p" "project" plain "%?"
+           :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags: :kkoent:project:\n\n")
+           :unnarrowed t
+           :immediate-finish t)))
+
+  (org-roam-db-autosync-mode)
+  :bind (("C-c n l" . org-roam)
+         ("C-c n f" . org-roam-find-file)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-insert)
+         ("C-c n T" . org-roam-dailies-goto-today)
+         ("C-c n t" . org-roam-dailies-capture-today)
+         ("C-c n y" . org-roam-dailies-capture-yesterday)
+         ("C-c n Y" . org-roam-dailies-goto-yesterday)
+         ("C-c n m" . org-roam-dailies-capture-tomorrow)
+         ("C-c n M" . org-roam-dailies-goto-tomorrow)
+         ("C-c n d" . org-roam-dailies-capture-date)
+         ("C-c n D" . org-roam-dailies-goto-date)
+         ("C-c n f" . org-roam-dailies-goto-next-note)
+         ("C-c n b" . org-roam-dailies-goto-previous-note)))
+
+;; (use-package org-roam-dailies
+;;   :after org-roam
+;;   :ensure t
+;;   :init
+;;   :config
+;;   :bind (("C-c n t" . org-roam-dailies-today)
+;;          ("C-c n y" . org-roam-dailies-yesterday)
+;;          ("C-c n m" . org-roam-dailies-tomorrow)
+;;          ("C-c n d" . org-roam-dailies-date)
+;;          ("C-c n j" . org-roam-dailies-capture-today)))
+
+
 
 (use-package multi-term
   :disabled
@@ -1425,5 +1454,6 @@
  '(custom-safe-themes
    '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(rotate parinfer-rust-mode rustic prettier-mode prettier c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
+   '(rotate parinfer-rust-mode rustic prettier-mode prettier c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window))
+ '(warning-suppress-log-types '((comp))))
 (put 'set-goal-column 'disabled nil)

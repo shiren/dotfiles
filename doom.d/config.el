@@ -133,7 +133,7 @@
         '(("o" "Custom View"
            ((agenda "")
             (tags "PIN"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE") 'notscheduled))))
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE")))))
             (todo "TODO"
                   ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
                    (org-agenda-overriding-header "Unscheduled tasks")))
@@ -146,9 +146,7 @@
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-skip-scheduled-delay-if-deadline t)
-  (setq org-agenda-restore-windows-after-quit t)
-  (add-hook! 'org-mode-hook (set-fill-column 120))
-  (add-hook! 'org-mode-hook 'turn-on-auto-fill))
+  (setq org-agenda-restore-windows-after-quit t))
 
 (after! org-roam
   (setq org-roam-directory (file-truename "~/org/roam"))
