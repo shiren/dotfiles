@@ -1,4 +1,3 @@
-;;; package --- Summary
 ;;; Commentary:
 ;;; Begin initialization
 ;;; Turn off mouse interface early in startup to avoid momentary display
@@ -356,12 +355,6 @@
   :ensure t
   :bind ("C-x j" . rotate-window))
 
-(use-package writeroom-mode
-  :diminish writeroom-mode
-  :ensure t
-  :init
-  :config)
-
 (use-package zoom
   :ensure t
   :init
@@ -407,6 +400,8 @@
   :ensure t
   :diminish undo-tree-mode
   :init
+  (setq undo-tree-auto-save-history nil)
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   (global-undo-tree-mode)
   :bind
   ("C-z" . undo)
@@ -447,38 +442,6 @@
   :bind
   ("C-c C-v" . er/expand-region)
   ("C-c v" . er/expand-region))
-
-(defun toggle-evilmode ()
-  (interactive)
-  (if (bound-and-true-p evil-local-mode)
-      (progn
-                                        ; go emacs
-        (evil-local-mode (or -1 1))
-        (undo-tree-mode (or -1 1))
-        (evil-escape-mode -1)
-        (set-variable 'cursor-type 'bar))
-
-    (progn
-                                        ; go evil
-      (evil-local-mode (or 1 1))
-      (evil-escape-mode t)
-      (set-variable 'cursor-type 'box))))
-
-(use-package evil
-  :disabled
-  :ensure t
-  :bind
-  ("C-z" . toggle-evilmode)
-  :init
-  (setq evil-toggle-key "C-`"))
-
-(use-package evil-escape
-  :disabled
-  :ensure t
-  :init
-  (add-hook 'evil-mode-hook #'evil-escape-mode)
-  :config
-  (setq-default evil-escape-delay 0.2))
 
 (use-package paredit
   :disabled
@@ -1219,8 +1182,25 @@
   ;; org에서 linewrap 되게
  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
- (setq org-startup-folded t)
+ ;; (setq org-startup-folded t)
+ ;; (setq org-hide-block-startup t)
  :config
+ (let* (
+        (base-font-color     (face-foreground 'default nil 'default))
+        (headline           `(:inherit default :weight bold :box nil :background nil :foreground ,base-font-color)))
+
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline))))
+     `(org-level-7 ((t (,@headline))))
+     `(org-level-6 ((t (,@headline))))
+     `(org-level-5 ((t (,@headline :foreground "#733B36" :height 1.2))))
+     `(org-level-4 ((t (,@headline :foreground "#F2CBBD" :height 1.2))))
+     `(org-level-3 ((t (,@headline :foreground "#BF785E" :height 1.2))))
+     `(org-level-2 ((t (,@headline :foreground "#A65B4B"  :height 1.2))))
+     `(org-level-1 ((t (,@headline :foreground "#6393A6" :height 1.2))))
+     `(org-document-title ((t (,@headline  :height 1.5 :underline nil))))))
+
  (global-set-key (kbd "C-C C-x C-x") 'org-clock-in-last)
  (global-set-key (kbd "C-C C-x C-o") 'org-clock-out)
  (global-set-key (kbd "C-C C-x C-j") 'org-clock-goto)
@@ -1250,7 +1230,6 @@
 ;;             (insert (concat "**** " start-ts "-" end-ts " - - " org-clock-current-task "\n"))))))))
 
 (use-package org-bullets
-  :after org
   :ensure t
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
@@ -1287,29 +1266,16 @@
          ("C-c n f" . org-roam-find-file)
          ("C-c n r" . org-roam-buffer-toggle)
          ("C-c n i" . org-roam-node-insert)
-         ("C-c n T" . org-roam-dailies-goto-today)
-         ("C-c n t" . org-roam-dailies-capture-today)
-         ("C-c n y" . org-roam-dailies-capture-yesterday)
-         ("C-c n Y" . org-roam-dailies-goto-yesterday)
-         ("C-c n m" . org-roam-dailies-capture-tomorrow)
-         ("C-c n M" . org-roam-dailies-goto-tomorrow)
-         ("C-c n d" . org-roam-dailies-capture-date)
-         ("C-c n D" . org-roam-dailies-goto-date)
-         ("C-c n f" . org-roam-dailies-goto-next-note)
-         ("C-c n b" . org-roam-dailies-goto-previous-note)))
-
-;; (use-package org-roam-dailies
-;;   :after org-roam
-;;   :ensure t
-;;   :init
-;;   :config
-;;   :bind (("C-c n t" . org-roam-dailies-today)
-;;          ("C-c n y" . org-roam-dailies-yesterday)
-;;          ("C-c n m" . org-roam-dailies-tomorrow)
-;;          ("C-c n d" . org-roam-dailies-date)
-;;          ("C-c n j" . org-roam-dailies-capture-today)))
-
-
+         ("C-c n d T" . org-roam-dailies-goto-today)
+         ("C-c n d t" . org-roam-dailies-capture-today)
+         ("C-c n d y" . org-roam-dailies-capture-yesterday)
+         ("C-c n d Y" . org-roam-dailies-goto-yesterday)
+         ("C-c n d m" . org-roam-dailies-capture-tomorrow)
+         ("C-c n d M" . org-roam-dailies-goto-tomorrow)
+         ("C-c n d d" . org-roam-dailies-capture-date)
+         ("C-c n d D" . org-roam-dailies-goto-date)
+         ("C-c n d f" . org-roam-dailies-goto-next-note)
+         ("C-c n d b" . org-roam-dailies-goto-previous-note)))
 
 (use-package multi-term
   :disabled
@@ -1334,13 +1300,13 @@
   :bind
   ("C-c t" . multi-vterm))
 
-;; (use-package vterm
-;;   ;; :ensure-system-package
-;;   ;; ((libvterm . "brew install libvterm"))
-;;   :disabled
-;;   :ensure t
-;;   :bind
-;;   ("C-c t" . vterm))
+(use-package vterm
+  ;; :ensure-system-package
+  ;; ((libvterm . "brew install libvterm"))
+  :disabled
+  :ensure t
+  :bind
+  ("C-c t" . vterm))
 
 (use-package magit
   :commands magit-get-top-dir
@@ -1364,9 +1330,6 @@
   (setq magit-set-upstream-on-push 'askifnotset)
   :bind
   ("C-c m" . magit-status))
-
-(use-package forge
-  :ensure t)
 
 (use-package prodigy
   :ensure t
