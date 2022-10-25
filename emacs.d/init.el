@@ -1235,7 +1235,6 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (use-package org-roam
-  :after org
   :ensure t
   :config
   (setq org-roam-directory (file-truename "~/org/roam"))
@@ -1263,7 +1262,7 @@
 
   (org-roam-db-autosync-mode)
   :bind (("C-c n l" . org-roam)
-         ("C-c n f" . org-roam-find-file)
+         ("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-buffer-toggle)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n d T" . org-roam-dailies-goto-today)
@@ -1276,21 +1275,6 @@
          ("C-c n d D" . org-roam-dailies-goto-date)
          ("C-c n d f" . org-roam-dailies-goto-next-note)
          ("C-c n d b" . org-roam-dailies-goto-previous-note)))
-
-(use-package multi-term
-  :disabled
-  :ensure t
-  :init
-  (setq multi-term-program "/bin/zsh")
-  :bind
-  ;;("C-c i" . multi-term))
-  :config
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (define-key term-raw-map (kbd "C-j")
-                (lookup-key (current-global-map) (kbd "C-j"))))))
-
-;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
 ;; vterm은 magit이 설치된 다음 설치해야함. 정확하게는 with-editor 이유는 아직 모르겠다.
 (use-package multi-vterm
