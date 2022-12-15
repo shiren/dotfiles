@@ -1209,8 +1209,8 @@
  (global-set-key (kbd "C-C C-x C-e") 'org-clock-modify-effort-estimate)
  (global-set-key (kbd "C-C C-x C-z") 'org-resolve-clocks)
  (define-key org-mode-map (kbd "C-j") nil)
- (define-key org-mode-map (kbd "M-j") 'org-return-indent)
- (define-key org-mode-map (kbd "<return>") 'org-return-indent))
+ (define-key org-mode-map (kbd "M-j") 'org-return)
+ (define-key org-mode-map (kbd "<return>") 'org-return))
 
 ;;(add-hook 'org-clock-out-hook (lambda () (shiren-org-log-time-for-entry))))
 
