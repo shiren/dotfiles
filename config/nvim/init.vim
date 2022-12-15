@@ -101,7 +101,7 @@ set rtp+=/usr/local/opt/fzf
 "=== Plugin ==="
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'tpope/vim-sensible'
-Plug 'kdheepak/lazygit.nvim'
+" Plug 'kdheepak/lazygit.nvim'
 
 " Search/Navigating
 Plug 'pelodelfuego/vim-swoop'
@@ -111,7 +111,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'glepnir/lspsaga.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'onsails/lspkind-nvim'
 
 " File Management
@@ -181,6 +180,7 @@ lua <<EOF
 
   vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
 EOF
+
 "LSP Setup"
 "npm install -g typescript-language-server
 lua << EOF
@@ -212,21 +212,21 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
  if client.name == 'tsserver' then
-   client.resolved_capabilities.document_formatting = false
-   client.resolved_capabilities.document_range_formatting = false
+   client.server_capabilities.document_formatting = false
+   client.server_capabilities.document_range_formatting = false
  end
 
- if client.resolved_capabilities.document_formatting then
+ if client.server_capabilities.document_formatting then
    vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
  end
 
- if client.resolved_capabilities.document_range_formatting then
+ if client.server_capabilities.document_range_formatting then
    vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
  end
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
@@ -317,7 +317,7 @@ inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
 "=== Plugin Setup ==="
-lua << EOF
+lua <<EOF
 --gitsign
 require('gitsigns').setup()
 
@@ -352,10 +352,10 @@ vmap <Leader>jI :call SwoopMultiSelection()<CR>
 
 "Telescope
 lua << EOF
-require('telescope').setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
-EOF
-lua << EOF
-require('telescope').load_extension('projects')
+local telescope = require('telescope');
+telescope.setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
+telescope.load_extension('projects')
+telescope.load_extension('fzf');
 EOF
 
 
@@ -364,6 +364,8 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>pp <cmd>Telescope projects<cr>
+nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
+nnoremap <leader>hc <cmd>Telescope commands<cr>
 
 lua << EOF
   require("project_nvim").setup {
@@ -410,8 +412,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   command = "Neoformat prettier",
 })
 EOF
-
-
 
 
 " Colors {{{
