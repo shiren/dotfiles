@@ -19,49 +19,30 @@ set tabstop=2
 "tab 대신 띄어쓰기로
 set expandtab
 
-
-set laststatus=2
 "검색시 대소문자 구별하지않음
 "set ignorecase
 "검색시 하이라이트(색상 강조)
 set hlsearch
 
-set incsearch
-
-"방향키로 이동가능
 set nocompatible
 "파일인코딩 형식 지정
 set fileencodings=utf-8,euc-kr
-"backspace 키 사용 가능
-set backspace=indent,eol,start
-"명령어에 대한 히스토리를 1000개까지
-set history=1000
 set undolevels=1000
 set tabpagemax=50
-"상태표시줄에 커서의 위치 표시
-set ruler
 "제목을 표시
 set title
 "매칭되는 괄호를 보여줌
 set showmatch
 "자동 줄바꿈 하지 않음
 set nowrap
-"tab 자동완성시 가능한 목록을 보여줌
-set wildmenu
 set clipboard=unnamed
 set foldmethod=indent
 set nofoldenable
 set showcmd
-set smarttab
 
 set mouse=a
 
 set completeopt-=menuone,noselect
-
-set ttimeout
-set ttimeoutlen=100
-
-set nrformats-=octal
 
 set cursorline
 
@@ -76,7 +57,6 @@ set wildignore+=*/node_modules/**
 
 "공백문자들
 set list
-set listchars=tab:≈.,trail:·,extends:ø,nbsp:+
 
 "자연스러운 분할
 set splitbelow          " Horizontal split below current.
@@ -84,10 +64,18 @@ set splitright          " Vertical split to right of current.
 
 set ttyfast
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+set colorcolumn=80
+" highlight ColorColumn guibg=#181818
+" }}}
+"
+
+
 set langmenu=en_US.UTF-8
 language messages en_US.UTF-8
 set shell=/usr/local/bin/zsh
-set sessionoptions-=options
 
 "빔 윈도우의 사이즈가 변경되었을때 = 자동 실행
 autocmd VimResized * wincmd =
@@ -105,6 +93,7 @@ Plug 'tpope/vim-sensible'
 
 " Search/Navigating
 Plug 'pelodelfuego/vim-swoop'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Language Server Protocol
@@ -137,6 +126,7 @@ Plug 'lewis6991/gitsigns.nvim'
 
 " UI
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'liuchengxu/vim-which-key'
 call plug#end()
 
 "=== KEYMAP ==="
@@ -147,6 +137,63 @@ imap ㅓㅏ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
+"=== wich-key ==="
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+call which_key#register('<Space>', "g:which_key_map")
+
+" Create map to add keys to
+let g:which_key_map =  {}
+" Define a separator
+let g:which_key_sep = '→'
+" set timeoutlen=100
+
+" Change the colors if you want
+highlight default link WhichKey          Operator
+highlight default link WhichKeySeperator DiffAdded
+highlight default link WhichKeyGroup     Identifier
+highlight default link WhichKeyDesc      Function
+
+" Hide status line
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+" Single mappings
+"let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment' ]
+"let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+
+let g:which_key_map['f'] = {
+    \ 'name' : '+file' ,
+    \ 'r': [ ':Telescope oldfiles' , 'recent files' ],
+    \ 'g': [ ':Telescope live_grep' , 'grep files' ],
+    \ }
+
+let g:which_key_map['p'] = {
+    \ 'name' : '+projects',
+    \ 'p': [ ':Telescope projects' , 'projects' ],
+    \ }
+
+let g:which_key_map['h'] = {
+    \ 'name' : '+help',
+    \ 'h': [ ':Telescope help_tags' , 'help tags' ],
+    \ 'c': [ ':Telescope commands' , 'commands' ],
+    \ }
+
+let g:which_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ '1' : ['b1'        , 'buffer 1']        ,
+      \ '2' : ['b2'        , 'buffer 2']        ,
+      \ 'd' : ['bd'        , 'delete-buffer']   ,
+      \ 'f' : ['bfirst'    , 'first-buffer']    ,
+      \ 'h' : ['Startify'  , 'home-buffer']     ,
+      \ 'l' : ['blast'     , 'last-buffer']     ,
+      \ 'n' : ['bnext'     , 'next-buffer']     ,
+      \ 'p' : ['bprevious' , 'previous-buffer'] ,
+      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ }
+
+"=== cmp(autocomplete) ==="
 lua <<EOF
   local cmp = require'cmp'
   local lspkind = require'lspkind'
@@ -217,12 +264,12 @@ local on_attach = function(client, bufnr)
  end
 
  if client.server_capabilities.document_formatting then
-   vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
+   vim.cmd("nnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.formatting()<CR>")
    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
  end
 
  if client.server_capabilities.document_range_formatting then
-   vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+   vim.cmd("xnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.range_formatting({})<CR>")
  end
 end
 
@@ -359,13 +406,13 @@ telescope.load_extension('fzf');
 EOF
 
 
-nnoremap <leader><leader> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>pp <cmd>Telescope projects<cr>
-nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
-nnoremap <leader>hc <cmd>Telescope commands<cr>
+"nnoremap <leader><leader> <cmd>Telescope find_files<cr>
+"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"nnoremap <leader>pp <cmd>Telescope projects<cr>
+"nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
+"nnoremap <leader>hc <cmd>Telescope commands<cr>
 
 lua << EOF
   require("project_nvim").setup {
@@ -413,26 +460,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 EOF
 
-
-" Colors {{{
-"if (has("termguicolors"))
-"  set termguicolors " enable true colors support
-"endif
-colorscheme dracula
-set background=dark " light or dark
-" colorscheme onebuddy
-
-highlight Cursor guifg=#f00 guibg=#657b83
-" highlight Comment cterm=italic gui=italic
-
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-set colorcolumn=80
-" highlight ColorColumn guibg=#181818
-" }}}
-"
-
 "========================= ETC ==================================
 "저장시 필요없는 스페이스 지우기
 function! TrimWhiteSpace()
@@ -455,6 +482,17 @@ if exists('$ITERM_PROFILE')
     let &t_EI="\<Esc>]50;CursorShape=0\x7"
   endif
 end
+
+" Colors {{{
+"if (has("termguicolors"))
+"  set termguicolors " enable true colors support
+"endif
+colorscheme dracula
+set background=dark " light or dark
+" colorscheme onebuddy
+
+highlight Cursor guifg=#f00 guibg=#657b83
+" highlight Comment cterm=italic gui=italic
 
 "Color override"
 "Avoid hidden Errors by cursorLine"
