@@ -131,22 +131,23 @@ call plug#end()
 
 "=== KEYMAP ==="
 "basic
-let mapleader = " "
+let g:mapleader = "\<Space>"
 imap jk <ESC>
 imap ㅓㅏ <ESC>
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 "=== wich-key ==="
+nnoremap <silent> <leader>? :silent WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-call which_key#register('<Space>', "g:which_key_map")
+
 
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
 let g:which_key_sep = '→'
-" set timeoutlen=100
+set timeoutlen=100
 
 " Change the colors if you want
 highlight default link WhichKey          Operator
@@ -160,8 +161,8 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-"let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment' ]
-"let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+let g:which_key_map[' '] = [ ':Telescope find_files'  , 'find_files' ]
+"let g:which_key_map['w'] = [ ':Files'                     , 'search files' ]
 
 let g:which_key_map['f'] = {
     \ 'name' : '+file' ,
@@ -192,6 +193,25 @@ let g:which_key_map.b = {
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
       \ '?' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
+
+let g:which_key_map['c'] = {
+    \ 'name' : '+code',
+    \ 'e': [ ':lua vim.diagnostic.open_float()' , 'diagnostic open' ],
+    \ 'q': [ ':lua vim.diagnostic.setloclist()' , 'setloclist' ],
+    \ 'd': [ ':lua vim.lsp.buf.definition()' , 'definition' ],
+    \ 'a': [ ':lua vim.lsp.buf.code_action()' , 'code action' ],
+    \ 'f': [ ':lua vim.lsp.buf.formatting()' , 'formatting' ],
+    \ }
+
+let g:which_key_map['j'] = {
+    \ 'name' : '+navi',
+    \ 'i': [ ':call Swoop()' , 'Swoop' ],
+    \ 'k': [ ':call SwoopSelection()' , 'Swoop Selection' ],
+    \ 'I': [ ':call SwoopMulti()' , 'Swoop Multi' ],
+    \ 'K': [ ':call SwoopMultiSelection()' , 'Swoop Multi Selection' ],
+    \ }
+
+call which_key#register('<Space>', "g:which_key_map")
 
 "=== cmp(autocomplete) ==="
 lua <<EOF
@@ -233,10 +253,10 @@ EOF
 lua << EOF
 
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+--vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+--vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -249,14 +269,14 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+--  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
  if client.name == 'tsserver' then
    client.server_capabilities.document_formatting = false
@@ -264,12 +284,12 @@ local on_attach = function(client, bufnr)
  end
 
  if client.server_capabilities.document_formatting then
-   vim.cmd("nnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.formatting()<CR>")
+--   vim.cmd("nnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.formatting()<CR>")
    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
  end
 
  if client.server_capabilities.document_range_formatting then
-   vim.cmd("xnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.range_formatting({})<CR>")
+--   vim.cmd("xnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.range_formatting({})<CR>")
  end
 end
 
@@ -392,10 +412,11 @@ EOF
 "Swoop
 let g:swoopIgnoreCase = 1
 let g:swoopAutoInsertMode = 1
-nmap <Leader>ji :call Swoop()<CR>
-vmap <Leader>ji :call SwoopSelection()<CR>
-nmap <Leader>jI :call SwoopMulti()<CR>
-vmap <Leader>jI :call SwoopMultiSelection()<CR>
+let g:swoopUseDefaultMappings = 0
+"nmap <Leader>ji :call Swoop()<CR>
+"vmap <Leader>ji :call SwoopSelection()<CR>
+"nmap <Leader>jI :call SwoopMulti()<CR>
+"vmap <Leader>jI :call SwoopMultiSelection()<CR>
 
 "Telescope
 lua << EOF
