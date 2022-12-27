@@ -59,8 +59,8 @@ set wildignore+=*/node_modules/**
 set list
 
 "자연스러운 분할
-set splitbelow          " Horizontal split below current.
-set splitright          " Vertical split to right of current.
+"set splitbelow          " Horizontal split below current.
+"set splitright          " Vertical split to right of current.
 
 set ttyfast
 
@@ -161,7 +161,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map[' '] = [ ':Telescope find_files'  , 'find_files' ]
+let g:which_key_map[' '] = [ ':Telescope find_files hidden=true' , 'find_files' ]
 "let g:which_key_map['w'] = [ ':Files'                     , 'search files' ]
 
 let g:which_key_map['f'] = {
@@ -191,16 +191,16 @@ let g:which_key_map.b = {
       \ 'l' : ['blast'     , 'last-buffer']     ,
       \ 'n' : ['bnext'     , 'next-buffer']     ,
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ 'b' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
 
 let g:which_key_map['c'] = {
     \ 'name' : '+code',
-    \ 'e': [ ':lua vim.diagnostic.open_float()' , 'diagnostic open' ],
+    \ 'e': [ ':lua vim.diagnostic.open_float()<cr>' , 'diagnostic open' ],
     \ 'q': [ ':lua vim.diagnostic.setloclist()' , 'setloclist' ],
     \ 'd': [ ':lua vim.lsp.buf.definition()' , 'definition' ],
     \ 'a': [ ':lua vim.lsp.buf.code_action()' , 'code action' ],
-    \ 'f': [ ':lua vim.lsp.buf.formatting()' , 'formatting' ],
+    \ 'f': [ ':lua vim.lsp.buf.format({async=true})' , 'formating' ],
     \ }
 
 let g:which_key_map['j'] = {
@@ -283,14 +283,15 @@ local on_attach = function(client, bufnr)
    client.server_capabilities.document_range_formatting = false
  end
 
- if client.server_capabilities.document_formatting then
+ if client.name == 'diagnosticls' then
 --   vim.cmd("nnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.formatting()<CR>")
-   vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+   vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.format({async=true})")
  end
 
  if client.server_capabilities.document_range_formatting then
 --   vim.cmd("xnoremap <silent><buffer> <Leader>cf :lua vim.lsp.buf.range_formatting({})<CR>")
  end
+
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
@@ -337,7 +338,7 @@ local diagnosticls_config = {
         rootPatterns = { '.git' },
       },
       prettier = {
-        command = 'prettier_d_slim',
+        command = 'prettier',
         rootPatterns = { '.git' },
         -- requiredFiles: { 'prettier.config.js' },
         args = { '--stdin', '--stdin-filepath', '%filename' }
@@ -345,11 +346,10 @@ local diagnosticls_config = {
     },
     formatFiletypes = {
       css = 'prettier',
-      javascript = 'prettier',
-      javascriptreact = 'prettier',
-      json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
       typescript = 'prettier',
       typescriptreact = 'prettier',
       json = 'prettier',
@@ -402,9 +402,11 @@ require'nvim-treesitter.configs'.setup {
     "tsx",
     "json",
     "swift",
+    "lua",
     "html",
     "css",
     "javascript",
+    "typescript",
   }
 }
 EOF
@@ -421,7 +423,7 @@ let g:swoopUseDefaultMappings = 0
 "Telescope
 lua << EOF
 local telescope = require('telescope');
-telescope.setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
+telescope.setup{ defaults = { file_ignore_patterns = {"node_modules", ".git/"} } }
 telescope.load_extension('projects')
 telescope.load_extension('fzf');
 EOF
@@ -472,14 +474,14 @@ lua << EOF
 EOF
 
 "neoformat
-let g:neoformat_try_node_exe = 1
-
-lua << EOF
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-  command = "Neoformat prettier",
-})
-EOF
+"let g:neoformat_try_node_exe = 1
+"
+"lua << EOF
+"vim.api.nvim_create_autocmd("BufWritePre", {
+"  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+"  command = "Neoformat prettier",
+"})
+"EOF
 
 "========================= ETC ==================================
 "저장시 필요없는 스페이스 지우기
