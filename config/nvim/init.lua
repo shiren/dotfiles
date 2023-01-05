@@ -1,6 +1,5 @@
 require("remap");
 require("plugins");
-print("hello shiren");
 
 local set = vim.opt -- set options
 set.tabstop = 2
