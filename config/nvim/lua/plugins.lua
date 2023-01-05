@@ -5,7 +5,8 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use('wbthomason/packer.nvim')
+  use('tpope/vim-sensible')
 
   use({
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -25,7 +26,7 @@ return require('packer').startup(function(use)
 
   use('mbbill/undotree')
 
-  use {
+  use({
     'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support
@@ -46,5 +47,5 @@ return require('packer').startup(function(use)
       -- Snippet Collection (Optional)
       {'rafamadriz/friendly-snippets'},
     }
-  }
+  })
 end)

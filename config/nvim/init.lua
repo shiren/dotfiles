@@ -6,3 +6,20 @@ set.tabstop = 2
 set.softtabstop = 2
 set.shiftwidth = 2
 set.expandtab = true
+
+set.number = true
+set.relativenumber = true
+
+set.smartindent = true
+
+set.wrap = false
+
+set.swapfile = false
+set.backup = false
+
+set.termguicolors = true
+
+set.scrolloff = 8
+set.updatetime = 50
+
+set.colorcolumn = "100"
