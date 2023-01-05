@@ -1236,8 +1236,23 @@
 
 (use-package org-roam
   :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/org/roam"))
+  :bind (("C-c n l" . org-roam)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n r" . org-roam-buffer-toggle)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n d T" . org-roam-dailies-goto-today)
+         ("C-c n d t" . org-roam-dailies-capture-today)
+         ("C-c n d y" . org-roam-dailies-capture-yesterday)
+         ("C-c n d Y" . org-roam-dailies-goto-yesterday)
+         ("C-c n d m" . org-roam-dailies-capture-tomorrow)
+         ("C-c n d M" . org-roam-dailies-goto-tomorrow)
+         ("C-c n d d" . org-roam-dailies-capture-date)
+         ("C-c n d D" . org-roam-dailies-goto-date)
+         ("C-c n d f" . org-roam-dailies-goto-next-note)
+         ("C-c n d b" . org-roam-dailies-goto-previous-note))
   :config
-  (setq org-roam-directory (file-truename "~/org/roam"))
   (setq org-roam-completion-everywhere t)
   (setq org-roam-extract-new-file-path "${slug}.org")
   (setq org-roam-dailies-capture-templates
@@ -1259,22 +1274,7 @@
            :if-new (file+head "${slug}.org" "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n#+filetags: :kkoent:project:\n\n")
            :unnarrowed t
            :immediate-finish t)))
-
-  (org-roam-db-autosync-mode)
-  :bind (("C-c n l" . org-roam)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n r" . org-roam-buffer-toggle)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n d T" . org-roam-dailies-goto-today)
-         ("C-c n d t" . org-roam-dailies-capture-today)
-         ("C-c n d y" . org-roam-dailies-capture-yesterday)
-         ("C-c n d Y" . org-roam-dailies-goto-yesterday)
-         ("C-c n d m" . org-roam-dailies-capture-tomorrow)
-         ("C-c n d M" . org-roam-dailies-goto-tomorrow)
-         ("C-c n d d" . org-roam-dailies-capture-date)
-         ("C-c n d D" . org-roam-dailies-goto-date)
-         ("C-c n d f" . org-roam-dailies-goto-next-note)
-         ("C-c n d b" . org-roam-dailies-goto-previous-note)))
+  (org-roam-db-autosync-mode))
 
 ;; vterm은 magit이 설치된 다음 설치해야함. 정확하게는 with-editor 이유는 아직 모르겠다.
 (use-package multi-vterm
