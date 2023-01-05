@@ -16,6 +16,7 @@ vim.keymap.set('n', '<leader>ht', builtin.help_tags, {})
 
 telescope.setup({
   defaults = {
+    file_ignore_patterns = {"node_modules", ".git/"},
     mappings = {
       i = {
         ["<C-g>"] = actions.close
