@@ -15,6 +15,8 @@ return require("packer").startup(function(use)
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "kdheepak/lazygit.nvim" },
+			{ "nvim-telescope/telescope-project.nvim" },
+
 			-- { "kyazdani42/nvim-web-devicons" },
 		},
 	})
