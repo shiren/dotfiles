@@ -22,4 +22,4 @@ set.termguicolors = true
 set.scrolloff = 8
 set.updatetime = 50
 
-set.colorcolumn = "100"
+set.colorcolumn = "90"

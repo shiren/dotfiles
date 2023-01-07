@@ -12,7 +12,11 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" }, { "kdheepak/lazygit.nvim" } },
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "kdheepak/lazygit.nvim" },
+			-- { "kyazdani42/nvim-web-devicons" },
+		},
 	})
 
 	use({
@@ -60,10 +64,10 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-	use("kyazdani42/nvim-web-devicons")
+	-- use("kyazdani42/nvim-web-devicons")
 
 	use({
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		-- requires = "kyazdani42/nvim-web-devicons",
 	})
 end)
