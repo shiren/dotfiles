@@ -1,5 +1,5 @@
-require("remap");
-require("plugins");
+require("remap")
+require("plugins")
 
 local set = vim.opt -- set options
 set.tabstop = 2
