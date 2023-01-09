@@ -15,9 +15,9 @@ return require("packer").startup(function(use)
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "kdheepak/lazygit.nvim" },
-			{ "nvim-telescope/telescope-project.nvim" },
+			-- { "nvim-telescope/telescope-project.nvim" },
 			{ "cljoly/telescope-repo.nvim" },
-
+			-- { "nvim-telescope/telescope-fzf-native.nvim" },
 			-- { "kyazdani42/nvim-web-devicons" },
 		},
 	})
@@ -72,5 +72,16 @@ return require("packer").startup(function(use)
 	use({
 		"folke/trouble.nvim",
 		-- requires = "kyazdani42/nvim-web-devicons",
+	})
+
+	--	use({
+	--		"junegunn/fzf.vim",
+	--		requires = {
+	--			{ "nvim-telescope/telescope-fzf-native.nvim" },
+	--		},
+	--	})
+
+	use({
+		"ahmedkhalf/project.nvim",
 	})
 end)
