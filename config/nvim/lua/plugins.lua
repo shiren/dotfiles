@@ -16,7 +16,7 @@ return require("packer").startup(function(use)
 			{ "nvim-lua/plenary.nvim" },
 			{ "kdheepak/lazygit.nvim" },
 			-- { "nvim-telescope/telescope-project.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 			-- { "kyazdani42/nvim-web-devicons" },
 		},
 	})
