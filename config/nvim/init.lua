@@ -23,3 +23,5 @@ set.scrolloff = 8
 set.updatetime = 50
 
 set.colorcolumn = "90"
+
+set.clipboard = "unnamedplus"
