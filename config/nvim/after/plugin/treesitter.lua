@@ -51,4 +51,11 @@ require("nvim-treesitter.configs").setup({
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
+	indent = {
+		enable = true,
+		disable = {},
+	},
+	autotag = {
+		enable = true,
+	},
 })
