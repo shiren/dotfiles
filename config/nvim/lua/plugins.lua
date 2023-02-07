@@ -83,4 +83,10 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "alexghergh/nvim-tmux-navigation" })
+
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		-- requires = { { "nvim-tree/nvim-web-devicons" } },
+	})
 end)
