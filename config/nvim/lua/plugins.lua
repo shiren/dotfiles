@@ -16,7 +16,7 @@ return require("packer").startup(function(use)
 			{ "kdheepak/lazygit.nvim" },
 			-- { "nvim-telescope/telescope-project.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-			-- { "kyazdani42/nvim-web-devicons" },
+			{ "kyazdani42/nvim-web-devicons" },
 		},
 	})
 
@@ -65,11 +65,11 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-	-- use("kyazdani42/nvim-web-devicons")
+	use("kyazdani42/nvim-web-devicons")
 
 	use({
 		"folke/trouble.nvim",
-		-- requires = "kyazdani42/nvim-web-devicons",
+		requires = "kyazdani42/nvim-web-devicons",
 	})
 
 	use({ "junegunn/fzf", run = "./install --bin" })
@@ -87,6 +87,6 @@ return require("packer").startup(function(use)
 	use({
 		"glepnir/lspsaga.nvim",
 		branch = "main",
-		-- requires = { { "nvim-tree/nvim-web-devicons" } },
+		requires = { { "nvim-tree/nvim-web-devicons" } },
 	})
 end)
