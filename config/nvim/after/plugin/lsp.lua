@@ -9,7 +9,7 @@ lsp.ensure_installed({
 	"jsonls",
 	"eslint",
 	"tailwindcss",
-	"sumneko_lua",
+	"lua_ls",
 	"vimls",
 })
 
