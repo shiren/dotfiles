@@ -34,7 +34,6 @@ return require("packer").startup(function(use)
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
@@ -90,7 +89,19 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-tree/nvim-web-devicons" } },
 	})
 
+	-- use({
+	-- 	"github/copilot.vim",
+	-- })
+
+	use({ "zbirenbaum/copilot.lua" })
+
 	use({
-		"github/copilot.vim",
+		"zbirenbaum/copilot-cmp",
+		require = { "copilot.lua" },
+	})
+
+	use({
+		"onsails/lspkind.nvim",
+		requires = { "nvim-cmp" },
 	})
 end)

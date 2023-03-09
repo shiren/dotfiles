@@ -15,9 +15,10 @@ lsp.ensure_installed({
 
 lsp.setup_nvim_cmp({
 	sources = {
-		{ name = "path" },
+		{ name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp", keyword_length = 2 },
 		{ name = "buffer", keyword_length = 2 },
+		{ name = "path", keyword_length = 2 },
 	},
 })
 
