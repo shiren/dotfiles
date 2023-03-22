@@ -80,6 +80,8 @@ export N_PREFIX=$HOME/.n
 export PATH="$HOME/.local/bin:/usr/local/git/bin:$PATH:$HOME/.cargo/bin:$HOME/.emacs.d/bin"
 export PATH="$N_PREFIX/bin:$PATH"
 
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
