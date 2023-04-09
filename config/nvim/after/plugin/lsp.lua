@@ -11,6 +11,7 @@ lsp.ensure_installed({
 	"tailwindcss",
 	"lua_ls",
 	"vimls",
+	"yamlls",
 })
 
 lsp.setup_nvim_cmp({

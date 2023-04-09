@@ -82,6 +82,11 @@ export PATH="$N_PREFIX/bin:$PATH"
 
 eval $(/opt/homebrew/bin/brew shellenv)
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+
+# 회사 환경용
+eval "$(rbenv init - zsh)"
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
