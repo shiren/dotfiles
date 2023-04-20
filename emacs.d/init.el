@@ -593,11 +593,6 @@
     (define-key company-active-map (kbd "<tab>") 'my-tab)
     (define-key company-active-map (kbd "TAB") 'my-tab)))
 
-;; (use-package company-tabnine
-;;   :ensure t
-;;   :config
-;;   (add-to-list 'company-backends #'company-tabnine))
-
 (use-package flycheck
   :ensure t
   :init
@@ -657,6 +652,7 @@
   ;; (typescript-language-server . "npm i -g typescript-language-server")
   ;; (vue-language-server . "npm install vue-language-server -g")
   :ensure t
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
   :init
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
@@ -670,7 +666,6 @@
   (add-hook 'web-mode-hook #'lsp)
   (add-hook 'web-mode-hook #'lsp-deferred)
   (add-hook 'swift-mode-hook #'lsp)
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (add-hook 'c-mode-hook 'lsp)
   (add-hook 'cpp-mode-hook 'lsp)
   (add-hook 'c++-mode-hook 'lsp)
@@ -698,13 +693,6 @@
   (setq lsp-ui-sideline-show-hover nil) ;;  어노잉한 hover 정보 제거
   (setq lsp-ui-flycheck-enable t)
   (setq lsp-ui-flycheck-live-reporting nil))
-
-;; (use-package company-lsp
-;;   :ensure t
-;;   :config
-;;   (add-hook 'lsp-mode-hook 'company-mode)
-;;   (setq company-lsp-cache-candidates t)
-;;   (push 'company-lsp company-backends))
 
 ;; ;;;; Emacs-lisp
 (use-package suggest
