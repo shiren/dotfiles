@@ -1,5 +1,7 @@
 #source ~/.vimrc
 
+"액션 목록은 :actionliast"
+
 set visualbell
 set noerrorbells
 let mapleader = " "
@@ -22,18 +24,14 @@ set clipboard+=unnamed
 " Use Idea to join lines smartly
 set ideajoin
 
-" Multiple cursors supporj
+" Multiple cursors support
 set multiple-cursor
 
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
-let mapleader = " "
-" let maplocalleader = ","
-
 " Use Q for formatting the current paragraph (or visual selection)
 vmap Q gq
 nmap Q gqap
-
 " These create newlines like o and O but stay in normal mode
 nmap zj o<Esc>k
 nmap zk O<Esc>j
@@ -51,3 +49,4 @@ nmap <leader>ji :action FindInPath<cr>
 nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>jj :action AceAction<cr>
 nmap <leader>jl :action AceLineAction<cr>
+nmap <leader>pf :action SearchEverywhere<cr>
