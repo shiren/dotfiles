@@ -14,7 +14,7 @@ require("lspsaga").setup({
 -- you can use <C-t> to jump back
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
-keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+keymap("n", "gh", "<cmd>Lspsaga finder<CR>", opts)
 
 -- Code action
 keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)

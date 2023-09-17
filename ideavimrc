@@ -1,6 +1,7 @@
 #source ~/.vimrc
 
-"액션 목록은 :actionliast"
+"액션 목록은 :actionlist"
+"액션 검색은 :actionlist 검색어"
 
 set visualbell
 set noerrorbells
