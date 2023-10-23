@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local cmp_action = require("lsp-zero").cmp_action()
 
 -- local function complete(fallback)
 -- 	return function()
@@ -34,7 +35,12 @@ local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
+
 cmp.setup({
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 	mapping = {
 		["<Tab>"] = vim.schedule_wrap(function(fallback)
 			if cmp.visible() and has_words_before() then
@@ -50,5 +56,11 @@ cmp.setup({
 			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 		}),
+	},
+	sources = {
+		{ name = "copilot", group_index = 2, keyword_length = 3 },
+		{ name = "nvim_lsp", keyword_length = 2 },
+		{ name = "buffer", keyword_length = 2 },
+		{ name = "path", keyword_length = 3 },
 	},
 })
