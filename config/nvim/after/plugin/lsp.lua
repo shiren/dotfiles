@@ -32,28 +32,28 @@ require("mason-lspconfig").setup({
 	},
 })
 
-local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
-
-cmp.setup({
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	-- mapping = cmp.mapping.preset.insert({ -- 요거 lspsaga하고 충돌난다
-	-- 	["<C-Space>"] = cmp.mapping.complete(),
-	-- 	["<C-f>"] = cmp_action.luasnip_jump_forward(),
-	-- 	["<C-b>"] = cmp_action.luasnip_jump_backward(),
-	-- 	["<C-p>"] = cmp.mapping.scroll_docs(-4),
-	-- 	["<C-n>"] = cmp.mapping.scroll_docs(4),
-	-- }),
-	sources = {
-		{ name = "copilot", group_index = 2 },
-		{ name = "nvim_lsp", keyword_length = 2 },
-		{ name = "buffer", keyword_length = 2 },
-		{ name = "path", keyword_length = 2 },
-	},
-})
+-- local cmp = require("cmp")
+-- local cmp_action = require("lsp-zero").cmp_action()
+--
+-- cmp.setup({
+-- 	window = {
+-- 		completion = cmp.config.window.bordered(),
+-- 		documentation = cmp.config.window.bordered(),
+-- 	},
+-- 	mapping = cmp.mapping.preset.insert({ -- 요거 lspsaga하고 충돌난다
+-- 		["<C-Space>"] = cmp.mapping.complete(),
+-- 		["<C-f>"] = cmp_action.luasnip_jump_forward(),
+-- 		["<C-b>"] = cmp_action.luasnip_jump_backward(),
+-- 		["<C-p>"] = cmp.mapping.scroll_docs(-4),
+-- 		["<C-n>"] = cmp.mapping.scroll_docs(4),
+-- 	}),
+-- 	sources = {
+-- 		{ name = "copilot", group_index = 2 },
+-- 		{ name = "nvim_lsp", keyword_length = 2 },
+-- 		{ name = "buffer", keyword_length = 2 },
+-- 		{ name = "path", keyword_length = 2 },
+-- 	},
+-- })
 
 -- lsp.setup_nvim_cmp({
 -- 	sources = {

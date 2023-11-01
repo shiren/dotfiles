@@ -49,6 +49,7 @@ cmp.setup({
 				fallback()
 			end
 		end),
+		["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
 	},
 	formatting = {
 		format = lspkind.cmp_format({
@@ -58,9 +59,11 @@ cmp.setup({
 		}),
 	},
 	sources = {
-		{ name = "copilot", group_index = 2, keyword_length = 3 },
-		{ name = "nvim_lsp", keyword_length = 2 },
-		{ name = "buffer", keyword_length = 2 },
-		{ name = "path", keyword_length = 3 },
+		{ name = "copilot", group_index = 4, keyword_length = 0 },
+		{ name = "nvim_lsp", group_index = 2, keyword_length = 3 },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "buffer", group_index = 1, keyword_length = 2 },
+		{ name = "nvim_lua", keyword_length = 2 },
+		{ name = "path", group_index = 3, keyword_length = 5 },
 	},
 })
