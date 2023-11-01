@@ -59,11 +59,13 @@ cmp.setup({
 		}),
 	},
 	sources = {
-		{ name = "copilot", group_index = 4, keyword_length = 0 },
-		{ name = "nvim_lsp", group_index = 2, keyword_length = 3 },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "buffer", group_index = 1, keyword_length = 2 },
-		{ name = "nvim_lua", keyword_length = 2 },
-		{ name = "path", group_index = 3, keyword_length = 5 },
+		-- { name = "copilot",                group_index = 3,   keyword_length = 4 },
+		{ name = "copilot", keyword_length = 4 },
+		{ name = "path" }, -- file paths
+		{ name = "nvim_lsp", keyword_length = 3 }, -- from language server
+		{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+		{ name = "nvim_lua", keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+		{ name = "buffer", keyword_length = 2 }, -- source current buffer
+		{ name = "calc" },
 	},
 })

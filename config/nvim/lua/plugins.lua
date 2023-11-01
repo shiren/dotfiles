@@ -107,4 +107,7 @@ return require("packer").startup(function(use)
 		"onsails/lspkind.nvim",
 		requires = { "nvim-cmp" },
 	})
+
+	-- Rust
+	use("simrat39/rust-tools.nvim")
 end)

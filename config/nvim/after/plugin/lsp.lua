@@ -14,23 +14,7 @@ lsp.preset("recommended")
 -- 	"yamlls",
 -- })
 
-require("mason").setup({})
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"tsserver",
-		"cssls",
-		"html",
-		"jsonls",
-		"eslint",
-		"tailwindcss",
-		"lua_ls",
-		"vimls",
-		"yamlls",
-	},
-	handlers = {
-		lsp.default_setup,
-	},
-})
+lsp.setup()
 
 -- local cmp = require("cmp")
 -- local cmp_action = require("lsp-zero").cmp_action()
@@ -68,7 +52,7 @@ lsp.configure("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { "vim" },
+				globals = { "vim", "require" },
 			},
 		},
 	},
@@ -106,6 +90,23 @@ lsp.on_attach(function(client, bufnr)
 	-- vim.keymap.set("n", "gl", vim.diagnostic.open_float, bufopts)
 end)
 
--- lsp.nvim_workspace()
+require("mason").setup({})
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"tsserver",
+		"cssls",
+		"html",
+		"jsonls",
+		"eslint",
+		"tailwindcss",
+		"lua_ls",
+		"vimls",
+		"yamlls",
+		"rust_analyzer",
+	},
+	handlers = {
+		lsp.default_setup,
+	},
+})
 
-lsp.setup()
+-- lsp.nvim_workspace()
