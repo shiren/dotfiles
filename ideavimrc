@@ -36,6 +36,8 @@ nmap Q gqap
 " These create newlines like o and O but stay in normal mode
 nmap zj o<Esc>k
 nmap zk O<Esc>j
+nmap <S-h> :tabprev<Return>
+nmap <S-l> :tabnext<Return>
 
 imap jk <Esc>
 imap ㅓㅏ <Esc>

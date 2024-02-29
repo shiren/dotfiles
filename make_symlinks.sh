@@ -6,11 +6,11 @@
 
 ########## Variables
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
+dir=~/dotfiles        # dotfiles directory
+olddir=~/dotfiles_old # old dotfiles backup directory
 
 # 둠 설치시 어차피 emacs.d/init을 덮어쓴다. 그래서 순정으로 돌릴때만 init.el의 링크하면된다.
-files="vimrc zshrc tmux.conf ideavimrc zprofile alacritty.yml config/nvim doom.d emacs.d/init.el"
+files="vimrc zshrc tmux.conf ideavimrc zprofile wezterm.lua config/nvim doom.d emacs.d/init.el"
 
 ##########
 
@@ -26,8 +26,8 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+	echo "Moving any existing dotfiles from ~ to $olddir"
+	mv ~/.$file ~/dotfiles_old/
+	echo "Creating symlink to $file in home directory."
+	ln -s $dir/$file ~/.$file
 done

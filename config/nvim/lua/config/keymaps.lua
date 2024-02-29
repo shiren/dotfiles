@@ -23,8 +23,6 @@ keymap.set("n", "<C-m>", "<C-i>", opts)
 
 -- tab
 keymap.set("n", "te", ":tabedit", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
 -- window
 keymap.set("n", "ss", ":split<Return>", opts)
