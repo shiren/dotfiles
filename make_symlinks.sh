@@ -9,8 +9,9 @@
 dir=~/dotfiles        # dotfiles directory
 olddir=~/dotfiles_old # old dotfiles backup directory
 
-# 둠 설치시 어차피 emacs.d/init을 덮어쓴다. 그래서 순정으로 돌릴때만 init.el의 링크하면된다.
-files="vimrc zshrc tmux.conf ideavimrc zprofile wezterm.lua config/nvim doom.d emacs.d/init.el"
+# 처리할 파일과 디렉토리를 분리
+files="vimrc zshrc tmux.conf ideavimrc zprofile wezterm.lua doom.d emacs.d/init.el"
+dirs="config/nvim config/ghostty"
 
 ##########
 
@@ -24,10 +25,40 @@ echo "Changing to the $dir directory"
 cd $dir
 echo "...done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
+# Process files
+echo "Processing files..."
 for file in $files; do
-	echo "Moving any existing dotfiles from ~ to $olddir"
-	mv ~/.$file ~/dotfiles_old/
-	echo "Creating symlink to $file in home directory."
-	ln -s $dir/$file ~/.$file
+  echo "Processing file $file..."
+
+  # Backup existing file
+  if [ -e ~/.$file ]; then
+    echo "Moving existing file ~/.$file to $olddir"
+    mv ~/.$file $olddir/
+  fi
+
+  # Create symlink
+  echo "Creating symlink for file $file"
+  ln -sf $dir/$file ~/.$file
 done
+
+# Process directories
+echo "Processing directories..."
+for dir_item in $dirs; do
+  echo "Processing directory $dir_item..."
+
+  # Ensure parent directories exist
+  mkdir -p ~/.$(dirname $dir_item)
+
+  # Backup existing directory
+  if [ -e ~/.$dir_item ]; then
+    echo "Moving existing directory ~/.$dir_item to $olddir"
+    mv ~/.$dir_item $olddir/
+  fi
+
+  # Create symlink
+  echo "Creating symlink for directory $dir_item"
+  echo "ln -sfn $dir/$dir_item ~/.$(dirname $dir_item)/$(basename $dir_item)"
+  ln -sfn $dir/$dir_item ~/.$(dirname $dir_item)/$(basename $dir_item)
+done
+
+echo "All files and directories have been processed."
