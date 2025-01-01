@@ -1,14 +1,14 @@
 # style
 theme = rose-pine
 
-font-family = "JetBrainsMonoNL Nerd Font Mono"
+font-family = JetBrainsMonoNL Nerd Font Mono
 font-size = 14
-
 
 # input
 cursor-style = block
 mouse-hide-while-typing = true
 shell-integration-features = no-cursor,sudo,no-title
+macos-option-as-alt = true
 
 # window
 macos-titlebar-style = hidden

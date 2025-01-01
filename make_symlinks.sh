@@ -11,7 +11,7 @@ olddir=~/dotfiles_old # old dotfiles backup directory
 
 # 처리할 파일과 디렉토리를 분리
 files="vimrc zshrc tmux.conf ideavimrc zprofile wezterm.lua doom.d emacs.d/init.el"
-dirs="config/nvim config/ghostty"
+dirs="config/nvim config/ghostty config/yazi"
 
 ##########
 
