@@ -1,0 +1,44 @@
+{
+  "title": "Vim Escape Rule (Final v2)",
+  "rules": [
+    {
+      "description": "j+k (ㅓ+ㅏ) 동시 입력 시 잔상 제거 + ESC + 영문 전환",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.jetbrains\\..*$",
+                "^com\\.google\\.android\\.studio$",
+                "^com\\.mitchellh\\.ghostty$",
+                "^com\\.apple\\.Terminal$",
+                "^com\\.googlecode\\.iterm2$",
+                "^net\\.kovidgoyal\\.kitty$",
+                "^com\\.github\\.wez\\.wezterm$",
+                "^io\\.alacritty$"
+              ]
+            }
+          ],
+          "from": {
+            "simultaneous": [{ "key_code": "j" }, { "key_code": "k" }],
+            "simultaneous_options": {
+              "key_down_order": "insensitive",
+              "simultaneous_threshold_milliseconds": 1000,
+              "detect_key_down_uninterruptedly": true
+            }
+          },
+          "to": [
+            { "key_code": "escape" },
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.keylayout.ABC"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

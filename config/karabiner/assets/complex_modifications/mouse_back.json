@@ -1,0 +1,33 @@
+{
+  "title": "마우스 버튼 3번을 '뒤로 가기'로 매핑",
+  "rules": [
+    {
+      "description": "Mouse Button 3 -> Command + [ (뒤로 가기)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 1149,
+                  "product_id": 32980
+                }
+              ]
+            }
+          ],
+          "from": {
+            "pointing_button": "button3"
+          },
+          "to": [
+            {
+              "key_code": "open_bracket",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
