@@ -26,7 +26,10 @@ set clipboard+=unnamed
 set ideajoin
 
 " Multiple cursors support
-set multiple-cursor
+set multicursor
+
+" 자동으로 노멀모드에서 영어로 변경
+set keep-english-in-normal[-and-restore-in-insert]
 
 " These settings are from - https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
 
@@ -53,3 +56,8 @@ nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>jj :action AceAction<cr>
 nmap <leader>jl :action AceLineAction<cr>
 nmap <leader>pf :action SearchEverywhere<cr>
+
+nnoremap <Space>dd :action ShowErrorDescription<CR>
+nnoremap <Space>dD :action ShowErrorDescriptions<CR>
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>

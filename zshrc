@@ -75,7 +75,8 @@ export PATH="$N_PREFIX/bin:$PATH"
 # NOTE FZF
 eval "$(fzf --zsh)"
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
-export FZF_DEFAULT_COMMAND='fd --hidden --follow --strip-cwd-prefix --exclude .git --exclude node_modules'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --strip-cwd-prefix --exclude .git --exclude node_modules --exclude "*/node_modules/*"'
+
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --strip-cwd-prefix --exclude .git --exclude node_modules"
 export FZF_DEFAULT_OPTS='--height 50% --layout=default --border'
@@ -84,11 +85,12 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# NOTE bun
-[ -s "/Users/shiren/.bun/_bun" ] && source "/Users/shiren/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # brew installations activation (new mac systems brew path: opt/homebrew , not usr/local )
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Added by Antigravity
+export PATH="/Users/shiren/.antigravity/antigravity/bin:$PATH"
+
+# Python
+export PIPX_DEFAULT_PYTHON=/opt/homebrew/bin/python3.9
