@@ -6,6 +6,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 keymap.set("i", "jk", "<Esc>", opts)
+keymap.set("i", "ㅓㅏ", "<Esc>", opts)
 vim.api.nvim_create_user_command("W", ":write", {})
 
 -- Increment/decrement
