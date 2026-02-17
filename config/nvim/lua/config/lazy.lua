@@ -17,18 +17,35 @@ require("lazy").setup({
       },
     },
     -- import any extras modules here
+    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+    { import = "lazyvim.plugins.extras.util.project" },
+    -- { import = "lazyvim.plugins.extras.ui.indent-blankline" },
+    { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
+    { import = "lazyvim.plugins.extras.coding.blink" }, -- 초고속 자동완성
+    -- { import = "lazyvim.plugins.extras.editor.fzf" }, -- Telescope 대신 fzf-lua 사용
+    { import = "lazyvim.plugins.extras.editor.snacks_picker" }, -- fzf-lua 대신 snacks-picker 사용
+
+    -- FE setup
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
+
+    -- BE setup
+    { import = "lazyvim.plugins.extras.lang.kotlin" },
+    { import = "lazyvim.plugins.extras.lang.java" },
+    { import = "lazyvim.plugins.extras.dap.core" },
+
+    -- ETC languages
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+
+    -- AI setup
     { import = "lazyvim.plugins.extras.ai.copilot" },
-    { import = "lazyvim.plugins.extras.ai.copilot-chat" },
-    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    { import = "lazyvim.plugins.extras.util.project" },
-    { import = "lazyvim.plugins.extras.ui.indent-blankline" },
-    { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
+    { import = "lazyvim.plugins.extras.ai.avante" },
+
     -- import/override with your plugins
     { import = "plugins" },
   },

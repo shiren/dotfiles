@@ -40,16 +40,10 @@ keymap.set("n", "<C-w><right>", "<C-w>>")
 keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
--- Diagnostics
-keymap.set("n", "<C-j>", function()
-  vim.diagnostic.goto_next()
-end, opts)
-
 --- Fzf
 vim.keymap.set("n", "<leader>hc", ":Commands<CR>", opts)
-
 vim.keymap.set("n", "<leader>jm", ":Marks<CR>", opts)
 
---- Telescope
-vim.keymap.set("n", "<leader>ji", ":Telescope lines<CR>", opts)
-vim.keymap.set("n", "<leader>pp", ":Telescope projects<CR>", opts)
+-- vim.keymap.set("n", "<leader>ji", function()
+--   Snacks.picker.lines({ layout = "ivy" })
+-- end, { desc = "Swiper" })

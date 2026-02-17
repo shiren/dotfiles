@@ -1,7 +1,8 @@
 # style
 theme = Rose Pine Moon
 
-font-family = JetBrainsMonoNL Nerd Font Mono
+font-family = "JetBrainsMonoNL Nerd Font Mono"
+font-family = "D2Coding"
 font-size = 14
 
 # input
