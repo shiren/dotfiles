@@ -49,15 +49,66 @@ imap ㅓㅏ <Esc>
 nmap <leader>ot :action ActivateTerminalToolWindow<cr>
 
 " Normal
-nmap <leader>fr :action RecentFiles<cr>
 nmap <leader>g :action ActivateCommitToolWindow<cr>
 nmap <leader>ji :action FindInPath<cr>
-nmap <leader><leader> :action SearchEverywhere<cr>
 nmap <leader>jj :action AceAction<cr>
 nmap <leader>jl :action AceLineAction<cr>
-nmap <leader>pf :action SearchEverywhere<cr>
 
 nnoremap <Space>dd :action ShowErrorDescription<CR>
 nnoremap <Space>dD :action ShowErrorDescriptions<CR>
 nnoremap ]d :action GotoNextError<CR>
 nnoremap [d :action GotoPreviousError<CR>
+
+" =========================================================
+" 🗂️ 버퍼(Buffer) 관리 (LazyVim 기본 단축키 대응)
+" =========================================================
+" <leader>, : Switch Buffer (열려있는 창/버퍼 전환)
+" IntelliJ의 'Switcher (Ctrl+Tab)' 기능이 Neovim의 버퍼 전환과 가장 비슷합니다.
+nmap <leader>, <Action>(Switcher)
+
+" <leader>fb : Find Buffers (버퍼 검색 - 위와 동일)
+nmap <leader>fb <Action>(Switcher)
+
+" <leader>bd : Buffer Delete (현재 버퍼/탭 닫기)
+nmap <leader>bd <Action>(CloseContent)
+
+
+" =========================================================
+" 🔍 파일 및 텍스트 검색 (Snacks Picker / Telescope 대응)
+" =========================================================
+" <leader><space> : Find Files (루트 디렉토리 기준 파일 찾기)
+" IntelliJ의 전체 검색(Search Everywhere) 팝업을 띄웁니다.
+nmap <leader><space> <Action>(SearchEverywhere)
+
+" <leader>ff : Find Files (파일 이름으로만 찾기)
+" IntelliJ의 'Go to File' 팝업을 띄웁니다.
+nmap <leader>ff <Action>(GotoFile)
+
+" <leader>fr : Find Recent (최근 열었던 파일 목록)
+" IntelliJ의 'Recent Files (Ctrl+E)' 팝업을 띄웁니다.
+nmap <leader>fr <Action>(RecentFiles)
+
+" <leader>/ : Live Grep (프로젝트 전체 텍스트 검색)
+nmap <leader>/ <Action>(FindInPath)
+
+" <leader>sg : Search Grep (위와 동일)
+nmap <leader>sg <Action>(FindInPath)
+
+" <leader>sw : Search Word (현재 커서에 있는 단어를 전체 프로젝트에서 검색)
+nmap <leader>sw <Action>(FindUsages)
+
+
+" =========================================================
+" 📝 Snacks & UI 기능 대응
+" =========================================================
+" <leader>. : Scratch (임시 메모장)
+nmap <leader>. <Action>(NewScratchFile)
+
+" <leader>e : Neo-tree 토글 -> IntelliJ 프로젝트(파일 탐색기) 창 토글
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+
+" <leader>gg : Lazygit -> IntelliJ Git(VCS) 창 토글
+nmap <leader>gg <Action>(ActivateVersionControlToolWindow)
+
+" <C-/> : 터미널 토글 -> IntelliJ 하단 터미널 토글
+nmap <C-/> <Action>(ActivateTerminalToolWindow)
