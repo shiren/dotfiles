@@ -1,0 +1,7 @@
+{
+  "name": "wiggle",
+  "version": "1.0.0",
+  "author": ["shiren"],
+  "description": "Random mouse movement to prevent sleep",
+  "license": "MIT"
+}
