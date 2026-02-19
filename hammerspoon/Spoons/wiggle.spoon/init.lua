@@ -17,6 +17,8 @@ local mouseJiggleMenubar = hs.menubar.new()
 local jiggleTimer = nil
 local isJiggling = false
 local animationTimers = {}
+local inited = false
+local hotkeyObjects = {}
 
 -- Ease-in-out 함수: 시작과 끝에서 느리고 중간에서 빠르게
 local function easeInOutQuad(t)
@@ -110,6 +112,10 @@ local function stopJiggle()
 end
 
 function obj:init()
+	if inited then
+		return
+	end
+	inited = true
 	mouseJiggleMenubar:setClickCallback(function()
 		if isJiggling then
 			stopJiggle()
@@ -121,6 +127,7 @@ function obj:init()
 end
 
 function obj:start()
+	self:init()
 	startJiggle()
 end
 
@@ -136,12 +143,32 @@ function obj:toggle()
 	end
 end
 
--- 핫키 바인딩 예시 (init.lua에서 호출)
+-- 핫키 바인딩 (init.lua에서 호출)
+-- mapping 예: { toggle = { "ctrl", "shift", "alt", "cmd", "a" } } (마지막이 키, 나머지가 수식자)
 function obj:bindHotkeys(mapping)
-	if hs.spoon and hs.spoon.bindHotkeys then
-		hs.spoon.bindHotkeys(mapping, function()
-			self:toggle()
-		end)
+	self:init()
+	for name, spec in pairs(hotkeyObjects) do
+		if spec and spec.delete then
+			spec:delete()
+		end
+	end
+	hotkeyObjects = {}
+	if not mapping or type(mapping) ~= "table" then
+		return
+	end
+	for name, spec in pairs(mapping) do
+		if name == "toggle" and type(spec) == "table" and #spec >= 2 then
+			local key = spec[#spec]
+			local mods = {}
+			for i = 1, #spec - 1 do
+				mods[i] = spec[i]
+			end
+			local obj = hs.hotkey.bind(mods, key, function()
+				self:toggle()
+			end)
+			hotkeyObjects[name] = obj
+			break
+		end
 	end
 end
 
