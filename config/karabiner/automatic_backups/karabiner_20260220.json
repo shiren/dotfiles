@@ -19,7 +19,7 @@
                         ]
                     },
                     {
-                        "description": "터미널에서 j와 k(ㅓ, ㅏ) 동시 입력 시 Ctrl+[ (한글 조합 통과)",
+                        "description": "터미널에서 j와 k(ㅓ, ㅏ)를 빠르게 연속으로 누르면 ESC + 영문 전환",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -35,10 +35,6 @@
                                             "^io\\.alacritty$"
                                         ],
                                         "type": "frontmost_application_if"
-                                    },
-                                    {
-                                        "input_sources": [{ "language": "^ko$" }],
-                                        "type": "input_source_if"
                                     }
                                 ],
                                 "from": {
@@ -49,10 +45,7 @@
                                     "simultaneous_options": { "key_down_order": "strict" }
                                 },
                                 "to": [
-                                    {
-                                        "key_code": "open_bracket",
-                                        "modifiers": ["left_control"]
-                                    },
+                                    { "key_code": "escape" },
                                     { "select_input_source": { "language": "^en$" } }
                                 ],
                                 "type": "basic"

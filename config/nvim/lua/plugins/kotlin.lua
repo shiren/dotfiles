@@ -5,6 +5,7 @@ return {
     opts = {
       servers = {
         kotlin_language_server = {
+          cmd = { "kotlin-lsp" }, -- Mason으로 설치한 JetBrains 공식 LSP 사용
           settings = {
             kotlin = {
               compiler = { jvm = { target = "21" } }, -- 본인 자바 버전
@@ -28,7 +29,7 @@ return {
   -- 스프링 부트 실행용 디버거(DAP) 단축키/설정
   {
     "mfussenegger/nvim-dap",
-    opts = function()
+    config = function()
       local dap = require("dap")
       dap.configurations.kotlin = {
         {

@@ -42,8 +42,8 @@ keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
 --- Fzf
-vim.keymap.set("n", "<leader>hc", ":Commands<CR>", opts)
-vim.keymap.set("n", "<leader>jm", ":Marks<CR>", opts)
+keymap.set("n", "<leader>hc", ":Commands<CR>", opts)
+keymap.set("n", "<leader>jm", ":Marks<CR>", opts)
 
 -- vim.keymap.set("n", "<leader>ji", function()
 --   Snacks.picker.lines({ layout = "ivy" })

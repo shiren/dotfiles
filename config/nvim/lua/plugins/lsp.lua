@@ -16,6 +16,7 @@ return {
         "css-lsp",
         "stylua",
         "shellcheck",
+        "kotlin-lsp", -- JetBrains 공식 Kotlin LSP (Mason으로 설치)
       },
     },
   },

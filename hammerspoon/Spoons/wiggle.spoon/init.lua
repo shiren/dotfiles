@@ -25,7 +25,7 @@ local function easeInOutQuad(t)
 	if t < 0.5 then
 		return 2 * t * t
 	else
-		return 1 - math.pow(-2 * t + 2, 2) / 2
+		return 1 - ((-2 * t + 2) ^ 2) / 2
 	end
 end
 
@@ -76,6 +76,7 @@ local function jiggleMouse()
 			local newX = startX + (targetX - startX) * easedProgress
 			local newY = startY + (targetY - startY) * easedProgress
 			hs.mouse.absolutePosition({ x = newX, y = newY })
+			hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.mouseMoved, { x = newX }):post()
 		end)
 		table.insert(animationTimers, timer)
 	end
@@ -147,7 +148,7 @@ end
 -- mapping 예: { toggle = { "ctrl", "shift", "alt", "cmd", "a" } } (마지막이 키, 나머지가 수식자)
 function obj:bindHotkeys(mapping)
 	self:init()
-	for name, spec in pairs(hotkeyObjects) do
+	for _, spec in pairs(hotkeyObjects) do
 		if spec and spec.delete then
 			spec:delete()
 		end
