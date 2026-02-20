@@ -26,7 +26,10 @@
             }
           ],
           "from": {
-            "simultaneous": [{ "key_code": "j" }, { "key_code": "k" }],
+            "simultaneous": [
+              { "key_code": "j" },
+              { "key_code": "k" }
+            ],
             "simultaneous_options": {
               "key_down_order": "insensitive",
               "simultaneous_threshold_milliseconds": 500,
