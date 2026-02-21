@@ -28,8 +28,7 @@ end
 local function clampToScreen(x, y)
 	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
 	local frame = screen:frame()
-	return math.max(frame.x, math.min(x, frame.x + frame.w - 1)),
-		math.max(frame.y, math.min(y, frame.y + frame.h - 1))
+	return math.max(frame.x, math.min(x, frame.x + frame.w - 1)), math.max(frame.y, math.min(y, frame.y + frame.h - 1))
 end
 
 local function clearAnimationTimers()
@@ -65,6 +64,7 @@ local function jiggleMouse()
 			local newX = startX + (targetX - startX) * eased
 			local newY = startY + (targetY - startY) * eased
 			hs.mouse.absolutePosition({ x = newX, y = newY })
+			hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.mouseMoved, { x = newX, y = newY }):post()
 			postMouseMoved(newX, newY)
 		end)
 		table.insert(animationTimers, timer)
