@@ -60,56 +60,6 @@
                         ]
                     },
                     {
-                        "description": "오른쪽 command 키를 사용하여 입력 소스 변경",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^co\\.zeit\\.hyper$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^com\\.2X\\.Client\\.Mac$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.citrix\\.XenAppViewer$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^com\\.itap-mobile\\.qmote$",
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.mac$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                            "^com\\.nulana\\.remotixmac$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                                            "^com\\.parallels\\.desktop$",
-                                            "^com\\.parallels\\.desktop\\.console$",
-                                            "^com\\.parallels\\.vm$",
-                                            "^com\\.parallels\\.winapp\\.",
-                                            "^com\\.teamviewer\\.TeamViewer$",
-                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                            "^com\\.vmware\\.fusion$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.vmware\\.proxyApp\\.",
-                                            "^com\\.vmware\\.view$",
-                                            "^io\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$",
-                                            "^net\\.sf\\.cord$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": { "key_code": "right_command" },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "shift + 스페이스 를 사용하여 입력 소스 변경",
                         "manipulators": [
                             {
@@ -152,12 +102,7 @@
                                     "key_code": "spacebar",
                                     "modifiers": { "mandatory": ["shift"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "spacebar",
-                                        "modifiers": ["left_control"]
-                                    }
-                                ],
+                                "to": [{ "key_code": "f18" }],
                                 "type": "basic"
                             }
                         ]
@@ -189,6 +134,12 @@
             ],
             "name": "Default profile",
             "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "right_command" },
+                    "to": [{ "key_code": "f18" }]
+                }
+            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]
