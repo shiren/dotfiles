@@ -19,3 +19,8 @@ loadSpoonSafe("VolumeOSC", function()
 	hs.loadSpoon("VolumeOSC")
 	spoon.VolumeOSC:start()
 end)
+
+loadSpoonSafe("BrowserRouter", function()
+	hs.loadSpoon("BrowserRouter")
+	spoon.BrowserRouter:start()
+end)

@@ -1,0 +1,13 @@
+{
+  "default" : {
+    "browser" : "Google Chrome",
+    "profile" : "Default"
+  },
+  "rules" : [
+    {
+      "url" : "woowa.in",
+      "browser" : "Google Chrome",
+      "profile" : "Profile 2"
+    }
+  ]
+}

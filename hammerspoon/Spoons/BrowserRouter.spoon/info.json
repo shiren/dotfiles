@@ -1,0 +1,7 @@
+{
+  "name": "browser router",
+  "version": "1.0.0",
+  "author": ["shiren"],
+  "description": "Route URLs to browser/profile by JSON rules with menubar UI",
+  "license": "MIT"
+}
