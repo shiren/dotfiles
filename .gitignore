@@ -56,3 +56,4 @@ karma.conf.local.js
 flychek_init.el
 packer_complied.lua
 config/nvim/plugin/
+config/karabiner/automatic_backups/
