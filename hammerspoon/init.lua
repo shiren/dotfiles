@@ -24,3 +24,8 @@ loadSpoonSafe("BrowserRouter", function()
 	hs.loadSpoon("BrowserRouter")
 	spoon.BrowserRouter:start()
 end)
+
+loadSpoonSafe("WowOnebuttonToggle", function()
+	hs.loadSpoon("WowOnebuttonToggle")
+	spoon.WowOnebuttonToggle:start()
+end)

@@ -1,0 +1,7 @@
+{
+  "name": "WowOnebuttonToggle",
+  "version": "1.0.0",
+  "author": ["shiren"],
+  "description": "Toggle repeating Mouse5 clicks when Mouse5 is pressed",
+  "license": "MIT"
+}
