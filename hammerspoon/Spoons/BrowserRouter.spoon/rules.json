@@ -1,12 +1,22 @@
 {
   "default" : {
-    "browser" : "Google Chrome",
-    "profile" : "Default"
+    "profile" : "Default",
+    "browser" : "Google Chrome"
   },
   "rules" : [
     {
-      "url" : "woowa.in",
       "browser" : "Google Chrome",
+      "url" : "woowa.in",
+      "profile" : "Profile 2"
+    },
+    {
+      "browser" : "Google Chrome",
+      "url" : "atlassian.com",
+      "profile" : "Profile 2"
+    },
+    {
+      "browser" : "Google Chrome",
+      "url" : "atlassian.net",
       "profile" : "Profile 2"
     }
   ]
