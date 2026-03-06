@@ -9,9 +9,10 @@ end
 
 -- IOPlatformUUID 확인:
 -- ioreg -rd1 -c IOPlatformExpertDevice | awk -F\" '/IOPlatformUUID/{print $4}'
-local platformUUID = hs.execute("ioreg -rd1 -c IOPlatformExpertDevice | awk -F\\\" '/IOPlatformUUID/{print $4}'"):gsub("%s+$", "")
+local platformUUID = hs.execute("ioreg -rd1 -c IOPlatformExpertDevice | awk -F\\\" '/IOPlatformUUID/{print $4}'")
+	:gsub("%s+$", "")
 local disableSpoonByUUID = {
-	["AC201633-05AE-58CA-BCB4-4AF5A94B955B"] = {
+	["0B9D6CE0-4596-5305-8D42-D385731D4C84"] = {
 		"BrowserRouter",
 	},
 }
