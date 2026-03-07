@@ -11,7 +11,7 @@ obj.wowBundleIDs = {
 }
 obj.wowAppName = "World of Warcraft"
 obj.mouseButtonNumber = 4
-obj.intervalSeconds = 0.5
+obj.intervalSeconds = 0.9
 obj.clickDelayMicros = 1000
 obj.alertDuration = 0.4
 
